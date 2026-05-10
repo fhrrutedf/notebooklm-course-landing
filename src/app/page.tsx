@@ -274,7 +274,7 @@ export default function LandingPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-12 text-center">
           <div className="inline-flex items-center gap-2 bg-[#f59e0b]/15 text-[#f59e0b] px-5 py-2 rounded-full text-sm font-bold mb-6 border border-[#f59e0b]/20">
             <Sparkles className="w-4 h-4" />
-            كورس عملي - المدرب نواف البوطة
+            كورس عملي - المدرب نواف البوسطه
           </div>
 
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-4">
@@ -576,7 +576,7 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-            كيف الذكاء الاصطناعي غيّر حياتي كمعلم - <span className="text-[#f59e0b]">نواف البوطة</span>
+            كيف الذكاء الاصطناعي غيّر حياتي كمعلم - <span className="text-[#f59e0b]">نواف البوسطه</span>
           </h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 flex flex-col md:flex-row items-center gap-8">
             <div className="shrink-0">
@@ -585,7 +585,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-2xl font-black text-white mb-1">نواف البوطة</h3>
+              <h3 className="text-2xl font-black text-white mb-1">نواف البوسطه</h3>
               <p className="text-[#f59e0b] font-bold mb-3">مدرب في الذكاء الاصطناعي التطبيقي بالتعليم</p>
               <p className="text-gray-400 leading-relaxed">
                 أنا معلم متلكم، كنت بقعد ساعات بتحضير الدروس وبكتابة الأسئلة وبالتنسيق عالوورد. لما اكتشفت هالأدوات حياتي انقلبت. صرت بعمل اختبار بنسختين بـ 5 دقائق، وبصحح اختبارات الطلاب بكسر وقت، وبعمل مذكرات PDF احترافية بدقائق. مؤمن إن كل معلم سوري يقدر يستفيد من هالأدوات بغض النظر عن خلفيته التقنية - لأنها فعلاً سهلة وبسيطة.
@@ -860,7 +860,7 @@ export default function LandingPage() {
       <footer className="bg-[#050505] py-8 mt-auto border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <div className="mb-3">
-            <span className="text-[#f59e0b] font-black text-lg">نواف البوطة</span>
+            <span className="text-[#f59e0b] font-black text-lg">نواف البوسطه</span>
             <span className="text-gray-600 mx-2">|</span>
             <span className="text-gray-400">المدرب</span>
           </div>
