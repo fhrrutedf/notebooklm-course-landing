@@ -66,3 +66,23 @@ Work Log:
 Stage Summary:
 - Output: /home/z/my-project/download/payment-guide.pdf (5 pages, 85 KB)
 - Also generated HTML source: /home/z/my-project/download/payment-guide.html
+---
+Task ID: 1
+Agent: Main Agent
+Task: إضافة اسم المدرب "نواف البوطة" إلى صفحة الهبوط
+
+Work Log:
+- قراءة ملفات المشروع الحالية (page.tsx, layout.tsx, globals.css)
+- إضافة اسم المدرب "نواف البوطة" في قسم Hero كبادج مع أيقونة GraduationCap
+- إضافة قسم جديد "تعرّف على المدرب" مع وصف احترافي ودائرة بالأحرف الأولى (ن.ب)
+- تحديث وصف المقدمة في محتوى الكورس ليشمل اسم المدرب
+- تحديث الـ Footer لعرض اسم المدرب prominently
+- تحديث metadata في layout.tsx (العنوان، الوصف، الكلمات المفتاحية، المؤلف) بالعربية
+- تغيير html lang من "en" إلى "ar" وإضافة dir="rtl"
+- تشغيل lint بدون أخطاء
+- التأكد من أن الصفحة تعمل (HTTP 200)
+
+Stage Summary:
+- اسم المدرب "نواف البوطة" تمت إضافته في 4 مواقع: Hero badge, Trainer section, Course intro, Footer
+- قسم "تعرّف على المدرب" جديد بالكامل مع دائرة (ن.ب) ووصف مهني
+- الصفحة تعمل بنجاح على localhost:3000

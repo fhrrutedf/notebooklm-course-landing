@@ -70,9 +70,13 @@ export default function LandingPage() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Sparkles className="w-4 h-4" />
                 كورس عملي - ساعتين فقط
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <GraduationCap className="w-4 h-4 text-amber-400" />
+                المدرب: <span className="font-bold text-amber-400">نواف البوطة</span>
               </div>
               <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
                 كيف تستخدم{' '}
@@ -341,7 +345,7 @@ export default function LandingPage() {
               {
                 time: '10 دقائق',
                 title: 'المقدمة',
-                desc: 'من أنا + ليش هاد الكورس + شو رح تتعلم',
+                desc: 'المدرب نواف البوطة + ليش هاد الكورس + شو رح تتعلم',
                 icon: Target,
               },
               {
@@ -597,9 +601,39 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Trainer Section */}
+      <section className="py-16 md:py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a2e] mb-4">
+              تعرّف على المدرب
+            </h2>
+          </div>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-8">
+            <div className="shrink-0">
+              <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-600 to-amber-400 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+                ن.ب
+              </div>
+            </div>
+            <div className="text-center md:text-right">
+              <h3 className="text-2xl font-bold text-[#1a1a2e] mb-1">نواف البوطة</h3>
+              <p className="text-purple-600 font-medium mb-3">مدرب في الذكاء الاصطناعي التطبيقي بالتعليم</p>
+              <p className="text-gray-600 leading-relaxed">
+                مدرب متخصص في استخدام أدوات الذكاء الاصطناعي في المجال التعليمي. يساعد المعلمين على توظيف التقنيات الحديثة لتوفير الوقت وتحسين جودة المحتوى التعليمي. يؤمن بأن كل معلم يستطيع استخدام AI بسهولة بغض النظر عن خلفيته التقنية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-[#0f0c29] text-gray-400 py-8 mt-auto">
         <div className="max-w-6xl mx-auto px-4 text-center">
+          <div className="mb-3">
+            <span className="text-amber-400 font-bold text-lg">نواف البوطة</span>
+            <span className="text-gray-400 mx-2">|</span>
+            <span className="text-gray-300">المدرب</span>
+          </div>
           <p className="text-sm">
             كورس NotebookLM + Z.ai في التعليم | للمعلمين والمعلمات في سوريا
           </p>

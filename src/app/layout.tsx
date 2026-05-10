@@ -14,24 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "كورس NotebookLM + Z.ai في التعليم | المدرب نواف البوطة",
+  description: "تعلم كيف تستخدم NotebookLM و Z.ai في التعليم. كورس عملي للمعلمين والمعلمات في سوريا. مدة الكورس ساعتان - السعر $30 فقط.",
+  keywords: ["NotebookLM", "Z.ai", "ذكاء اصطناعي", "تعليم", "سوريا", "معلمين", "كورس", "نواف البوطة"],
+  authors: [{ name: "نواف البوطة" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "كورس NotebookLM + Z.ai في التعليم",
+    description: "كورس عملي للمعلمين - المدرب نواف البوطة",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "كورس NotebookLM + Z.ai في التعليم",
+    description: "كورس عملي للمعلمين - المدرب نواف البوطة",
   },
 };
 
@@ -41,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
