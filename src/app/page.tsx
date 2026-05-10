@@ -372,47 +372,113 @@ export default function LandingPage() {
             من رفع المصدر (كتاب مدرسي أو جامعي أو مذكرة تدريبية) لحد إخراج اختبار وملف PDF جاهز للطباعة - كل شي عملياً
           </p>
 
-          {/* Presentation Slides - Sample Output */}
+          {/* Presentation Examples - Hand-drawn Notebook Style */}
           <div className="mb-12">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
-              <h3 className="text-xl md:text-2xl font-black text-[#f59e0b]">مثال عملي: درس الخلية - علوم الصف السابع</h3>
-              <div className="flex items-center gap-3">
-                <a
-                  href="/downloads/cell-lesson-presentation.pdf"
-                  download
-                  className="flex items-center gap-2 bg-[#f59e0b]/15 hover:bg-[#f59e0b]/25 text-[#f59e0b] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#f59e0b]/20"
-                >
-                  <Download className="w-4 h-4" />
-                  تحميل PDF
-                </a>
-                <a
-                  href="/downloads/cell-lesson-presentation.pptx"
-                  download
-                  className="flex items-center gap-2 bg-[#8b5cf6]/15 hover:bg-[#8b5cf6]/25 text-[#8b5cf6] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#8b5cf6]/20"
-                >
-                  <Download className="w-4 h-4" />
-                  تحميل عرض تقديمي
-                </a>
+            <h3 className="text-xl md:text-2xl font-black text-[#f59e0b] text-center mb-2">بتقدر تعمل عروض تقديمية تعليمية احترافية</h3>
+            <p className="text-center text-gray-400 text-sm mb-6">بأسلوب الورقة والقلم - رسومات توضيحية وأسهم وأمثلة حية - كل شي من الكتاب</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Slide 1: Force Resultant */}
+              <div className="group cursor-pointer">
+                <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors relative"
+                  style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
+                  {/* Notebook lines */}
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
+                  {/* Red margin line */}
+                  <div className="absolute top-0 bottom-0 right-12 w-px bg-red-300/40" />
+                  <div className="relative p-5 min-h-[220px]" dir="rtl">
+                    <h4 className="text-blue-700 font-bold text-base mb-3 border-b-2 border-blue-700/30 pb-1">القوة الناتجة</h4>
+                    {/* Same direction forces */}
+                    <div className="mb-3">
+                      <p className="text-gray-700 text-xs mb-1">قوتان بنفس الاتجاه:</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-gray-500 text-xs">← 20N</span>
+                        <span className="text-gray-500 text-xs">← 30N</span>
+                      </div>
+                      <div className="bg-yellow-200/70 rounded px-2 py-1 text-center">
+                        <span className="text-gray-800 font-bold text-sm">القوة الناتجة = 20 + 30 = 50N</span>
+                      </div>
+                    </div>
+                    {/* Opposite forces */}
+                    <div>
+                      <p className="text-gray-700 text-xs mb-1">قوتان متعاكستان:</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-gray-500 text-xs">← 30N</span>
+                        <span className="text-gray-500 text-xs">20N →</span>
+                      </div>
+                      <div className="bg-yellow-200/70 rounded px-2 py-1 text-center">
+                        <span className="text-gray-800 font-bold text-sm">القوة الناتجة = 30 - 20 = 10N</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-center text-xs text-gray-500 mt-2">شرح القوة الناتجة</p>
+              </div>
+
+              {/* Slide 2: Mass vs Weight */}
+              <div className="group cursor-pointer">
+                <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors relative"
+                  style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
+                  <div className="absolute top-0 bottom-0 right-12 w-px bg-red-300/40" />
+                  <div className="relative p-5 min-h-[220px]" dir="rtl">
+                    <h4 className="text-blue-700 font-bold text-base mb-3 border-b-2 border-blue-700/30 pb-1">الكتلة والوزن</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-blue-50/50 rounded-lg p-2 border border-blue-200/50">
+                        <p className="text-blue-700 font-bold text-xs mb-1">الكتلة</p>
+                        <p className="text-gray-600 text-xs">ثابتة لا تتغير</p>
+                        <p className="text-gray-500 text-xs mt-1">وحدة القياس: كغ</p>
+                        <p className="text-gray-500 text-xs">مثال: 73 كغ</p>
+                      </div>
+                      <div className="bg-red-50/50 rounded-lg p-2 border border-red-200/50">
+                        <p className="text-red-600 font-bold text-xs mb-1">الوزن</p>
+                        <p className="text-gray-600 text-xs">يتغير حسب الجاذبية</p>
+                        <p className="text-gray-500 text-xs mt-1">الوحدة: نيوتن</p>
+                        <p className="text-gray-500 text-xs">الوزن = الكتلة × التعجيل</p>
+                      </div>
+                    </div>
+                    <div className="bg-yellow-200/70 rounded px-2 py-1.5 text-center mt-3">
+                      <span className="text-gray-800 font-bold text-xs">الكتلة ثابتة بس الوزن بيختلف من كوكب للتاني!</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-center text-xs text-gray-500 mt-2">مقارنة الكتلة والوزن</p>
+              </div>
+
+              {/* Slide 3: Safety Rules */}
+              <div className="group cursor-pointer">
+                <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors relative"
+                  style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
+                  <div className="absolute top-0 bottom-0 right-12 w-px bg-red-300/40" />
+                  <div className="relative p-5 min-h-[220px]" dir="rtl">
+                    <h4 className="text-blue-700 font-bold text-base mb-3 border-b-2 border-blue-700/30 pb-1">قواعد السلامة - الكيمياء</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 bg-green-50/50 rounded-lg p-1.5 border border-green-200/50">
+                        <span className="text-green-600 text-xs">✓</span>
+                        <span className="text-gray-700 text-xs">ارتدِ النظارات الواقية</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-green-50/50 rounded-lg p-1.5 border border-green-200/50">
+                        <span className="text-green-600 text-xs">✓</span>
+                        <span className="text-gray-700 text-xs">اغسل يديك بعد التجربة</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-red-50/50 rounded-lg p-1.5 border border-red-200/50">
+                        <span className="text-red-500 text-xs">✗</span>
+                        <span className="text-gray-700 text-xs">لا تتناول أو تستنشق المواد</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-red-50/50 rounded-lg p-1.5 border border-red-200/50">
+                        <span className="text-red-500 text-xs">✗</span>
+                        <span className="text-gray-700 text-xs">لا تخزن المواد بغير مكانها</span>
+                      </div>
+                    </div>
+                    <div className="bg-yellow-200/70 rounded px-2 py-1 text-center mt-2">
+                      <span className="text-gray-800 font-bold text-xs">السلامة أولاً دائماً!</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-center text-xs text-gray-500 mt-2">قواعد السلامة بالمختبر</p>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {[
-                { src: '/images/slides/slide-1.png', label: 'العنوان' },
-                { src: '/images/slides/slide-2.png', label: 'تركيب الخلية' },
-                { src: '/images/slides/slide-3.png', label: 'مقارنة نباتية وحيوانية' },
-                { src: '/images/slides/slide-4.png', label: 'ملخص الدرس' },
-                { src: '/images/slides/slide-5.png', label: 'أسئلة تقييمية' },
-                { src: '/images/slides/slide-6.png', label: 'خطة الدرس' },
-              ].map((slide, i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors">
-                    <img src={slide.src} alt={slide.label} className="w-full h-auto group-hover:scale-105 transition-transform duration-300" />
-                  </div>
-                  <p className="text-center text-xs text-gray-500 mt-2">{slide.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-4">هاد مثال حقيقي لشي ممكن تعمله بهالأدوات - كله من الكتاب المدرسي وموثق بأرقام الصفحات</p>
+            <p className="text-center text-sm text-gray-500 mt-4">هاد مثال لشي ممكن تعمله بهالأدوات - عروض تقديمية بأسلوب الورقة والقلم، كل شي من الكتاب وموثق</p>
           </div>
 
           {/* Tool Cards */}
@@ -458,7 +524,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 {[
                   'يحول المحتوى لملف PDF احترافي جاهز للطباعة',
-                  'بيعمل مذكرات بخطط دروس وأوراق عمل',
+                  'بيعمل عروض تقديمية تعليمية بأسلوب الورقة والقلم',
                   'يدعم العربية مع تنسيق من اليمين لليسار',
                   'بيعمل اختبارات منسقة + إجابات نموذجية',
                   'كل شي جاهز للطباعة والتوزيع على الطلاب',
@@ -488,6 +554,7 @@ export default function LandingPage() {
                 {[
                   { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
                   { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
+                  { task: 'عمل عرض تقديمي تعليمي', old: '3-4 ساعات', ai: '10 دقائق', save: '95%' },
                   { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
                   { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
                   { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
