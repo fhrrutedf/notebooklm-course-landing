@@ -125,7 +125,7 @@ export default function LandingPage() {
     },
     {
       q: 'كيف بدفع؟',
-      a: 'الدفع عبر تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
+      a: 'الدفع عبر شام كاش أو تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
     },
     {
       q: 'هل فيي أتابع الكورس بوقتي؟',
@@ -290,7 +290,7 @@ export default function LandingPage() {
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
                 { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
-                { icon: CreditCard, step: '٢', text: 'حول $22 بنكي/صرافة' },
+                { icon: CreditCard, step: '٢', text: 'حول $22 شام كاش/بنكي' },
                 { icon: Send, step: '٣', text: 'استلم الرابط فوراً' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 md:gap-3">
@@ -780,7 +780,7 @@ export default function LandingPage() {
               <div className="flex items-center justify-center gap-3">
                 <span className="text-[#22c55e]">١. تواصل واتساب</span>
                 <span className="text-gray-600">←</span>
-                <span className="text-[#22c55e]">٢. حول $22</span>
+                <span className="text-[#22c55e]">٢. حول $22 شام كاش</span>
                 <span className="text-gray-600">←</span>
                 <span className="text-[#22c55e]">٣. استلم الرابط</span>
               </div>
