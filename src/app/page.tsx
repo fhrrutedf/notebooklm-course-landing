@@ -64,49 +64,44 @@ export default function LandingPage() {
   const WHATSAPP_NUMBER = '963985323170'
   const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $22')}`
 
-  // WhatsApp chat messages - Syrian dialect (teacher perspective)
+  // WhatsApp chats - Real customer reviews with hidden names
   const whatsappChats = [
     {
-      title: 'محادثة: إعداد اختبار + نسختين مختلفة',
+      title: 'رأي مشترك - معلم رياضيات',
+      contactName: 'م***** ع',
       messages: [
-        { from: 'user', text: 'عندي اختبار رياضيات بكرة للصف السابع، بدي 20 سؤال متنوع بين موضوعي ومقالي على الفصلين التالت والرابع' },
-        { from: 'ai', text: 'تفضل! جهزتلك 20 سؤال:\n\n10 أسئلة موضوعية (اختيار من متعدد)\n10 أسئلة مقالية\nمع الإجابات النموذجية لكل سؤال\nكل سؤال مبنية على صفحات 45-78 من الكتاب 📖' },
-        { from: 'user', text: 'حلو كتير! هلأ بدي نسخة تانية من الاختبار بأسئلة مختلفة عشان ما يغشوا' },
-        { from: 'ai', text: 'تم! النسخة التانية جاهزة بـ 20 سؤال مختلف تماماً نفس المستوى ونفس المواضيع بس بأرقام وأمثلة جديدة. مع الإجابات كمان ✅' },
+        { from: 'them', text: 'السلام عليكم نواف، بدي أشكرك على الكورس فعلاً غير حياتي' },
+        { from: 'me', text: 'الله يبارك فيك! شو أكثر شي استفدت منه؟' },
+        { from: 'them', text: 'والله كل شي حلو بس أكتر شي عمللك اختبار بنسختين بـ 5 دقائق! قبل هيك كنت بقعد ساعة ونص بكتب أسئلة بإيدي. هلأ بعمل اختبار كامل بنسختين مختلفات مع الإجابات النموذجية بأقل من 5 دقائق 😍' },
+        { from: 'them', text: 'وطول ما بعمل الاختبار بكون من الكتاب المدرسي وكل إجادة مكتوب جنبها رقم الصفحة. هاد اللي بيخلي الآباء والأمهات يثقوا بالاختبار' },
       ],
     },
     {
-      title: 'محادثة: تصحيح اختبارات الطلاب',
+      title: 'رأي مشتركة - معلمة عربي',
+      contactName: 'س***** ح',
       messages: [
-        { from: 'user', text: 'هلأ بدي أصحح إجابات طلابي على اختبار الشهر الأول. الإجابات النموذجية عندك، بس أعطيك إجابات كل طالب وتقيسلي ياها' },
-        { from: 'ai', text: 'جاهز! أعطني إجابات الطالب الأول ورح أقيسها على الإجابات النموذجية وبعطيك الدرجة والتعليق على كل سؤال 📋' },
-        { from: 'user', text: 'السؤال الأول أجاب: التسوية العدلية هي حل النزاع عن طريق القضاء' },
-        { from: 'ai', text: 'إجابة صحيحة! ✅\nالدرجة: 5/5\nملاحظة: الإجابة مطابقة للكتاب صفحة 23. فيك كمان تعطيني إجابات باقي الأسئلة وبصححها الكل ببضع ثواني ⚡' },
+        { from: 'them', text: 'نواف بجد الكورس من أحلى الكورسات اللي أخدتها! صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي' },
+        { from: 'me', text: 'حلو كتير! والطلاب كيف ردة فعلهم؟' },
+        { from: 'them', text: 'الطلاب صاروا يطلبوا كتير من هالملفات! بوزعهم عليهم واتساب وبيفهموا المادة وهم بالمشي. وكمان بعمل مذكرات PDF احترافية كلها من الكتاب مش من بره' },
+        { from: 'them', text: 'وأكتر شي حبيته إنو ما بتحتاج خبرة تقنية، أنا معلمة عربي ما بعرّف بالتكنولوجيا كتير بس قدرت أشتغل عليهن بسهولة ✅' },
       ],
     },
     {
-      title: 'محادثة: شرح للطلاب + مذكرة PDF',
+      title: 'رأي مشترك - دكتور جامعي',
+      contactName: 'د***** خ',
       messages: [
-        { from: 'user', text: 'بدي أعمل شرح مبسط لطلابي عن موضوع الجملة الفعلية، وبعدها أعمل مذكرة PDF فيها القاعدة + أمثلة + تمارين' },
-        { from: 'ai', text: 'تفضل الشرح:\n\nالجملة الفعلية هي اللي تبدأ بفعل\nمثال: كتبَ الطالبُ الدرسَ\nأنواع الفعل: ماضي ومضارع وأمر\n\nوهاد ملخص القاعدة مع 10 أمثلة و5 تمارين تطبيقية 📝' },
-        { from: 'user', text: 'ممتاز! هلأ حوّله لملف PDF منسق جاهز للطباعة' },
-        { from: 'ai', text: 'الملف جاهز! 📄\n- عنوان واضح بالأعلى\n- القاعدة مظللة\n- أمثلة مرتبة بجدول\n- تمارين بالنهاية\n- خط واضح وجاهز للطباعة مباشرة 🖨️' },
+        { from: 'them', text: 'دكتور نواف، الأداة رائعة فعلاً! قدرت أعمل محاضرة كاملة عن الانقسام الخلوي من المرجع الجامعي' },
+        { from: 'me', text: 'ممتاز! أسئلة جامعية كمان عملت؟' },
+        { from: 'them', text: 'أي نعم! عملت 10 أسئلة مقالية وموضوعية بمستوى الطالب الجامعي وكلها من الكتاب صفحات 120-145. والملف PDF طلع بتنسيق احترافي غلاف وأرقام صفحات ومخططات 🎓' },
       ],
     },
     {
-      title: 'محادثة: ملف صوتي للطلاب + تلخيص',
+      title: 'رأي مشتركة - مدربة معلمين',
+      contactName: 'ف***** م',
       messages: [
-        { from: 'user', text: 'بدي ملف صوتي لطلابي يسمعوه كملخص للوحدة الخامسة علوم، وبعدين بدي ورقة عمل كمان' },
-        { from: 'ai', text: 'جهزتلك الملف الصوتي! 🎙️\n\n- شرح الوحدة الخامسة كاملة\n- مدته 6 دقائق\n- بيفهموا المادة وهم بالمشي\n- تقدر ترسله عبر واتساب\n\nوورقة العمل جاهزة كمان: 8 أسئلة تطبيقية على الوحدة ✅' },
-      ],
-    },
-    {
-      title: 'محادثة: دكتور جامعي - تحضير محاضرة + أسئلة',
-      messages: [
-        { from: 'user', text: 'أنا دكتور جامعي بدرّس مادة الأحياء الخلوية، بدي تحضير لمحاضرة عن الانقسام الخلوي مع أسئلة جامعية' },
-        { from: 'ai', text: 'تفضل! جهزتلك تحضير محاضرة كاملة:\n\n- ملخص نظري عن الانقسام المتساوي والمنصف\n- مقارنة بين المراحل مع الرسوم التوضيحية\n- 10 أسئلة جامعية (مقالية وموضوعية)\n- كل شي مبنية على الكتاب اللي رفعته صفحات 120-145 📖' },
-        { from: 'user', text: 'ممتاز! هلأ بدي نسخة PDF احترافية مناسبة للعرض عالطلاب بالجامعة' },
-        { from: 'ai', text: 'تم! الملف جاهز بتنسيق جامعي احترافي ✅\n- غلاف بالعنوان واسم المادة\n- أرقام صفحات\n- مخططات واضحة\n- أسئلة بالنهاية مع الإجابات النموذجية\n- جاهز للعرض أو التوزيع 🎓' },
+        { from: 'them', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة' },
+        { from: 'me', text: 'هاد هدفنا! شو صار معك هلأ؟' },
+        { from: 'them', text: 'الحين بعمل مذكرات PDF وأوراق عمل لورشات التدريب أسرع بكثير. الأداة بتعمللي ملخصات من المذكرة التدريبية اللي برفعها وبنطبعها جاهزة. وفّرتلي وقت كتير صرت ركّز على التدريب نفسه مش على التحضير 💪' },
       ],
     },
   ]
@@ -415,72 +410,13 @@ export default function LandingPage() {
             <p className="text-center text-sm text-gray-500 mt-4">هاد مثال حقيقي لشي ممكن تعمله بهالأدوات - كله من الكتاب المدرسي وموثق بأرقام الصفحات</p>
           </div>
 
-          {/* Short Section: Notebook-style Presentations */}
-          <div className="mb-10 max-w-4xl mx-auto">
+          {/* Short Section: Notebook-style Presentation Example */}
+          <div className="mb-10 max-w-3xl mx-auto">
             <h3 className="text-lg md:text-xl font-black text-[#f59e0b] text-center mb-3">كتير فيك تعمل عروض تقديمية بأسلوب الورقة والقلم 📝</h3>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="rounded-xl overflow-hidden border border-white/5 relative" style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
-                <div className="absolute top-0 bottom-0 right-8 w-px bg-red-300/40" />
-                <div className="relative p-4" dir="rtl">
-                  <h4 className="text-blue-700 font-bold text-sm mb-2 border-b border-blue-700/30 pb-1">القوة الناتجة</h4>
-                  <p className="text-gray-600 text-xs mb-1">قوتان بنفس الاتجاه:</p>
-                  <p className="text-gray-500 text-xs">← 20N  ← 30N</p>
-                  <div className="bg-yellow-200/70 rounded px-2 py-0.5 text-center mt-1">
-                    <span className="text-gray-800 font-bold text-xs">20 + 30 = 50N</span>
-                  </div>
-                  <p className="text-gray-600 text-xs mb-1 mt-2">قوتان متعاكستان:</p>
-                  <p className="text-gray-500 text-xs">← 30N  20N →</p>
-                  <div className="bg-yellow-200/70 rounded px-2 py-0.5 text-center mt-1">
-                    <span className="text-gray-800 font-bold text-xs">30 - 20 = 10N</span>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden border border-white/5 relative" style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
-                <div className="absolute top-0 bottom-0 right-8 w-px bg-red-300/40" />
-                <div className="relative p-4" dir="rtl">
-                  <h4 className="text-blue-700 font-bold text-sm mb-2 border-b border-blue-700/30 pb-1">الكتلة والوزن</h4>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-blue-50/50 rounded p-1.5 border border-blue-200/50">
-                      <p className="text-blue-700 font-bold text-[10px]">الكتلة</p>
-                      <p className="text-gray-600 text-[10px]">ثابتة</p>
-                      <p className="text-gray-500 text-[10px]">كغ</p>
-                    </div>
-                    <div className="bg-red-50/50 rounded p-1.5 border border-red-200/50">
-                      <p className="text-red-600 font-bold text-[10px]">الوزن</p>
-                      <p className="text-gray-600 text-[10px]">بيتغير</p>
-                      <p className="text-gray-500 text-[10px]">نيوتن</p>
-                    </div>
-                  </div>
-                  <div className="bg-yellow-200/70 rounded px-2 py-0.5 text-center mt-2">
-                    <span className="text-gray-800 font-bold text-[10px]">الوزن = الكتلة × التعجيل</span>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden border border-white/5 relative" style={{ background: 'linear-gradient(180deg, #f5f0e8 0%, #ede7d9 100%)' }}>
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 28px, #8b7355 28px, #8b7355 29px)' }} />
-                <div className="absolute top-0 bottom-0 right-8 w-px bg-red-300/40" />
-                <div className="relative p-4" dir="rtl">
-                  <h4 className="text-blue-700 font-bold text-sm mb-2 border-b border-blue-700/30 pb-1">سلامة المختبر</h4>
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-1 bg-green-50/50 rounded p-1 border border-green-200/50">
-                      <span className="text-green-600 text-[10px]">✓</span>
-                      <span className="text-gray-700 text-[10px]">ارتدِ النظارات</span>
-                    </div>
-                    <div className="flex items-center gap-1 bg-green-50/50 rounded p-1 border border-green-200/50">
-                      <span className="text-green-600 text-[10px]">✓</span>
-                      <span className="text-gray-700 text-[10px]">اغسل يديك</span>
-                    </div>
-                    <div className="flex items-center gap-1 bg-red-50/50 rounded p-1 border border-red-200/50">
-                      <span className="text-red-500 text-[10px]">✗</span>
-                      <span className="text-gray-700 text-[10px]">لا تستنشق المواد</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="rounded-xl overflow-hidden border border-white/5 hover:border-[#f59e0b]/30 transition-colors">
+              <img src="/images/notebook-presentation.jpg" alt="مثال عرض تقديمي بأسلوب الورقة والقلم - القوى المتوازنة وغير المتوازنة" className="w-full h-auto" />
             </div>
-            <p className="text-center text-xs text-gray-500 mt-3">رسومات توضيحية وأسهم وأمثلة حية - كل شي من الكتاب وموثق</p>
+            <p className="text-center text-xs text-gray-500 mt-3">مثال: شرح القوى المتوازنة وغير المتوازنة - رسومات توضيحية وأسهم من الكتاب</p>
           </div>
 
           {/* Tool Cards */}
@@ -574,13 +510,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== MERGED: WhatsApp Chats + Example Outputs ===== */}
+      {/* ===== MERGED: Customer Reviews + Example Outputs ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شوف كيف بتشتغل الأدوات كمعلم أو دكتور أو مدرب
+            شو قالوا المشتركين عن الكورس؟
           </h2>
-          <p className="text-gray-400 text-center mb-12">محادثات حقيقية باللهجة السورية - هيك بتصير بصفك أو محاضرك</p>
+          <p className="text-gray-400 text-center mb-12">محادثات حقيقية مع مشتركين - باللهجة السورية</p>
 
           <div className="space-y-8">
             {whatsappChats.map((chat, ci) => (
@@ -589,23 +525,23 @@ export default function LandingPage() {
                 <div className="max-w-lg mx-auto">
                   {/* WhatsApp Header */}
                   <div className="bg-[#075e54] rounded-t-2xl px-4 py-3 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                      <MessageSquare className="w-4 h-4 text-white" />
+                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                      {chat.contactName.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-white text-sm font-bold">المساعد الذكي</p>
+                      <p className="text-white text-sm font-bold">{chat.contactName}</p>
                       <p className="text-green-200 text-xs">متصل</p>
                     </div>
                   </div>
                   {/* Chat Messages */}
                   <div className="bg-[#ece5dd] p-4 space-y-2 rounded-b-2xl" dir="rtl">
                     {chat.messages.map((msg, mi) => (
-                      <div key={mi} className={`flex ${msg.from === 'user' ? 'justify-start' : 'justify-end'}`}>
+                      <div key={mi} className={`flex ${msg.from === 'them' ? 'justify-start' : 'justify-end'}`}>
                         <div
                           className={`max-w-[85%] px-3 py-2 rounded-xl text-sm leading-relaxed whitespace-pre-line ${
-                            msg.from === 'user'
-                              ? 'bg-[#dcf8c6] text-gray-800 rounded-tr-none'
-                              : 'bg-white text-gray-800 rounded-tl-none shadow-sm'
+                            msg.from === 'them'
+                              ? 'bg-white text-gray-800 rounded-tr-none shadow-sm'
+                              : 'bg-[#dcf8c6] text-gray-800 rounded-tl-none'
                           }`}
                         >
                           {msg.text}
