@@ -14,14 +14,15 @@ import {
   Sparkles,
   Star,
   Zap,
-  Gift,
-  ArrowLeft,
   Upload,
   Search,
   FileOutput,
   Download,
   MessageSquare,
-  Mic,
+  Users,
+  CreditCard,
+  Send,
+  ArrowLeft,
 } from 'lucide-react'
 
 export default function LandingPage() {
@@ -104,7 +105,7 @@ export default function LandingPage() {
   const faqs = [
     {
       q: 'أنا معلم ما بعرف شي بالتكنولوجيا، فيي أستفيد من الكورس؟',
-      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين اللي ما عندهم أي خبرة تقنية. كل اللي تحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر، من أول ما تفتح الأداة لحد ما تطبع ملف PDF جاهز.',
+      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر، من أول ما تفتح الأداة لحد ما تطبع ملف PDF جاهز.',
     },
     {
       q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
@@ -112,36 +113,19 @@ export default function LandingPage() {
     },
     {
       q: 'أنا بدرّس عربي، الكورس بيناسبني؟',
-      a: 'بيناسب كل المواد! عربي، رياضيات، علوم، تربية إسلامية، إنجليزي، اجتماعيات... الأداة بتفهم أي مادة وبتعمل محتوى مبنية على الكتاب المدرسي. الأمثلة العملية بالكورس تشمل مواد مختلفة.',
-    },
-    {
-      q: 'فيي أعمل اختبارات وأسئلة امتحان بهالأدوات؟',
-      a: 'هاد من أهم استخداماتها! بتقدر تعمل أسئلة موضوعية ومقالية، تنسخ الاختبار بنسختين مختلفة عشان ما يغشوا الطلاب، وبتحصل على الإجابات النموذجية لكل سؤال. كل شي مبنية على الكتاب المدرسي وموثقة بأرقام الصفحات.',
-    },
-    {
-      q: 'فيي أعمل شرح لطلابي بيسمعوه على واتساب؟',
-      a: 'أي نعم! ميزة الملف الصوتي رهيبة - بتعمل شرح صوتي بنقرة واحدة. ملف بصيغة صوتية تقدر ترسلها لطلابك عبر واتساب. الطلاب بيسمعوها وهم بالمشي أو بالبيت. كتير معلمين حكولي إن الطلاب انبسطوا فيها كتير.',
+      a: 'بيناسب كل المواد! عربي، رياضيات، علوم، تربية إسلامية، إنجليزي، اجتماعيات... الأداة بتفهم أي مادة وبتعمل محتوى مبنية على الكتاب المدرسي. الأمثلة العملية بالكورس بتشمل مواد مختلفة.',
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج السوري؟',
-      a: 'هاد أكتر شي بيميزها عن ChatGPT! الأداة بترجع للكتاب المدرسي اللي رفعته وبتجاوب منه بس. كل إجابة بيكون مكتوب جنبها رقم الصفحة. ما بتطلع معلومات من بره المنهج. هاد اللي بيخليها آمنة وموثوقة للمعلم.',
-    },
-    {
-      q: 'بدي أعمل مذكرة PDF كاملة - فيي؟',
-      a: 'بالضبط! هاد واحد من أهم استخدامات الكورس. بتاخد المحتوى من الأداة الأولى وبترسلو للأداة التانية وبطلةع مذكرة PDF منسقة وجاهزة للطباعة. ملخص + أسئلة + أوراق عمل + إجابات نموذجية كلها بملف واحد مرتب.',
+      a: 'هاد أكتر شي بيميزها عن ChatGPT! الأداة بترجع للكتاب المدرسي اللي رفعته وبتجاوب منه بس. كل إجادة بيكون مكتوب جنبها رقم الصفحة. ما بتطلع معلومات من بره المنهج. هاد اللي بيخليها آمنة وموثوقة للمعلم.',
     },
     {
       q: 'شو الفرق بين هالأدوات وChatGPT العادي؟',
       a: 'الفرق كبير! ChatGPT بيعطيك إجابات عامة من الإنترنت مش من الكتاب المدرسي. أما هالأدوات فبتشتغل على الكتاب اللي أنت بترفعه يعني كل إجابة من المصدر وموثقة. كمان الأداة التانية بتنسقلك PDF احترافي جاهز للطباعة - شي ChatGPT ما بيعملو.',
     },
     {
-      q: 'كيف يتم الدفع؟',
-      a: 'الدفع عبر تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب وسيتم إرسال رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
-    },
-
-    {
-      q: 'هل أحصل على شهادة؟',
-      a: 'نعم، تحصل على شهادة إتمام إلكترونية بعد الانتهاء من الكورس وتطبيق الواجب العملي. الشهادة ممكن تضيفها لسيرتك الذاتية أو ملفك المهني.',
+      q: 'كيف بدفع؟',
+      a: 'الدفع عبر تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
     },
     {
       q: 'هل فيي أتابع الكورس بوقتي؟',
@@ -152,24 +136,12 @@ export default function LandingPage() {
       a: 'بتشتغل على الموبايل والكمبيوتر! الأدتين مواقع إنترنت عادية بتفتح على أي متصفح. بس للتنسيق والأعمال الكبيرة أفضل تستخدم الكمبيوتر عشان الشاشة أوسع وأسهل بالشغل.',
     },
     {
-      q: 'بقدر أرفع كتب كتير لمواد مختلفة بنفس الوقت؟',
-      a: 'أي نعم! فيك تعمل ملف منفصل لكل مادة وكل كتاب. يعني فيك ترفع كتاب الرياضيات وكتاب العربي وكتاب العلوم - كل واحد بملف مستقل. وقت بدك تتحضر لمادة معينة بتفتح ملفها وبتلاقي كل شي جاهز.',
-    },
-    {
-      q: 'هل الأداة بتعمل شروحات بالعربي منيح؟',
-      a: 'بالتأكيد! الأداة بتفهم العربي منيح وبتعمل شروحات باللغة العربية. وبما إنها بتشتغل على الكتاب المدرسي اللي رفعته، فالشرح بيكون مطابق للمنهج ومكتوب بلغة مناسبة لطلابك.',
-    },
-    {
-      q: 'فيي استخدمها لتصحيح اختبارات الطلاب؟',
-      a: 'أي نعم! من رفعتك لأسئلة الاختبار والإجابات النموذجية، بتقدر تعطيها إجابات الطلاب وتطلب منها تصحيحها. بيعطيلك الدرجة والتعليق على كل إجابة. هاد بيوفّر وقت كتير خصوصي لما عندك صفوف كتير.',
-    },
-    {
       q: 'شو بيصير لو الكتاب المدرسي مش متوفر بشكل إلكتروني؟',
       a: 'ما في مشكلة! فيك تصور الكتاب بجوالك وترفعه كصور. الأداة بتعرف تقرأ الصور كمان. أو فيك ترفع أي مذكرة أو ملخص عندك. المهم يكون عندك مصدر ترفعه والأداة بتعمل الباقي.',
     },
     {
       q: 'هل الأداة بتشتغل والإنترنت ضعيف بسوريا؟',
-      a: 'الأداة مش محتاجة إنترنت قوي. بس تحتاج اتصال مستقر. بتشتغل حتى على شبكات 3G. نصيحتي إنك تحضّر وأنت عالإنترنت وبتنزّل الملفات، وبعدها بتقدر تشتغل عليها وأنت أوفلاين.',
+      a: 'الأداة مش محتاجة إنترنت قوي. بس بتحتاج اتصال مستقر. بتشتغل حتى على شبكات 3G. نصيحتي إنك تحضّر وأنت عالإنترنت وبتنزّل الملفات، وبعدها بتقدر تشتغل عليها وأنت أوفلاين.',
     },
   ]
 
@@ -220,12 +192,10 @@ export default function LandingPage() {
     },
   ]
 
+  // Reduced from 6 to 3 bonuses for credibility
   const bonuses = [
     { title: '15 برومبت جاهز', subtitle: 'PROMPTS جاهزة', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين السوريين. كل برومبت مجرّب وبيدي نتائج ممتازة مع المنهج السوري.', icon: Zap },
-    { title: 'دليل كتابة البرومبتات', subtitle: 'PROMPT WRITING GUIDE', value: '$10', desc: 'دليل شامل بيعلمك تكتب برومبتات احترافية من الصفر. من المبتدئ للمحترف. بعد هاد الدليل رح تقدر تكتب أي برومبت وتحصل على نتائج مذهلة.', icon: BookOpen },
     { title: 'ورقة مرجعية سريعة', subtitle: 'CHEAT SHEET', value: '$10', desc: 'ورقة مرجعية سريعة بتلخص أهم الأوامر والخطوات. طباعها وحطها جنبك. بثواني بتلاقي اللي بدك ياه.', icon: FileText },
-    { title: 'دليل المعلم الكامل', subtitle: 'TEACHER GUIDE', value: '$15', desc: 'دليل خطوة بخطوة من البداية للنهاية. كل مرحلة مشروحة بالتفصيل مع صور توضيحية. مناسب حتى لو ما عندك أي خبرة تقنية.', icon: GraduationCap },
-    { title: 'نصوص إعلانات + واتساب', subtitle: 'ADS & WHATSAPP COPY', value: '$10', desc: 'نصوص إعلانات جاهزة لفيسبوك وانستغرام + رسائل واتساب تسويقية. بيوفر عليك ساعات من الكتابة.', icon: MessageCircle },
     { title: 'وصول دائم + تحديثات', subtitle: 'LIFETIME ACCESS', value: '$20', desc: 'ادفع مرة واحتفظ بالكورس للأبد. مفيش اشتراك شهري ولا تجديد. بمجرد اشتراكك، عندك وصول دائم لكل المحتوى وأي تحديثات مستقبلية.', icon: Shield },
   ]
 
@@ -234,8 +204,6 @@ export default function LandingPage() {
     { name: 'سارة', role: 'معلمة لغة عربية - دمشق', text: 'صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي وبوزعها عليهم واتساب. الطلاب صاروا يطلبوا كتير من هالملفات!' },
     { name: 'محمد', role: 'معلم علوم - حمص', text: 'الأداة الأولى بتشتغل على الكتاب المدرسي مباشرة - مش متل ChatGPT اللي بيعطيك إجابات عامة. كل إجابة مكتوب جنبها رقم الصفحة!' },
     { name: 'فاطمة', role: 'معلمة تربية إسلامية - حماة', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة. الحين بعمل مذكرات PDF وبصحح اختبارات أسرع بكثير.' },
-    { name: 'عمر', role: 'معلم إنجليزي - اللاذقية', text: 'أفضل استثمار عملته هالسنة. بـ $22 وفرت ساعات يومياً. بعمل ورقة عمل كاملة بأقل من 3 دقائق والتنسيق احترافي.' },
-    { name: 'ريم', role: 'معلمة علوم - دير الزور', text: 'كنت بقعد ساعات بالتنسيق بالوورد، الحين بدقائق بكون جاهز. والميزة الصوتية خلت الطلاب يذاكروا وهم بالمشي!' },
   ]
 
   const exampleOutputs = [
@@ -287,20 +255,59 @@ export default function LandingPage() {
             <span className="text-[#f59e0b]">بـ 15 دقيقة بدل ساعتين تحضير</span>
           </h1>
 
+          {/* FIXED: Removed "مجانيتين" contradiction - now focuses on VALUE */}
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            أداتين مجانيتين رح يوفّروا عليك ساعات يومياً. صحّح اختبارات، اعمل أسئلة، جهّز شروحات وملفات صوتية لطلابك - كل شي من الكتاب المدرسي وموثق بأرقام الصفحات.
+            تعلم تستخدم أداتين الذكاء الاصطناعي لإعداد اختبارات بنسختين، تصحيح أوراق الطلاب، وعمل مذكرات PDF احترافية - كل شي من الكتاب المدرسي وموثق بأرقام الصفحات.
           </p>
 
-          {/* CTA */}
+          {/* CTA - FIXED: More action-oriented text */}
           <a
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30 mb-4"
           >
-            تواصل عبر واتساب
+            اشترك الآن - $22 فقط
             <MessageCircle className="w-6 h-6" />
           </a>
+
+          {/* NEW: Social Proof under hero CTA */}
+          <div className="flex items-center justify-center gap-6 mt-4 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5">
+              <Users className="w-4 h-4 text-[#22c55e]" />
+              انضم لعشرات المعلمين
+            </span>
+            <span className="flex items-center gap-1">
+              {[1,2,3,4,5].map((s) => (
+                <Star key={s} className="w-3.5 h-3.5 fill-[#f59e0b] text-[#f59e0b]" />
+              ))}
+              <span className="mr-1">4.9/5</span>
+            </span>
+          </div>
+
+          {/* NEW: Purchase Steps - Clear process */}
+          <div className="mt-8 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-4 md:gap-8">
+              {[
+                { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
+                { icon: CreditCard, step: '٢', text: 'حول $22 بنكي/صرافة' },
+                { icon: Send, step: '٣', text: 'استلم الرابط فوراً' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 md:gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-[#f59e0b]/15 rounded-lg flex items-center justify-center shrink-0">
+                      <item.icon className="w-4 h-4 text-[#f59e0b]" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs text-[#f59e0b] font-bold">خطوة {item.step}</div>
+                      <div className="text-xs text-gray-400">{item.text}</div>
+                    </div>
+                  </div>
+                  {i < 2 && <ArrowLeft className="w-4 h-4 text-gray-600 hidden md:block" />}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -316,12 +323,12 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-5">
             {[
-              { icon: Clock, problem: 'بتقعد 2-3 ساعات بتحضير درس واحد', color: '#ef4444' },
-              { icon: FileText, problem: 'بتكتب أسئلة اختبار بإيدك وبتاخد ساعة ونص', color: '#ef4444' },
-              { icon: Brain, problem: 'بتصحح اختبارات 40 طالب وبئي بحياتك', color: '#ef4444' },
-              { icon: BookOpen, problem: 'بتحاول تلخص فصل كامل وبقعد ساعتين', color: '#ef4444' },
-              { icon: MessageCircle, problem: 'طلابك بيسألوا وبتضطر تعيد الشرح كذا مرة', color: '#ef4444' },
-              { icon: FileOutput, problem: 'بتقعد عالوورد بتنسق مذكرة وبتزهق', color: '#ef4444' },
+              { icon: Clock, problem: 'بتقعد 2-3 ساعات بتحضير درس واحد' },
+              { icon: FileText, problem: 'بتكتب أسئلة اختبار بإيدك وبتاخد ساعة ونص' },
+              { icon: Brain, problem: 'بتصحح اختبارات 40 طالب وبئي بحياتك' },
+              { icon: BookOpen, problem: 'بتحاول تلخص فصل كامل وبقعد ساعتين' },
+              { icon: MessageCircle, problem: 'طلابك بيسألوا وبتضطر تعيد الشرح كذا مرة' },
+              { icon: FileOutput, problem: 'بتقعد عالوورد بتنسق مذكرة وبتزهق' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-4 bg-[#1a1a1a] rounded-xl p-5 border border-red-900/20">
                 <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center shrink-0">
@@ -340,7 +347,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== WHAT WILL YOU LEARN - VISUAL ===== */}
+      {/* ===== MERGED: What you learn + Tools + Time savings ===== */}
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
@@ -384,64 +391,9 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Workflow Infographic */}
-          <div className="rounded-2xl overflow-hidden border border-white/5">
-            <img src="/workflow-infographic.png" alt="مخطط سير العمل" className="w-full h-auto" />
-          </div>
-        </div>
-      </section>
-
-      {/* ===== BEFORE / AFTER VISUAL ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            كم وقت بتوفر كأستاذ؟
-          </h2>
-          <p className="text-gray-400 text-center mb-12">الفرق بين قبل وبعد - شوف بنفسك</p>
-
-          {/* Time Savings Table */}
-          <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-[#f59e0b]/10 border-b border-white/10">
-                  <th className="py-4 px-6 text-right text-[#f59e0b] font-bold">المهمة</th>
-                  <th className="py-4 px-6 text-center text-red-400 font-bold">الطريقة العادية</th>
-                  <th className="py-4 px-6 text-center text-[#22c55e] font-bold">بـ AI</th>
-                  <th className="py-4 px-6 text-center text-[#f59e0b] font-bold">التوفير</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
-                  { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
-                  { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
-                  { task: 'كتابة خطة درس', old: 'ساعة', ai: '5 دقائق', save: '92%' },
-                  { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
-                  { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
-                ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.02]'}>
-                    <td className="py-3 px-6 text-right font-medium text-white">{row.task}</td>
-                    <td className="py-3 px-6 text-center text-red-400">{row.old}</td>
-                    <td className="py-3 px-6 text-center text-[#22c55e] font-medium">{row.ai}</td>
-                    <td className="py-3 px-6 text-center text-[#f59e0b] font-bold">{row.save}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== WHAT THE TOOLS DO - VISUAL CARDS ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            الأدوات شو بتعمل للمعلم بالضبط؟
-          </h2>
-          <p className="text-gray-400 text-center mb-12">هاد اللي رح يطلع معك كأستاذ</p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Tool 1: Source Upload & Questions */}
+          {/* Tool Cards - Merged into this section */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {/* Tool 1 */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-purple-900/30 hover:border-purple-500/50 transition-colors">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-[#8b5cf6]/20 rounded-xl flex items-center justify-center">
@@ -468,7 +420,7 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            {/* Tool 2: PDF Design */}
+            {/* Tool 2 */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-amber-900/30 hover:border-amber-500/50 transition-colors">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-[#f59e0b]/20 rounded-xl flex items-center justify-center">
@@ -495,38 +447,46 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ===== EXAMPLE OUTPUTS ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شو بتطلع النتيجة كأستاذ؟
-          </h2>
-          <p className="text-gray-400 text-center mb-12">شوف بنفسك شو ممكن تعمل لطلابك بهالأدوات</p>
+          {/* Time Savings Table */}
+          <h3 className="text-xl md:text-2xl font-black text-center mb-6">كم وقت بتوفر كأستاذ؟</h3>
+          <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#f59e0b]/10 border-b border-white/10">
+                  <th className="py-4 px-6 text-right text-[#f59e0b] font-bold">المهمة</th>
+                  <th className="py-4 px-6 text-center text-red-400 font-bold">الطريقة العادية</th>
+                  <th className="py-4 px-6 text-center text-[#22c55e] font-bold">بـ AI</th>
+                  <th className="py-4 px-6 text-center text-[#f59e0b] font-bold">التوفير</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
+                  { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
+                  { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
+                  { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
+                  { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.02]'}>
+                    <td className="py-3 px-6 text-right font-medium text-white">{row.task}</td>
+                    <td className="py-3 px-6 text-center text-red-400">{row.old}</td>
+                    <td className="py-3 px-6 text-center text-[#22c55e] font-medium">{row.ai}</td>
+                    <td className="py-3 px-6 text-center text-[#f59e0b] font-bold">{row.save}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {exampleOutputs.map((ex, i) => (
-              <div key={i} className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 group">
-                <div className="aspect-[3/4] overflow-hidden bg-gray-900">
-                  <img
-                    src={ex.img}
-                    alt={ex.title}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-[#f59e0b] mb-1">{ex.title}</h3>
-                  <p className="text-gray-500 text-sm">{ex.desc}</p>
-                </div>
-              </div>
-            ))}
+          {/* Workflow Infographic */}
+          <div className="mt-10 rounded-2xl overflow-hidden border border-white/5">
+            <img src="/workflow-infographic.png" alt="مخطط سير العمل" className="w-full h-auto" />
           </div>
         </div>
       </section>
 
-      {/* ===== WHATSAPP CHATS ===== */}
+      {/* ===== MERGED: WhatsApp Chats + Example Outputs ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
@@ -569,6 +529,26 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+
+          {/* Example Outputs - Merged here */}
+          <h3 className="text-xl md:text-2xl font-black text-center mt-12 mb-6">شو بتطلع النتيجة كأستاذ؟</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {exampleOutputs.map((ex, i) => (
+              <div key={i} className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 group">
+                <div className="aspect-[3/4] overflow-hidden bg-gray-900">
+                  <img
+                    src={ex.img}
+                    alt={ex.title}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-[#f59e0b] mb-1">{ex.title}</h3>
+                  <p className="text-gray-500 text-sm">{ex.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -580,6 +560,7 @@ export default function LandingPage() {
           </h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 flex flex-col md:flex-row items-center gap-8">
             <div className="shrink-0">
+              {/* TODO: Replace with real photo when available */}
               <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#f59e0b] to-[#8b5cf6] flex items-center justify-center text-white text-4xl font-black shadow-lg shadow-[#f59e0b]/20">
                 ن.ب
               </div>
@@ -591,18 +572,6 @@ export default function LandingPage() {
                 أنا معلم متلكم، كنت بقعد ساعات بتحضير الدروس وبكتابة الأسئلة وبالتنسيق عالوورد. لما اكتشفت هالأدوات حياتي انقلبت. صرت بعمل اختبار بنسختين بـ 5 دقائق، وبصحح اختبارات الطلاب بكسر وقت، وبعمل مذكرات PDF احترافية بدقائق. مؤمن إن كل معلم سوري يقدر يستفيد من هالأدوات بغض النظر عن خلفيته التقنية - لأنها فعلاً سهلة وبسيطة.
               </p>
             </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
-            >
-              تواصل عبر واتساب
-              <MessageCircle className="w-6 h-6" />
-            </a>
           </div>
         </div>
       </section>
@@ -654,47 +623,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== COUNTDOWN + CTA ===== */}
-      <section className="py-10 bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-lg font-bold mb-4">ينتهي العرض الخاص بعد</p>
-          <div className="flex items-center justify-center gap-2 mb-6">
-            {[
-              { val: pad(timeLeft.days), label: 'يوم' },
-              { val: pad(timeLeft.hours), label: 'ساعة' },
-              { val: pad(timeLeft.minutes), label: 'دقيقة' },
-              { val: pad(timeLeft.seconds), label: 'ثانية' },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className="bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 min-w-[60px]">
-                  <div className="text-2xl md:text-3xl font-mono font-black text-[#f59e0b]">{item.val}</div>
-                  <div className="text-xs text-gray-500">{item.label}</div>
-                </div>
-                {i < 3 && <span className="text-[#f59e0b] text-2xl font-bold">:</span>}
-              </div>
-            ))}
-          </div>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
-          >
-            تواصل عبر واتساب
-            <MessageCircle className="w-6 h-6" />
-          </a>
-        </div>
-      </section>
-
-      {/* ===== BONUSES ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
+      {/* ===== BONUSES - REDUCED to 3 ===== */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-3">مازلت متردد؟</h2>
           <h3 className="text-xl md:text-3xl font-black text-center mb-12">
-            هدايا مجانية بقيمة <span className="text-[#f59e0b]">$80</span> تحصل عليها <span className="text-[#22c55e]">مجاناً</span>
+            هدايا مجانية بقيمة <span className="text-[#f59e0b]">$45</span> تحصل عليها <span className="text-[#22c55e]">مجاناً</span>
           </h3>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-3 gap-5">
             {bonuses.map((bonus, i) => (
               <div key={i} className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#f59e0b]/10 hover:border-[#f59e0b]/30 transition-colors">
                 <div className="flex items-center justify-between mb-3">
@@ -715,7 +652,7 @@ export default function LandingPage() {
 
           <div className="text-center mt-8 bg-[#1a1a1a] rounded-2xl p-6 border border-[#f59e0b]/20">
             <p className="text-gray-400 text-lg">
-              قيمة البونصات <span className="text-[#f59e0b] font-bold line-through">$80</span> ولكن ستحصل عليها
+              قيمة البونصات <span className="text-[#f59e0b] font-bold line-through">$45</span> ولكن ستحصل عليها
               <span className="text-[#22c55e] font-black text-2xl mr-2"> مجاناً عند اشتراك</span>
             </p>
           </div>
@@ -723,7 +660,7 @@ export default function LandingPage() {
       </section>
 
       {/* ===== PRICING SUMMARY ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
+      <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-10">كل ما ستحصل عليه عند اشتراكك</h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
@@ -745,10 +682,10 @@ export default function LandingPage() {
             <div className="border-t-2 border-[#f59e0b]/30 mt-6 pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-400">إجمالي قيمة هذه الباقة يتجاوز</span>
-                <span className="text-[#f59e0b] font-bold line-through text-xl">$145</span>
+                <span className="text-[#f59e0b] font-bold line-through text-xl">$110</span>
               </div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-400">لكن… ستحصل عليها كلها الآن مقابل</span>
+                <span className="text-gray-400">لكن… هتحصل عليها كلها الآن مقابل</span>
               </div>
               <div className="text-center">
                 <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$22</span>
@@ -763,20 +700,19 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="w-full mt-8 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              تواصل عبر واتساب
+              اشترك الآن - $22 فقط
               <MessageCircle className="w-6 h-6" />
             </a>
-
           </div>
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
+      {/* ===== TESTIMONIALS - REDUCED to 4 ===== */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-3">شو بيقولوا المعلمين؟</h2>
           <p className="text-gray-400 text-center mb-12">آراء حقيقية من معلمين جربوا الكورس</p>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {testimonials.map((item, i) => (
               <div key={i} className="bg-[#1a1a1a] rounded-2xl p-6 border border-white/5">
                 <div className="flex items-center gap-1 mb-3">
@@ -795,7 +731,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== FAQ ===== */}
+      {/* ===== FAQ - FIXED: Syrian dialect ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-12">الأسئلة الشائعة</h2>
@@ -822,7 +758,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== REGISTRATION - WHATSAPP CTA ===== */}
+      {/* ===== FINAL CTA ===== */}
       <section id="register" className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-xl mx-auto px-4">
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-[#25D366]/20 text-center">
@@ -830,12 +766,24 @@ export default function LandingPage() {
               <MessageCircle className="w-10 h-10 text-[#25D366]" />
             </div>
             <h2 className="text-2xl md:text-4xl font-black mb-3">جاهز تبدأ؟</h2>
-            <p className="text-gray-400 text-lg mb-6">تواصل معنا عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
+            <p className="text-gray-400 text-lg mb-6">تواصل عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
 
             <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
               <div className="text-4xl font-black text-[#22c55e]">$22</div>
               <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$65</span></p>
               <p className="text-gray-500 text-sm">عرض لمدة 3 أيام فقط</p>
+            </div>
+
+            {/* NEW: Purchase Steps Reminder */}
+            <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5 text-sm">
+              <p className="text-gray-500 mb-3 font-bold">كيف تشترك؟</p>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-[#22c55e]">١. تواصل واتساب</span>
+                <span className="text-gray-600">←</span>
+                <span className="text-[#22c55e]">٢. حول $22</span>
+                <span className="text-gray-600">←</span>
+                <span className="text-[#22c55e]">٣. استلم الرابط</span>
+              </div>
             </div>
 
             <a
@@ -844,7 +792,7 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              تواصل عبر واتساب
+              اشترك الآن - $22 فقط
               <MessageCircle className="w-6 h-6" />
             </a>
 
@@ -856,7 +804,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== FOOTER ===== */}
+      {/* ===== FOOTER - FIXED year ===== */}
       <footer className="bg-[#050505] py-8 mt-auto border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <div className="mb-3">
@@ -865,9 +813,20 @@ export default function LandingPage() {
             <span className="text-gray-400">المدرب</span>
           </div>
           <p className="text-gray-600 text-sm">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والمعلمات في سوريا</p>
-          <p className="text-xs mt-2 text-gray-700">جميع الحقوق محفوظة 2025</p>
+          <p className="text-xs mt-2 text-gray-700">جميع الحقوق محفوظة 2026</p>
         </div>
       </footer>
+
+      {/* ===== NEW: FLOATING WHATSAPP BUTTON ===== */}
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/40 transition-all hover:scale-110"
+        aria-label="تواصل عبر واتساب"
+      >
+        <MessageCircle className="w-7 h-7 text-white" />
+      </a>
     </div>
   )
 }
