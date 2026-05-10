@@ -46,6 +46,9 @@ export default function LandingPage() {
 
   const pad = (n: number) => n.toString().padStart(2, '0')
 
+  const WHATSAPP_NUMBER = '963985323170'
+  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي للمعلمين - $30')}`
+
   // WhatsApp chat messages - Syrian dialect (teacher perspective)
   const whatsappChats = [
     {
@@ -279,14 +282,16 @@ export default function LandingPage() {
 
           {/* CTA */}
           <a
-            href="#register"
-            className="inline-flex items-center gap-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#22c55e]/30 mb-4"
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30 mb-4"
           >
-            اشترك الآن
-            <ArrowLeft className="w-6 h-6" />
+            تواصل عبر واتساب
+            <MessageCircle className="w-6 h-6" />
           </a>
           <p className="text-gray-500 text-sm">
-            استرجع استثمارك بالكامل اذا لم تجد الفائدة المتوقعة
+            ضمان استرجاع كامل خلال 7 أيام
           </p>
         </div>
       </section>
@@ -582,13 +587,15 @@ export default function LandingPage() {
 
           <div className="text-center mt-10">
             <a
-              href="#register"
-              className="inline-flex items-center gap-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#22c55e]/30"
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن
-              <ArrowLeft className="w-6 h-6" />
+              تواصل عبر واتساب
+              <MessageCircle className="w-6 h-6" />
             </a>
-            <p className="text-gray-500 text-sm mt-3">استرجع استثمارك بالكامل اذا لم تجد الفائدة المتوقعة</p>
+            <p className="text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
           </div>
         </div>
       </section>
@@ -661,13 +668,15 @@ export default function LandingPage() {
             ))}
           </div>
           <a
-            href="#register"
-            className="inline-flex items-center gap-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#22c55e]/30"
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
           >
-            اشترك الآن
-            <ArrowLeft className="w-6 h-6" />
+            تواصل عبر واتساب
+            <MessageCircle className="w-6 h-6" />
           </a>
-          <p className="text-gray-500 text-sm mt-3">استرجع استثمارك بالكامل اذا لم تجد الفائدة المتوقعة</p>
+          <p className="text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
         </div>
       </section>
 
@@ -742,13 +751,15 @@ export default function LandingPage() {
             </div>
 
             <a
-              href="#register"
-              className="w-full mt-8 bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#22c55e]/30"
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full mt-8 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن
-              <ArrowLeft className="w-6 h-6" />
+              تواصل عبر واتساب
+              <MessageCircle className="w-6 h-6" />
             </a>
-            <p className="text-center text-gray-500 text-sm mt-3">استرجع استثمارك بالكامل اذا لم تجد الفائدة المتوقعة</p>
+            <p className="text-center text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
           </div>
         </div>
       </section>
@@ -819,63 +830,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== REGISTRATION ===== */}
+      {/* ===== REGISTRATION - WHATSAPP CTA ===== */}
       <section id="register" className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-4xl font-black mb-3">سجّل الآن بالكورس</h2>
-            <p className="text-gray-400 text-lg">ابدأ رحلتك مع الذكاء الاصطناعي بالتعليم اليوم</p>
-          </div>
+          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-[#25D366]/20 text-center">
+            <div className="w-20 h-20 bg-[#25D366]/15 rounded-full flex items-center justify-center mx-auto mb-6">
+              <MessageCircle className="w-10 h-10 text-[#25D366]" />
+            </div>
+            <h2 className="text-2xl md:text-4xl font-black mb-3">جاهز تبدأ؟</h2>
+            <p className="text-gray-400 text-lg mb-6">تواصل معنا عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
 
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
-            <div className="text-center mb-6">
-              <div className="text-5xl font-black text-[#22c55e]">$30</div>
+            <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
+              <div className="text-4xl font-black text-[#22c55e]">$30</div>
               <p className="text-gray-500 mt-1">دفع واحد - وصول دائم</p>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-400">الاسم الكامل</label>
-                <input
-                  type="text"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-colors"
-                  placeholder="أدخل اسمك الكامل"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-400">رقم الواتساب</label>
-                <input
-                  type="tel"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-colors"
-                  placeholder="+963 xxx xxx xxxx"
-                  dir="ltr"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-400">المادة التي تدرّسها</label>
-                <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-colors">
-                  <option value="" className="bg-[#1a1a1a]">اختر المادة</option>
-                  <option value="رياضيات" className="bg-[#1a1a1a]">رياضيات</option>
-                  <option value="لغة عربية" className="bg-[#1a1a1a]">لغة عربية</option>
-                  <option value="علوم" className="bg-[#1a1a1a]">علوم</option>
-                  <option value="تربية إسلامية" className="bg-[#1a1a1a]">تربية إسلامية</option>
-                  <option value="لغة إنجليزية" className="bg-[#1a1a1a]">لغة إنجليزية</option>
-                  <option value="أخرى" className="bg-[#1a1a1a]">أخرى</option>
-                </select>
-              </div>
-            </div>
-
             <a
-              href="#"
-              className="w-full mt-6 bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#22c55e]/30"
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن - $30
-              <ArrowLeft className="w-6 h-6" />
+              تواصل عبر واتساب
+              <MessageCircle className="w-6 h-6" />
             </a>
 
             <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
               <span className="flex items-center gap-1"><Shield className="w-4 h-4 text-[#22c55e]" /> ضمان استرجاع 7 أيام</span>
-              <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> وصول فوري</span>
+              <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> رابط الكورس فوراً</span>
             </div>
           </div>
         </div>
