@@ -1,154 +1,38 @@
-
 ---
 Task ID: 1
 Agent: Main Agent
-Task: Create complete 2-hour video script PDF for NotebookLM + Z.ai course
+Task: Create science lesson presentation, update website to target university doctors and trainers
 
 Work Log:
-- Read all 7 uploaded PDF files from course-files.zip
-- Analyzed complete-plan.pdf, course-guide.pdf, teacher-guide.pdf, prompt-writing-guide.pdf, 15-prompts.pdf, cheatsheet.pdf, ads-whatsapp.pdf
-- Created comprehensive HTML document with full video script (125 minutes)
-- Script includes: introduction, AI basics, NotebookLM detailed walkthrough, Z.ai detailed walkthrough, prompt engineering (س-د-س-م), 15 ready prompts, conclusion
-- Added stage directions, time markers, tip boxes, warning boxes, prompt boxes
-- Generated PDF via html2pdf-next.js (23 pages, RTL Arabic with Amiri font)
+- Created 6 professional Arabic slide images (1280x720) using Playwright HTML rendering
+  - Slide 1: Title - "الخلية الحية" with stats (5 minutes, 100% from textbook, PDF ready)
+  - Slide 2: Cell structure - membrane, cytoplasm, nucleus with diagram
+  - Slide 3: Plant vs Animal cell comparison table
+  - Slide 4: Summary with objectives (includes university/trainer section)
+  - Slide 5: Quiz questions with answers and page references
+  - Slide 6: Lesson plan with timeline and goals
+- Created PPTX presentation file (cell-lesson-presentation.pptx) with python-pptx
+- Created PDF version (cell-lesson-presentation.pdf) using ReportLab from slide images
+- Updated website page.tsx:
+  - Hero: Added "للمعلمين والدكاترة الجامعيين والمدربين"
+  - Hero subtitle: Updated to include all target audiences
+  - Problems section: "هلأ وأنت معلم أو دكتور جامعي أو مدرب"
+  - Updated problem descriptions to include university/training contexts
+  - "What you learn" section: Updated to include university/training sources
+  - Slides section: Updated to 6 slides with PDF + PPTX download buttons
+  - WhatsApp chats: Added university doctor example (محاضرة + أسئلة جامعية)
+  - Testimonials: Changed "محمد معلم علوم" to "د. خالد دكتور جامعي" and "فاطمة" to "مدربة معلمين"
+  - FAQ: Added "دكتور جامعي أو مدرب" question, updated existing questions
+  - Course modules: Updated titles and items to include university/trainer context
+  - Bonuses: Updated description to include all audiences
+  - Footer: Updated to "للمعلمين والدكاترة الجامعيين والمدربين"
+- Chinese workflow infographic image confirmed NOT referenced in code (already removed from display)
+- Removed old PDF file (presentation-cell-lesson.pdf) 
+- Build successful
 
 Stage Summary:
-- Output: /home/z/my-project/download/video-script.pdf (23 pages, 307 KB)
-- Also generated HTML source: /home/z/my-project/download/video-script.html
-
----
-Task ID: 2
-Agent: Main Agent
-Task: Generate promotional images for the course
-
-Work Log:
-- Generated 3 promotional images using z-ai-generate CLI
-- course-cover.png: Main cover image (1344x768, purple/gold tech design)
-- course-fb-ad.png: Facebook ad banner (1344x768, AI brain with purple/gold)
-- course-hero-banner.png: Landing page hero banner (1344x768, futuristic education)
-
-Stage Summary:
-- Output: /home/z/my-project/download/course-cover.png (116 KB)
-- Output: /home/z/my-project/download/course-fb-ad.png (137 KB)
-- Output: /home/z/my-project/download/course-hero-banner.png (176 KB)
-
----
-Task ID: 3
-Agent: Main Agent
-Task: Build landing page for course registration (Next.js)
-
-Work Log:
-- Initialized fullstack dev environment
-- Created comprehensive landing page in src/app/page.tsx
-- Features: Hero section, stats bar, problem section, solution (NotebookLM + Z.ai), workflow steps, time savings table, course content, bonus files, testimonials, FAQ, registration form, footer
-- RTL Arabic layout throughout
-- Copied hero banner image to public folder
-- Lint check passed, dev server running on port 3000
-
-Stage Summary:
-- Landing page live at Next.js dev server
-- Full RTL Arabic design with purple/gold theme
-- Registration form with name, phone, subject fields
-
----
-Task ID: 4
-Agent: Main Agent
-Task: Create payment and registration guide PDF
-
-Work Log:
-- Created HTML document with payment guide content
-- Covers: 4 payment methods (bank transfer, exchange office, USDT, OMT/Western Union)
-- Step-by-step registration process
-- Post-registration instructions
-- Support and refund policy
-- Generated PDF via html2pdf-next.js (5 pages)
-
-Stage Summary:
-- Output: /home/z/my-project/download/payment-guide.pdf (5 pages, 85 KB)
-- Also generated HTML source: /home/z/my-project/download/payment-guide.html
----
-Task ID: 1
-Agent: Main Agent
-Task: إضافة اسم المدرب "نواف البوطة" إلى صفحة الهبوط
-
-Work Log:
-- قراءة ملفات المشروع الحالية (page.tsx, layout.tsx, globals.css)
-- إضافة اسم المدرب "نواف البوطة" في قسم Hero كبادج مع أيقونة GraduationCap
-- إضافة قسم جديد "تعرّف على المدرب" مع وصف احترافي ودائرة بالأحرف الأولى (ن.ب)
-- تحديث وصف المقدمة في محتوى الكورس ليشمل اسم المدرب
-- تحديث الـ Footer لعرض اسم المدرب prominently
-- تحديث metadata في layout.tsx (العنوان، الوصف، الكلمات المفتاحية، المؤلف) بالعربية
-- تغيير html lang من "en" إلى "ar" وإضافة dir="rtl"
-- تشغيل lint بدون أخطاء
-- التأكد من أن الصفحة تعمل (HTTP 200)
-
-Stage Summary:
-- اسم المدرب "نواف البوطة" تمت إضافته في 4 مواقع: Hero badge, Trainer section, Course intro, Footer
-- قسم "تعرّف على المدرب" جديد بالكامل مع دائرة (ن.ب) ووصف مهني
-- الصفحة تعمل بنجاح على localhost:3000
-
----
-Task ID: 2
-Agent: Main Agent
-Task: إعادة بناء صفحة الهبوط بنفس أسلوب صفحة kariemhanafy.com
-
-Work Log:
-- تحليل صفحة المرجع kariemhanafy.com/double-your-income-course باستخدام agent-browser + VLM
-- استخراج هيكل الصفحة: تصميم داكن، عداد تنازلي، شهادات، بونصات بأسعار، ضمان استرجاع، FAQ أكورديون، ملخص تسعير
-- إعادة بناء page.tsx بالكامل بنفس الأسلوب البياعي:
-  - شريط استعجال أحمر في الأعلى مع عداد تنازلي
-  - قسم Hero بخلفية داكنة وعناوين جريئة
-  - فيديو placeholder مع نافذة منبثقة
-  - زر CTA أخضر "اشترك الآن" في عدة مواقع
-  - قسم المدرب نواف البوطة
-  - شهادات خبراء
-  - جدول توفير الوقت
-  - محتوى الكورس كأكورديون
-  - عداد تنازلي ثاني
-  - بونصات بأسعار ($80 قيمة مجانية)
-  - ملخص تسعير (القيمة $177 مقابل $30)
-  - شهادات المعلمين
-  - ضمان استرجاع المال 7 أيام
-  - أسئلة شائعة أكورديون
-  - نموذج تسجيل
-  - فيديو مودال
-- تشغيل lint بدون أخطاء
-- الصفحة تعمل بنجاح (HTTP 200)
-
-Stage Summary:
-- صفحة هبوط احترافية بأسلوب بيعي داكن مطابقة لأسلوب kariemhanafy.com
-- اسم المدرب "نواف البوطة" ظاهر في عدة مواقع
-- التصميم داكن (#0a0a0a) مع ألوان أخضر للـ CTA وذهبي للعناوين
-
----
-Task ID: 3
-Agent: Main Agent
-Task: إعادة تصميم صفحة الهبوط بناءً على ملاحظات المستخدم
-
-Work Log:
-- حذف كل ما يتعلق بالفيديو (play button, video modal, video placeholder)
-- استبدال أسماء الأدوات (NotebookLM, Z.ai) بأوصاف ما تفعله:
-  - "أداة رفع المصادر والأسئلة" (بدل NotebookLM)
-  - "أداة التصميم والتنسيق الذكي" (بدل Z.ai)
-- إنشاء 3 محادثات واتساب باللهجة السورية كـ CSS components:
-  - تلخيص فصل كامل + أسئلة
-  - عمل مذكرة PDF
-  - عمل بودكاست تعليمي
-- إضافة مخططات بصرية (5 خطوات workflow مع أيقونات ملونة)
-- توليد 5 صور بأداة z-ai-generate:
-  - example-pdf.png (مذكرة PDF)
-  - example-exam.png (أسئلة امتحان)
-  - example-lesson-plan.png (خطة درس)
-  - workflow-infographic.png (مخطط سير العمل)
-  - before-after.png (قبل وبعد)
-- إضافة قسم "أمثلة حقيقية" مع الصور المولّدة
-- إضافة صور before/after و workflow infographic
-- تشغيل lint بدون أخطاء
-- الصفحة تعمل بنجاح
-
-Stage Summary:
-- لا يوجد أي فيديو في الصفحة
-- لا يوجد أي اسم أداة (NotebookLM/Z.ai) في المحتوى الرئيسي
-- محادثات واتساب باللهجة السورية موجودة (3 محادثات)
-- صور أمثلة حقيقية + مخططات بصرية
-- التصميم داكن واحترافي
+- 6 professional slide images created at /public/images/slides/slide-1.png through slide-6.png
+- PPTX file at /public/downloads/cell-lesson-presentation.pptx
+- PDF file at /public/downloads/cell-lesson-presentation.pdf
+- Website fully updated to target teachers + university professors + trainers
+- All references to "معلمين فقط" changed to include "دكاترة جامعيين ومدربين"

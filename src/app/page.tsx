@@ -62,7 +62,7 @@ export default function LandingPage() {
   const pad = (n: number) => n.toString().padStart(2, '0')
 
   const WHATSAPP_NUMBER = '963985323170'
-  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي للمعلمين - $22')}`
+  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $22')}`
 
   // WhatsApp chat messages - Syrian dialect (teacher perspective)
   const whatsappChats = [
@@ -100,20 +100,29 @@ export default function LandingPage() {
         { from: 'ai', text: 'جهزتلك الملف الصوتي! 🎙️\n\n- شرح الوحدة الخامسة كاملة\n- مدته 6 دقائق\n- بيفهموا المادة وهم بالمشي\n- تقدر ترسله عبر واتساب\n\nوورقة العمل جاهزة كمان: 8 أسئلة تطبيقية على الوحدة ✅' },
       ],
     },
+    {
+      title: 'محادثة: دكتور جامعي - تحضير محاضرة + أسئلة',
+      messages: [
+        { from: 'user', text: 'أنا دكتور جامعي بدرّس مادة الأحياء الخلوية، بدي تحضير لمحاضرة عن الانقسام الخلوي مع أسئلة جامعية' },
+        { from: 'ai', text: 'تفضل! جهزتلك تحضير محاضرة كاملة:\n\n- ملخص نظري عن الانقسام المتساوي والمنصف\n- مقارنة بين المراحل مع الرسوم التوضيحية\n- 10 أسئلة جامعية (مقالية وموضوعية)\n- كل شي مبنية على الكتاب اللي رفعته صفحات 120-145 📖' },
+        { from: 'user', text: 'ممتاز! هلأ بدي نسخة PDF احترافية مناسبة للعرض عالطلاب بالجامعة' },
+        { from: 'ai', text: 'تم! الملف جاهز بتنسيق جامعي احترافي ✅\n- غلاف بالعنوان واسم المادة\n- أرقام صفحات\n- مخططات واضحة\n- أسئلة بالنهاية مع الإجابات النموذجية\n- جاهز للعرض أو التوزيع 🎓' },
+      ],
+    },
   ]
 
   const faqs = [
     {
-      q: 'أنا معلم ما بعرف شي بالتكنولوجيا، فيي أستفيد من الكورس؟',
-      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر، من أول ما تفتح الأداة لحد ما تطبع ملف PDF جاهز.',
+      q: 'أنا معلم أو دكتور جامعي ما بعرف شي بالتكنولوجيا، فيي أستفيد من الكورس؟',
+      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين والدكاترة والمدربين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر، من أول ما تفتح الأداة لحد ما تطبع ملف PDF جاهز.',
     },
     {
       q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
       a: 'الأداة الأولى مجانية تماماً. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
     },
     {
-      q: 'أنا بدرّس عربي، الكورس بيناسبني؟',
-      a: 'بيناسب كل المواد! عربي، رياضيات، علوم، تربية إسلامية، إنجليزي، اجتماعيات... الأداة بتفهم أي مادة وبتعمل محتوى مبنية على الكتاب المدرسي. الأمثلة العملية بالكورس بتشمل مواد مختلفة.',
+      q: 'أنا بدرّس عربي أو مادة جامعية، الكورس بيناسبني؟',
+      a: 'بيناسب كل المواد وكل المراحل! عربي، رياضيات، علوم، تربية إسلامية، إنجليزي، اجتماعيات... وكمان المواد الجامعية. الأداة بتفهم أي مادة وبتعمل محتوى مبنية على المصدر اللي بترفعه سواء كتاب مدرسي أو جامعي أو مذكرة تدريبية. الأمثلة العملية بالكورس بتشمل مواد مختلفة ومستويات مختلفة.',
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج السوري؟',
@@ -122,6 +131,10 @@ export default function LandingPage() {
     {
       q: 'شو الفرق بين هالأدوات وChatGPT العادي؟',
       a: 'الفرق كبير! ChatGPT بيعطيك إجابات عامة من الإنترنت مش من الكتاب المدرسي. أما هالأدوات فبتشتغل على الكتاب اللي أنت بترفعه يعني كل إجابة من المصدر وموثقة. كمان الأداة التانية بتنسقلك PDF احترافي جاهز للطباعة - شي ChatGPT ما بيعملو.',
+    },
+    {
+      q: 'أنا دكتور جامعي أو مدرب، الكورس بيعطيني شي مختلف عن المعلم المدرسي؟',
+      a: 'الأدوات نفسها بس طريقة الاستخدام بتختلف. الدكتور الجامعي بيقدر يعمل محاضرات وأسئلة بمستوى جامعي من المراجع العلمية. والمدرب بيقدر يعمل أوراق عمل وملخصات لورشات التدريب. الكورس بيعلمك تقنيات مختلفة حسب احتياجك.',
     },
     {
       q: 'كيف بدفع؟',
@@ -147,13 +160,13 @@ export default function LandingPage() {
 
   const courseModules = [
     {
-      title: 'المقدمة + أساسيات الذكاء الاصطناعي للمعلم',
+      title: 'المقدمة + أساسيات الذكاء الاصطناعي للمعلم والدكتور والمدرب',
       lessons: 3,
       time: '30 دقيقة',
       items: [
-        'التعريف بالمدرب وليش هاد الكورس مهم للمعلمين',
-        'شو هو الذكاء الاصطناعي + كيف بيوفّر وقت الأستاذ بالتحضير',
-        'مقارنة بين أدوات AI المتاحة وأيها الأنسب للمعلم السوري',
+        'التعريف بالمدرب وليش هاد الكورس مهم للمعلمين والدكاترة والمدربين',
+        'شو هو الذكاء الاصطناعي + كيف بيوفّر وقتك بالتحضير سواء مدرسة أو جامعة أو ورشة تدريب',
+        'مقارنة بين أدوات AI المتاحة وأيها الأنسب للمعلم والدكتور السوري',
       ],
     },
     {
@@ -184,9 +197,9 @@ export default function LandingPage() {
       lessons: 4,
       time: '30 دقيقة',
       items: [
-        'قاعدة س-د-س-م لكتابة البرومبت المثالي للمعلم',
-        'أخطاء شائعة بيقع فيها المعلمين عند استخدام AI',
-        '15 برومبت جاهز للتطبيق المباشر - نسخ ولصق',
+        'قاعدة س-د-س-م لكتابة البرومبت المثالي للمعلم والدكتور والمدرب',
+        'أخطاء شائعة بيقع فيها المعلمين والدكاترة عند استخدام AI',
+        '15 برومبت جاهز للتطبيق المباشر - مدرسة وجامعة وتدريب',
         'تقنيات متقدمة + ملخص + خاتمة',
       ],
     },
@@ -194,7 +207,7 @@ export default function LandingPage() {
 
   // Reduced from 6 to 3 bonuses for credibility
   const bonuses = [
-    { title: '15 برومبت جاهز', subtitle: 'PROMPTS جاهزة', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين السوريين. كل برومبت مجرّب وبيدي نتائج ممتازة مع المنهج السوري.', icon: Zap },
+    { title: '15 برومبت جاهز', subtitle: 'PROMPTS جاهزة', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين والدكاترة والمدربين السوريين. كل برومبت مجرّب وبيدي نتائج ممتازة مع المناهج السورية.', icon: Zap },
     { title: 'ورقة مرجعية سريعة', subtitle: 'CHEAT SHEET', value: '$10', desc: 'ورقة مرجعية سريعة بتلخص أهم الأوامر والخطوات. طباعها وحطها جنبك. بثواني بتلاقي اللي بدك ياه.', icon: FileText },
     { title: 'وصول دائم + تحديثات', subtitle: 'LIFETIME ACCESS', value: '$20', desc: 'ادفع مرة واحتفظ بالكورس للأبد. مفيش اشتراك شهري ولا تجديد. بمجرد اشتراكك، عندك وصول دائم لكل المحتوى وأي تحديثات مستقبلية.', icon: Shield },
   ]
@@ -202,8 +215,8 @@ export default function LandingPage() {
   const testimonials = [
     { name: 'أحمد', role: 'معلم رياضيات - حلب', text: 'كنت بقعد 3 ساعات بتحضير درس واحد وتصحيح الاختبارات بياخد وقت كتير. الحين بعمل اختبار بنسختين بـ 5 دقائق، وبتصلا الإجابات النموذجية جاهزة!' },
     { name: 'سارة', role: 'معلمة لغة عربية - دمشق', text: 'صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي وبوزعها عليهم واتساب. الطلاب صاروا يطلبوا كتير من هالملفات!' },
-    { name: 'محمد', role: 'معلم علوم - حمص', text: 'الأداة الأولى بتشتغل على الكتاب المدرسي مباشرة - مش متل ChatGPT اللي بيعطيك إجابات عامة. كل إجابة مكتوب جنبها رقم الصفحة!' },
-    { name: 'فاطمة', role: 'معلمة تربية إسلامية - حماة', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة. الحين بعمل مذكرات PDF وبصحح اختبارات أسرع بكثير.' },
+    { name: 'د. خالد', role: 'دكتور جامعي - كلية العلوم - دمشق', text: 'كنت بقعد وقت طويل بتحضير المحاضرات وكتابة الأسئلة الجامعية. الأداة بتشتغل على الكتاب الجامعي مباشرة وبتعمللي أسئلة بمستوى الطالب الجامعي مع الإجابات النموذجية!' },
+    { name: 'فاطمة', role: 'مدربة معلمين - حماة', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة. الحين بعمل مذكرات PDF وأوراق عمل لورشات التدريب أسرع بكثير.' },
   ]
 
   const exampleOutputs = [
@@ -253,11 +266,13 @@ export default function LandingPage() {
             اختبارات وشروحات ومذكرات
             <br />
             <span className="text-[#f59e0b]">بـ 15 دقيقة بدل ساعتين تحضير</span>
+            <br />
+            <span className="text-lg md:text-xl text-gray-500">للمعلمين والدكاترة الجامعيين والمدربين</span>
           </h1>
 
           {/* FIXED: Removed "مجانيتين" contradiction - now focuses on VALUE */}
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            تعلم تستخدم أداتين الذكاء الاصطناعي لإعداد اختبارات بنسختين، تصحيح أوراق الطلاب، وعمل مذكرات PDF احترافية - كل شي من الكتاب المدرسي وموثق بأرقام الصفحات.
+            تعلم تستخدم أداتين الذكاء الاصطناعي لإعداد اختبارات بنسختين، تصحيح أوراق الطلاب، وعمل مذكرات PDF احترافية - كل شي من المصدر وموثق بأرقام الصفحات. مناسب للمعلمين والدكاترة الجامعيين والمدربين.
           </p>
 
           {/* CTA - FIXED: More action-oriented text */}
@@ -275,7 +290,7 @@ export default function LandingPage() {
           <div className="flex items-center justify-center gap-6 mt-4 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
               <Users className="w-4 h-4 text-[#22c55e]" />
-              انضم لعشرات المعلمين
+              انضم لعشرات المعلمين والدكاترة
             </span>
             <span className="flex items-center gap-1">
               {[1,2,3,4,5].map((s) => (
@@ -315,7 +330,7 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            هلأ وأنت معلم، كم مرة صار معك هيك؟
+            هلأ وأنت معلم أو دكتور جامعي أو مدرب، كم مرة صار معك هيك؟
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
             كلنا بنمر بنفس المشاكل - بس الحين في حل
@@ -323,12 +338,12 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-5">
             {[
-              { icon: Clock, problem: 'بتقعد 2-3 ساعات بتحضير درس واحد' },
+              { icon: Clock, problem: 'بتقعد 2-3 ساعات بتحضير محاضرة أو درس واحد' },
               { icon: FileText, problem: 'بتكتب أسئلة اختبار بإيدك وبتاخد ساعة ونص' },
               { icon: Brain, problem: 'بتصحح اختبارات 40 طالب وبئي بحياتك' },
-              { icon: BookOpen, problem: 'بتحاول تلخص فصل كامل وبقعد ساعتين' },
+              { icon: BookOpen, problem: 'بتحاول تلخص فصل كامل أو مادة علمية وبقعد ساعتين' },
               { icon: MessageCircle, problem: 'طلابك بيسألوا وبتضطر تعيد الشرح كذا مرة' },
-              { icon: FileOutput, problem: 'بتقعد عالوورد بتنسق مذكرة وبتزهق' },
+              { icon: FileOutput, problem: 'بتقعد عالوورد بتنسق مذكرة أو عرض تقديمي وبتزهق' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-4 bg-[#1a1a1a] rounded-xl p-5 border border-red-900/20">
                 <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center shrink-0">
@@ -351,32 +366,43 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شو رح تتعلم تعمل كأستاذ بالضبط؟
+            شو رح تتعلم تعمل كمعلم أو دكتور أو مدرب؟
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-            من رفع الكتاب المدرسي لحد إخراج اختبار وملف PDF جاهز للطباعة - كل شي عملياً
+            من رفع المصدر (كتاب مدرسي أو جامعي أو مذكرة تدريبية) لحد إخراج اختبار وملف PDF جاهز للطباعة - كل شي عملياً
           </p>
 
           {/* Presentation Slides - Sample Output */}
           <div className="mb-12">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
               <h3 className="text-xl md:text-2xl font-black text-[#f59e0b]">مثال عملي: درس الخلية - علوم الصف السابع</h3>
-              <a
-                href="/downloads/presentation-cell-lesson.pdf"
-                download
-                className="flex items-center gap-2 bg-[#f59e0b]/15 hover:bg-[#f59e0b]/25 text-[#f59e0b] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#f59e0b]/20"
-              >
-                <Download className="w-4 h-4" />
-                تحميل PDF
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href="/downloads/cell-lesson-presentation.pdf"
+                  download
+                  className="flex items-center gap-2 bg-[#f59e0b]/15 hover:bg-[#f59e0b]/25 text-[#f59e0b] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#f59e0b]/20"
+                >
+                  <Download className="w-4 h-4" />
+                  تحميل PDF
+                </a>
+                <a
+                  href="/downloads/cell-lesson-presentation.pptx"
+                  download
+                  className="flex items-center gap-2 bg-[#8b5cf6]/15 hover:bg-[#8b5cf6]/25 text-[#8b5cf6] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#8b5cf6]/20"
+                >
+                  <Download className="w-4 h-4" />
+                  تحميل عرض تقديمي
+                </a>
+              </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {[
                 { src: '/images/slides/slide-1.png', label: 'العنوان' },
                 { src: '/images/slides/slide-2.png', label: 'تركيب الخلية' },
-                { src: '/images/slides/slide-3.png', label: 'مقارنة' },
-                { src: '/images/slides/slide-4.png', label: 'ملخص' },
-                { src: '/images/slides/slide-5.png', label: 'أسئلة' },
+                { src: '/images/slides/slide-3.png', label: 'مقارنة نباتية وحيوانية' },
+                { src: '/images/slides/slide-4.png', label: 'ملخص الدرس' },
+                { src: '/images/slides/slide-5.png', label: 'أسئلة تقييمية' },
+                { src: '/images/slides/slide-6.png', label: 'خطة الدرس' },
               ].map((slide, i) => (
                 <div key={i} className="group cursor-pointer">
                   <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors">
@@ -447,7 +473,7 @@ export default function LandingPage() {
           </div>
 
           {/* Time Savings Table */}
-          <h3 className="text-xl md:text-2xl font-black text-center mb-6">كم وقت بتوفر كأستاذ؟</h3>
+          <h3 className="text-xl md:text-2xl font-black text-center mb-6">كم وقت بتوفر؟</h3>
           <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
             <table className="w-full">
               <thead>
@@ -483,9 +509,9 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شوف كيف بتشتغل الأدوات كأستاذ
+            شوف كيف بتشتغل الأدوات كمعلم أو دكتور أو مدرب
           </h2>
-          <p className="text-gray-400 text-center mb-12">محادثات حقيقية باللهجة السورية - هيك بتصير بصفك</p>
+          <p className="text-gray-400 text-center mb-12">محادثات حقيقية باللهجة السورية - هيك بتصير بصفك أو محاضرك</p>
 
           <div className="space-y-8">
             {whatsappChats.map((chat, ci) => (
@@ -524,7 +550,7 @@ export default function LandingPage() {
           </div>
 
           {/* Example Outputs - Merged here */}
-          <h3 className="text-xl md:text-2xl font-black text-center mt-12 mb-6">شو بتطلع النتيجة كأستاذ؟</h3>
+          <h3 className="text-xl md:text-2xl font-black text-center mt-12 mb-6">شو بتطلع النتيجة؟</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {exampleOutputs.map((ex, i) => (
               <div key={i} className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 group">
@@ -549,7 +575,7 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-            كيف الذكاء الاصطناعي غيّر حياتي كمعلم - <span className="text-[#f59e0b]">نواف البوسطه</span>
+            كيف الذكاء الاصطناعي غيّر حياتي كمعلم ومدرب - <span className="text-[#f59e0b]">نواف البوسطه</span>
           </h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 flex flex-col md:flex-row items-center gap-8">
             <div className="shrink-0">
@@ -827,7 +853,7 @@ export default function LandingPage() {
             <span className="text-gray-600 mx-2">|</span>
             <span className="text-gray-400">المدرب</span>
           </div>
-          <p className="text-gray-600 text-sm">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والمعلمات في سوريا</p>
+          <p className="text-gray-600 text-sm">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والدكاترة الجامعيين والمدربين في سوريا</p>
           <p className="text-xs mt-2 text-gray-700">جميع الحقوق محفوظة 2026</p>
         </div>
       </footer>
