@@ -27,27 +27,41 @@ import {
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
-  const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 12, minutes: 45, seconds: 30 })
+  const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 0, minutes: 0, seconds: 0 })
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { days, hours, minutes, seconds } = prev
-        seconds--
-        if (seconds < 0) { seconds = 59; minutes-- }
-        if (minutes < 0) { minutes = 59; hours-- }
-        if (hours < 0) { hours = 23; days-- }
-        if (days < 0) { days = 0; hours = 0; minutes = 0; seconds = 0 }
-        return { days, hours, minutes, seconds }
-      })
-    }, 1000)
+    // Set countdown from localStorage - each visitor gets 3 days from first visit
+    const STORAGE_KEY = 'course_offer_end'
+    const stored = localStorage.getItem(STORAGE_KEY)
+    let endTime: number
+
+    if (stored) {
+      endTime = parseInt(stored, 10)
+    } else {
+      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000 // 3 days from now
+      localStorage.setItem(STORAGE_KEY, endTime.toString())
+    }
+
+    const updateTimer = () => {
+      const diff = Math.max(0, endTime - Date.now())
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+      setTimeLeft({ days, hours, minutes, seconds })
+    }
+
+    updateTimer()
+    setMounted(true)
+    const timer = setInterval(updateTimer, 1000)
     return () => clearInterval(timer)
   }, [])
 
   const pad = (n: number) => n.toString().padStart(2, '0')
 
   const WHATSAPP_NUMBER = '963985323170'
-  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي للمعلمين - $30')}`
+  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي للمعلمين - $22')}`
 
   // WhatsApp chat messages - Syrian dialect (teacher perspective)
   const whatsappChats = [
@@ -94,7 +108,7 @@ export default function LandingPage() {
     },
     {
       q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
-      a: 'الأداة الأولى مجانية تماماً من شركة جوجل. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
+      a: 'الأداة الأولى مجانية تماماً. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
     },
     {
       q: 'أنا بدرّس عربي، الكورس بيناسبني؟',
@@ -124,17 +138,14 @@ export default function LandingPage() {
       q: 'كيف يتم الدفع؟',
       a: 'الدفع عبر تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب وسيتم إرسال رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
     },
-    {
-      q: 'هل أقدر أسترد فلوسي لو ما عجبني الكورس؟',
-      a: 'أكيد! عندك ضمان استرجاع كامل خلال 7 أيام. لو حسيت إن الكورس مش مفيدك كمعلم، تواصل معنا ورح نرجع لك المبلغ كامل بدون أي أسئلة. ما عندك شي تخسره.',
-    },
+
     {
       q: 'هل أحصل على شهادة؟',
       a: 'نعم، تحصل على شهادة إتمام إلكترونية بعد الانتهاء من الكورس وتطبيق الواجب العملي. الشهادة ممكن تضيفها لسيرتك الذاتية أو ملفك المهني.',
     },
     {
-      q: 'كم مدة الكورس وهل فيي أتابعه بوقتي؟',
-      a: 'الكورس ساعتين بس! بتنتهي منو بجلسة وحدة. وبما إن عندك وصول دائم، فيك ترجع له أي وقت بدك. كل محاضرة قصيرة وعمليها - ما فيها حشو.',
+      q: 'هل فيي أتابع الكورس بوقتي؟',
+      a: 'أي نعم! عندك وصول دائم للكورس، فيك ترجع له أي وقت بدك. كل محاضرة قصيرة وعمليها - ما فيها حشو.',
     },
     {
       q: 'هل الأدوات بتشتغل على الموبايل ولا لازم كمبيوتر؟',
@@ -223,7 +234,7 @@ export default function LandingPage() {
     { name: 'سارة', role: 'معلمة لغة عربية - دمشق', text: 'صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي وبوزعها عليهم واتساب. الطلاب صاروا يطلبوا كتير من هالملفات!' },
     { name: 'محمد', role: 'معلم علوم - حمص', text: 'الأداة الأولى بتشتغل على الكتاب المدرسي مباشرة - مش متل ChatGPT اللي بيعطيك إجابات عامة. كل إجابة مكتوب جنبها رقم الصفحة!' },
     { name: 'فاطمة', role: 'معلمة تربية إسلامية - حماة', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة. الحين بعمل مذكرات PDF وبصحح اختبارات أسرع بكثير.' },
-    { name: 'عمر', role: 'معلم إنجليزي - اللاذقية', text: 'أفضل استثمار عملته هالسنة. بـ $30 وفرت ساعات يومياً. بعمل ورقة عمل كاملة بأقل من 3 دقائق والتنسيق احترافي.' },
+    { name: 'عمر', role: 'معلم إنجليزي - اللاذقية', text: 'أفضل استثمار عملته هالسنة. بـ $22 وفرت ساعات يومياً. بعمل ورقة عمل كاملة بأقل من 3 دقائق والتنسيق احترافي.' },
     { name: 'ريم', role: 'معلمة علوم - دير الزور', text: 'كنت بقعد ساعات بالتنسيق بالوورد، الحين بدقائق بكون جاهز. والميزة الصوتية خلت الطلاب يذاكروا وهم بالمشي!' },
   ]
 
@@ -263,7 +274,7 @@ export default function LandingPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-12 text-center">
           <div className="inline-flex items-center gap-2 bg-[#f59e0b]/15 text-[#f59e0b] px-5 py-2 rounded-full text-sm font-bold mb-6 border border-[#f59e0b]/20">
             <Sparkles className="w-4 h-4" />
-            كورس عملي - ساعتين فقط - المدرب نواف البوطة
+            كورس عملي - المدرب نواف البوطة
           </div>
 
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-4">
@@ -273,7 +284,7 @@ export default function LandingPage() {
             <br />
             اختبارات وشروحات ومذكرات
             <br />
-            <span className="text-[#f59e0b]">بـ 15 دقيقة بدل ساعتين</span>
+            <span className="text-[#f59e0b]">بـ 15 دقيقة بدل ساعتين تحضير</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -290,9 +301,6 @@ export default function LandingPage() {
             تواصل عبر واتساب
             <MessageCircle className="w-6 h-6" />
           </a>
-          <p className="text-gray-500 text-sm">
-            ضمان استرجاع كامل خلال 7 أيام
-          </p>
         </div>
       </section>
 
@@ -441,7 +449,7 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-white text-lg">أداة رفع المصادر والأسئلة</h3>
-                  <span className="text-sm text-[#8b5cf6]">مجانية - من شركة جوجل</span>
+                  <span className="text-sm text-[#8b5cf6]">مجانية تماماً</span>
                 </div>
               </div>
               <ul className="space-y-3">
@@ -595,7 +603,6 @@ export default function LandingPage() {
               تواصل عبر واتساب
               <MessageCircle className="w-6 h-6" />
             </a>
-            <p className="text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
           </div>
         </div>
       </section>
@@ -604,7 +611,7 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-3">محتوى الكورس</h2>
-          <p className="text-gray-400 text-center mb-12">4 موديولات - ساعتين من المحتوى العملي المباشر</p>
+          <p className="text-gray-400 text-center mb-12">4 موديولات من المحتوى العملي المباشر</p>
 
           <div className="space-y-3">
             {courseModules.map((mod, i) => (
@@ -676,7 +683,6 @@ export default function LandingPage() {
             تواصل عبر واتساب
             <MessageCircle className="w-6 h-6" />
           </a>
-          <p className="text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
         </div>
       </section>
 
@@ -722,7 +728,7 @@ export default function LandingPage() {
           <h2 className="text-2xl md:text-4xl font-black text-center mb-10">كل ما ستحصل عليه عند اشتراكك</h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
             {[
-              { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'ساعتين من المحتوى العملي المباشر', value: '$97' },
+              { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'محتوى عملي مباشر', value: '$65' },
               ...bonuses.map((b) => ({ title: b.title, desc: '', value: b.value })),
             ].map((item, i) => (
               <div key={i} className={`flex items-center justify-between ${i > 0 ? 'border-t border-white/5 pt-4 mt-4' : 'pb-4'}`}>
@@ -739,14 +745,15 @@ export default function LandingPage() {
             <div className="border-t-2 border-[#f59e0b]/30 mt-6 pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-400">إجمالي قيمة هذه الباقة يتجاوز</span>
-                <span className="text-[#f59e0b] font-bold line-through text-xl">$177</span>
+                <span className="text-[#f59e0b] font-bold line-through text-xl">$145</span>
               </div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-400">لكن… ستحصل عليها كلها الآن مقابل</span>
               </div>
               <div className="text-center">
-                <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$30</span>
-                <p className="text-gray-400 mt-2">دفع واحد - وصول دائم</p>
+                <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$22</span>
+                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$65</span> - عرض لمدة 3 أيام فقط</p>
+                <p className="text-gray-400 mt-1">دفع واحد - وصول دائم</p>
               </div>
             </div>
 
@@ -759,7 +766,7 @@ export default function LandingPage() {
               تواصل عبر واتساب
               <MessageCircle className="w-6 h-6" />
             </a>
-            <p className="text-center text-gray-500 text-sm mt-3">ضمان استرجاع كامل خلال 7 أيام</p>
+
           </div>
         </div>
       </section>
@@ -784,21 +791,6 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== GUARANTEE ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-[#22c55e]/20 text-center">
-            <div className="w-20 h-20 bg-[#22c55e]/15 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Shield className="w-10 h-10 text-[#22c55e]" />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-black text-white mb-4">ضمان استرجاع المال</h3>
-            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mx-auto">
-              استرجاع كامل للفلوس لو المعلومات اللي موجودة في الكورس مش هتقدر تخليك تحضّر دروسك بشكل أسرع وأحسن. ببساطة تواصل معنا خلال <span className="text-white font-bold">7 أيام</span> ورح نرجع لك المبلغ كامل بدون أي أسئلة أو تعقيدات.
-            </p>
           </div>
         </div>
       </section>
@@ -841,8 +833,9 @@ export default function LandingPage() {
             <p className="text-gray-400 text-lg mb-6">تواصل معنا عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
 
             <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
-              <div className="text-4xl font-black text-[#22c55e]">$30</div>
-              <p className="text-gray-500 mt-1">دفع واحد - وصول دائم</p>
+              <div className="text-4xl font-black text-[#22c55e]">$22</div>
+              <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$65</span></p>
+              <p className="text-gray-500 text-sm">عرض لمدة 3 أيام فقط</p>
             </div>
 
             <a
@@ -856,7 +849,7 @@ export default function LandingPage() {
             </a>
 
             <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
-              <span className="flex items-center gap-1"><Shield className="w-4 h-4 text-[#22c55e]" /> ضمان استرجاع 7 أيام</span>
+              <span className="flex items-center gap-1"><Shield className="w-4 h-4 text-[#22c55e]" /> وصول دائم</span>
               <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> رابط الكورس فوراً</span>
             </div>
           </div>
