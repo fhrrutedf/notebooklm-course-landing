@@ -49,12 +49,21 @@ export default function LandingPage() {
   // WhatsApp chat messages - Syrian dialect (teacher perspective)
   const whatsappChats = [
     {
-      title: 'محادثة: تصحيح اختبار + إعداد أسئلة',
+      title: 'محادثة: إعداد اختبار + نسختين مختلفة',
       messages: [
         { from: 'user', text: 'عندي اختبار رياضيات بكرة للصف السابع، بدي 20 سؤال متنوع بين موضوعي ومقالي على الفصلين التالت والرابع' },
         { from: 'ai', text: 'تفضل! جهزتلك 20 سؤال:\n\n10 أسئلة موضوعية (اختيار من متعدد)\n10 أسئلة مقالية\nمع الإجابات النموذجية لكل سؤال\nكل سؤال مبنية على صفحات 45-78 من الكتاب 📖' },
         { from: 'user', text: 'حلو كتير! هلأ بدي نسخة تانية من الاختبار بأسئلة مختلفة عشان ما يغشوا' },
         { from: 'ai', text: 'تم! النسخة التانية جاهزة بـ 20 سؤال مختلف تماماً نفس المستوى ونفس المواضيع بس بأرقام وأمثلة جديدة. مع الإجابات كمان ✅' },
+      ],
+    },
+    {
+      title: 'محادثة: تصحيح اختبارات الطلاب',
+      messages: [
+        { from: 'user', text: 'هلأ بدي أصحح إجابات طلابي على اختبار الشهر الأول. الإجابات النموذجية عندك، بس أعطيك إجابات كل طالب وتقيسلي ياها' },
+        { from: 'ai', text: 'جاهز! أعطني إجابات الطالب الأول ورح أقيسها على الإجابات النموذجية وبعطيك الدرجة والتعليق على كل سؤال 📋' },
+        { from: 'user', text: 'السؤال الأول أجاب: التسوية العدلية هي حل النزاع عن طريق القضاء' },
+        { from: 'ai', text: 'إجابة صحيحة! ✅\nالدرجة: 5/5\nملاحظة: الإجابة مطابقة للكتاب صفحة 23. فيك كمان تعطيني إجابات باقي الأسئلة وبصححها الكل ببضع ثواني ⚡' },
       ],
     },
     {
@@ -82,7 +91,7 @@ export default function LandingPage() {
     },
     {
       q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
-      a: 'الأداة الأولى مجانية تماماً من شركة جوجل. الأداة الثانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
+      a: 'الأداة الأولى مجانية تماماً من شركة جوجل. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
     },
     {
       q: 'أنا بدرّس عربي، الكورس بيناسبني؟',
@@ -94,7 +103,7 @@ export default function LandingPage() {
     },
     {
       q: 'فيي أعمل شرح لطلابي بيسمعوه على واتساب؟',
-      a: 'أي نعم! ميزة الملف الصوتي رهيبة - بتعمل شرح صوتي بنقرة واحدة. ملف بصيغة صوتية تقدر ترسلها لطلابك عبر واتساب. الطلاب بيسمعوها وهم بالمشي بالمشي أو بالبيت. كتير معلمين حكولي إن الطلاب انبسطوا فيها كتير.',
+      a: 'أي نعم! ميزة الملف الصوتي رهيبة - بتعمل شرح صوتي بنقرة واحدة. ملف بصيغة صوتية تقدر ترسلها لطلابك عبر واتساب. الطلاب بيسمعوها وهم بالمشي أو بالبيت. كتير معلمين حكولي إن الطلاب انبسطوا فيها كتير.',
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج السوري؟',
@@ -102,7 +111,7 @@ export default function LandingPage() {
     },
     {
       q: 'بدي أعمل مذكرة PDF كاملة - فيي؟',
-      a: 'بالضبط! هاد واحد من أهم استخدامات الكورس. بتاخد المحتوى من الأداة الأولى وبترسلو للأداة الثانية وبطلةع مذكرة PDF منسقة وجاهزة للطباعة. ملخص + أسئلة + أوراق عمل + إجابات نموذجية كلها بملف واحد مرتب.',
+      a: 'بالضبط! هاد واحد من أهم استخدامات الكورس. بتاخد المحتوى من الأداة الأولى وبترسلو للأداة التانية وبطلةع مذكرة PDF منسقة وجاهزة للطباعة. ملخص + أسئلة + أوراق عمل + إجابات نموذجية كلها بملف واحد مرتب.',
     },
     {
       q: 'شو الفرق بين هالأدوات وChatGPT العادي؟',
@@ -123,6 +132,30 @@ export default function LandingPage() {
     {
       q: 'كم مدة الكورس وهل فيي أتابعه بوقتي؟',
       a: 'الكورس ساعتين بس! بتنتهي منو بجلسة وحدة. وبما إن عندك وصول دائم، فيك ترجع له أي وقت بدك. كل محاضرة قصيرة وعمليها - ما فيها حشو.',
+    },
+    {
+      q: 'هل الأدوات بتشتغل على الموبايل ولا لازم كمبيوتر؟',
+      a: 'بتشتغل على الموبايل والكمبيوتر! الأدتين مواقع إنترنت عادية بتفتح على أي متصفح. بس للتنسيق والأعمال الكبيرة أفضل تستخدم الكمبيوتر عشان الشاشة أوسع وأسهل بالشغل.',
+    },
+    {
+      q: 'بقدر أرفع كتب كتير لمواد مختلفة بنفس الوقت؟',
+      a: 'أي نعم! فيك تعمل ملف منفصل لكل مادة وكل كتاب. يعني فيك ترفع كتاب الرياضيات وكتاب العربي وكتاب العلوم - كل واحد بملف مستقل. وقت بدك تتحضر لمادة معينة بتفتح ملفها وبتلاقي كل شي جاهز.',
+    },
+    {
+      q: 'هل الأداة بتعمل شروحات بالعربي منيح؟',
+      a: 'بالتأكيد! الأداة بتفهم العربي منيح وبتعمل شروحات باللغة العربية. وبما إنها بتشتغل على الكتاب المدرسي اللي رفعته، فالشرح بيكون مطابق للمنهج ومكتوب بلغة مناسبة لطلابك.',
+    },
+    {
+      q: 'فيي استخدمها لتصحيح اختبارات الطلاب؟',
+      a: 'أي نعم! من رفعتك لأسئلة الاختبار والإجابات النموذجية، بتقدر تعطيها إجابات الطلاب وتطلب منها تصحيحها. بيعطيلك الدرجة والتعليق على كل إجابة. هاد بيوفّر وقت كتير خصوصي لما عندك صفوف كتير.',
+    },
+    {
+      q: 'شو بيصير لو الكتاب المدرسي مش متوفر بشكل إلكتروني؟',
+      a: 'ما في مشكلة! فيك تصور الكتاب بجوالك وترفعه كصور. الأداة بتعرف تقرأ الصور كمان. أو فيك ترفع أي مذكرة أو ملخص عندك. المهم يكون عندك مصدر ترفعه والأداة بتعمل الباقي.',
+    },
+    {
+      q: 'هل الأداة بتشتغل والإنترنت ضعيف بسوريا؟',
+      a: 'الأداة مش محتاجة إنترنت قوي. بس تحتاج اتصال مستقر. بتشتغل حتى على شبكات 3G. نصيحتي إنك تحضّر وأنت عالإنترنت وبتنزّل الملفات، وبعدها بتقدر تشتغل عليها وأنت أوفلاين.',
     },
   ]
 
@@ -192,9 +225,10 @@ export default function LandingPage() {
   ]
 
   const exampleOutputs = [
-    { img: '/example-pdf.png', title: 'مذكرة PDF للطلاب', desc: 'ملخص + أسئلة + أوراق عمل جاهزة للطباعة' },
-    { img: '/example-exam.png', title: 'اختبار كامل', desc: 'أسئلة متنوعة + إجابات نموذجية بنسختين' },
-    { img: '/example-lesson-plan.png', title: 'خطة درس', desc: 'خطة درس كاملة بأقسام مرتبة' },
+    { img: '/images/math-textbook-1.png', title: 'مذكرة رياضيات - الأعداد النسبية', desc: 'شرح + أمثلة + تمارين + إجابات نموذجية جاهزة للطباعة' },
+    { img: '/images/math-textbook-2.png', title: 'مذكرة رياضيات - مراجعة الأعداد الكسرية', desc: 'ملخص + جدول عمليات + خصائص + خط الأعداد' },
+    { img: '/images/exam-paper.png', title: 'اختبار الشهر الأول - بكلوريا', desc: 'أسئلة نظرية وتطبيقية + إجابات نموذجية بنسختين' },
+    { img: '/images/lesson-plan.png', title: 'خطة درس - اللغة العربية', desc: 'أهداف + أنشطة + تقييم + جدول زمني مرتب' },
   ]
 
   return (
@@ -230,17 +264,17 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-4">
-            ابني نظام تحضير
+            بطل تعب نفسك بالتحضير
             <br />
-            <span className="text-[#f59e0b]">بالذكاء الاصطناعي</span>
+            <span className="text-[#f59e0b]">الذكاء الاصطناعي</span> بيعملك
             <br />
-            يدخلك من 2 ساعة تحضير
+            اختبارات وشروحات ومذكرات
             <br />
-            <span className="text-[#f59e0b]">لـ 15 دقيقة فقط</span>
+            <span className="text-[#f59e0b]">بـ 15 دقيقة بدل ساعتين</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            حتى لو عندك خبرة تقنية صفر، هعلّمك تستخدم أداتين من أقوى أدوات الذكاء الاصطناعي لتحوّل أي مصدر لملف PDF احترافي جاهز للطباعة بأقل من 15 دقيقة
+            أداتين مجانيتين رح يوفّروا عليك ساعات يومياً. صحّح اختبارات، اعمل أسئلة، جهّز شروحات وملفات صوتية لطلابك - كل شي من الكتاب المدرسي وموثق بأرقام الصفحات.
           </p>
 
           {/* CTA */}
@@ -257,8 +291,44 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== WHAT WILL YOU LEARN - VISUAL ===== */}
+      {/* ===== TEACHER PROBLEMS ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
+            هلأ وأنت معلم، كم مرة صار معك هيك؟
+          </h2>
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+            كلنا بنمر بنفس المشاكل - بس الحين في حل
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              { icon: Clock, problem: 'بتقعد 2-3 ساعات بتحضير درس واحد', color: '#ef4444' },
+              { icon: FileText, problem: 'بتكتب أسئلة اختبار بإيدك وبتاخد ساعة ونص', color: '#ef4444' },
+              { icon: Brain, problem: 'بتصحح اختبارات 40 طالب وبئي بحياتك', color: '#ef4444' },
+              { icon: BookOpen, problem: 'بتحاول تلخص فصل كامل وبقعد ساعتين', color: '#ef4444' },
+              { icon: MessageCircle, problem: 'طلابك بيسألوا وبتضطر تعيد الشرح كذا مرة', color: '#ef4444' },
+              { icon: FileOutput, problem: 'بتقعد عالوورد بتنسق مذكرة وبتزهق', color: '#ef4444' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-4 bg-[#1a1a1a] rounded-xl p-5 border border-red-900/20">
+                <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center shrink-0">
+                  <item.icon className="w-6 h-6 text-red-400" />
+                </div>
+                <p className="text-gray-300 font-medium">{item.problem}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-xl font-bold text-white">
+              هالمشاكل كلها <span className="text-[#22c55e]">خلصت</span> مع الذكاء الاصطناعي
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WHAT WILL YOU LEARN - VISUAL ===== */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
             شو رح تتعلم تعمل كأستاذ بالضبط؟
@@ -312,13 +382,9 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            قبل وبعد استخدام الذكاء الاصطناعي
+            كم وقت بتوفر كأستاذ؟
           </h2>
-          <p className="text-gray-400 text-center mb-12">الفرق واضح - شوف بنفسك</p>
-
-          <div className="rounded-2xl overflow-hidden border border-white/5 mb-12">
-            <img src="/before-after.png" alt="قبل وبعد" className="w-full h-auto" />
-          </div>
+          <p className="text-gray-400 text-center mb-12">الفرق بين قبل وبعد - شوف بنفسك</p>
 
           {/* Time Savings Table */}
           <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
@@ -335,6 +401,7 @@ export default function LandingPage() {
                 {[
                   { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
                   { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
+                  { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
                   { task: 'كتابة خطة درس', old: 'ساعة', ai: '5 دقائق', save: '92%' },
                   { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
                   { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
@@ -426,14 +493,14 @@ export default function LandingPage() {
           </h2>
           <p className="text-gray-400 text-center mb-12">شوف بنفسك شو ممكن تعمل لطلابك بهالأدوات</p>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {exampleOutputs.map((ex, i) => (
               <div key={i} className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 group">
-                <div className="aspect-[3/4] overflow-hidden">
+                <div className="aspect-[3/4] overflow-hidden bg-gray-900">
                   <img
                     src={ex.img}
                     alt={ex.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-4">
@@ -496,7 +563,7 @@ export default function LandingPage() {
       <section className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-            ازاي اتحولت من معلم بيقعد <span className="text-[#f59e0b]">ساعات بالتحضير</span> لمعلم بيخلص بـ <span className="text-[#22c55e]">15 دقيقة</span>
+            كيف الذكاء الاصطناعي غيّر حياتي كمعلم - <span className="text-[#f59e0b]">نواف البوطة</span>
           </h2>
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 flex flex-col md:flex-row items-center gap-8">
             <div className="shrink-0">
@@ -508,7 +575,7 @@ export default function LandingPage() {
               <h3 className="text-2xl font-black text-white mb-1">نواف البوطة</h3>
               <p className="text-[#f59e0b] font-bold mb-3">مدرب في الذكاء الاصطناعي التطبيقي بالتعليم</p>
               <p className="text-gray-400 leading-relaxed">
-                مدرب متخصص في استخدام أدوات الذكاء الاصطناعي في المجال التعليمي. بعد ما جربت كل أدوات AI المتاحة، لقيت إن هالأدتين هم الأنسب للمعلمين السوريين. مؤمن بأن كل معلم يقدر يستخدم AI بسهولة بغض النظر عن خلفيته التقنية.
+                أنا معلم متلكم، كنت بقعد ساعات بتحضير الدروس وبكتابة الأسئلة وبالتنسيق عالوورد. لما اكتشفت هالأدوات حياتي انقلبت. صرت بعمل اختبار بنسختين بـ 5 دقائق، وبصحح اختبارات الطلاب بكسر وقت، وبعمل مذكرات PDF احترافية بدقائق. مؤمن إن كل معلم سوري يقدر يستفيد من هالأدوات بغض النظر عن خلفيته التقنية - لأنها فعلاً سهلة وبسيطة.
               </p>
             </div>
           </div>
