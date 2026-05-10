@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@page {
+  size: A4;
+  margin: 20mm 18mm 20mm 18mm;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font-family: 'Amiri', serif;
+  direction: rtl;
+  text-align: right;
+  color: #1a1a2e;
+  line-height: 1.9;
+  font-size: 13pt;
+}
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #ffffff;
+}
+.cover h1 { font-size: 28pt; font-weight: 700; margin: 15px 0; line-height: 1.5; }
+.cover h2 { font-size: 16pt; font-weight: 400; margin: 10px 0; color: #c8c8ff; }
+.cover .meta { font-size: 12pt; color: #8888bb; margin-top: 30px; }
+
+h1.section-title {
+  font-size: 22pt; font-weight: 700; color: #302b63;
+  border-bottom: 3px solid #302b63; padding-bottom: 8px;
+  margin-top: 30px; margin-bottom: 20px;
+}
+h2.part-title {
+  font-size: 18pt; font-weight: 700; color: #4a4580;
+  margin-top: 25px; margin-bottom: 12px;
+  border-right: 5px solid #302b63; padding-right: 12px;
+}
+h3.sub-title {
+  font-size: 15pt; font-weight: 700; color: #5c5599;
+  margin-top: 20px; margin-bottom: 8px;
+}
+.step {
+  display: flex; align-items: flex-start; margin: 10px 0; padding: 10px 14px;
+  background: #f5f5ff; border-radius: 8px;
+}
+.step-num {
+  background: #302b63; color: #fff; min-width: 32px; height: 32px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; margin-left: 12px; font-size: 14pt; flex-shrink: 0;
+}
+.tip {
+  background: #fff8e1; border-right: 4px solid #ffc107;
+  padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 12pt;
+}
+.tip::before { content: "💡 نصيحة: "; font-weight: 700; color: #f57f17; }
+.warning {
+  background: #fce4ec; border-right: 4px solid #e91e63;
+  padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 12pt;
+}
+.warning::before { content: "⚠️ تنبيه: "; font-weight: 700; color: #c2185b; }
+.important {
+  background: #e8f5e9; border-right: 4px solid #4caf50;
+  padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 12pt;
+}
+.important::before { content: "✅ مهم: "; font-weight: 700; color: #2e7d32; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11.5pt; }
+table th { background: #302b63; color: #fff; padding: 8px 12px; text-align: center; font-weight: 700; }
+table td { padding: 7px 12px; border: 1px solid #ddd; text-align: center; }
+table tr:nth-child(even) { background: #f5f5ff; }
+.page-break { page-break-before: always; }
+.bold { font-weight: 700; }
+.highlight { background: #fff3cd; padding: 1px 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>دليل الدفع والتسجيل</h1>
+  <h2>كورس NotebookLM + Z.ai في التعليم</h2>
+  <div class="meta">للمعلمين والمعلمات في سوريا<br>السعر: $30 | المدة: ساعتان</div>
+</div>
+
+<h1 class="section-title">طرق الدفع المتاحة</h1>
+
+<p>الكورس بسعر <span class="bold">$30 دولار أمريكي</span> (مرة واحدة فقط). ممكن تدفع بأي طريقة من الطرق التالية:</p>
+
+<table>
+<tr><th>الطريقة</th><th>التفاصيل</th><th>الوقت المتوقع</th></tr>
+<tr><td>تحويل بنكي</td><td>حول المبلغ لحسابنا البنكي</td><td>1-2 يوم عمل</td></tr>
+<tr><td>مكتب صرافة</td><td>أي مكتب صرافة في سوريا</td><td>فوري</td></tr>
+<tr><td>Usdt (Tether)</td><td>عبر شبكة TRC20</td><td>10-30 دقيقة</td></tr>
+<tr><td>Omt / Western Union</td><td>أي فرع في سوريا</td><td>فوري</td></tr>
+</table>
+
+<h2 class="part-title">خطوات التسجيل والدفع</h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div><span class="bold">سجّل عبر نموذج التسجيل</span><br>
+  ادخل لصفحة التسجيل وعبّي البيانات: الاسم الكامل، رقم الواتساب، والمادة التي تدرّسها.</div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><span class="bold">اختر طريقة الدفع</span><br>
+  رح نتصل فيك عبر الواتساب خلال 24 ساعة ونرسلك تفاصيل الدفع حسب الطريقة اللي بتختارها.</div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><span class="bold">أرسل إثبات الدفع</span><br>
+  بعد ما تحوّل المبلغ، أرسل صورة إثبات الدفع عبر واتساب (سكرينة شاشة أو صورة الإيصال).</div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <div><span class="bold">استلم رابط الكورس</span><br>
+  بعد تأكيد الدفع، رح نرسلك رابط الكورس + كل الملفات الإضافية (15 برومبت + الأدلة + الورقة المرجعية).</div>
+</div>
+
+<div class="important">كل الملفات الإضافية (15 برومبت جاهز + دليل البرومبتات + ورقة مرجعية + دليل المعلم) مشروطة بالكورس. ما في أي رسوم إضافية.</div>
+
+<h2 class="part-title">تفاصيل الدفع حسب الطريقة</h2>
+
+<h3 class="sub-title">1. التحويل البنكي</h3>
+<p>ابعتلنا عبر واتساب وبنعطيك رقم الحساب. بعد التحويل، أرسل صورة الإيصال. التحويل البيوصل بـ 1-2 يوم عمل.</p>
+
+<h3 class="sub-title">2. مكتب الصرافة</h3>
+<p>هي أسرع طريقة. روح لأي مكتب صرافة بقربك وحوّل المبلغ ($30) على الاسم اللي رح نعطيك ياه. أرسل إثبات التحويل فوراً عبر واتساب.</p>
+
+<h3 class="sub-title">3. USDT (Tether)</h3>
+<p>لو عندك محفظة رقمية، ممكن تحول USDT عبر شبكة TRC20. العنوان رح نرسلك ياه عبر واتساب. التحويل بيتم خلال 10-30 دقيقة.</p>
+
+<h3 class="sub-title">4. OMT / Western Union</h3>
+<p>روح لأي فرع OMT أو Western Union بسوريا. حوّل المبلغ على الاسم ورقم الهاتف اللي رح نعطيك ياه. أرسل رقم الحوالة عبر واتساب.</p>
+
+<div class="page-break"></div>
+
+<h1 class="section-title">بعد التسجيل: كيف تتابع الكورس</h1>
+
+<h2 class="part-title">كيف تفتح الكورس</h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div>بعد تأكيد الدفع، رح نرسلك <span class="bold">رابط قناة تليغرام خاصة</span> فيها فيديو الكورس وكل الملفات.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div>
+  <div>اضغط الرابط وانضم للقناة. الكورس متوفر على شكل فيديو واحد مدته ساعتين.</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div>
+  <div>الملفات الإضافية (15 برومبت + الأدلة + الورقة المرجعية) موجودة كملفات PDF بالقناة.</div>
+</div>
+
+<div class="tip">ننصحك تتفرج على الكورس كامل أولاً بعدين تبدأ تطبّق عملياً. خد وقتك ومش لازم تشوفو مرة وحدة.</div>
+
+<h2 class="part-title">ماذا ستحتاج قبل الكورس</h2>
+
+<table>
+<tr><th>العنصر</th><th>التفاصيل</th><th>ملاحظة</th></tr>
+<tr><td>حساب جوجل</td><td>Gmail أي حساب</td><td>مجاني ومطلوب لـ NotebookLM</td></tr>
+<tr><td>اتصال إنترنت</td><td>أي سرعة</td><td>حتى 2Mbps كافية</td></tr>
+<tr><td>متصفح Chrome</td><td>آخر إصدار</td><td>مجاني</td></tr>
+<tr><td>كتاب مدرسي PDF</td><td>أي مادة تدرّسها</td><td>ممكن ترفع 10 صفحات بس</td></tr>
+</table>
+
+<div class="warning">لا تحتاج أي خبرة تقنية مسبقة. الكورس مصمم للمبتدئين تماماً. كل اللي تحتاجه يتوفر مجاناً.</div>
+
+<h2 class="part-title">الدعم والمساعدة</h2>
+
+<p>لو واجهت أي مشكلة بالتسجيل أو الدفع أو الكورس، تواصل معنا عبر:</p>
+
+<table>
+<tr><th>الطريقة</th><th>التفاصيل</th></tr>
+<tr><td>واتساب</td><td>أرسل رسالة بأي وقت</td></tr>
+<tr><td>مجموعة الواتساب</td><td>بعد التسجيل بنضيفك لمجموعة المعلمين</td></tr>
+</table>
+
+<div class="important">ضمان استرجاع المبلغ: لو ما اقتنعت بالكورس خلال 7 أيام، رح نرجعلك المبلغ كامل. لا أسئلة ولا شروط.</div>
+
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@page {
+  size: A4;
+  margin: 20mm 18mm 20mm 18mm;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font-family: 'Amiri', serif;
+  direction: rtl;
+  text-align: right;
+  color: #1a1a2e;
+  line-height: 1.9;
+  font-size: 13pt;
+}
+
+/* Cover Page */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #ffffff;
+}
+.cover-icon {
+  font-size: 60pt;
+  margin-bottom: 20px;
+}
+.cover h1 {
+  font-size: 30pt;
+  font-weight: 700;
+  margin: 15px 0;
+  line-height: 1.5;
+}
+.cover h2 {
+  font-size: 18pt;
+  font-weight: 400;
+  margin: 10px 0;
+  color: #c8c8ff;
+}
+.cover .subtitle {
+  font-size: 14pt;
+  color: #a0a0d0;
+  margin-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding-top: 20px;
+}
+.cover .meta {
+  font-size: 12pt;
+  color: #8888bb;
+  margin-top: 15px;
+}
+
+/* TOC Page */
+.toc {
+  page-break-after: always;
+  padding-top: 10px;
+}
+.toc h2 {
+  text-align: center;
+  font-size: 22pt;
+  color: #302b63;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #302b63;
+  padding-bottom: 10px;
+}
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px dotted #ccc;
+  font-size: 12pt;
+}
+.toc-item.main {
+  font-weight: 700;
+  font-size: 13pt;
+  color: #302b63;
+}
+.toc-item.sub {
+  padding-right: 25px;
+  color: #444;
+}
+
+/* Section Headers */
+h1.section-title {
+  font-size: 22pt;
+  font-weight: 700;
+  color: #302b63;
+  border-bottom: 3px solid #302b63;
+  padding-bottom: 8px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+h2.part-title {
+  font-size: 18pt;
+  font-weight: 700;
+  color: #4a4580;
+  margin-top: 25px;
+  margin-bottom: 12px;
+  border-right: 5px solid #302b63;
+  padding-right: 12px;
+}
+
+h3.sub-title {
+  font-size: 15pt;
+  font-weight: 700;
+  color: #5c5599;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* Time Marker */
+.time {
+  display: inline-block;
+  background: #302b63;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 10pt;
+  font-family: 'Courier New', monospace;
+  direction: ltr;
+  margin-left: 5px;
+}
+
+/* Stage Direction */
+.stage {
+  background: #f0edff;
+  border-right: 3px solid #7b6fb5;
+  padding: 8px 14px;
+  margin: 10px 0;
+  font-style: italic;
+  color: #4a4580;
+  font-size: 11.5pt;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Script Text (what instructor says) */
+.script {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  line-height: 2;
+}
+
+/* Tip/Note Box */
+.tip {
+  background: #fff8e1;
+  border-right: 4px solid #ffc107;
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 12pt;
+}
+.tip::before {
+  content: "💡 نصيحة: ";
+  font-weight: 700;
+  color: #f57f17;
+}
+
+/* Warning Box */
+.warning {
+  background: #fce4ec;
+  border-right: 4px solid #e91e63;
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 12pt;
+}
+.warning::before {
+  content: "⚠️ تنبيه: ";
+  font-weight: 700;
+  color: #c2185b;
+}
+
+/* Important Box */
+.important {
+  background: #e8f5e9;
+  border-right: 4px solid #4caf50;
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 12pt;
+}
+.important::before {
+  content: "✅ مهم: ";
+  font-weight: 700;
+  color: #2e7d32;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 11.5pt;
+}
+table th {
+  background: #302b63;
+  color: #fff;
+  padding: 8px 12px;
+  text-align: center;
+  font-weight: 700;
+}
+table td {
+  padding: 7px 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+table tr:nth-child(even) {
+  background: #f5f5ff;
+}
+
+/* Page break between major sections */
+.page-break {
+  page-break-before: always;
+}
+
+/* Footer note */
+.footer-note {
+  font-size: 10pt;
+  color: #888;
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+/* Emphasis */
+.highlight {
+  background: #fff3cd;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.bold {
+  font-weight: 700;
+}
+
+/* Prompt box */
+.prompt-box {
+  background: #1a1a2e;
+  color: #e0e0ff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-family: 'Amiri', serif;
+  direction: rtl;
+  line-height: 2;
+  border: 1px solid #444;
+}
+.prompt-box::before {
+  content: "📝 البرومبت: ";
+  color: #ffc107;
+  font-weight: 700;
+}
+
+/* Checklist */
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+.checklist li {
+  padding: 4px 0;
+  padding-right: 25px;
+  position: relative;
+}
+.checklist li::before {
+  content: "☐";
+  position: absolute;
+  right: 0;
+  color: #302b63;
+}
+
+/* Workflow step */
+.workflow-step {
+  display: flex;
+  align-items: flex-start;
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: #f5f5ff;
+  border-radius: 6px;
+}
+.step-num {
+  background: #302b63;
+  color: #fff;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-left: 12px;
+  font-size: 13pt;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover">
+  <div class="cover-icon">🎬</div>
+  <h1>سكريبت الفيديو الكامل</h1>
+  <h2>كورس NotebookLM + Z.ai في التعليم</h2>
+  <div class="subtitle">
+    دليل المُحاضر كلمة بكلمة<br>
+    مدة الكورس: ساعتان تدريبيتان
+  </div>
+  <div class="meta">
+    الجمهور: المعلمون والمعلمات في سوريا | السعر: $30<br>
+    يتضمن: إرشادات المسرح + النص الكامل + إشارات بصرية
+  </div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="toc">
+  <h2>فهرس المحتويات</h2>
+  
+  <div class="toc-item main"><span>المقدمة</span><span>10 دقائق</span></div>
+  <div class="toc-item sub"><span>من أنا + لماذا هذا الكورس + ماذا ستتعلم</span></div>
+  
+  <div class="toc-item main"><span>الجزء الأول: أساسيات الذكاء الاصطناعي</span><span>20 دقيقة</span></div>
+  <div class="toc-item sub"><span>شو هو الذكاء الاصطناعي + كيف يفيد المعلم</span></div>
+  
+  <div class="toc-item main"><span>الجزء الثاني: NotebookLM بالتفصيل</span><span>30 دقيقة</span></div>
+  <div class="toc-item sub"><span>شرح عملي + تطبيق مباشر + بودكاست تعليمي</span></div>
+  
+  <div class="toc-item main"><span>الجزء الثالث: Z.ai بالتفصيل</span><span>30 دقيقة</span></div>
+  <div class="toc-item sub"><span>شرح عملي + إنشاء ملفات PDF احترافية</span></div>
+  
+  <div class="toc-item main"><span>الجزء الرابع: برومبتات احترافية</span><span>20 دقيقة</span></div>
+  <div class="toc-item sub"><span>قاعدة س-د-س-م + أخطاء شائعة + تقنيات متقدمة</span></div>
+  
+  <div class="toc-item main"><span>الجزء الخامس: نماذج جاهزة</span><span>10 دقيقة</span></div>
+  <div class="toc-item sub"><span>15 برومبت جاهز للتطبيق المباشر</span></div>
+  
+  <div class="toc-item main"><span>الخاتمة</span><span>5 دقائق</span></div>
+  <div class="toc-item sub"><span>ملخص + دعوة للتطبيق + الخطوة الجاية</span></div>
+</div>
+
+<!-- ==================== PART: INTRODUCTION ==================== -->
+<h1 class="section-title">المقدمة <span class="time">00:00 - 10:00</span></h1>
+
+<h2 class="part-title">الافتتاحية <span class="time">00:00 - 03:00</span></h2>
+
+<div class="stage">[ابدأ المتصفح على صفحة بيضاء. كاميرا الوجه مفعلة إن أمكن، أو شاشة فقط]</div>
+
+<div class="script">
+أهلاً وسهلاً فيكون بالكورس! أنا [اسمك]، وبطول معكون اليوم رح نتعلم كيف نستعمل أداتنين من أقوى أدوات الذكاء الاصطناعي بالتعليم. الأداة الأولى اسمها <span class="bold">NotebookLM</span> من جوجل، وهي ببساطة بتخليك تحط كتابك المدرسي أو مذكرتك وبتمون تسألو أي سؤال وبجاوبك من المصدر نفسو. الأداة التانية اسمها <span class="bold">Z.ai</span> وهي بتاخد النتائج اللي طلعتها من NotebookLM وبتعملك منها ملف PDF احترافي جاهز تطبعو وتوزعو على الطلاب.
+</div>
+
+<div class="script">
+خلوني أكون رصيح معكون: اللي رح نتعلمو اليوم رح يوفر عليكون ساعات يومية بالتحضير. أنا شخصياً كنت بقعد 2-3 ساعات بالتحضير، هالصار أحصر ببربع ساعة. يلا نبش!
+</div>
+
+<div class="tip">تكلم ببطء ووضوح. ابتسم. خلّي الطالب يحس إنو قاعد مع صاحبو مش بساعد محاضر.</div>
+
+<h2 class="part-title">لماذا هذا الكورس؟ <span class="time">03:00 - 06:00</span></h2>
+
+<div class="stage">[اعرض شريحة أو اكتب على الشاشة: مشكلة المعلم السوري]</div>
+
+<div class="script">
+قبل ما نبش بالشرح، خلوني أحكيلكم ليش هاد الكورس مهم. نحنا كمعلمين بسوريا عندنا تحديات خاصة: مصادر محدودة، مناهج كتيرة، ووقت قليل. المعلم بيضطر يضل ساعات عم يحضر الدروس، عم يكتب الأسئلة، عم يعمل المذكرات. والنتيجة؟ بيضل يركض والطلاب ما بياخدوا أحسن نسخة منو.
+</div>
+
+<div class="script">
+الذكاء الاصطناعي مش رح ياخد شغلكن - لا سمح الله. الذكاء الاصطناعي رح يخليكن تاخدوا وقتكن اللي بتضيعوه بالتحضير وتخصصوه للطلاب. يعني بدل 3 ساعات تحضير، بتضل نص ساعة، والساعتين ونص الباقيين رح يكونوا لطلاكن.
+</div>
+
+<div class="important">هاد الكورس مش نظري أبداً. كل دقيقة فيها تطبيق عملي على شاشة حقيقية. بنهاية الكورس رح تكونوا عارفين تعملوا: ملخصات، أسئلة، خطط دروس، مذكرات PDF، وبودكاست تعليمي. كل شي بالعربي وبالمنهج السوري.</div>
+
+<h2 class="part-title">ماذا ستتعلم اليوم؟ <span class="time">06:00 - 10:00</span></h2>
+
+<div class="stage">[اعرض جدول محتويات الكورس على الشاشة]</div>
+
+<table>
+<tr><th>الجزء</th><th>المدة</th><th>المحتوى</th></tr>
+<tr><td>المقدمة</td><td>10 دقائق</td><td>من أنا + ليش هاد الكورس + شو رح تتعلم</td></tr>
+<tr><td>الجزء 1</td><td>20 دقيقة</td><td>أساسيات الذكاء الاصطناعي + كيف يفيد المعلم</td></tr>
+<tr><td>الجزء 2</td><td>30 دقيقة</td><td>NotebookLM: شرح عملي + تطبيق مباشر</td></tr>
+<tr><td>الجزء 3</td><td>30 دقيقة</td><td>Z.ai: شرح عملي + إنشاء ملفات PDF</td></tr>
+<tr><td>الجزء 4</td><td>20 دقيقة</td><td>كيف تكتب برومبت احترافي</td></tr>
+<tr><td>الجزء 5</td><td>10 دقيقة</td><td>15 برومبت جاهز للتطبيق المباشر</td></tr>
+<tr><td>الخاتمة</td><td>5 دقائق</td><td>ملخص + دعوة للتطبيق + خطوة جاية</td></tr>
+</table>
+
+<div class="script">
+هاد خريطة الطريق لليوم. رح نبدأ من الصفر، مش لازم عندكن أي خبرة تقنية. اللي لازمكن بس: حساب جوجل واتصال إنترنت. يلا نبدأ بالجزء الأول!
+</div>
+
+<!-- ==================== PART 1: AI BASICS ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الجزء الأول: أساسيات الذكاء الاصطناعي <span class="time">10:00 - 30:00</span></h1>
+
+<h2 class="part-title">شو هو الذكاء الاصطناعي؟ <span class="time">10:00 - 15:00</span></h2>
+
+<div class="stage">[اعرض شريحة بسيطة: "الذكاء الاصطناعي = مساعد ذكي"]</div>
+
+<div class="script">
+خلوني أشرح الذكاء الاصطناعي بشكل بسيط. فكروا بالذكاء الاصطناعي متل ما بيكون مساعد ذكي جداً. هاد المساعد بيفهم لغتك، بيفهم طلباتك، وبينفذها بسرعة. بس المو مهم إنو بيشتغل على معلومات عامة من الإنترنت، والمو دائماً دقيقة.
+</div>
+
+<div class="script">
+اللي بيميز أدوات اللي رح نتعلمها اليوم عن ChatGPT وغيرها، إنو <span class="bold">بتشتغل على مصادرك أنت فقط</span>. يعني لو رفعت كتابك المدرسي، الأداة رح تفتكر من هاد الكتاب بس. ما رح تطلع كلام من راسها. هاد الفرق الأكبر واللي بيخليها آمنة ومناسبة للتعليم.
+</div>
+
+<div class="tip">لا تستعمل مصطلحات تقنية معقدة. المعلم مش لازم يفهم الخوارزميات، لازم يفهم النتيجة: "هاد الأداة بتعملك كذا وكذا".</div>
+
+<h2 class="part-title">كيف يفيد الذكاء الاصطناعي المعلم؟ <span class="time">15:00 - 22:00</span></h2>
+
+<div class="stage">[اعرض جدول المقارنة بين العمل اليدوي والعمل بالذكاء الاصطناعي]</div>
+
+<table>
+<tr><th>المهمة</th><th>الطريقة العادية</th><th>بالذكاء الاصطناعي</th></tr>
+<tr><td>تلخيص فصل كامل</td><td>2-3 ساعات</td><td>5 دقائق</td></tr>
+<tr><td>إعداد 20 سؤال اختبار</td><td>ساعة ونص</td><td>3 دقائق</td></tr>
+<tr><td>كتابة خطة درس</td><td>ساعة</td><td>5 دقائق</td></tr>
+<tr><td>تصميم مذكرة PDF</td><td>ساعتين</td><td>10 دقائق</td></tr>
+<tr><td>عمل بودكاست تعليمي</td><td>مستحيل تقريباً</td><td>5 دقائق</td></tr>
+</table>
+
+<div class="script">
+شو رأيكون بهالجدول؟ الفرق كبير جداً! بس خلوني أكون واضح: الذكاء الاصطناعي <span class="bold">مش بديل عن المعلم</span>. دورك كمعلم بيقى محورياً وأساسياً. الذكاء الاصطناعي بس بيساعدك تنجز المهام المتكررة أسرع، عشان تضل عندك وقت و طاقة للإبداع والتفاعل مع الطلاب.
+</div>
+
+<div class="warning">الذكاء الاصطناعي أداة مساعدة وليس بديلاً عن المعلم. القرار النهائي والإبداع الإنساني يبقى من اختصاصك. دوّر كمعلم لا يزال محورياً ولا غنى عنه.</div>
+
+<h2 class="part-title">لماذا NotebookLM و Z.ai تحديداً؟ <span class="time">22:00 - 30:00</span></h2>
+
+<div class="stage">[اعرض جدول المقارنة بين الأدوات]</div>
+
+<table>
+<tr><th>المعيار</th><th>NotebookLM</th><th>ChatGPT</th><th>Gemini</th></tr>
+<tr><td>مصدر المعلومات</td><td>مصادرك الشخصية فقط</td><td>تدريب عام + ملفات مرفوعة</td><td>تدريب عام + جوجل</td></tr>
+<tr><td>الدقة في السياق التعليمي</td><td>عالية جداً</td><td>متوسطة</td><td>متوسطة</td></tr>
+<tr><td>التهدف (Hallucination)</td><td>نادر جداً</td><td>ممكن</td><td>ممكن</td></tr>
+<tr><td>التوثيق والاقتباسات</td><td>تلقائي مع كل إجابة</td><td>غير متوفر</td><td>محدود</td></tr>
+<tr><td>السعر</td><td>مجاني</td><td>مجاني / $20 شهرياً</td><td>مجاني / $20 شهرياً</td></tr>
+<tr><td>ملفات صوتية</td><td>نعم (Audio Overview)</td><td>لا</td><td>لا</td></tr>
+</table>
+
+<div class="script">
+لاحظوا شي مهم: NotebookLM كل إجابة بيربطها بمصدرها. يعني لما بيقولك إجابة، بيقلك هاد الكلام من الصفحة كذا بالكتاب. هاد معناه إنو كل شي بيقولو مو قول ومصدر، مش كلام من راسو. هاد الفرق الأكبر بين NotebookLM و ChatGPT.
+</div>
+
+<div class="script">
+ولما نجي لـ Z.ai، فهي الأداة اللي بتكمل الصورة. NotebookLM بيعطيك المحتوى كنص عادي بالشات. بس المعلم بدو يوزع هاد المحتوى كملف PDF مرتب واحترافي. وهون بيجي دور Z.ai: بتاخد النص وبتحولو لملف PDF احترافي جاهز للطباعة والتوزيع.
+</div>
+
+<div class="important">الفكرة المركزية للبيع: "NotebookLM بيسحب المعلومات من كتابك المدرسي، و Z.ai بيحولها لملف PDF احترافي جاهز للطباعة. بأقل من 15 دقيقة بتعمل اللي كان بياخد 3 ساعات."</div>
+
+<!-- ==================== PART 2: NotebookLM ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الجزء الثاني: NotebookLM بالتفصيل <span class="time">30:00 - 60:00</span></h1>
+
+<h2 class="part-title">إنشاء حساب والدخول <span class="time">30:00 - 35:00</span></h2>
+
+<div class="stage">[افتح المتصفح واذهب إلى notebooklm.google.com]</div>
+
+<div class="script">
+أول شي بنفتح المتصفح وبنكتب notebooklm.google.com. هاد الموقع الرسمي للأداة من جوجل. كما شايفني، الواجهة بسيطة ونظيفة.
+</div>
+
+<div class="stage">[اضغط على "Try NotebookLM"]</div>
+
+<div class="script">
+بنضغط على Try NotebookLM. بيسألنا نسجل بحساب جوجل. طبعاً كلنا عندنا حساب جوجل، بنعبي البيانات وبندخل. ملاحظة: الأداة <span class="bold">مجانية تماماً</span>، ما في ولا سنت بتدفعوها.
+</div>
+
+<div class="stage">[أظهر واجهة NotebookLM الرئيسية]</div>
+
+<div class="script">
+هي واجهة NotebookLM. على اليمين عندنا منطقة المصادر Sources، وهون بالوسط منطقة المحادثة Chat، وعلى اليسار الملاحظات Notes. الشغل كلو بيتلخص بثلاث خطوات: بنرفع مصادر، بنسأل أسئلة، بنحفظ النتائج. يلا نجرّب!
+</div>
+
+<h2 class="part-title">رفع أول مصدر <span class="time">35:00 - 45:00</span></h2>
+
+<div class="stage">[اضغط على "Create Notebook" ثم "Add Source"]</div>
+
+<div class="script">
+بنضغط Create Notebook لنعمل دفتر جديد. بنسمّيه مثلاً "رياضيات صف سادس - الفصل الثالث". هاد الاسم رح يبان كل ما افتحنا الدفتر. هلا بنضغط Add Source.
+</div>
+
+<div class="stage">[أظهر خيارات رفع المصادر]</div>
+
+<div class="script">
+شو بنقدر نرفع؟ بنقدر نرفع ملف PDF، نص مكتوب، رابط موقع إنترنت، فيديو يوتيوب، ملف Google Drive، حتى صوت! أنا هلا رح أرفع ملف PDF حق كتاب رياضيات.
+</div>
+
+<div class="stage">[ارفع ملف PDF - جهّز ملف مسبقاً]</div>
+
+<div class="script">
+بنختار PDF وبنرفع الملف. كما شايفني، الأداة عم تحلل الملف... وخلصت! صار الملف جاهز. بنلاحظ إنو الأداة عملت ملخص تلقائي للمصدر على اليمين.
+</div>
+
+<div class="tip">جهّز ملف PDF مسبقاً من كتاب مدرسي حقيقي (حتى لو 10 صفحات بس). الأفضل إنو يكون من منهج سوري حقيقي عشان الطالب يشوف نتائج مألوفة.</div>
+
+<div class="script">
+رح أرفع كمان مصدر ثاني عشان نحط مصادر متعددة. بنضغط Add Source تاني، وهلق بنرفع رابط يوتيوب لشرح نفس الفصل. كما شايفني، صار عندنا مصدرين بالدفتر. NotebookLM رح يفهم الإتنين ويربط بينهم لما نسألو.
+</div>
+
+<h2 class="part-title">طرح الأسئلة والحصول على نتائج <span class="time">45:00 - 55:00</span></h2>
+
+<div class="stage">[انقر على حقل المحادثة Chat]</div>
+
+<div class="script">
+هلا وصلنا للجزء الممتع! بنسأل NotebookLM أي سؤال عن مصادرنا. خلوني أجرّبكم كم سؤال.
+</div>
+
+<div class="prompt-box">لخّص الفصل الثالث من الكتاب مع إبراز التعاريف والمفاهيم الأساسية</div>
+
+<div class="script">
+بنضغط إرسال... وشووفوا! بثواني عطاني ملخص مرتب مع التعاريف. وكل شي مخرّع، كلو من الكتاب اللي رفعنو. لاحظوا الأرقام الصغيرة بجانب كل فقرة - هادي هي الاقتباسات.
+</div>
+
+<div class="stage">[أظهر مزية الاقتباسات - اضغط على رقم المرجع]</div>
+
+<div class="script">
+بنضغط على أي رقم وبروح للمكان المضبوط بالكتاب. هاد معناه إنو كل شي بيقولو مو قول ومصدر، مش كلام من راسو. هاد الفرق الأكبر بين NotebookLM و ChatGPT.
+</div>
+
+<div class="prompt-box">أنشئ لي 10 أسئلة اختيار من متعدد عن هاد الفصل مع الإجابات النموذجية</div>
+
+<div class="script">
+وهلق بنجرّب سؤال ثاني. بنكتب: "أنشئ لي 10 أسئلة اختيار من متعدد"... وشوفوا النتيجة! 10 أسئلة مرتبة مع 4 خيارات والإجابة الصحيحة مظللة. هاد اللي كان بياخد ساعة بياخد 30 ثانية!
+</div>
+
+<div class="prompt-box">حضّر لي خطة درس كاملة لهاد الفصل مدتها 45 دقيقة، تشمل الأهداف والمقدمة والأنشطة والتقييم</div>
+
+<div class="script">
+وهلق بنجرّب شي أقوى: خطة درس كاملة... وشوفوا! خطة درس كاملة جاهزة. بس لازم تعدّلها شوي عشان تناسب أسلوبك، بس الأساس جاهز. الأهداف السلوكية، المقدمة المشوقة، خطوات الشرح، الأنشطة، والتقييم - كل شي موجود.
+</div>
+
+<h2 class="part-title">مزية Audio Overview - البودكاست التعليمي <span class="time">55:00 - 60:00</span></h2>
+
+<div class="stage">[انقر على "Notebook guide" ثم "Audio Overview"]</div>
+
+<div class="script">
+هلا رح أوريكم مزية رهيبة. NotebookLM بيقدر يعمللكم ملف صوتي - يعني بودكاست - عن مصادركم. شخصين بيحكوا عن الموضوع بشكل طبيعي ومبسّط. بنضغط على Notebook guide فوق، وبنختار Audio Overview.
+</div>
+
+<div class="stage">[اضغط "Generate" وانتظر]</div>
+
+<div class="script">
+بنضغط Generate. بياخد دقايق بيحضّر الصوت... وهيك صار عندنا حلقة بودكاست عن الفصل! بنقدر نحمّلو ونوزّعو على الطلاب عبر واتساب. هاد ممتاز للطلاب اللي بيحبوا يسمعوا أكثر ما بيقرأوا، أو للمراجعة وهم عم يمشوا أو بالباص.
+</div>
+
+<div class="tip">بالأضافة، بنقدر نوجّه هاد البودكاست. يعني بنكتب مثلاً: "اشرح هاد الفصل لطلاب صف سادس بطريقة مبسّطة مع أمثلة من الحياة اليومية". وهيك البودكاست بيتكيّف حسب المستوى اللي بدنا ياه.</div>
+
+<!-- ==================== PART 3: Z.ai ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الجزء الثالث: Z.ai بالتفصيل <span class="time">60:00 - 90:00</span></h1>
+
+<h2 class="part-title">مقدمة عن Z.ai <span class="time">60:00 - 65:00</span></h2>
+
+<div class="script">
+أهلاً تاني! هلا رح نتعامل مع أداة Z.ai. هاد أداة ذكاء اصطناعي بتعطيها وصف اللي بدك ياه وبتعملك إياه كملف PDF احترافي. يعني بدل ما تعدّل بالوورد وتنسّق وترتب، بتقول للأداة شو بدك وهي بتعمللك ياه.
+</div>
+
+<div class="stage">[افتح موقع Z.ai]</div>
+
+<div class="script">
+بنفتح Z.ai. بنشوف واجهة بسيطة. بنقدر نكتب وصف اللي بدنا ياه أو نلصق النص اللي نسخناه من NotebookLM. الخلاصة: NotebookLM سحب المعلومات، و Z.ai رح يرتّبها ويصمّمها بملف PDF.
+</div>
+
+<h2 class="part-title">المشروع الأول: مذكرة درس PDF <span class="time">65:00 - 75:00</span></h2>
+
+<div class="stage">[الصق نص الملخص من NotebookLM]</div>
+
+<div class="script">
+هلا بنرجع للملخص اللي عملناه بـ NotebookLM عن فصل الرياضيات. بنسخناه وبنلصقه هون بـ Z.ai. بنضيف معو تعليمات.
+</div>
+
+<div class="prompt-box">حول هاد النص لمذكرة درس PDF احترافية تشمل عنوان الفصل، التعاريف، الأمثلة، وتمارين للتطبيق. تصميم نظيف ومناسب لطالب ابتدائي</div>
+
+<div class="stage">[انتظر توليد الـ PDF]</div>
+
+<div class="script">
+بنضغط Generate... وشوفوا! بثواني عملنا ملف PDF مرتب بعنوان وأقسام وتنسيق احترافي. بنقدر نحمّلو ونطبعو ونوزّعو على الطلاب. هلا قارنوا هاد النتيجة مع النص العادي اللي كان عندنا. الفرق كبير!
+</div>
+
+<div class="tip">لو النتيجة ما عجبتك 100%، بنقدر نعدّل التعليمات. مثلاً: "أضف جدول ملخص بالنهاية" أو "خلي التصميم بيتناسب مع صف رابع" أو "أضف رسومات توضيحية مكان الفارغ". كل ما كانت تعليماتك أدق، النتيجة بتكون أحسن.</div>
+
+<div class="stage">[حمّل الملف]</div>
+
+<div class="script">
+بنضغط Download وبنحمّل ملف PDF جاهز. هلا المعلم عندو مذكرة احترافية جاهزة للطباعة بـ 5 دقايق بدل ساعة!
+</div>
+
+<h2 class="part-title">المشروع الثاني: خطة درس PDF <span class="time">75:00 - 82:00</span></h2>
+
+<div class="script">
+هلا رح نعمل شي ثاني: خطة درس PDF. بنرجع لـ NotebookLM، بنسألو يعملنا خطة درس، بننسخ النتيجة، وبنعطيها لـ Z.ai عشان يرتّبها بملف PDF رسمي.
+</div>
+
+<div class="prompt-box">حول هاد النص لخطة درس PDF رسمية بتنسيق وزارة التربية. تشمل: اسم المادة، الصف، الأهداف، المقدمة، خطوات الدرس، الأنشطة، التقييم، والواجب. استخدم جدول مرتب وخط واضح</div>
+
+<div class="stage">[انتظر النتيجة]</div>
+
+<div class="script">
+وشوفوا النتيجة! خطة درس مرتبة بجدول، بأقسام واضحة، جاهزة للتقديم للمدير أو للملف الشخصي. هاد اللي كان بياخد ساعتين بياخد 10 دقايق!
+</div>
+
+<h2 class="part-title">المشروع الثالث: أسئلة امتحان PDF <span class="time">82:00 - 90:00</span></h2>
+
+<div class="script">
+هلا رح نعمل بنك أسئلة PDF. نفس الطريقة: NotebookLM بيعمل الأسئلة، Z.ai بيرتّبها بملف PDF امتحاني رسمي.
+</div>
+
+<div class="prompt-box">حول هالأسئلة لورقة امتحان PDF رسمية. رتّب الأسئلة من السهل للصعب. أضف مكان اسم الطالب والصف والتاريخ بأعلى الصفحة. خلي كل سؤال بمكان واضح مع خيارات مختارة مرتبة. أضف ورقة إجابات منفصلة بالنهاية</div>
+
+<div class="stage">[انتظر النتيجة]</div>
+
+<div class="script">
+هاي النتيجة! ورقة امتحان رسمية بإطار واسم المدرسة والصف والأسئلة مرتبة. حتى عمل ورقة إجابات! طبّع ووزّع على الطلاب. مني كان بيصدق إنو اللي كان بياخد ساعتين بياخد 10 دقايق؟
+</div>
+
+<!-- ==================== PART 4: PROMPT ENGINEERING ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الجزء الرابع: برومبتات احترافية <span class="time">90:00 - 110:00</span></h1>
+
+<h2 class="part-title">شو هو البرومبت وليش مهم؟ <span class="time">90:00 - 94:00</span></h2>
+
+<div class="script">
+البرومبت هو التعليمات أو الطلب اللي بتعطيه للذكاء الاصطناعي عشان يساعدك. ببساطة، هو الزبدة اللي بتقول فيها للذكاء الاصطناعي شو بدك منه بالضبط. تقدر تفكر فيه متل ما بتكلم مع مساعد ذكي: كل ما كانت تعليماتك أوضح وأدق، كل ما النتيجة كانت أحسن.
+</div>
+
+<div class="stage">[اعرض مثال مقارنة على الشاشة]</div>
+
+<table>
+<tr><th>نوع البرومبت</th><th>النص</th><th>النتيجة</th></tr>
+<tr><td>ضعيف</td><td>اعملي درس</td><td>شي عام ما بيفيدك</td></tr>
+<tr><td>متوسط</td><td>اعملي درس عن الرياضيات</td><td>أحسن شوي بس بعدو عام</td></tr>
+<tr><td>قوي</td><td>اعملي خطة درس عن الأعداد الزوجية والفردية لتلاميذ الصف الرابع الابتدائي، مع أمثلة عملية من الحياة اليومية وتنشيط تفاعلي بمدة 45 دقيقة</td><td>نتيجة دقيقة ومفيدة</td></tr>
+</table>
+
+<div class="important">الفرق بين المعلمين مو بالذكاء، هو بالقدرة على التواصل الفعال مع الآلة. المعلم اللي بيكتب برومبت ممتاز رح يوفر ساعتين من التحضير، بينما المعلم اللي بيستخدم برومبت ضعيف رح يضيع وقتو ويحس إنو الذكاء الاصطناعي ما بيفيد.</div>
+
+<h2 class="part-title">القاعدة الذهبية: س-د-س-م <span class="time">94:00 - 102:00</span></h2>
+
+<div class="script">
+عشان تكتب برومبت قوي، فيي قاعدة بسيطة بتتذكروها دائماً: <span class="bold">س-د-س-م</span>. كل حرف بيمثل عنصر مهم بالبرومبت.
+</div>
+
+<table>
+<tr><th>الحرف</th><th>العنصر</th><th>الوصف</th><th>مثال تعليمي</th></tr>
+<tr><td><span class="bold">س</span></td><td>السياق</td><td>الصف، المنهج، المنطقة</td><td>الصف الرابع، المنهج السوري</td></tr>
+<tr><td><span class="bold">د</span></td><td>الدور</td><td>خبير تربوي، مصمم مناهج</td><td>معلم رياضيات بالمرحلة الابتدائية</td></tr>
+<tr><td><span class="bold">س</span></td><td>السؤال</td><td>شو بدك بالضبط؟</td><td>اعملي خطة درس عن الأعداد الزوجية</td></tr>
+<tr><td><span class="bold">م</span></td><td>المخرج</td><td>جدول، نقاط، خطة</td><td>جدول + أمثلة عملية + نشاط</td></tr>
+</table>
+
+<div class="script">
+خلوني أطبّق القاعدة عملياً. برومبت كامل بيكون هيك:
+</div>
+
+<div class="prompt-box">أنا معلم رياضيات للصف الرابع الابتدائي بالمنهج السوري [س: السياق + د: الدور]. اعملي خطة درس عن الأعداد الزوجية والفردية، مع أمثلة عملية من الحياة اليومية وتنشيط تفاعلي بمدة 45 دقيقة [س: السؤال]. اكتب النتيجة بشكل جدول منظم مع عناوين واضحة وأضف 10 أسئلة لتقييم فهم الطلاب [م: المخرج]</div>
+
+<div class="tip">ما لازم تستعمل كل العناصر بكل مرة. بس كل ما استعملت أكثر، كل ما النتيجة كانت أدق. ابدأ بسيط وطوّر تدريجياً.</div>
+
+<h2 class="part-title">أخطاء شائعة في كتابة البرومبت <span class="time">102:00 - 106:00</span></h2>
+
+<div class="stage">[اعرض الأخطاء على الشاشة واحداً تلو الآخر]</div>
+
+<div class="warning">الخطأ الأول: برومبت قصير جداً. لو كتبت "اعملي درس" بس، النتيجة رح تكون عامة ما بتفيدك. كل ما كان البرومبت أطول وأكثر تفصيلاً، النتيجة بتكون أدق.</div>
+
+<div class="warning">الخطأ الثاني: نسيان تحديد الصف والمنهج. الذكاء الاصطناعي ما بيعرف إنك بتدرّس بالمنهج السوري إلا لو قلتلو. لازم تحدد الصف والمادة والمنهج بكل برومبت.</div>
+
+<div class="warning">الخطأ الثالث: عدم تحديد شكل المخرج. لو ما قلت للذكاء الاصطناعي كيف بدك النتيجة تطلع (جدول، نقاط، خطة)، رح يعطيك نص عادي ممكن ما يكون مناسب.</div>
+
+<div class="warning">الخطأ الرابع: عدم المراجعة والتعديل. أول نتيجة ما لازم تكون الأخيرة. دايماً راجع وعدّل البرومبت لحد ما تحصل على النتيجة اللي بدك ياه.</div>
+
+<h2 class="part-title">تقنيات متقدمة <span class="time">106:00 - 110:00</span></h2>
+
+<div class="script">
+الحين بعد ما تعلمنا الأساسيات، خلوني أوريكم كم تقنية متقدمة بتخلي برومبتاتكن أقوى.
+</div>
+
+<div class="stage">[اعرض التقنيات واحدة واحدة]</div>
+
+<h3 class="sub-title">1. تقنية "دور الخبير"</h3>
+<div class="script">
+بدل ما تكتب "اعملي أسئلة"، اكتب "أنت خبير تربوي بتصميم الاختبارات التحصيلية للمنهج السوري. صمّم لي اختبار..." هاد بيخلق الذكاء الاصطناعي يشتغل بعقلية خبير وبيعطيك نتيجة أحسن بكثير.
+</div>
+
+<h3 class="sub-title">2. تقنية "الأمثلة المرجعية"</h3>
+<div class="script">لو عندك مثال لدرس عجبك، انسخو وحطو بالبرومبت وقل: "اعملي درس بنفس هاد الأسلوب والتنسيق". الذكاء الاصطناعي بيقدر يقلّد الأسلوب بدقة.</div>
+
+<h3 class="sub-title">3. تقنية "الخطوة بخطوة"</h3>
+<div class="script">لو عندك مشروع كبير (مثل تصميم وحدة كاملة)، قسّمو لخطوات. برومبت للخطة، برومبت للأسئلة، برومبت للأنشطة. كل نتيجة بتكون أحسن لما بتكون مركّزة على شي واحد.</div>
+
+<!-- ==================== PART 5: READY PROMPTS ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الجزء الخامس: نماذج جاهزة <span class="time">110:00 - 120:00</span></h1>
+
+<div class="script">
+الحين وصلنا للجزء اللي كتير منكن مستنيو: 15 برومبت جاهز تنسخوه وتلصقوه وتستعملوه مباشرة. رح أعرض أهمهم الحين، والباقي موجود بملف PDF اللي مع الكورس.
+</div>
+
+<h2 class="part-title">برومبتات تحضير الدروس</h2>
+
+<div class="prompt-box">أنا معلم رياضيات للصف الرابع الابتدائي بالمنهج السوري. اعملي خطة درس عن الأعداد الزوجية والفردية، مدة الحصة 45 دقيقة، مع أهداف سلوكية وتمهيد مشوق وأنشطة تفاعلية وتقييم ختامي. اكتب النتيجة بشكل جدول منظم</div>
+
+<div class="prompt-box">أنا معلمة لغة عربية للصف السادس. اعملي خطة درس عن المفعول به، مع أمثلة من القرآن والشعر العربي، ونشاط كتابي للطلاب. الخطة لازم تشمل 3 مراحل: عرض المفهوم، تطبيق جمعي، تطبيق فردي. اكتب النتيجة بشكل منظم</div>
+
+<div class="prompt-box">أنا معلم علوم للصف الثامن. اعملي خطة درس عن التكاثر بالنباتات، مع تجربة عملية ممكن اعملها بالصف باستخدام مواد بسيطة (بصل، ماء، أكواب). الخطة مدتها 45 دقيقة</div>
+
+<h2 class="part-title">برومبتات تصميم الأسئلة</h2>
+
+<div class="prompt-box">أنا معلمة رياضيات للصف الخامس. صمّمي لي 10 أسئلة اختيار من متعدد عن الكسور العادية، كل سؤال بخيارات مرتبة من السهل للصعب، مع مفتاح الإجابات. الأسئلة لازم تكون مناسبة لمستوى تلاميذ الساحة التعليمية السورية</div>
+
+<div class="prompt-box">أنا معلم تربية إسلامية للصف السابع. صمّملي اختبار عن سورة الكهف، يتضمن: 5 أسئلة اختيار من متعدد، 3 أسئلة صح وخطأ، 2 سؤال مقالي قصير. وزّع الدرجات وأعطيني مفتاح الإجابات</div>
+
+<h2 class="part-title">برومبتات أنشطة تعليمية</h2>
+
+<div class="prompt-box">صمّم 3 أنشطة تفاعلية لتعليم جدول الضرب للصف الثالث: نشاط حركي (الطلاب يعملوا حاجة بأجسامهم)، نشاط جماعي (مجموعات)، ونشاط فردي (ورقة عمل). كل نشاط مدته 10 دقائق</div>
+
+<div class="prompt-box">أنا معلمة تربية فنية للصف الرابع. صمّمي نشاط فني عن الألوان الأساسية والمشتقة، مدته 30 دقيقة، باستخدام مواد متوفرة بالبيت (ألوان مائية، ورق، مقص)</div>
+
+<h2 class="part-title">برومبتات دعم الطلاب</h2>
+
+<div class="prompt-box">عندي طلاب بالصف الثالث ما فهموا الطرح بشكل كامل. صمّملي 3 أنشطة تقوية بدون استخدام الأرقام أولاً، ثم أضف الأرقام تدريجياً. الأنشطة لازم تكون ملموسة وباستخدام أشياء من البيت</div>
+
+<div class="prompt-box">صمّم خطة دعم تعليمي لطالب بالصف الخامس بيعاني من ضعف بالقراءة. الخطة لازم تشمل: تمارين يومية بمدة 15 دقيقة، استراتيجيات للأسرة، وأساليب تقييم أسبوعية</div>
+
+<div class="important">كل هالبرومبتات موجودة بملف PDF جاهز مع الكورس. انسخها واستعملها مباشرة! وكل برومبت ممكن تعدّلو حسب مادتك وصفك.</div>
+
+<!-- ==================== CONCLUSION ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">الخاتمة <span class="time">120:00 - 125:00</span></h1>
+
+<h2 class="part-title">الـ Workflow الكامل <span class="time">120:00 - 122:00</span></h2>
+
+<div class="script">
+خلوني ألخصلكن الـ Workflow الكامل اللي رح تستخدموه كل يوم:
+</div>
+
+<div class="workflow-step">
+  <div class="step-num">1</div>
+  <div>افتح NotebookLM وارفع مصادرك (مرة وحدة وبس! ما لازم ترفعهم كل مرة)</div>
+</div>
+<div class="workflow-step">
+  <div class="step-num">2</div>
+  <div>اسأل NotebookLM السؤال اللي بدك ياه (ملخص، أسئلة، خطة درس)</div>
+</div>
+<div class="workflow-step">
+  <div class="step-num">3</div>
+  <div>انسخ النتيجة</div>
+</div>
+<div class="workflow-step">
+  <div class="step-num">4</div>
+  <div>افتح Z.ai والصق النتيجة مع تعليمات التصميم</div>
+</div>
+<div class="workflow-step">
+  <div class="step-num">5</div>
+  <div>حمّل PDF واطبع</div>
+</div>
+
+<div class="important">الخلاصة: من المصدر للمنتج النهائي بـ 10-15 دقيقة!</div>
+
+<h2 class="part-title">ملخص الكورس <span class="time">122:00 - 124:00</span></h2>
+
+<div class="script">
+اليوم تعلمنا كيف نستعمل أداتين من أهم أدوات الذكاء الاصطناعي بالتعليم: NotebookLM لسحب المعلومات من المصادر، و Z.ai لتحويلها لملفات PDF احترافية. وتعلمنا كيف نكتب برومبتات قوية باستخدام قاعدة س-د-س-م، وشوفنا 15 برومبت جاهز للتطبيق المباشر.
+</div>
+
+<div class="script">
+بالملف اللي مع الكورس رح تلقوا: 15 قالب Prompt جاهز تنسخوه وتلصقوه، ورقة غش سريعة، ودليل المعلم الكامل. كل شي جاهز للاستخدام.
+</div>
+
+<h2 class="part-title">الخطوة الجاية <span class="time">124:00 - 125:00</span></h2>
+
+<div class="script">
+الخطوة الجاية هي إنكم تجربوا على مادتكم الخاصة. ارفعوا فصل من كتابكم على NotebookLM، واسألوه أي سؤال. بتلاحظوا الفرق من أول مرة. وأي سؤال أنا موجود ب مجموعة الواتساب. شكراً لكون وبتوفيق!
+</div>
+
+<div class="tip">اختم بحماس! خلّي الطالب يحس إنو قدر يعمل شي حقيقي. اذكر إنو الملفات جاهزة وإنو أي سؤال أنا موجود.</div>
+
+<!-- ==================== APPENDIX: QUICK REFERENCE ==================== -->
+<div class="page-break"></div>
+<h1 class="section-title">ملحق: ورقة مرجعية سريعة للمُحاضر</h1>
+
+<h2 class="part-title">قائمة تحضير ما قبل التصوير</h2>
+<ul class="checklist">
+<li>حساب جوجل جاهز ومسجل الدخول</li>
+<li>ملف PDF من كتاب مدرسي سوري (10-20 صفحة)</li>
+<li>رابط يوتيوب لشرح نفس الفصل</li>
+<li>متصفح Chrome نظيف (أغلق كل التبويبات غير الضرورية)</li>
+<li>OBS Studio أو Camtasia جاهز للتسجيل</li>
+<li>ميكروفون مفتوح ومختبر</li>
+<li>دقة الشاشة 1080p كحد أدنى</li>
+<li>خلفية شاشة نظيفة واحترافية</li>
+<li>NotebookLM مفتوح على تبويب جاهز</li>
+<li>Z.ai مفتوح على تبويب جاهز</li>
+</ul>
+
+<h2 class="part-title">نصائح التصوير</h2>
+
+<div class="tip">سجّل كل جلسة كفيديو واحد متصل. لا تقطعه لأجزاء صغيرة. لو أخطأت، وقّف ثانية وابدأ الجملة من أولها - بالتحرير بتقدر تقطع الجزء الغلط.</div>
+
+<div class="tip">تكلم ببطء ووضوح. توقف ثانية بين الأقسام. خلّي الطالب يستوعب كل خطوة قبل ما تنتقل للتانية.</div>
+
+<div class="tip">استخدم شريط عنوان في أعلى الفيديو يوضح اسم الجزء والوقت. مثلاً: "الجزء 2: NotebookLM | 30:00-60:00". هاد بيساعد الطالب يرجع لأي جزء بسرعة.</div>
+
+<h2 class="part-title">الوقت المقدّر لكل جزء</h2>
+
+<table>
+<tr><th>الجزء</th><th>المدة المقدّرة</th><th>المدة الفعلية المتوقعة</th><th>المرونة</th></tr>
+<tr><td>المقدمة</td><td>10 دقائق</td><td>8-12 دقيقة</td><td>مرن</td></tr>
+<tr><td>أساسيات AI</td><td>20 دقيقة</td><td>18-25 دقيقة</td><td>مرن</td></tr>
+<tr><td>NotebookLM</td><td>30 دقيقة</td><td>28-35 دقيقة</td><td>تطبيق عملي - لا تختصر</td></tr>
+<tr><td>Z.ai</td><td>30 دقيقة</td><td>28-35 دقيقة</td><td>تطبيق عملي - لا تختصر</td></tr>
+<tr><td>برومبتات</td><td>20 دقيقة</td><td>18-22 دقيقة</td><td>مرن</td></tr>
+<tr><td>نماذج جاهزة</td><td>10 دقيقة</td><td>8-12 دقيقة</td><td>يمكن إرسال كملف</td></tr>
+<tr><td>الخاتمة</td><td>5 دقائق</td><td>3-7 دقائق</td><td>مرن</td></tr>
+</table>
+
+<div class="warning">لا تتجاوز 135 دقيقة إجمالاً. لو حسيت إنو الوقت طويل، اختصر من المقدمة وأساسيات AI. الجزئين العمليين (NotebookLM + Z.ai) ما لازم يتم اختصارهم أبداً.</div>
+
+</body>
+</html>
