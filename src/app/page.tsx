@@ -369,22 +369,13 @@ export default function LandingPage() {
   return (
     <div dir="rtl" className="min-h-screen flex flex-col bg-[#0a0a0a] font-sans text-white">
 
-      {/* ===== TOP URGENCY BAR (with seats counter) ===== */}
+      {/* ===== TOP URGENCY BAR - Real Scarcity: First 30 only ===== */}
       <div className="bg-gradient-to-r from-[#c0392b] via-[#e74c3c] to-[#c0392b] py-3 text-center">
         <p className="text-white font-bold text-sm md:text-base">
-          🔥 ينتهي العرض الخاص بعد
-          <span className="inline-flex items-center gap-1 mx-2 font-mono">
-            <span className="bg-black/30 px-2 py-1 rounded text-lg">{pad(timeLeft.days)}</span> يوم
-            <span className="mx-1">:</span>
-            <span className="bg-black/30 px-2 py-1 rounded text-lg">{pad(timeLeft.hours)}</span> ساعة
-            <span className="mx-1">:</span>
-            <span className="bg-black/30 px-2 py-1 rounded text-lg">{pad(timeLeft.minutes)}</span> دقيقة
-            <span className="mx-1">:</span>
-            <span className="bg-black/30 px-2 py-1 rounded text-lg">{pad(timeLeft.seconds)}</span> ثانية
-          </span>
+          🔥 عرض التسجيل المبكر - أول 30 شخص بس بـ $12
           {mounted && (
             <span className="inline-flex items-center gap-1 mr-3 text-yellow-200 animate-pulse">
-              | 🔥 باقي فقط <span className="bg-black/30 px-2 py-1 rounded font-black text-lg">{seatsLeft}</span> مقعد من 50
+              | باقي <span className="bg-black/30 px-2 py-1 rounded font-black text-lg">{seatsLeft}</span> مقعد من 30
             </span>
           )}
         </p>
@@ -471,6 +462,183 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LOSS AVERSION: خسارتك لو ما اشتريت ===== */}
+      <section className="py-16 md:py-20 bg-[#1a0a0a] border-y border-red-900/30">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
+            كم <span className="text-red-400">بتخسر</span> لو ما تعلمت هالأدوات؟
+          </h2>
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+            كل أسبوع بيمر وأنت بتضيع وقتك بالطريقة القديمة
+          </p>
+
+          <div className="max-w-3xl mx-auto bg-[#1a1a1a] rounded-2xl p-8 border border-red-900/30">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-red-500/15 rounded-xl flex items-center justify-center shrink-0">
+                  <Clock className="w-7 h-7 text-red-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-lg">5 ساعات تحضير بالأسبوع × 40 أسبوع مدرسي</p>
+                  <p className="text-red-400 font-black text-xl">= 200 ساعة ضائعة بسنة وحدة</p>
+                </div>
+              </div>
+
+              <div className="border-t border-white/5 pt-6 flex items-center gap-4">
+                <div className="w-14 h-14 bg-red-500/15 rounded-xl flex items-center justify-center shrink-0">
+                  <Brain className="w-7 h-7 text-red-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-lg">200 ساعة = <span className="text-red-400 font-black">25 يوم كامل</span> من حياتك</p>
+                  <p className="text-gray-400">يعني شهر كامل بتقعدو بالتحضير بدل عائلتك وراحتك</p>
+                </div>
+              </div>
+
+              <div className="border-t border-white/5 pt-6 flex items-center gap-4">
+                <div className="w-14 h-14 bg-red-500/15 rounded-xl flex items-center justify-center shrink-0">
+                  <FileText className="w-7 h-7 text-red-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-lg">كل يوم بتأخر = <span className="text-red-400 font-black">يوم من عمرك رح</span></p>
+                  <p className="text-gray-400">بينما زميلك اللي تعلم AI بتحضّر بـ 15 دقيقة وبيرتاح</p>
+                </div>
+              </div>
+
+              <div className="border-t border-white/5 pt-6 bg-red-500/10 rounded-xl p-5 mt-4">
+                <p className="text-center text-white font-bold text-lg">
+                  الكورس بـ <span className="text-[#22c55e] font-black">$12</span> = <span className="text-[#22c55e]">أقل من 400 ليرة باليوم</span>
+                </p>
+                <p className="text-center text-gray-400 text-sm mt-1">أقل من سعر كاسة شاي - وبتحفّظ 200 ساعة بسنة</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== VISUAL BEFORE/AFTER ===== */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a]">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
+            <span className="text-red-400">قبل</span> الكورس vs <span className="text-[#22c55e]">بعد</span> الكورس
+          </h2>
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+            الفرق واضح - شوف كيف بيتغير يومك كمعلم
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* BEFORE */}
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border-2 border-red-900/30 relative">
+              <div className="absolute -top-3 right-6 bg-red-500 text-white text-sm font-black px-4 py-1 rounded-full">قبل ❌</div>
+              <div className="space-y-4 mt-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">⏰</span>
+                  <div>
+                    <p className="text-white font-bold">2-3 ساعات بتحضير درس واحد</p>
+                    <p className="text-gray-500 text-sm">بتقعد من العصر للمغرب</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">📝</span>
+                  <div>
+                    <p className="text-white font-bold">أكتب الأسئلة بإيدي</p>
+                    <p className="text-gray-500 text-sm">ساعة ونص عشان 20 سؤال</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">📄</span>
+                  <div>
+                    <p className="text-white font-bold">نسخة وحدة من الاختبار</p>
+                    <p className="text-gray-500 text-sm">الطلاب بينقلوا من بعض</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">❌</span>
+                  <div>
+                    <p className="text-white font-bold">بدون إجابات نموذجية</p>
+                    <p className="text-gray-500 text-sm">بتصحح بإيدك وتاخد وقت كتير</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">💻</span>
+                  <div>
+                    <p className="text-white font-bold">تنسيق الوورد بياخد ساعات</p>
+                    <p className="text-gray-500 text-sm">وبالنهاية بيطلع مو مرتب</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl mt-0.5">🌙</span>
+                  <div>
+                    <p className="text-white font-bold">11 بالليل لسه بتحضّر</p>
+                    <p className="text-gray-500 text-sm">والأولاد نايمين وأنت شغّال</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* AFTER */}
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border-2 border-[#22c55e]/30 relative shadow-lg shadow-[#22c55e]/5">
+              <div className="absolute -top-3 right-6 bg-[#22c55e] text-white text-sm font-black px-4 py-1 rounded-full">بعد ✅</div>
+              <div className="space-y-4 mt-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">⚡</span>
+                  <div>
+                    <p className="text-white font-bold">15 دقيقة بتحضير نفس الدرس</p>
+                    <p className="text-[#22c55e] text-sm">بتخلص وأنت مستغرب!</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">🤖</span>
+                  <div>
+                    <p className="text-white font-bold">AI بيعمللك 20 سؤال بـ 3 دقائق</p>
+                    <p className="text-[#22c55e] text-sm">من الكتاب وموثق بأرقام الصفحات</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">📋</span>
+                  <div>
+                    <p className="text-white font-bold">نسختين مختلفات من الاختبار</p>
+                    <p className="text-[#22c55e] text-sm">لا نسخ ولا غش!</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">✅</span>
+                  <div>
+                    <p className="text-white font-bold">إجابات نموذجية + رقم الصفحة</p>
+                    <p className="text-[#22c55e] text-sm">الآباء بيثقوا بالاختبار 100%</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">🖨️</span>
+                  <div>
+                    <p className="text-white font-bold">PDF احترافي جاهز للطباعة</p>
+                    <p className="text-[#22c55e] text-sm">بغلاف وأرقام وتنسيق مرتب</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#22c55e] text-xl mt-0.5">🏠</span>
+                  <div>
+                    <p className="text-white font-bold">4 العصر خلصت كل شي</p>
+                    <p className="text-[#22c55e] text-sm">وقت للأولاد ولنفسك!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-10">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
+            >
+              بدّل يومك - اشترك الآن $12
+              <MessageCircle className="w-6 h-6" />
+            </a>
           </div>
         </div>
       </section>
@@ -868,7 +1036,7 @@ export default function LandingPage() {
           {mounted && (
             <div className="text-center mb-6">
               <span className="inline-flex items-center gap-2 text-red-400 font-bold text-lg animate-pulse">
-                🔥 باقي فقط {seatsLeft} مقاعد من 50
+                🔥 باقي فقط {seatsLeft} مقاعد من 30
               </span>
             </div>
           )}
@@ -899,7 +1067,7 @@ export default function LandingPage() {
               </div>
               <div className="text-center">
                 <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$12</span>
-                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$35</span> - عرض لمدة 3 أيام فقط</p>
+                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$35</span> - عرض التسجيل المبكر لأول 30 شخص</p>
                 <p className="text-gray-400 mt-1">دفع واحد - وصول دائم</p>
               </div>
             </div>
@@ -908,7 +1076,7 @@ export default function LandingPage() {
             {mounted && (
               <div className="text-center mt-6 mb-2">
                 <span className="inline-flex items-center gap-2 text-[#f59e0b] font-bold text-base">
-                  ⏱️ العرض ينتهي بعد {timeLeft.days} يوم {pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}
+                  🔥 عرض التسجيل المبكر - باقي {seatsLeft} مقعد من 30
                 </span>
               </div>
             )}
@@ -995,7 +1163,7 @@ export default function LandingPage() {
             <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
               <div className="text-4xl font-black text-[#22c55e]">$12</div>
               <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$35</span></p>
-              <p className="text-gray-500 text-sm">عرض لمدة 3 أيام فقط</p>
+              <p className="text-gray-500 text-sm">عرض التسجيل المبكر لأول 30 شخص</p>
             </div>
 
             {/* Feature 2: Seats counter in final CTA */}
@@ -1133,7 +1301,7 @@ export default function LandingPage() {
             <div className="text-4xl mb-4">⏳</div>
             <h3 className="text-2xl font-black text-white mb-3">لحظة! فيه عرض خاص</h3>
             <p className="text-gray-300 leading-relaxed mb-6">
-              قبل ما تروح، بدي قلك إنو السعر $12 رح يرتفع قريباً. سجّل هلأ ووفّر 66%
+              قبل ما تروح، بدي قلك إنو عرض $12 لأول 30 شخص بس. لما يخلصوا السعر بيرجع $35. سجّل هلأ قبل ما يخلصوا المقاعد
             </p>
 
             <a
