@@ -207,7 +207,7 @@ export default function LandingPage() {
   const pad = (n: number) => n.toString().padStart(2, '0')
 
   const WHATSAPP_NUMBER = '963985323170'
-  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $22')}`
+  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $12')}`
 
   // WhatsApp chats - Real customer reviews with hidden names
   const whatsappChats = [
@@ -426,7 +426,7 @@ export default function LandingPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30 mb-4"
           >
-            اشترك الآن - $22 فقط
+            اشترك الآن - $12 فقط
             <MessageCircle className="w-6 h-6" />
           </a>
 
@@ -454,7 +454,7 @@ export default function LandingPage() {
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
                 { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
-                { icon: CreditCard, step: '٢', text: 'حول $22 شام كاش/بنكي' },
+                { icon: CreditCard, step: '٢', text: 'حول $12 شام كاش/بنكي' },
                 { icon: Send, step: '٣', text: 'استلم الرابط فوراً' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 md:gap-3">
@@ -875,7 +875,7 @@ export default function LandingPage() {
 
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
             {[
-              { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'محتوى عملي مباشر', value: '$65' },
+              { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'محتوى عملي مباشر', value: '$35' },
               ...bonuses.map((b) => ({ title: b.title, desc: '', value: b.value })),
             ].map((item, i) => (
               <div key={i} className={`flex items-center justify-between ${i > 0 ? 'border-t border-white/5 pt-4 mt-4' : 'pb-4'}`}>
@@ -892,14 +892,14 @@ export default function LandingPage() {
             <div className="border-t-2 border-[#f59e0b]/30 mt-6 pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-400">إجمالي قيمة هذه الباقة يتجاوز</span>
-                <span className="text-[#f59e0b] font-bold line-through text-xl">$110</span>
+                <span className="text-[#f59e0b] font-bold line-through text-xl">$70</span>
               </div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-400">لكن… هتحصل عليها كلها الآن مقابل</span>
               </div>
               <div className="text-center">
-                <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$22</span>
-                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$65</span> - عرض لمدة 3 أيام فقط</p>
+                <span className="text-5xl md:text-6xl font-black text-[#22c55e]">$12</span>
+                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$35</span> - عرض لمدة 3 أيام فقط</p>
                 <p className="text-gray-400 mt-1">دفع واحد - وصول دائم</p>
               </div>
             </div>
@@ -924,7 +924,7 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="w-full mt-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن - $22 فقط
+              اشترك الآن - $12 فقط
               <MessageCircle className="w-6 h-6" />
             </a>
           </div>
@@ -993,8 +993,8 @@ export default function LandingPage() {
             <p className="text-gray-400 text-lg mb-6">تواصل عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
 
             <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
-              <div className="text-4xl font-black text-[#22c55e]">$22</div>
-              <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$65</span></p>
+              <div className="text-4xl font-black text-[#22c55e]">$12</div>
+              <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">$35</span></p>
               <p className="text-gray-500 text-sm">عرض لمدة 3 أيام فقط</p>
             </div>
 
@@ -1013,7 +1013,7 @@ export default function LandingPage() {
               <div className="flex items-center justify-center gap-3">
                 <span className="text-[#22c55e]">١. تواصل واتساب</span>
                 <span className="text-gray-600">←</span>
-                <span className="text-[#22c55e]">٢. حول $22 شام كاش</span>
+                <span className="text-[#22c55e]">٢. حول $12 شام كاش</span>
                 <span className="text-gray-600">←</span>
                 <span className="text-[#22c55e]">٣. استلم الرابط</span>
               </div>
@@ -1025,7 +1025,7 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن - $22 فقط
+              اشترك الآن - $12 فقط
               <MessageCircle className="w-6 h-6" />
             </a>
 
@@ -1091,8 +1091,8 @@ export default function LandingPage() {
           style={{ animation: 'slideUp 0.3s ease-out' }}
         >
           <div>
-            <span className="text-[#22c55e] font-black text-xl">$22</span>
-            <span className="text-gray-500 text-sm mr-1">بدل <span className="line-through">$65</span></span>
+            <span className="text-[#22c55e] font-black text-xl">$12</span>
+            <span className="text-gray-500 text-sm mr-1">بدل <span className="line-through">$35</span></span>
           </div>
           <a
             href={WHATSAPP_LINK}
@@ -1133,7 +1133,7 @@ export default function LandingPage() {
             <div className="text-4xl mb-4">⏳</div>
             <h3 className="text-2xl font-black text-white mb-3">لحظة! فيه عرض خاص</h3>
             <p className="text-gray-300 leading-relaxed mb-6">
-              قبل ما تروح، بدي قلك إنو السعر $22 رح يرتفع قريباً. سجّل هلأ ووفّر 66%
+              قبل ما تروح، بدي قلك إنو السعر $12 رح يرتفع قريباً. سجّل هلأ ووفّر 66%
             </p>
 
             <a
@@ -1143,7 +1143,7 @@ export default function LandingPage() {
               className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 mb-3"
               onClick={() => setShowExitPopup(false)}
             >
-              سجّل الآن $22
+              سجّل الآن $12
               <MessageCircle className="w-5 h-5" />
             </a>
 
