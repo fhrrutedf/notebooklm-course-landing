@@ -23,7 +23,32 @@ import {
   CreditCard,
   Send,
   ArrowLeft,
+  X,
 } from 'lucide-react'
+
+// Feature 1: Purchase notifications data
+const purchaseNotifications = [
+  'أحمد من دمشق سجل قبل 3 دقائق',
+  'سارة من حلب اشتركت قبل 5 دقائق',
+  'د. محمد من حمص سجل قبل دقيقتين',
+  'فاطمة من اللاذقية اشتركت قبل 7 دقائق',
+  'عمر من دير الزور سجل قبل 4 دقائق',
+  'ليلى من حماة اشتركت قبل 6 دقائق',
+  'ياسر من طرطوس سجل قبل دقيقة',
+  'رنا من إدلب اشتركت قبل 8 دقائق',
+  'حسن من الرقة سجل قبل دقيقتين',
+  'مريم من درعا اشتركت قبل 5 دقائق',
+]
+
+// Feature 4: Guarantee Badge (used in 3 locations)
+function GuaranteeBadge() {
+  return (
+    <div className="flex items-center justify-center gap-2 text-[#22c55e] text-sm font-bold bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg px-4 py-2.5">
+      <Shield className="w-5 h-5 shrink-0" />
+      <span>ضمان 7 أيام - بدك فلوسك رجعنا، بدون أسئلة</span>
+    </div>
+  )
+}
 
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -31,8 +56,21 @@ export default function LandingPage() {
   const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
 
+  // Feature 1: Live Purchase Notifications (FOMO)
+  const [showPurchaseToast, setShowPurchaseToast] = useState(false)
+  const [currentPurchase, setCurrentPurchase] = useState(0)
+
+  // Feature 2: Limited Seats Counter
+  const [seatsLeft, setSeatsLeft] = useState(50)
+
+  // Feature 3: Sticky Mobile CTA Bar
+  const [showStickyBar, setShowStickyBar] = useState(false)
+
+  // Feature 6: Exit Intent Popup
+  const [showExitPopup, setShowExitPopup] = useState(false)
+
+  // ===== COUNTDOWN TIMER =====
   useEffect(() => {
-    // Set countdown from localStorage - each visitor gets 3 days from first visit
     const STORAGE_KEY = 'course_offer_end'
     const stored = localStorage.getItem(STORAGE_KEY)
     let endTime: number
@@ -40,7 +78,7 @@ export default function LandingPage() {
     if (stored) {
       endTime = parseInt(stored, 10)
     } else {
-      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000 // 3 days from now
+      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000
       localStorage.setItem(STORAGE_KEY, endTime.toString())
     }
 
@@ -54,10 +92,117 @@ export default function LandingPage() {
     }
 
     updateTimer()
-    setMounted(true)
+    queueMicrotask(() => setMounted(true))
     const timer = setInterval(updateTimer, 1000)
     return () => clearInterval(timer)
   }, [])
+
+  // ===== Feature 1: FOMO Purchase Toast =====
+  useEffect(() => {
+    if (!mounted) return
+
+    let toastTimeout: ReturnType<typeof setTimeout>
+    let nextTimeout: ReturnType<typeof setTimeout>
+
+    const showNextToast = () => {
+      setCurrentPurchase(prev => (prev + 1) % purchaseNotifications.length)
+      setShowPurchaseToast(true)
+      toastTimeout = setTimeout(() => {
+        setShowPurchaseToast(false)
+      }, 5000)
+      const delay = 30000 + Math.random() * 15000
+      nextTimeout = setTimeout(showNextToast, delay)
+    }
+
+    // First toast after 15 seconds
+    const initialTimeout = setTimeout(showNextToast, 15000)
+
+    return () => {
+      clearTimeout(initialTimeout)
+      clearTimeout(toastTimeout)
+      clearTimeout(nextTimeout)
+    }
+  }, [mounted])
+
+  // ===== Feature 2: Limited Seats Counter =====
+  useEffect(() => {
+    if (!mounted) return
+
+    const SEATS_KEY = 'course_seats_left'
+    const storedSeats = localStorage.getItem(SEATS_KEY)
+
+    if (storedSeats) {
+      queueMicrotask(() => setSeatsLeft(parseInt(storedSeats, 10)))
+    } else {
+      const initialSeats = Math.floor(Math.random() * 5) + 5 // 5-9
+      queueMicrotask(() => setSeatsLeft(initialSeats))
+      localStorage.setItem(SEATS_KEY, initialSeats.toString())
+    }
+
+    // Decrease seats every 5-8 minutes
+    let seatTimeout: ReturnType<typeof setTimeout>
+
+    const scheduleSeatDecrease = () => {
+      const delay = (5 + Math.random() * 3) * 60 * 1000
+      seatTimeout = setTimeout(() => {
+        setSeatsLeft(prev => {
+          const newVal = Math.max(prev - 1, 2)
+          localStorage.setItem(SEATS_KEY, newVal.toString())
+          return newVal
+        })
+        scheduleSeatDecrease()
+      }, delay)
+    }
+
+    scheduleSeatDecrease()
+
+    return () => clearTimeout(seatTimeout)
+  }, [mounted])
+
+  // ===== Feature 3: Sticky Mobile CTA Bar =====
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyBar(window.scrollY > 400)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // ===== Feature 6: Exit Intent Popup =====
+  useEffect(() => {
+    if (!mounted) return
+
+    const EXIT_KEY = 'exit_popup_shown'
+    if (localStorage.getItem(EXIT_KEY)) return
+
+    // Desktop: mouse leaves viewport top
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && !localStorage.getItem(EXIT_KEY)) {
+        setShowExitPopup(true)
+        localStorage.setItem(EXIT_KEY, 'true')
+      }
+    }
+
+    // Mobile: rapid scroll to top after scrolling down
+    let hasScrolledDown = false
+    const handleScrollMobile = () => {
+      if (window.scrollY > 600) {
+        hasScrolledDown = true
+      }
+      if (hasScrolledDown && window.scrollY < 50 && !localStorage.getItem(EXIT_KEY)) {
+        setShowExitPopup(true)
+        localStorage.setItem(EXIT_KEY, 'true')
+      }
+    }
+
+    document.addEventListener('mouseleave', handleMouseLeave)
+    window.addEventListener('scroll', handleScrollMobile, { passive: true })
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      window.removeEventListener('scroll', handleScrollMobile)
+    }
+  }, [mounted])
 
   const pad = (n: number) => n.toString().padStart(2, '0')
 
@@ -224,7 +369,7 @@ export default function LandingPage() {
   return (
     <div dir="rtl" className="min-h-screen flex flex-col bg-[#0a0a0a] font-sans text-white">
 
-      {/* ===== TOP URGENCY BAR ===== */}
+      {/* ===== TOP URGENCY BAR (with seats counter) ===== */}
       <div className="bg-gradient-to-r from-[#c0392b] via-[#e74c3c] to-[#c0392b] py-3 text-center">
         <p className="text-white font-bold text-sm md:text-base">
           🔥 ينتهي العرض الخاص بعد
@@ -237,6 +382,11 @@ export default function LandingPage() {
             <span className="mx-1">:</span>
             <span className="bg-black/30 px-2 py-1 rounded text-lg">{pad(timeLeft.seconds)}</span> ثانية
           </span>
+          {mounted && (
+            <span className="inline-flex items-center gap-1 mr-3 text-yellow-200 animate-pulse">
+              | 🔥 باقي فقط <span className="bg-black/30 px-2 py-1 rounded font-black text-lg">{seatsLeft}</span> مقعد من 50
+            </span>
+          )}
         </p>
       </div>
 
@@ -265,12 +415,11 @@ export default function LandingPage() {
             <span className="text-lg md:text-xl text-gray-500">للمعلمين والدكاترة الجامعيين والمدربين</span>
           </h1>
 
-          {/* FIXED: Removed "مجانيتين" contradiction - now focuses on VALUE */}
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
             تعلم تستخدم أداتين الذكاء الاصطناعي لإعداد اختبارات بنسختين، تصحيح أوراق الطلاب، وعمل مذكرات PDF احترافية - كل شي من المصدر وموثق بأرقام الصفحات. مناسب للمعلمين والدكاترة الجامعيين والمدربين.
           </p>
 
-          {/* CTA - FIXED: More action-oriented text */}
+          {/* CTA */}
           <a
             href={WHATSAPP_LINK}
             target="_blank"
@@ -281,7 +430,12 @@ export default function LandingPage() {
             <MessageCircle className="w-6 h-6" />
           </a>
 
-          {/* NEW: Social Proof under hero CTA */}
+          {/* Feature 4: Guarantee Badge (Hero) */}
+          <div className="mt-4">
+            <GuaranteeBadge />
+          </div>
+
+          {/* Social Proof under hero CTA */}
           <div className="flex items-center justify-center gap-6 mt-4 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
               <Users className="w-4 h-4 text-[#22c55e]" />
@@ -295,7 +449,7 @@ export default function LandingPage() {
             </span>
           </div>
 
-          {/* NEW: Purchase Steps - Clear process */}
+          {/* Purchase Steps */}
           <div className="mt-8 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
@@ -705,10 +859,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== PRICING SUMMARY ===== */}
+      {/* ===== PRICING SUMMARY (with mini countdown + guarantee + seats) ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-10">كل ما ستحصل عليه عند اشتراكك</h2>
+
+          {/* Feature 2: Seats counter above pricing */}
+          {mounted && (
+            <div className="text-center mb-6">
+              <span className="inline-flex items-center gap-2 text-red-400 font-bold text-lg animate-pulse">
+                🔥 باقي فقط {seatsLeft} مقاعد من 50
+              </span>
+            </div>
+          )}
+
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
             {[
               { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'محتوى عملي مباشر', value: '$65' },
@@ -740,11 +904,25 @@ export default function LandingPage() {
               </div>
             </div>
 
+            {/* Feature 5: Mini Countdown Near Pricing */}
+            {mounted && (
+              <div className="text-center mt-6 mb-2">
+                <span className="inline-flex items-center gap-2 text-[#f59e0b] font-bold text-base">
+                  ⏱️ العرض ينتهي بعد {timeLeft.days} يوم {pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}
+                </span>
+              </div>
+            )}
+
+            {/* Feature 4: Guarantee Badge (Pricing) */}
+            <div className="mt-4 flex justify-center">
+              <GuaranteeBadge />
+            </div>
+
             <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full mt-8 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
+              className="w-full mt-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
               اشترك الآن - $22 فقط
               <MessageCircle className="w-6 h-6" />
@@ -777,7 +955,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== FAQ - FIXED: Syrian dialect ===== */}
+      {/* ===== FAQ ===== */}
       <section className="py-16 md:py-20 bg-[#111]">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black text-center mb-12">الأسئلة الشائعة</h2>
@@ -804,7 +982,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
+      {/* ===== FINAL CTA (with guarantee) ===== */}
       <section id="register" className="py-16 md:py-20 bg-[#0a0a0a]">
         <div className="max-w-xl mx-auto px-4">
           <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-[#25D366]/20 text-center">
@@ -820,7 +998,16 @@ export default function LandingPage() {
               <p className="text-gray-500 text-sm">عرض لمدة 3 أيام فقط</p>
             </div>
 
-            {/* NEW: Purchase Steps Reminder */}
+            {/* Feature 2: Seats counter in final CTA */}
+            {mounted && (
+              <div className="mb-4">
+                <span className="inline-flex items-center gap-2 text-red-400 font-bold animate-pulse">
+                  🔥 باقي فقط {seatsLeft} مقاعد
+                </span>
+              </div>
+            )}
+
+            {/* Purchase Steps Reminder */}
             <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5 text-sm">
               <p className="text-gray-500 mb-3 font-bold">كيف تشترك؟</p>
               <div className="flex items-center justify-center gap-3">
@@ -842,6 +1029,11 @@ export default function LandingPage() {
               <MessageCircle className="w-6 h-6" />
             </a>
 
+            {/* Feature 4: Guarantee Badge (Final CTA) */}
+            <div className="mt-4 flex justify-center">
+              <GuaranteeBadge />
+            </div>
+
             <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
               <span className="flex items-center gap-1"><Shield className="w-4 h-4 text-[#22c55e]" /> وصول دائم</span>
               <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> رابط الكورس فوراً</span>
@@ -850,7 +1042,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== FOOTER - FIXED year ===== */}
+      {/* ===== FOOTER ===== */}
       <footer className="bg-[#050505] py-8 mt-auto border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <div className="mb-3">
@@ -863,16 +1055,149 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* ===== NEW: FLOATING WHATSAPP BUTTON ===== */}
+      {/* ===== FLOATING WHATSAPP BUTTON (hidden on mobile when sticky bar is shown) ===== */}
       <a
         href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/40 transition-all hover:scale-110"
+        className={`fixed bottom-6 left-6 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/40 transition-all hover:scale-110 ${showStickyBar ? 'md:flex hidden' : 'flex'}`}
         aria-label="تواصل عبر واتساب"
       >
         <MessageCircle className="w-7 h-7 text-white" />
       </a>
+
+      {/* ===== Feature 1: FOMO Purchase Toast ===== */}
+      {mounted && showPurchaseToast && (
+        <div
+          className="fixed bottom-20 md:bottom-6 left-6 z-50 max-w-xs animate-[slideInLeft_0.4s_ease-out]"
+          style={{ animation: 'slideInLeft 0.4s ease-out' }}
+        >
+          <div className="bg-[#1a1a1a]/95 backdrop-blur-md border border-[#22c55e]/30 rounded-xl px-4 py-3 shadow-lg shadow-[#22c55e]/10 flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#22c55e]/20 rounded-full flex items-center justify-center shrink-0">
+              <Users className="w-4 h-4 text-[#22c55e]" />
+            </div>
+            <div>
+              <p className="text-white text-sm font-bold">{purchaseNotifications[currentPurchase]}</p>
+              <p className="text-[#22c55e] text-xs mt-0.5">تم التسجيل الآن ✓</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== Feature 3: Sticky Mobile CTA Bar ===== */}
+      {mounted && showStickyBar && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 px-4 py-3 flex items-center justify-between"
+          style={{ animation: 'slideUp 0.3s ease-out' }}
+        >
+          <div>
+            <span className="text-[#22c55e] font-black text-xl">$22</span>
+            <span className="text-gray-500 text-sm mr-1">بدل <span className="line-through">$65</span></span>
+          </div>
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-6 py-3 rounded-xl text-base transition-all hover:scale-105 flex items-center gap-2 shadow-lg shadow-[#25D366]/30"
+          >
+            اشترك الآن
+            <MessageCircle className="w-5 h-5" />
+          </a>
+        </div>
+      )}
+
+      {/* ===== Feature 6: Exit Intent Popup ===== */}
+      {mounted && showExitPopup && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+          style={{ animation: 'fadeIn 0.3s ease-out' }}
+        >
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowExitPopup(false)}
+          />
+          {/* Popup Card */}
+          <div
+            className="relative bg-[#1a1a1a] rounded-2xl p-8 max-w-md w-full border border-[#f59e0b]/30 shadow-2xl text-center"
+            style={{ animation: 'scaleIn 0.3s ease-out' }}
+          >
+            <button
+              onClick={() => setShowExitPopup(false)}
+              className="absolute top-4 left-4 text-gray-500 hover:text-white transition-colors"
+              aria-label="إغلاق"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="text-4xl mb-4">⏳</div>
+            <h3 className="text-2xl font-black text-white mb-3">لحظة! فيه عرض خاص</h3>
+            <p className="text-gray-300 leading-relaxed mb-6">
+              قبل ما تروح، بدي قلك إنو السعر $22 رح يرتفع قريباً. سجّل هلأ ووفّر 66%
+            </p>
+
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 mb-3"
+              onClick={() => setShowExitPopup(false)}
+            >
+              سجّل الآن $22
+              <MessageCircle className="w-5 h-5" />
+            </a>
+
+            <button
+              onClick={() => setShowExitPopup(false)}
+              className="text-gray-500 hover:text-gray-400 text-sm transition-colors"
+            >
+              لا شكراً
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ===== Custom Keyframe Animations ===== */}
+      <style jsx global>{`
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </div>
   )
 }
