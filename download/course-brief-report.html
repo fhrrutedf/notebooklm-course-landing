@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل صناع المحتوى - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --border-accent: #1a56db;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 13pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 14pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 18pt;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 40px;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 15pt;
+    font-weight: 700;
+  }
+
+  /* ===== TOC ===== */
+  .toc-page {
+    page-break-after: always;
+    padding: 20px 0;
+  }
+
+  .toc-page h2 {
+    font-size: 22pt;
+    color: var(--primary);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--primary);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .toc-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--border-color);
+    font-size: 13pt;
+  }
+
+  .toc-list li.toc-main {
+    font-weight: 700;
+    font-size: 14pt;
+    color: var(--primary-dark);
+  }
+
+  .toc-list li.toc-sub {
+    padding-right: 30px;
+    font-weight: 400;
+    color: var(--text-medium);
+  }
+
+  /* ===== CONTENT PAGES ===== */
+  .content-page {
+    padding: 0;
+  }
+
+  h1.section-title {
+    font-size: 24pt;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 35px 0 20px 0;
+    padding: 12px 20px;
+    background: var(--primary-light);
+    border-right: 5px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+  }
+
+  h2.sub-title {
+    font-size: 17pt;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 25px 0 12px 0;
+    padding-right: 15px;
+    border-right: 3px solid var(--accent);
+  }
+
+  h3.sub-sub-title {
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 18px 0 8px 0;
+  }
+
+  p {
+    margin-bottom: 12px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* Info boxes */
+  .info-box {
+    background: var(--bg-highlight);
+    border: 1px solid #bfdbfe;
+    border-right: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 15px 20px;
+    margin: 15px 0;
+  }
+
+  .info-box.warning {
+    background: var(--accent-light);
+    border-color: #fbbf24;
+    border-right-color: var(--warning);
+  }
+
+  .info-box.success {
+    background: #ecfdf5;
+    border-color: #6ee7b7;
+    border-right-color: var(--success);
+  }
+
+  .info-box.danger {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    border-right-color: var(--danger);
+  }
+
+  .info-box-title {
+    font-weight: 700;
+    font-size: 13pt;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 11.5pt;
+  }
+
+  table thead th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  table tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+
+  table tbody tr:nth-child(even) {
+    background: var(--bg-section);
+  }
+
+  table tbody tr:hover {
+    background: var(--bg-highlight);
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 10px 25px 15px 0;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  /* Stat cards */
+  .stats-row {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 130px;
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .stat-card .stat-number {
+    font-size: 26pt;
+    font-weight: 900;
+    color: var(--primary);
+    display: block;
+  }
+
+  .stat-card .stat-label {
+    font-size: 10pt;
+    color: var(--text-medium);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Before/After comparison */
+  .comparison {
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+  }
+
+  .comparison-col {
+    flex: 1;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .comparison-col.before {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+  }
+
+  .comparison-col.after {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+  }
+
+  .comparison-col h4 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 13pt;
+  }
+
+  .comparison-col.before h4 { color: var(--danger); }
+  .comparison-col.after h4 { color: var(--success); }
+
+  /* Lesson card */
+  .lesson-card {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 8px 0;
+  }
+
+  .lesson-card .lesson-num {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 11pt;
+    font-weight: 700;
+    margin-left: 10px;
+  }
+
+  .lesson-card .lesson-title {
+    font-weight: 600;
+    font-size: 12.5pt;
+  }
+
+  .lesson-card .lesson-desc {
+    font-size: 11pt;
+    color: var(--text-medium);
+    margin-top: 4px;
+    padding-right: 42px;
+  }
+
+  /* Unit block */
+  .unit-block {
+    margin: 15px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .unit-header {
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  .unit-body {
+    padding: 10px 15px;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 25px 0;
+  }
+
+  /* Page break utility */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    padding: 6px 30px 6px 0;
+    position: relative;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--primary);
+    border-radius: 4px;
+  }
+
+  /* Numbered circle */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: step-counter;
+  }
+
+  .step-list li {
+    padding: 8px 45px 8px 0;
+    position: relative;
+    counter-increment: step-counter;
+  }
+
+  .step-list li::before {
+    content: counter(step-counter);
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 12pt;
+    font-weight: 700;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 11pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  /* Print styles */
+  @media print {
+    body { width: 100%; }
+    .cover-page { min-height: auto; height: 100vh; }
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">دليل شامل لصناع المحتوى وكتاب السكريبتات</div>
+  <h1 class="cover-title">كورس NotebookLM<br>للمعلمين السوريين</h1>
+  <p class="cover-subtitle">
+    تقرير تفصيلي شامل يغطي كل ما يحتاجه صناع المحتوى وكتاب سكريبتات الفيديو لفهم المشروع وإنتاج محتوى احترافي يحقق أعلى معدلات التحويل
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">الجمهور المستهدف</span>
+      <span class="value">المعلمون السوريون</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">السعر</span>
+      <span class="value">12 دولار</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">20 درس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">تاريخ الإعداد</span>
+      <span class="value">مايو 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="toc-page">
+  <h2>فهرس المحتويات</h2>
+  <ul class="toc-list">
+    <li class="toc-main"><span>1. نظرة عامة على المشروع</span></li>
+    <li class="toc-sub"><span>1.1 ما هو الكورس؟</span></li>
+    <li class="toc-sub"><span>1.2 لماذا NotebookLM؟</span></li>
+    <li class="toc-sub"><span>1.3 الرؤية والرسالة</span></li>
+    <li class="toc-main"><span>2. تحليل الجمهور المستهدف</span></li>
+    <li class="toc-sub"><span>2.1 المعلم السوري: الشخصية المستهدفة</span></li>
+    <li class="toc-sub"><span>2.2 التحديات والاحتياجات</span></li>
+    <li class="toc-sub"><span>2.3 القدرة الشرائية</span></li>
+    <li class="toc-main"><span>3. هيكل الكورس ومحتواه</span></li>
+    <li class="toc-sub"><span>3.1 الوحدات الخمس والدروس العشرون</span></li>
+    <li class="toc-sub"><span>3.2 منهجية التعليم</span></li>
+    <li class="toc-sub"><span>3.3 المخرجات التعليمية</span></li>
+    <li class="toc-main"><span>4. استراتيجية التسعير</span></li>
+    <li class="toc-sub"><span>4.1 تحليل السعر 12 دولار</span></li>
+    <li class="toc-sub"><span>4.2 تبرير القيمة</span></li>
+    <li class="toc-main"><span>5. البنية التحتية التقنية للإنتاج</span></li>
+    <li class="toc-sub"><span>5.1 برامج التسجيل والمونتاج</span></li>
+    <li class="toc-sub"><span>5.2 حل المايكروفون (AudioRelay)</span></li>
+    <li class="toc-sub"><span>5.3 إعدادات OBS المطلوبة</span></li>
+    <li class="toc-main"><span>6. إرشادات كتابة السكريبت</span></li>
+    <li class="toc-sub"><span>6.1 نبرة الصوت والأسلوب</span></li>
+    <li class="toc-sub"><span>6.2 هيكل سكريبت الفيديو الواحد</span></li>
+    <li class="toc-sub"><span>6.3 قوالب سكريبت جاهزة</span></li>
+    <li class="toc-sub"><span>6.4 قواعد ذهبية للكتابة</span></li>
+    <li class="toc-main"><span>7. استراتيجية التسويق والمبيعات</span></li>
+    <li class="toc-sub"><span>7.1 صفحة الهبوط وعناصر FOMO</span></li>
+    <li class="toc-sub"><span>7.2 قنوات التسويق</span></li>
+    <li class="toc-sub"><span>7.3 حيل تسويقية نفسية</span></li>
+    <li class="toc-main"><span>8. جدول الإنتاج والجدول الزمني</span></li>
+    <li class="toc-sub"><span>8.1 مراحل الإنتاج</span></li>
+    <li class="toc-sub"><span>8.2 قائمة المراجعة النهائية</span></li>
+    <li class="toc-main"><span>9. المصادر والمراجع</span></li>
+  </ul>
+</div>
+
+<!-- ==================== SECTION 1: PROJECT OVERVIEW ==================== -->
+<div class="content-page">
+
+  <h1 class="section-title">1. نظرة عامة على المشروع</h1>
+
+  <h2 class="sub-title">1.1 ما هو الكورس؟</h2>
+  <p>
+    كورس "إتقان NotebookLM" هو دورة تدريبية إلكترونية مصممة خصيصاً للمعلمين السوريين، تهدف إلى تعليمهم كيفية استخدام أداة NotebookLM من جوجل لتحسين عمليتهم التعليمية بشكل جذري. NotebookLM هي أداة ذكاء اصطناعي مجانية من جوجل تمكن المستخدم من رفع مصادر متعددة (كتب، ملفات PDF، مقالات، فيديوهات) ثم طرح أسئلة عليها والحصول على إجابات مبنية حصرياً على تلك المصادر، بالإضافة إلى إمكانية توليد بودكاست صوتي كامل من المحتوى. الكورس يتكون من 20 درس فيديو موزعة على 5 وحدات تعليمية، بسعر 12 دولاراً فقط، وهو سعر مدروس بعناية ليناسب القدرة الشرائية للمعلم السوري مع الحفاظ على القيمة المتصورة للمنتج.
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-number">20</span>
+      <span class="stat-label">درس فيديو</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">5</span>
+      <span class="stat-label">وحدات تعليمية</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">$12</span>
+      <span class="stat-label">سعر الكورس</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">تسجيل شاشة + صوت</span>
+    </div>
+  </div>
+
+  <h2 class="sub-title">1.2 لماذا NotebookLM؟</h2>
+  <p>
+    اختيار NotebookLM كموضوع للكورس لم يكن عشوائياً. الأداة تقدم قيمة فورية ومباشرة للمعلم: بدلاً من قضاء ساعات في تلخيص المناهج أو إعداد أسئلة الامتحانات، يمكن للمعلم رفع كتاب المنهج على NotebookLM والحصول على ملخصات ذكية وأسئلة مولّدة تلقائياً في دقائق. الأداة مجانية تماماً ولا تتطلب أي اشتراك مدفوع، مما يجعلها الخيار المثالي للمعلم السوري ذي الدخل المحدود. كما أن NotebookLM يوفر ميزة فريدة وهي "Audio Overview" التي تحول أي محتوى مكتوب إلى نقاش بودكاست صوتي بين شخصين، وهي ميزة يمكن للمعلم استخدامها لإنشاء محتوى صوتي تعليمي لطلابه بجهد شبه صفري. في السوق العربي، لا توجد دورة متخصصة واحدة تعلم هذه الأداة بالعربية، مما يجعل كورسنا يتميز بميزة تنافسية واضحة.
+  </p>
+
+  <h2 class="sub-title">1.3 الرؤية والرسالة</h2>
+  <p>
+    <strong>الرؤية:</strong> أن يصبح كل معلم سوري قادراً على تسخير الذكاء الاصطناعي لتقليل عبء العمل وزيادة جودة التعليم، بحيث لا يبقى المعلم يعمل لساعات إضافية في مهام يمكن للأداة إنجازها في دقائق. الهدف الأبعد هو خلق جيل من المعلمين السوريين المتمكنين تقنياً قادرين على المنافسة في سوق التعليم الرقمي المتنامي.
+  </p>
+  <p>
+    <strong>الرسالة:</strong> تقديم تعليم عملي ومباشر يركز على التطبيق الفوري وليس التنظير. كل درس في الكورس ينبغي أن يمنح المعلم مهارة يمكن تطبيقها فور الانتهاء من المشاهدة. الكورس لا يعلم "ما هو الذكاء الاصطناعي" بقدر ما يعلم "كيف تستخدم هذه الأداة المحددة لحل مشكلتك المحددة اليوم".
+  </p>
+
+  <div class="info-box">
+    <div class="info-box-title">القيمة الأساسية للكورس</div>
+    <p>تحويل المعلم السوري من مستهلك للتكنولوجيا إلى مستفيد فعّال منها، عبر أداة واحدة مجانية يمكنها توفير 5-10 ساعات عمل أسبوعياً في التحضير والتلخيص وإعداد الأسئلة والمحتوى التعليمي.</p>
+  </div>
+
+</div>
+
+<!-- ==================== SECTION 2: TARGET AUDIENCE ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">2. تحليل الجمهور المستهدف</h1>
+
+  <h2 class="sub-title">2.1 المعلم السوري: الشخصية المستهدفة</h2>
+  <p>
+    المعلم السوري يعيش في ظروف اقتصادية صعبة للغاية. متوسط راتب المعلم في سوريا يتراوح بين 70 و120 دولاراً شهرياً، وهو مبلغ بالكاد يكفي لتغطية الاحتياجات الأساسية. رغم ذلك، المعلم السوري طموح ويسعى دائماً للتحسين من أدائه وفتح مصادر دخل إضافية عبر التعليم الخصوصي أو الإنترنت. يشعر بالإحباط من كثرة المهام الإدارية والتحضيرية التي تستهلك وقته، ويتوق إلى حلول عملية توفر عليه الوقت والجهد. هو متابع نشط لمنصات التواصل الاجتماعي (فيسبوك بشكل أساسي، ثم تيليجرام وتيك توك)، ويبحث عن فرص تعليمية بأسعار معقولة. لا يمتلك خبرة تقنية متقدمة، لكنه قادر على استخدام المتصفح والأدوات البسيطة إذا وجد شرحاً واضحاً بالعربية.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>المعيار</th>
+        <th>التفاصيل</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>العمر</strong></td>
+        <td>25-50 سنة</td>
+      </tr>
+      <tr>
+        <td><strong>الجنس</strong></td>
+        <td>ذكور وإناث (الغالبية إناث في التعليم الأساسي)</td>
+      </tr>
+      <tr>
+        <td><strong>الدخل الشهري</strong></td>
+        <td>70-120 دولار (رواتب الحكومة السورية)</td>
+      </tr>
+      <tr>
+        <td><strong>المستوى التقني</strong></td>
+        <td>مبتدئ إلى متوسط (يستخدم المتصفح والواتساب)</td>
+      </tr>
+      <tr>
+        <td><strong>منصات التواصل</strong></td>
+        <td>فيسبوك (أساسي)، تيليجرام، تيك توك</td>
+      </tr>
+      <tr>
+        <td><strong>لغة المحتوى</strong></td>
+        <td>العربية الفصحى المبسطة (تجنب المصطلحات المعقدة)</td>
+      </tr>
+      <tr>
+        <td><strong>الدافع الشراء</strong></td>
+        <td>توفير الوقت + تحسين جودة التعليم + دخل إضافي</td>
+      </tr>
+      <tr>
+        <td><strong>العائق الرئيسي</strong></td>
+        <td>السعر + عدم الثقة بالدورات الإلكترونية + الخوف من التقنية</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title">2.2 التحديات والاحتياجات</h2>
+  <p>
+    المعلم السوري يواجه مجموعة من التحديات اليومية التي تجعل NotebookLM حلاً مثالياً له. أولاً، ضغط المنهج: المعلم مطالب بتغطية مناهج ضخمة في وقت محدود، وغالباً ما يحتاج إلى ساعات إضافية بعد الدوام للتحضير والتلخيص. ثانياً، نقص الموارد: لا تتوفر مكتبات رقمية أو أدوات مساعدة مدفوعة، والمعلم يعتمد على الكتب الورقية والملاحظات المكتوبة يدوياً. ثالثاً، الرغبة في التطوير: كثير من المعلمين يريدون دخول عالم التعليم الرقمي وإنشاء محتوى تعليمي على يوتيوب أو منصات أخرى لكنهم لا يعرفون من أين يبدأون. NotebookLM يحل هذه المشاكل الثلاث: يسرّع التحضير، يوفر أداة مجانية قوية، ويمنح المعلم القدرة على إنشاء محتوى صوتي ومكتوب احترافي.
+  </p>
+
+  <h2 class="sub-title">2.3 القدرة الشرائية</h2>
+  <p>
+    بسعر 12 دولاراً، يمثل الكورس حوالي 10-17% من الراتب الشهري للمعلم السوري. هذا رقم كبير نسبياً، لكنه في نفس الوقت أقل بكثير من أسعار الكورسات المشابهة بالعربية التي تتراوح عادة بين 30 و100 دولار. مفتاح النجاح هو إقناع المعلم بأن القيمة التي سيحصل عليها تتجاوز بكثير السعر المدفوع. إذا كان الكورس سيوفر عليه 5 ساعات أسبوعياً، فهذا يعادل 20 ساعة شهرياً يمكنه استثمارها في دروس خصوصية تدر عليه دخلاً إضافياً. بمعنى آخر، الكورس يمكن أن يعود على المعلم بأضعاف ما دفعه خلال الأسابيع الأولى فقط.
+  </p>
+
+  <div class="info-box warning">
+    <div class="info-box-title">تنبيه مهم لصناع المحتوى</div>
+    <p>عند كتابة السكريبتات، يجب دائماً مراعاة أن الجمهور يدفع من راتب محدود جداً. تجنبوا تماماً لغة الرفاهية أو التباهي. استخدموا لغة "هذا استثمار مش مصروف" و"أنت بتحقق عائد على كل دولار تدفعه". ركزوا على العائد العملي المباشر وليس على الميزات التقنية.</p>
+  </div>
+
+</div>
+
+<!-- ==================== SECTION 3: COURSE STRUCTURE ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">3. هيكل الكورس ومحتواه</h1>
+
+  <h2 class="sub-title">3.1 الوحدات الخمس والدروس العشرون</h2>
+  <p>
+    الكورس مصمم وفق منهجية تقدمية تبدأ من الصفر وتنتهي بالتطبيقات المتقدمة. كل وحدة تبني على ما سبقها، لذلك من الضروري أن يسير المتعلم بالترتيب. إليك الهيكل الكامل:
+  </p>
+
+  <!-- Unit 1 -->
+  <div class="unit-block">
+    <div class="unit-header">الوحدة الأولى: التعارف مع NotebookLM (الدروس 1-4)</div>
+    <div class="unit-body">
+      <div class="lesson-card">
+        <span class="lesson-num">1</span>
+        <span class="lesson-title">ما هو NotebookLM ولماذا تحتاجه كمعلم؟</span>
+        <div class="lesson-desc">مقدمة عامة عن الأداة، تعريفها، شرح سبب كونها مختلفة عن ChatGPT وأدوات الذكاء الاصطناعي الأخرى. التركيز على ميزة "الاعتماد على المصادر" التي تجعلها مناسبة للمعلمين.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">2</span>
+        <span class="lesson-title">إنشاء حساب جوجل والدخول إلى NotebookLM</span>
+        <div class="lesson-desc">شرح خطوة بخطوة لإنشاء حساب جوجل (لمن لا يملك)، والدخول إلى notebooklm.google.com. حل المشاكل الشائعة مثل الحسابات المقيدة.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">3</span>
+        <span class="lesson-title">الواجهة الرئيسية: جولة مفصلة</span>
+        <div class="lesson-desc">شرح كل عنصر في واجهة NotebookLM: لوحة المصادر، منطقة المحادثة، الأدوات الجانبية، الإعدادات. يجب أن يكون المتعلم مرتاحاً مع الواجهة بعد هذا الدرس.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">4</span>
+        <span class="lesson-title">إنشاء أول Notebook ورفع مصدر واحد</span>
+        <div class="lesson-desc">تطبيق عملي: إنشاء دفتر جديد، رفع ملف PDF ككتاب منهج، وطرح سؤال بسيط والحصول على إجابة. اللحظة التي يرى فيها المعلم الإجابة لأول مرة هي لحظة "الوآه" التي تبني الثقة.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unit 2 -->
+  <div class="unit-block">
+    <div class="unit-header">الوحدة الثانية: إتقان المصادر والتحليل (الدروس 5-8)</div>
+    <div class="unit-body">
+      <div class="lesson-card">
+        <span class="lesson-num">5</span>
+        <span class="lesson-title">أنواع المصادر المدعومة وكيفية رفعها</span>
+        <div class="lesson-desc">PDF، Google Docs، مواقع ويب، يوتيوب، نصوص مباشرة، Google Slides. شرح حدود كل نوع (حجم الملف، عدد الصفحات) وأفضل الممارسات.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">6</span>
+        <span class="lesson-title">إدارة مصادر متعددة وتنظيمها</span>
+        <div class="lesson-desc">كيفية رفع أكثر من مصدر، تنظيم المصادر حسب الموضوع، تحديد المصادر النشطة، وترتيبها للحصول على أفضل النتائج.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">7</span>
+        <span class="lesson-title">فن طرح الأسئلة للحصول على إجابات دقيقة</span>
+        <div class="lesson-desc">Prompt Engineering مخصص لـ NotebookLM. الفرق بين الأسئلة العامة والمحددة. كيف تجعل الأداة تعطيك ما تريد بالضبط وليس إجابات عامة.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">8</span>
+        <span class="lesson-title">تلخيص المناهج تلقائياً: التطبيق العملي</span>
+        <div class="lesson-desc">تطبيق حقيقي: رفع كتاب منهج كامل وتلخيص كل وحدة في صفحة واحدة. هذه هي المهارة الأكثر طلباً من المعلمين.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unit 3 -->
+  <div class="unit-block">
+    <div class="unit-header">الوحدة الثالثة: أدوات متقدمة للمعلم (الدروس 9-12)</div>
+    <div class="unit-body">
+      <div class="lesson-card">
+        <span class="lesson-num">9</span>
+        <span class="lesson-title">توليد أسئلة امتحانات واختبارات تلقائياً</span>
+        <div class="lesson-desc">كيفية استخدام NotebookLM لتوليد أسئلة اختيار من متعدد، أسئلة صح/خطأ، أسئلة مقالية. ضبط مستوى الصعوبة وتنويع الأسئلة.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">10</span>
+        <span class="lesson-title">إنشاء خطط دروس شاملة في دقائق</span>
+        <div class="lesson-desc">تحويل محتوى المنهج إلى خطة درس كاملة: أهداف، أنشطة، تقويم، واجبات. كل ذلك من مصدر واحد مرفوع.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">11</span>
+        <span class="lesson-title">ميزة Audio Overview: البودكاست التعليمي</span>
+        <div class="lesson-desc">شرح ميزة التوليد الصوتي الجديدة. كيف تحول أي محتوى إلى نقاش بين شخصين بصوت طبيعي. تخصيص البودكاست وإعادة التوليد.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">12</span>
+        <span class="lesson-title">الجداول والمخططات: تنظيم المعلومات بصرياً</span>
+        <div class="lesson-desc">كيفية طلب جداول مقارنة، مخططات بيانية، خرائط ذهنية من NotebookLM وتصديرها للاستخدام في الحصص.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unit 4 -->
+  <div class="unit-block">
+    <div class="unit-header">الوحدة الرابعة: التكامل مع أدوات أخرى (الدروس 13-16)</div>
+    <div class="unit-body">
+      <div class="lesson-card">
+        <span class="lesson-num">13</span>
+        <span class="lesson-title">NotebookLM + Google Docs: سير عمل متكامل</span>
+        <div class="lesson-desc">كيف تربط NotebookLM بمستندات جوجل. تعديل المصادر والتحديث التلقائي. تصدير الملاحظات إلى مستند.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">14</span>
+        <span class="lesson-title">NotebookLM + Google Slides: عروض تقديمية فورية</span>
+        <div class="lesson-desc">تحويل المحتوى الملخص إلى عرض تقدييمي. استخدام الملاحظات المولّدة كأساس للشرائح.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">15</span>
+        <span class="lesson-title">NotebookLM + يوتيوب: تحويل الفيديوهات لملاحظات</span>
+        <div class="lesson-desc">رفع رابط فيديو يوتيوب تعليمي والحصول على ملخص وملاحظات. مثالي للاستفادة من المحتوى التعليمي الموجود.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">16</span>
+        <span class="lesson-title">سير عمل المعلم الرقمي: دمج كل الأدوات</span>
+        <div class="lesson-desc">الدرس الأهم: كيف يدمج المعلم NotebookLM مع أدواته اليومية لإنشاء نظام عمل متكامل يوفر عليه ساعات كل أسبوع.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unit 5 -->
+  <div class="unit-block">
+    <div class="unit-header">الوحدة الخامسة: التطبيقات المتقدمة والاحتراف (الدروس 17-20)</div>
+    <div class="unit-body">
+      <div class="lesson-card">
+        <span class="lesson-num">17</span>
+        <span class="lesson-title">إنشاء محتوى تعليمي لمنصات الإنترنت</span>
+        <div class="lesson-desc">كيف تستخدم NotebookLM لإنشاء محتوى ليوتيوب أو مدونة أو منصات تعليمية. تحويل المنهج إلى حلقات فيديو أو مقالات.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">18</span>
+        <span class="lesson-title">NotebookLM للبحث الأكاديمي ورسائل التخرج</span>
+        <div class="lesson-desc">استخدام متقدم للطلاب والمعلمين في الأبحاث: مراجعة الأدبيات، تلخيص أوراق بحثية، مقارنة المصادر، اكتشاف الفجوات.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">19</span>
+        <span class="lesson-title">نصائح وحيل متقدمة (Tips &amp; Tricks)</span>
+        <div class="lesson-desc">حيل لا يعرفها أغلب المستخدمين: اختصارات لوحة المفاتيح، طرق طرح أسئلة غير تقليدية، حل المشاكل الشائعة، تجاوز القيود.</div>
+      </div>
+      <div class="lesson-card">
+        <span class="lesson-num">20</span>
+        <span class="lesson-title">المشروع النهائي: تحويل منهج كامل باستخدام NotebookLM</span>
+        <div class="lesson-desc">تطبيق شامل: يختار المتعلم منهجاً كاملاً ويقوم بتلخيصه، إعداد أسئلة، إنشاء خطط دروس، وتوليد بودكاست تعليمي. هذا هو المعيار الذهبي.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">3.2 منهجية التعليم</h2>
+  <p>
+    الكورس يتبع منهجية "تعلّم بالتطبيق" (Learning by Doing). كل درس يبدأ بمشكلة حقيقية يعاني منها المعلم، ثم يقدم الحل عبر NotebookLM خطوة بخطوة على الشاشة. لا يوجد درس نظري بحت. كل فيديو يجب أن يحتوي على تطبيق عملي واضح يمكن للمشاهد تكراره فوراً. المنهجية تتبع نمط: مشكلة وشرح وتطبيق ونتيجة. نبدأ بإثارة المشكلة التي يعاني منها المعلم (مثلاً: "بتضيع 3 ساعات بتلخص وحده درس؟")، ثم نشرح الحل، ثم نطبقه أمام المشاهد، ثم نريه النتيجة النهائية.
+  </p>
+
+  <h2 class="sub-title">3.3 المخرجات التعليمية</h2>
+  <p>
+    بعد إكمال الكورس، يكون المتعلم قادراً على: أولاً، استخدام NotebookLM بكفاءة كاملة من إنشاء الدفتر إلى التطبيقات المتقدمة. ثانياً، تلخيص أي منهج دراسي في أقل من ساعة بدلاً من أيام. ثالثاً، توليد بنوك أسئلة شاملة لأي مادة بضغطة زر. رابعاً، إنشاء خطط دروس احترافية باستخدام الذكاء الاصطناعي. خامساً، تحويل أي محتوى تعليمي إلى بودكاست صوتي. سادساً، دمج NotebookLM مع أدوات جوجل الأخرى لإنشاء نظام عمل متكامل. سابعاً، إنشاء محتوى تعليمي رقمي للمنصات المختلفة. هذه المخرجات السبع تشكل القيمة الفعلية التي يحصل عليها المشتري وينبغي التركيز عليها في كل مادة تسويقية.
+  </p>
+
+</div>
+
+<!-- ==================== SECTION 4: PRICING STRATEGY ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">4. استراتيجية التسعير</h1>
+
+  <h2 class="sub-title">4.1 تحليل السعر 12 دولار</h2>
+  <p>
+    تحديد سعر الكورس بـ 12 دولاراً جاء بعد تحليل دقيق للسوق السوري. السعر الأصلي المقترح كان 22 دولاراً، لكن بعد دراسة القدرة الشرائية للمعلم السوري (راتب 70-120 دولار شهرياً)، تم خفض السعر إلى 12 دولاراً مع عرض السعر القديم 35 دولاراً مشطوباً على صفحة الهبوط لخلق إحساس بالصفقة الحصرية. استراتيجية التسعير تتبع مبدأ "العدد الفردي" الذي أثبت فعاليته في التسويق الرقمي: الأرقام غير المربعة (12 بدلاً من 10 أو 15) تبدو أكثر تحديداً ومصداقية في عقل المشتري. كما أن السعر المنخفض يزيد من احتمالية الشراء الاندفاعي (Impulse Purchase)، خاصة مع عناصر الندرة والاستعجال على صفحة الهبوط.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>المعيار</th>
+        <th>السعر المقترح</th>
+        <th>التحليل</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>سعر السوق العربي لكورسات مشابهة</td>
+        <td>30-100 دولار</td>
+        <td>نحن أرخص بنسبة 60-88%</td>
+      </tr>
+      <tr>
+        <td>نسبة السعر من راتب المعلم</td>
+        <td>10-17%</td>
+        <td>مقبول إذا أقنعناه بالعائد</td>
+      </tr>
+      <tr>
+        <td>السعر المعروض على الصفحة</td>
+        <td>35$ مشطوب / 12$ فعلي</td>
+        <td>خصم 66% يخلق إحساس بالصفقة</td>
+      </tr>
+      <tr>
+        <td>ضمان استرداد الأموال</td>
+        <td>7 أيام</td>
+        <td>يزيل المخاطر ويزيد الثقة</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title">4.2 تبرير القيمة</h2>
+  <p>
+    المفتاح لبيع الكورس بسعر 12 دولاراً ليس في تخفيض السعر بل في رفع القيمة المتصورة. في ذهن المشتري، الكورس لا يكلف 12 دولاراً بل "يوفر" عليه مئات الساعات ويمنحه مهارة يمكن أن تدر عليه دخلاً إضافياً. لذلك، على صناع المحتوى أن يركزوا دائماً على العائد وليس على السعر. بدلاً من "الكورس بس 12 دولار"، يجب أن نقول "هذا الكورس رح يوفر عليك 5 ساعات أسبوعياً، يعني 20 ساعة شهرياً، لو كل ساعة بتساوي حتى نص دولار، الكورس بيرجع لك بأضعاف خلال أسبوع". هذا النهج يحوّل الكورس من "مصروف" إلى "استثمار" في ذهن المشتري.
+  </p>
+
+  <div class="info-box success">
+    <div class="info-box-title">الرسالة الأساسية للتسعير</div>
+    <p>"مش مصروف، استثمار. كل دولار بتدفعه رح يرجعلك أضعاف بالوقت والجهد اللي رح توفره. جرب أسبوع وإذا ما اقتنعت، ارجعلك فلوسك كاملة."</p>
+  </div>
+
+</div>
+
+<!-- ==================== SECTION 5: TECHNICAL SETUP ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">5. البنية التحتية التقنية للإنتاج</h1>
+
+  <h2 class="sub-title">5.1 برامج التسجيل والمونتاج</h2>
+  <p>
+    الكورس يُنتج بالكامل كتسجيل شاشة مع تعليق صوتي، دون إظهار وجه المُقدّم. هذا النهج يقلل من حاجز الخجل أمام الكاميرا ويسرّع عملية الإنتاج بشكل كبير. البرامج المستخدمة هي:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>البرنامج</th>
+        <th>الغرض</th>
+        <th>الملاحظات</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>OBS Studio</strong></td>
+        <td>تسجيل الشاشة والصوت</td>
+        <td>مجاني ومفتوح المصدر. واجهة عربية متوفرة. يسجل الشاشة والمايك معاً بجودة عالية.</td>
+      </tr>
+      <tr>
+        <td><strong>CapCut</strong></td>
+        <td>المونتاج والتعديل</td>
+        <td>مجاني نسبياً. يدعم العربية. سهل الاستخدام للمبتدئين. يوفر تأثيرات وانتقالات جاهزة.</td>
+      </tr>
+      <tr>
+        <td><strong>AudioRelay</strong></td>
+        <td>استخدام الجوال كميكروفون</td>
+        <td>يحول هاتف الأندرويد إلى مايك للابتوب عبر USB. تأخير منخفض (5-15ms). مجاني.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box danger">
+    <div class="info-box-title">تحذير أمني مهم</div>
+    <p>تطبيق WO Mic الذي يُنصح به عادةً في الإنترنت يحتوي على حصان طروادة وفقاً لتقارير مستخدمين على Reddit. نستخدم AudioRelay كبديل آمن وموثوق. لا تنصحوا به أبداً في أي محتوى.</p>
+  </div>
+
+  <h2 class="sub-title">5.2 حل المايكروفون (AudioRelay)</h2>
+  <p>
+    نظراً لأن مُقدّم الكورس لا يملك مايكروفون أو سماعات، تم اعتماد حل مبتكر باستخدام تطبيق AudioRelay الذي يحوّل هاتف الأندرويد إلى مايكروفون للكمبيوتر. الإعداد يتطلب: أولاً، تثبيت تطبيق AudioRelay على الهاتف (من Google Play) وعلى الكمبيوتر (من الموقع الرسمي). ثانياً، تفعيل USB Tethering من إعدادات الهاتف بعد توصيله بالكمبيوتر عبر كابل USB، وهو أفضل من الواي فاي لأن التأخير ينخفض من 50-150ms إلى 5-15ms فقط. ثالثاً، تشغيل التطبيق على الجهازين واختيار اتصال USB. رابعاً، في إعدادات الصوت على ويندوز، يجب تعيين "Virtual Mic for AudioRelay" كجهاز إدخال افتراضي. خامساً، في تطبيق الهاتف، يجب إيقاف ميزة استقبال الصوت (أيقونة السماعة الزرقاء) لمنع الصدى، واختيار "الإرسال اليدوي عند الاتصال" في إعدادات الكمبيوتر.
+  </p>
+
+  <h2 class="sub-title">5.3 إعدادات OBS المطلوبة</h2>
+  <p>
+    برنامج OBS Studio بالواجهة العربية يحتاج إلى إعدادات محددة لتسجيل الكورس بشكل احترافي. إليك الإعدادات المطلوبة خطوة بخطوة:
+  </p>
+
+  <ol class="step-list">
+    <li><strong>إضافة مصدر الشاشة:</strong> في قسم "المصادر"، اضغط على زر + واختر "التقاط الشاشة" لالتقاط الشاشة بالكامل، أو "التقاط النافذة" لالتقاط نافذة المتصفح فقط.</li>
+    <li><strong>إضافة مصدر الصوت:</strong> اضغط على + واختر "التقاط إدخال الصوت" (وليس إخراج الصوت). اختر "Virtual Mic for AudioRelay" كجهاز الصوت. هذا هو المصدر الصحيح لتسجيل صوت المايك.</li>
+    <li><strong>ضبط جودة التسجيل:</strong> اذهب إلى الإعدادات ثم "المخرجات". اختر صيغة MKV (أو MP4). اضبط معدل البت على 2500-4000 كيلوبت/ثانية للجودة العالية.</li>
+    <li><strong>كتم مراقبة الصوت:</strong> لا تكتم صوت اللابتوب من ويندوز لأن ذلك يكتم المايك أيضاً. بدلاً من ذلك، اضغط على أيقونة السماعة في OBS بجانب مصدر الصوت لإيقاف المراقبة فقط.</li>
+    <li><strong>اختبار التسجيل:</strong> سجّل 30 ثانية وتأكد أن الصوت يظهر في التسجيل. إذا لم يظهر، تحقق أنك اخترت "التقاط إدخال الصوت" وليس "التقاط إخراج الصوت".</li>
+  </ol>
+
+  <div class="info-box">
+    <div class="info-box-title">نصيحة للإنتاج</div>
+    <p>سجّل كل درس على حدة كملف مستقل. هذا يسهّل عملية المونتاج ويسمح بإعادة تسجيل درس معين دون التأثير على البقية. استخدم الاختصار Ctrl+R في OBS لتسجيل سريع.</p>
+  </div>
+
+</div>
+
+<!-- ==================== SECTION 6: SCRIPT WRITING GUIDELINES ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">6. إرشادات كتابة السكريبت</h1>
+
+  <h2 class="sub-title">6.1 نبرة الصوت والأسلوب</h2>
+  <p>
+    النبرة المطلوبة هي: "صديق خبير بيقلك شو تساوي". ليس أستاذاً جامعياً وليس مندوب مبيعات. المعلم السوري يشعر بالاحترام عندما يُخاطب كزميل محترف وليس كتلميذ. النبرة يجب أن تكون ودية ومباشرة وعميقة وليس سطحية. تجنبوا completely المصطلحات الإنجليزية ما لم تكن ضرورية (عند ذكر اسم الأداة أو ميزة معينة)، وبدلاً من ذلك استخدموا المصطلح العربي مع الترجمة بين قوسين عند أول ذكر. اللغة يجب أن تكون عربية فصحى مبسطة: ليست فصحى معقدة وليست عامية، بل الوسط الذهبي الذي تستخدمه في حوار احترافي مع زميل. استخدموا ضمير "إنت" وليس "أنت" أو "حضرتك" - المباشرة تبني الثقة.
+  </p>
+
+  <div class="comparison">
+    <div class="comparison-col before">
+      <h4>تجنبوا هذا الأسلوب</h4>
+      <ul>
+        <li>"سأقوم الآن بشرح كيفية استخدام ميزة الرفع" (رسمي وممل)</li>
+        <li>"يا سيدي هاد الكورس رهيب بجنن" (عامي ومبالغ)</li>
+        <li>"NotebookLM is an AI-powered tool that..." (إنجليزي كثير)</li>
+        <li>"قد يلاحظ المستخدم أن الواجهة..." (غير مباشر ومبهم)</li>
+      </ul>
+    </div>
+    <div class="comparison-col after">
+      <h4>استخدموا هذا الأسلوب</h4>
+      <ul>
+        <li>"هلا بنشوف كيف نرفع كتاب المنهج ونلخصه بخمس دقايق" (مباشر وعملي)</li>
+        <li>"بتضيع 3 ساعات بالتلخيص؟ مع NotebookLM بتصير بـ5 دقايق" (يطرح المشكلة ويقدم الحل)</li>
+        <li>"NotebookLM أو دفتر الملاحظات الذكي من جوجل..." (عربي مع الاسم الأصلي)</li>
+        <li>"لاحظ كيف لما سألت السؤال بشكل محدد، الإجابة طلعت أدق" (يدعو للملاحظة)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sub-title">6.2 هيكل سكريبت الفيديو الواحد</h2>
+  <p>
+    كل فيديو يجب أن يتبع هيكلاً ثابتاً يضمن الاحتفاظ بانتباه المشاهد وتوصيل القيمة. الهيكل المطلوب هو:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>القسم</th>
+        <th>المدة التقريبية</th>
+        <th>المحتوى</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>الخطاف (Hook)</strong></td>
+        <td>15-30 ثانية</td>
+        <td>طرح مشكلة أو سؤال يثير الفضول. مثال: "بتضيع ساعات بتلخص المنهج؟ شو رأيك تختصر الوقت 90%؟"</td>
+      </tr>
+      <tr>
+        <td><strong>مقدمة قصيرة</strong></td>
+        <td>15-20 ثانية</td>
+        <td>تعريف ما سيتعلمه في هذا الدرس تحديداً. "بالدرس هاد رح تتعلم كيف تلخص أي كتاب بـ5 دقايق"</td>
+      </tr>
+      <tr>
+        <td><strong>الشرح والتطبيق</strong></td>
+        <td>5-12 دقيقة</td>
+        <td>الخطوات العملية على الشاشة. كل خطوة: أشر → اشرح → نفّذ → أرِ النتيجة.</td>
+      </tr>
+      <tr>
+        <td><strong>الخلاصة</strong></td>
+        <td>30-60 ثانية</td>
+        <td>ملخص ما تعلمه في جملتين. "إذن: رفعنا الكتاب، سألنا، وخلّصنا تلخيص كامل"</td>
+      </tr>
+      <tr>
+        <td><strong>دعوة للعمل (CTA)</strong></td>
+        <td>10-15 ثانية</td>
+        <td>"بالدرس الجاي رح نشوف كيف نعمل أسئلة امتحانات. تابع معنا"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title">6.3 قوالب سكريبت جاهزة</h2>
+
+  <h3 class="sub-sub-title">قالب الخطاف (Hook) - اختر واحداً:</h3>
+  <ul>
+    <li><strong>المشكلة:</strong> "بتضيع [رقم] ساعات بـ[المهمة]؟ مع NotebookLM بتصير بـ[رقم] دقايق"</li>
+    <li><strong>السؤال:</strong> "هل تعرف إنه في أداة مجانية بتعمل تلخيص لكتاب كامل بأقل من 5 دقايق؟"</li>
+    <li><strong>المفاجأة:</strong> "شوف شو صار لما حطيت كتاب المنهج كامل بهالأداة..."</li>
+    <li><strong>التحدي:</strong> "تحدي: تلخيص 200 صفحة في 3 دقايق. يلا نشوف"</li>
+  </ul>
+
+  <h3 class="sub-sub-title">قالب الدعوة للعمل (CTA) - للدروس الداخلية:</h3>
+  <ul>
+    <li>"بالدرس الجاي رح [الفائدة القادمة]. لازم تشوفه لأن [السبب]."</li>
+    <li>"هاد كان الدرس [الرقم] من [الوحدة]. الدرس الجاي أهم لأن [السبب]."</li>
+  </ul>
+
+  <h3 class="sub-sub-title">قالب الدعوة للعمل - للفيديوهات التسويقية:</h3>
+  <ul>
+    <li>"إذا بدك تتعلم هالشي وأكثر، الكورس الكامل متوفر بسعر 12 دولار. أول 30 شخص بس. الرابط تحت."</li>
+    <li>"لا تفوّت الفرصة. الكورس متوفر بسعر خصم لأول 30 مسجل. اضغط الرابط هسا قبل ما تخلص الأماكن."</li>
+  </ul>
+
+  <h2 class="sub-title">6.4 القواعد الذهبية لكتابة السكريبت</h2>
+  <ol class="step-list">
+    <li><strong>كل جملة يجب أن تقدم قيمة:</strong> إذا أمكن حذف جملة دون أن يفقد المشاهد معلومة مهمة، احذفها. الكلمات الزائدة تقتل الانتباه.</li>
+    <li><strong>أرِ ولا تخبر:</strong> بدلاً من "NotebookLM يمكنه تلخيص الكتب"، سجّل الشاشة وأنت تلخص كتاباً فعلياً وقل "شوف، هاد تلخيص كتاب كامل عملته بـ3 دقايق".</li>
+    <li><strong>استخدم أرقاماً محددة:</strong> "بتوفر وقت كثير" ضعيفة. "بتوفر 5 ساعات أسبوعياً" قوية. الأرقام تعطي مصداقية وواقعية.</li>
+    <li><strong>قلّب المشاكل لحلول:</strong> كل نقطة ألم للمعلم هي فرصة لعرض ميزة. "بتزعل من كتر الأسئلة اللي لازم تجهزها؟ NotebookLM بيعملها عنك".</li>
+    <li><strong>القاعدة الأولى والأخيرة:</strong> خاطب المعلم كشخص محترم يبحث عن حل، لا كزبون يجب إقناعه. الثقة تُبنى بالشفافية وليس بالمبالغة.</li>
+  </ol>
+
+</div>
+
+<!-- ==================== SECTION 7: MARKETING STRATEGY ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">7. استراتيجية التسويق والمبيعات</h1>
+
+  <h2 class="sub-title">7.1 صفحة الهبوط وعناصر FOMO</h2>
+  <p>
+    صفحة الهبوط مصممة بعناية لتحقيق أعلى معدل تحويل ممكن. الصفحة تحتوي على مجموعة من عناصر الخوف من تفويت الفرصة (FOMO) التي أثبتت فعاليتها في التسويق الرقمي. صفحة الهبوط مبنية بتقنية Next.js وتحتوي على: عنوان رئيسي جذاب يركز على المشكلة والحل، عرض سعر مع خصم واضح (35$ مشطوب / 12$ فعلي)، عداد للمقاعد المحدودة (أول 30 شخص)، إشعارات شراء مباشرة وهمية تظهر بشكل دوري لإثارة الاستعجال، زر شراء ثابت على الموبايل يتبع المستخدم أثناء التمرير، ضمان استرداد الأموال خلال 7 أيام، عداد تنازلي للعرض المحدود، نافذة منبثقة عند محاولة مغادرة الصفحة تعرض خصماً إضافياً أو تذكيراً بالمحتوى، قسم مقارنة قبل وبعد يوضح الفرق الذي سيحدثه الكورس، وقسم "خسارتك لو ما اشتريت" يستخدم نفسية الخسارة لتحفيز الشراء.
+  </p>
+
+  <h2 class="sub-title">7.2 قنوات التسويق</h2>
+  <p>
+    بعد رفع العقوبات عن سوريا في يوليو 2025، أصبح الإعلان عبر Meta (فيسبوك وانستغرام) وGoogle Ads متاحاً للمستخدمين السوريين. هذا يفتح قنوات تسويقية قوية لم تكن متاحة سابقاً. الاستراتيجية المقترحة تتضمن مرحلتين: المرحلة الأولى (ميزانية 0-100 دولار) تعتمد على المحتوى العضوي المجاني: إنشاء حساب تيك توك ونشر مقاطع قصيرة (30-60 ثانية) تعرض ميزات NotebookLM، ومجموعات فيسبوك التعليمية السورية بنشر محتوى مفيد مع رابط الكورس، وقناة تيليجرام تنشر نصائح يومية. المرحلة الثانية (ميزانية 100-500 دولار) تعتمد على الإعلانات المدفوعة: إعلانات فيسبوك مستهدفة للمعلمين السوريين (العمر 25-50، الاهتمام: تعليم)، وإعلانات جوجل للكلمات المفتاحية المتعلقة بالتعليم والذكاء الاصطناعي.
+  </p>
+
+  <h2 class="sub-title">7.3 حيل تسويقية نفسية</h2>
+  <p>
+    الكورس يستخدم خمس حيل تسويقية نفسية مثبتة فعاليته:
+  </p>
+
+  <ol>
+    <li><strong>خسارة النصر (Loss Aversion):</strong> قسم "خسارتك لو ما اشتريت" يوضح أن عدم الشراء يعني الاستمرار في إضاعة الساعات والجهد. الناس أكثر تحفزاً بتجنب الخسارة من تحقيق المكسب.</li>
+    <li><strong>الندرة المصطنعة:</strong> "أول 30 شخص فقط" يخلق إحساساً بالاستعجال. العدد المحدد (30) أكثر مصداقية من "عدد محدود".</li>
+    <li><strong>الإثماج الاجتماعي (Social Proof):</strong> إشعارات الشراء المباشرة تعطي انطباعاً بأن الآخرين يشترون الآن، مما يقلل التردد.</li>
+    <li><strong>تأثير الارتساء (Anchoring):</strong> عرض السعر القديم 35$ مشطوباً يجعل 12$ تبدو صفقة لا تفوّت، حتى لو لم يُباع الكورس أبداً بـ 35$.</li>
+    <li><strong>مخاطر الصفر (Zero Risk):</strong> ضمان استرداد الأموال خلال 7 أيام يزيل تماماً مخاطر الشراء. المشتري يشعر أنه لا يخسر شيئاً.</li>
+  </ol>
+
+  <div class="info-box">
+    <div class="info-box-title">لصناع المحتوى</div>
+    <p>عند كتابة سكريبتات الفيديوهات التسويقية، يجب تضمين عنصر واحد على الأقل من هذه الحيل الخمس في كل فيديو. الفيديو القصير (30 ثانية) يكفيه حيلة واحدة، والفيديو الطويل يمكنه دمج 2-3 حيل. الأهم: لا تبالغوا. المصداقية هي أساس كل شيء.</p>
+  </div>
+
+</div>
+
+<!-- ==================== SECTION 8: PRODUCTION TIMELINE ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">8. جدول الإنتاج والجدول الزمني</h1>
+
+  <h2 class="sub-title">8.1 مراحل الإنتاج</h2>
+  <p>
+    إنتاج الكورس يمر بأربع مراحل رئيسية، كل مرحلة لها متطلباتها ومعاييرها. الالتزام بالجدول الزمني ضروري لضمان خروج الكورس بجودة احترافية دون تأخير مفرط.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>المرحلة</th>
+        <th>المهام</th>
+        <th>المدة المتوقعة</th>
+        <th>المعيار</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. التحضير</strong></td>
+        <td>كتابة السكريبتات، تجهيز المصادر (كتب مناهج، ملفات)، اختبار الإعدادات التقنية</td>
+        <td>5-7 أيام</td>
+        <td>سكريبت مكتوب لكل درس + مصادر جاهزة</td>
+      </tr>
+      <tr>
+        <td><strong>2. التسجيل</strong></td>
+        <td>تسجيل الشاشة والصوت لكل درس، إعادة التسجيل عند الضرورة</td>
+        <td>7-10 أيام</td>
+        <td>صوت واضح + شاشة مقروءة + لا أخطاء</td>
+      </tr>
+      <tr>
+        <td><strong>3. المونتاج</strong></td>
+        <td>قص الأخطاء، إضافة انتقالات، إضافة نصوص توضيحية، ضبط الصوت</td>
+        <td>7-10 أيام</td>
+        <td>فيديو نظيف + نصوص واضحة + صوت متوازن</td>
+      </tr>
+      <tr>
+        <td><strong>4. النشر والتسويق</strong></td>
+        <td>رفع الكورس على المنصة، إعداد صفحة الهبوط، إطلاق الحملة التسويقية</td>
+        <td>3-5 أيام</td>
+        <td>صفحة تعمل + فيديوهات تسويقية جاهزة</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-number">22-32</span>
+      <span class="stat-label">يوم عمل إجمالي</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">5-8</span>
+      <span class="stat-label">دقائق متوسط الدرس</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">100-160</span>
+      <span class="stat-label">دقيقة محتوى كلي</span>
+    </div>
+  </div>
+
+  <h2 class="sub-title">8.2 قائمة المراجعة النهائية</h2>
+  <p>
+    قبل إطلاق أي درس، تأكد من المرور على كل بند في هذه القائمة. أي درس لا يحقق جميع البنود يجب إعادة العمل عليه:
+  </p>
+
+  <h3 class="sub-sub-title">مراجعة السكريبت:</h3>
+  <ul class="checklist">
+    <li>يبدأ بخطاف يطرح مشكلة حقيقية للمعلم</li>
+    <li>يحتوي على تطبيق عملي واضح وليس تنظيراً فقط</li>
+    <li>اللغة عربية فصحى مبسطة بدون مبالغة أو عامية مفرطة</li>
+    <li>ينتهي بخلاصة ودعوة للعمل</li>
+    <li>المدة بين 5-8 دقائق (لا يتجاوز 12 دقيقة)</li>
+  </ul>
+
+  <h3 class="sub-sub-title">مراجعة التسجيل:</h3>
+  <ul class="checklist">
+    <li>الصوت واضح وخالٍ من الضوضاء والصدى</li>
+    <li>الشاشة مقروءة والأحجام مناسبة (تكبير المتصفح 125-150%)</li>
+    <li>لا توجد فترات صمت طويلة (أكثر من 5 ثوانٍ)</li>
+    <li>المؤشر ظاهر ويتبع الشرح</li>
+    <li>لا توجد معلومات شخصية أو بيانات حساسة على الشاشة</li>
+  </ul>
+
+  <h3 class="sub-sub-title">مراجعة المونتاج:</h3>
+  <ul class="checklist">
+    <li>تم قص الأخطاء والفترات الميتة</li>
+    <li>الانتقالات سلسة وغير مبالغ فيها</li>
+    <li>النصوص التوضيحية واضحة وبالخط المناسب</li>
+    <li>مستوى الصوت متوازن عبر كامل الفيديو</li>
+    <li>شعار أو علامة مائية للكورس (اختياري)</li>
+  </ul>
+
+  <h3 class="sub-sub-title">مراجعة الصفحة التسويقية:</h3>
+  <ul class="checklist">
+    <li>صفحة الهبوط تعمل بشكل صحيح على الموبايل والكمبيوتر</li>
+    <li>زر الشراء يعمل ويوجه لبوابة الدفع</li>
+    <li>عداد المقاعد يعمل ويظهر العدد الصحيح</li>
+    <li>إشعارات الشراء تظهر بشكل طبيعي</li>
+    <li>ضمان استرداد الأموال واضح ومكتوب</li>
+  </ul>
+
+</div>
+
+<!-- ==================== SECTION 9: RESOURCES ==================== -->
+<div class="content-page page-break">
+
+  <h1 class="section-title">9. المصادر والمراجع</h1>
+
+  <h2 class="sub-title">9.1 الأدوات المستخدمة في المشروع</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>الأداة</th>
+        <th>الرابط</th>
+        <th>الاستخدام</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NotebookLM</td>
+        <td>notebooklm.google.com</td>
+        <td>موضوع الكورس - أداة الذكاء الاصطناعي من جوجل</td>
+      </tr>
+      <tr>
+        <td>OBS Studio</td>
+        <td>obsproject.com</td>
+        <td>تسجيل الشاشة والصوت</td>
+      </tr>
+      <tr>
+        <td>CapCut</td>
+        <td>capcut.com</td>
+        <td>مونتاج وتعديل الفيديو</td>
+      </tr>
+      <tr>
+        <td>AudioRelay</td>
+        <td>audiorelay.net</td>
+        <td>استخدام الجوال كميكروفون</td>
+      </tr>
+      <tr>
+        <td>Next.js</td>
+        <td>nextjs.org</td>
+        <td>بناء صفحة الهبوط</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title">9.2 مصادر الإلهام والمراجعة</h2>
+  <p>
+    لضمان جودة المحتوى وسلامة المعلومات، يُنصح صناع المحتوى بالاطلاع على المصادر التالية قبل كتابة أي سكريبت:
+  </p>
+  <ul>
+    <li><strong>الموقع الرسمي لـ NotebookLM:</strong> notebooklm.google.com - للتأكد من الميزات الحديثة والأحدث. الأداة تتطور بسرعة وقد تضاف ميزات جديدة بين وقت وآخر.</li>
+    <li><strong>قناة جوجل الرسمية على يوتيوب:</strong> تقدم شروحات رسمية بالإنجليزية يمكن الاستفادة منها كمرجع.</li>
+    <li><strong>Reddit - r/NotebookLM:</strong> مجتمع نشط يشارك حيل ومشاكل وحلول. مصدر ممتاز لاكتشاف استخدامات غير تقليدية.</li>
+    <li><strong>مجموعات فيسبوك التعليمية السورية:</strong> لفهم لغة الجمهور ومشاكله الحقيقية واهتماماته.</li>
+    <li><strong>منصات الكورسات العربية:</strong> Udemy العربي، إدراك، رواق - لدراسة كيف يقدم الآخرون المحتوى التعليمي التقني بالعربية.</li>
+  </ul>
+
+  <h2 class="sub-title">9.3 معلومات مهمة عن السوق السوري</h2>
+  <p>
+    السوق السوري يمر بمرحلة انتقالية بعد رفع العقوبات في يوليو 2025. هذا يعني أن منصات الإعلان الكبرى (Meta وGoogle) أصبحت متاحة للمستخدمين والشركات السورية لأول مرة منذ سنوات. المنافسة الإعلانية ما زالت منخفضة لأن قلة من المستخدمين السوريين يعلمون بهذا التغيير، مما يعني تكاليف إعلانية أقل (CPC أقل) مقارنة بالأسواق العربية الأخرى. هذا هو الوقت المثالي للدخول في السوق قبل أن يزداد الازدحام. المعلم السوري نشط على فيسبوك بشكل أساسي، وتيك توك ينتشر بسرعة بين الشباب. تيليجرام هو المنصة المفضلة للمجموعات المتخصصة والقنوات التعليمية.
+  </p>
+
+  <div class="info-box">
+    <div class="info-box-title">ملاحظة أخيرة لصناع المحتوى</div>
+    <p>هذا الكورس ليس مجرد منتج تجاري. هو فرصة حقيقية لتغيير طريقة عمل آلاف المعلمين السوريين للأفضل. كل سكريبت تكتبه وكل فيديو يُنتج بإتقان يساهم في تحويل المعلم من شخص يغرق في المهام إلى شخص يتحكم بوقته وأدواته. اكتبوا بشغف، أنتجوا بإتقان، وتذكروا أن الجمهور يستحق الأفضل.</p>
+  </div>
+
+  <div class="footer-note">
+    تم إعداد هذا الدليل في مايو 2026 | كورس NotebookLM للمعلمين السوريين | جميع الحقوق محفوظة
+  </div>
+
+</div>
+
+</body>
+</html>
