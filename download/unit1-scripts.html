@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة الأولى - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --script-bg: #1e293b;
+    --script-text: #e2e8f0;
+    --script-action: #fbbf24;
+    --script-screen: #38bdf8;
+    --script-note: #a78bfa;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  /* ===== LESSON HEADER ===== */
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #0d3a8e, #1a56db);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  /* Script sections */
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  /* Script line styles */
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '🎙️ ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '🎬 ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '🖥️ ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '📝 ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '⚡ ';
+    font-size: 10pt;
+  }
+
+  /* Duration indicator */
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* Tips box */
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+  }
+
+  /* Word count */
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">سكريبت فيديو جاهز للتسجيل</div>
+  <h1 class="cover-title">الوحدة الأولى<br>التعارف مع NotebookLM</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو جاهز للتسجيل مباشرة. كل درس مشروح بالتفصيل مع تعليمات الشاشة والصوت والإجراءات
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">مدة التقريبية</span>
+      <span class="value">30-40 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">مبتدئ - من الصفر</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 1 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الأولى - الدرس 1 من 4</div>
+      <h1 class="lesson-title">ما هو NotebookLM ولماذا تحتاجه كمعلم؟</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 6-8 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تعريفي + تطبيقي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">15-30 ثانية</span>
+      الخطاف (Hook) - إثارة الفضول والمشكلة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">افتح المتصفح على سطح المكتب - لا تظهر أي موقع بعد</div>
+      <div class="script-line voiceover">بتضيع 3 ساعات بتلخص وحده درس؟ وبتقضي الليل تجهز أسئلة امتحان؟ شو رأيك تعمل نفس الشيء بـ5 دقايق بس؟</div>
+      <div class="script-line action">توقف ثانيتين (Pause درامي)</div>
+      <div class="script-line voiceover">أنا بعرف، هاد الشي بيشبه السحر. بس هو مش سحر... هو أداة مجانية من جوجل اسمها NotebookLM. واليوم رح تتعرف عليها.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">20-30 ثانية</span>
+      المقدمة - تعريف الدرس
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً وسهلاً بكم. هاد الدرس الأول من كورس "إتقان NotebookLM للمعلمين". أنا رح أكون معكم خطوة بخطوة، من الصفر لعند ما تصيروا تستخدموا الأداة مثل المحترفين.</div>
+      <div class="script-line screen">افتح المتصفح واكتب notebooklm.google.com في شريط العنوان - لا تضغط Enter بعد</div>
+      <div class="script-line voiceover">بالدرس هاد رح نعرف شو هو NotebookLM، شو الفرق بينه وبين ChatGPT، وليش هو الأداة الأنسب للمعلم. وبالنهاية رح تشوفوا بأعينكم أول مثال عملي. يلا نبدأ.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">4-6 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: What is NotebookLM -->
+      <div class="script-line highlight">القسم أ: تعريف NotebookLM</div>
+
+      <div class="script-line action">اضغط Enter لفتح موقع NotebookLM - أظهر الصفحة الرئيسية</div>
+
+      <div class="script-line voiceover">NotebookLM هو أداة ذكاء اصطناعي مجانية من جوجل. بس مو مثل أي أداة ذكاء اصطناعي. الفرق الأساسي هو: NotebookLM ما بيجاوبك من الإنترنت بشكل عشوائي. هو بيجاوبك من المصادر اللي أنت بتحددها.</div>
+
+      <div class="script-line screen">أظهر واجهة NotebookLM الرئيسية - كبّر الصفحة 150%</div>
+
+      <div class="script-line voiceover">يعني شو؟ يعني أنت كمعلم بترفع كتاب المنهج، وبعدين بطرح أي سؤال، والأداة بتجاوبك بناءً على الكتاب نفسه. مش من مواقع إنترنت مشكوك فيها. هاد الشي بيخلي الإجابات دقيقة وموثوقة ومربوطة بالمنهج اللي بتدرّسه.</div>
+
+      <div class="script-line note">تأكد من تكبير المتصفح 150% ليكون النص مقروءاً في الفيديو</div>
+
+      <div class="script-line voiceover">تخيل معي: بدل ما تقلّص 200 صفحة بيدك، بترفع الكتاب على NotebookLM وبسأله "لخّصلي الوحدة الأولى" وبحصل تلخيص كامل بأقل من دقيقة. وبدل ما تقضي ساعتين تجهز أسئلة، بتطلب من الأداة "جهّزلي 20 سؤال اختيار من متعدد عن الوحدة الثالثة" وبتحصلهم فوراً.</div>
+
+      <div class="script-line action">توقف ثانيتين - دع المعلومة تستقر</div>
+
+      <!-- Part B: Why not ChatGPT -->
+      <div class="script-line highlight">القسم ب: الفرق بين NotebookLM و ChatGPT</div>
+
+      <div class="script-line voiceover">الآن في سؤال مهم: ليش ما نستخدم ChatGPT؟ الكل بيحكي عن ChatGPT، فليش NotebookLM أفضل للمعلم؟</div>
+
+      <div class="script-line screen">افتح تبويب جديد واكتب مقارنة بسيطة على جانب الشاشة (يمكن استخدام Notepad أو مستند Google Docs)</div>
+
+      <div class="script-line voiceover">خليني أوضح الفرق بسرعة:</div>
+
+      <div class="script-line voiceover">النقطة الأولى: المصادر. ChatGPT بيجاوبك من الإنترنت كله، يعني ممكن يعطيك معلومة غلط أو من مصدر مو موثوق. أما NotebookLM فبيجاوبك من المصادر اللي أنت رفعتها فقط. يعني إذا رفعت كتاب المنهج، كل إجابة بتجي من الكتاب نفسه.</div>
+
+      <div class="script-line voiceover">النقطة الثانية: المراجع. كل إجابة بيجاوبك إياها NotebookLM بيرفقلك مصدرها من الكتاب مع رقم الصفحة. يعني تقدر ترجع تتأكد. ChatGPT ما بيعطيك مراجع واضحة.</div>
+
+      <div class="script-line voiceover">النقطة الثالثة: البودكاست. NotebookLM فيه ميزة فريدة مش موجودة بغيره: بيوّلك تحول أي محتوى مكتوب إلى نقاش صوتي بين شخصين. يعني تقدر تعمل بودكاست تعليمي لطلابك من غير ما تتكلم ولا كلمة.</div>
+
+      <div class="script-line voiceover">والنقطة الأهم: NotebookLM مجاني بالكامل. ما في اشتراك مدفوع. ما في حدود يومية مثل ChatGPT. تفتح وتستخدم من غير أي تكلفة.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة للتسجيل</div>
+        <p>عند ذكر المقارنة مع ChatGPT، حافظ على نبرة محايدة. لا تنتقد ChatGPT بل أبرز مميزات NotebookLM فقط. لا تقل "ChatGPT سيء" بل قل "NotebookLM مصمم خصيصاً للعمل مع مصادر محددة"</p>
+      </div>
+
+      <!-- Part C: Why Syrian teachers need this -->
+      <div class="script-line highlight">القسم ج: ليش المعلم السوري محتاج NotebookLM</div>
+
+      <div class="script-line voiceover">الحين خليني أحكي لكم ليش هالأداة بالذات مهمة للمعلم السوري.</div>
+
+      <div class="script-line voiceover">أولاً: المعلم السوري عندو منهج ضخم ووقت محدود. ما عندو وقت يلخص ويجهز أسئلة ويعمل خطط دروس لكل حصة. NotebookLM بيعمل هالشي كله بجزء من الوقت.</div>
+
+      <div class="script-line voiceover">ثانياً: الأداة مجانية. ما بدك اشتراك مدفوع. بتحتاج بس حساب جوجل واللي عندك إياه أكيد.</div>
+
+      <div class="script-line voiceover">ثالثاً: النتائج دقيقة لأنها من المنهج نفسه. مش من الإنترنت العشوائي. يعني تقدر تتأكد إنو اللي بتقدّمه لطلابك صحيح ومربوط بالمنهج الرسمي.</div>
+
+      <div class="script-line voiceover">رابعاً: تقدر تستخدمها لأشياء كثيرة مش بس التلخيص. أسئلة امتحانات، خطط دروس، بودكاست تعليمي، أوراق عمل، كل شي بتعمله يدوياً اليوم NotebookLM بيعمللك إياه.</div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-45 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن لخصنا: NotebookLM هو أداة مجانية من جوجل بتشتغل على مصادرك أنت. بتعطيك إجابات دقيقة مع مراجع. وفيها ميزة البودكاست. وأهم شي للمعلم السوري: بتوفر عليه ساعات من العمل اليدوي كل أسبوع.</div>
+      <div class="script-line action">أظهر صفحة NotebookLM الرئيسية مرة أخرى</div>
+      <div class="script-line voiceover">بس كلام كتير! الحين وقت نشوف الأداة فعلياً. بالدرس الجاي رح نتعلم كيف نفتح حساب وكيف ندخل لـ NotebookLM خطوة بخطوة. مش لازم تكون خبير تقني، أنا رح أكون معك بكل خطوة. شوفك بالدرس الجاي!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذا استفدت من هالدرس، تابع الكورس لأن الدروس الجاية أحلى وأهم. بالدرس الجاي رح ندخل فعلياً على NotebookLM ونشوف الواجهة. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~450 كلمة | المدة المتوقعة: 6-8 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 2 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الأولى - الدرس 2 من 4</div>
+      <h1 class="lesson-title">إنشاء حساب جوجل والدخول إلى NotebookLM</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 5-7 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي خطوة بخطوة</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">15-20 ثانية</span>
+      الخطاف (Hook)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر صفحة تسجيل الدخول لجوجل على المتصفح</div>
+      <div class="script-line voiceover">هل عندك حساب جوجل؟ مم. إذا عندك، ممكن تتخطى أول جزء. وإذا ما عندك، رح نعمل واحد بـ3 دقايق. وبعدين رح ندخل على NotebookLM لأول مرة. يلا!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس هاد رح نتعلم شيئين: إنشاء حساب جوجل للي ما عنده، والدخول إلى NotebookLM. العملية بسيطة جداً بس رح نمشي خطوة بخطوة عشان ما نضيع.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">3-5 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Creating Google Account -->
+      <div class="script-line highlight">القسم أ: إنشاء حساب جوجل (لمن لا يملك)</div>
+
+      <div class="script-line screen">اذهب إلى accounts.google.com/signup - كبّر الصفحة 150%</div>
+
+      <div class="script-line voiceover">إذا عندك حساب جوجل أصلاً - يعني عندك Gmail - ممكن تتخطى هالجزء وروح على الدقيقة [رقم] بالفيديو. أما إذا ما عندك، اتبع معي.</div>
+
+      <div class="script-line action">أظهر صفحة إنشاء الحساب - ابدأ بملء الاسم</div>
+
+      <div class="script-line voiceover">الخطوة الأولى: ادخل اسمك الأول والأخير. هاد اللي رح يظهر بحسابك.</div>
+
+      <div class="script-line action">انقر على التالي - أظهر حقل تاريخ الميلاد والجنس</div>
+
+      <div class="script-line voiceover">الخطوة الثانية: ادخل تاريخ ميلادك والجنس. لازم يكون عمرك فوق 13 سنة حسب سياسة جوجل.</div>
+
+      <div class="script-line action">انقر على التالي - أظهر اختيار اسم المستخدم</div>
+
+      <div class="script-line voiceover">الخطوة الثالثة: اختار اسم المستخدم. هاد رح يكون ايميلك. إذا الاسم مأخوذ، جوجل رح يقترح عليك بدائل. اختار شي بسيط بتحفظه.</div>
+
+      <div class="script-line action">انقر على التالي - أظهر حقل كلمة المرور</div>
+
+      <div class="script-line voiceover">الخطوة الرابعة: ادخل كلمة مرور قوية. حط أحرف وأرقام ورموز. واكتبها بمكان آمن لأنك رح تحتاجها كل مرة تدخل فيها.</div>
+
+      <div class="script-line note">لا تظهر كلمة المرور الفعلية في الفيديو - استخدم كلمة مرور وهمية للشرح</div>
+
+      <div class="script-line action">انقر على التالي - أكمل خطوات التحقق المتبقية</div>
+
+      <div class="script-line voiceover">جوجل ممكن يطلب منك رقم هاتف للتحقق. هاد شي طبيعي لحماية حسابك. ادخل رقمك واكتب رمز التأكيد اللي بيوصللك.</div>
+
+      <div class="script-line voiceover">وبس! الحساب جاهز. العملية كلها ما بتاخد أكثر من 3 دقايق.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه أمني مهم</div>
+        <p>لا تستخدم كلمة مرور واحدة لأكثر من موقع. لا تشارك كلمة المرور مع أحد. فعّل التحقق بخطوتين (2FA) لحماية حسابك.</p>
+      </div>
+
+      <!-- Part B: Accessing NotebookLM -->
+      <div class="script-line highlight">القسم ب: الدخول إلى NotebookLM</div>
+
+      <div class="script-line screen">افتح تبويب جديد واكتب notebooklm.google.com</div>
+
+      <div class="script-line voiceover">الحين الجزء المهم: الدخول لـ NotebookLM. اكتب بالعنوان: notebooklm.google.com واضغط Enter.</div>
+
+      <div class="script-line screen">أظهر صفحة NotebookLM الرئيسية - زر "Try NotebookLM" أو "تجربة NotebookLM"</div>
+
+      <div class="script-line voiceover">رح تشوف الصفحة الرئيسية. اضغط على زر "Try NotebookLM" أو "تجربة NotebookLM".</div>
+
+      <div class="script-line screen">أظهر صفحة تسجيل الدخول - اختر الحساب الذي أنشأته</div>
+
+      <div class="script-line voiceover">جوجل رح يطلب منك تختار الحساب. اختار الحساب اللي عملته. ممكن يطلب منك الموافقة على شروط الاستخدام - اضغط "موافقة" أو "Accept".</div>
+
+      <div class="script-line screen">أظهر واجهة NotebookLM بعد الدخول - الواجهة الرئيسية الفارغة</div>
+
+      <div class="script-line voiceover">وهيك! أنت داخل NotebookLM. شفت كيف بسيطة؟ الآن أنت جاهز لتبدأ. بالدرس الجاي رح نتعرف على كل جزء من الواجهة بالتفصيل عشان تكون مرتاح لما نبدأ نستخدمها فعلياً.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة</div>
+        <p>إذا واجهت مشكلة "الحساب غير متاح في منطقتك"، جرب استخدام VPN. بعض الميزات قد تكون مقيدة جغرافياً لكن الأداة الأساسية تعمل من معظم الدول العربية.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن: عملنا حساب جوجل بـ3 دقايق، ودخلنا على NotebookLM بـ30 ثانية. العملية بسيطة وسريعة. الحين أنت جاهز للخطوة الجاية.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نتعرف على واجهة NotebookLM بالتفصيل - كل زر وكل قائمة وكل ميزة. هاد الدرس مهم لأنك لازم تكون مرتاح بالواجهة قبل ما نبدأ نستخدمها. تابع معنا!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~400 كلمة | المدة المتوقعة: 5-7 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 3 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الأولى - الدرس 3 من 4</div>
+      <h1 class="lesson-title">الواجهة الرئيسية: جولة مفصلة</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 7-9 دقائق</div>
+      <div class="lesson-meta-pill">نوع: شرح واجهة + تطبيق</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">15-20 ثانية</span>
+      الخطاف (Hook)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر واجهة NotebookLM الرئيسية بدون أي مصادر</div>
+      <div class="script-line voiceover">هل فتحت NotebookLM وحسيت حالك ضايع؟ أزرار كتير وأماكن كتير وما بعرف وين أبدأ؟ لا تقلق، بالدرس هاد رح نعمل جولة مفصلة على كل ركن بالواجهة. بالنهاية رح تكون مرتح مثل البيت!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثالث. رح نتعرف اليوم على كل جزء من واجهة NotebookLM. لا تخافوا من الكم، رح نمشي ببطء ونشرح كل شي. الهدف إنك بالدرس الجاي تكون جاهز تستخدم الأداة من غير ما تحس بالضياع.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">5-7 دقائق</span>
+      الشرح والتطبيق - جولة الواجهة
+    </div>
+    <div class="script-section-body">
+
+      <!-- Section 1: Source Panel -->
+      <div class="script-line highlight">القسم أ: لوحة المصادر (Sources)</div>
+
+      <div class="script-line screen">كبّر الصفحة على الجزء الأيسر - لوحة المصادر</div>
+      <div class="script-line action">أشر بالماوس على لوحة المصادر - حرّك المؤشر ببطء</div>
+
+      <div class="script-line voiceover">أول شي بنشوفه على اليسار: لوحة المصادر أو Sources. هون بترفع الكتب والملفات والمقالات اللي بدك تشتغل عليها. فكّر فيها مثل رف الكتب اللي بتحط عليه مراجعك.</div>
+
+      <div class="script-line screen">أشر على زر "+ Add Source" أو "إضافة مصدر"</div>
+
+      <div class="script-line voiceover">هاد الزر "+ Add Source" هو اللي بترفع من خلاله المصادر. بتقدر ترفع PDF، مستندات جوجل، مواقع ويب، فيديوهات يوتيوب، وأكثر. رح نتعلم كل نوع بالتفصيل بدرس قادم.</div>
+
+      <div class="script-line screen">أشر على مساحة المصادر الفارغة</div>
+
+      <div class="script-line voiceover">الحين الفضاء فاضي لأننا ما رفعنا شي. بس تخيل هون بكون عندك قائمة بكل الكتب والملفات اللي رفعتها. تقدر تضيف حتى 50 مصدر بنفس الدفتر!</div>
+
+      <div class="script-line note">أثناء الشرح أشر ببطء على كل عنصر - لا تتحرك بسرعة. المشاهد يحتاج وقت لمتابعة المؤشر</div>
+
+      <!-- Section 2: Chat Area -->
+      <div class="script-line highlight">القسم ب: منطقة المحادثة (Chat)</div>
+
+      <div class="script-line screen">انزل بالماوس لمنطقة المحادثة الوسطى</div>
+
+      <div class="script-line voiceover">بالمنتصف عندنا منطقة المحادثة. هون بتحكي مع NotebookLM. بتكتب سؤالك بالأسفل وهو بيجاوبك فوق. تمام مثل المحادثة العادية.</div>
+
+      <div class="script-line screen">أشر على حقل إدخال السؤال بالأسفل</div>
+
+      <div class="script-line voiceover">هاد حقل السؤال. هون بتكتب أي شي بدك تسأله عن المصادر اللي رفعتها. مثلاً: "لخّصلي الوحدة الأولى" أو "أعطيني أهم النقاط عن كذا".</div>
+
+      <div class="script-line screen">أشر على اقتراحات الأسئلة المقترحة إن وجدت</div>
+
+      <div class="script-line voiceover">أحياناً NotebookLM بيقترحلك أسئلة جاهزة بناءً على المصادر اللي رفعتها. تقدر تضغط على أي وحدة منها مباشرة بدل ما تكتب.</div>
+
+      <!-- Section 3: Notes Panel -->
+      <div class="script-line highlight">القسم ج: لوحة الملاحظات (Notes)</div>
+
+      <div class="script-line screen">انزل بالماوس أو انظر إلى لوحة الملاحظات على اليمين</div>
+
+      <div class="script-line voiceover">على اليمين عندنا لوحة الملاحظات أو Notes. هون بتحفظ أي شي بدك ترجعلو لاحقاً. يعني لما NotebookLM يعطيك إجابة ممتازة، تقدر تحفظها كملاحظة بضغطة واحدة. وكمان تقدر تكتب ملاحظاتك الخاصة.</div>
+
+      <div class="script-line screen">أشر على أي ملاحظة محفوظة إن وجدت</div>
+
+      <div class="script-line voiceover">الملاحظات المحفوظة بتكون متاحة دائماً حتى لو قفلت الدفتر وفتحته بعدين. يعني مش لازم تعيد البحث كل مرة.</div>
+
+      <!-- Section 4: Top Bar and Settings -->
+      <div class="script-line highlight">القسم د: الشريط العلوي والإعدادات</div>
+
+      <div class="script-line screen">أشر بالماوس على الشريط العلوي</div>
+
+      <div class="script-line voiceover">بالشريط العلوي عندو اسم الدفتر الحالي - تقدر تغيّره. وكمان في زر مشاركة الدفتر مع غيرك، وزر الإعدادات.</div>
+
+      <div class="script-line screen">انقر على قائمة النقاط الثلاث أو أيقونة الإعدادات</div>
+
+      <div class="script-line voiceover">من الإعدادات تقدر تتحكم بمستوى الخصوصية، وتحذف الدفتر، وتغيّر خيارات تانية. لا تقلق، رح نشرح كل شي لما نحتاجه.</div>
+
+      <!-- Section 5: Audio Overview -->
+      <div class="script-line highlight">القسم هـ: ميزة Audio Overview (البودكاست)</div>
+
+      <div class="script-line screen">أشر على زر "Audio Overview" أو "نظرة عامة صوتية"</div>
+
+      <div class="script-line voiceover">وأخيراً، الميزة اللي رح تحبونها كتير: Audio Overview. هاد الزر بيحوّل أي محتوى عندك إلى نقاش صوتي بين شخصين. يعني بدل ما تقرأ تلخيص، بتسمعه مثل البودكاست. رح نتعمق فيها بدرس لاحق بس حبيت تعرفوا إنها موجودة.</div>
+
+      <div class="script-line action">أظهر الواجهة كاملة مرة أخرى - نظرة شاملة</div>
+
+      <div class="script-line voiceover">وهيك صرنا نعرف كل أجزاء الواجهة: لوحة المصادر على اليسار، المحادثة بالنص، الملاحظات على اليمين، الإعدادات فوق، والبودكاست جاهز كمان. بسيطة صح؟</div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن الواجهة فيها 5 أجزاء أساسية: لوحة المصادر لرفع الكتب، منطقة المحادثة لطرح الأسئلة، لوحة الملاحظات لحفظ المهم، الشريط العلوي للإعدادات، وميزة البودكاست الصوتي. كل جزء رح نتعمق فيه أكتر بالدروس الجاية.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">15-20 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">الحين عرفنا الواجهة. بالدرس الجاي رح نستخدمها فعلياً لأول مرة! رح نعمل أول دفتر ونرفع أول مصدر ونسأل أول سؤال. هاد الدرس رح يكون ممتع كتير. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~550 كلمة | المدة المتوقعة: 7-9 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 4 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الأولى - الدرس 4 من 4</div>
+      <h1 class="lesson-title">إنشاء أول Notebook ورفع مصدر واحد</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 8-10 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي كامل</div>
+      <div class="lesson-meta-pill">الأهمية: عالية - درس محوري</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - لحظة الوآه
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر سطح المكتب فارغ ثم افتح المتصفح على NotebookLM</div>
+      <div class="script-line voiceover">هل أنت جاهز تشوف أول مرة سحر NotebookLM بعينك؟ بالدرس هاد رح نعمل أول دفتر، رح نرفع كتاب منهج كامل، ونسأله سؤال... والنتيجة رح تذهلك. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">هاد الدرس الرابع والأخير بالوحدة الأولى. وهو أهم درس لحد هلا، لأنه أول مرة رح نستخدم الأداة فعلياً. رح نتعلم: إنشاء دفتر جديد، رفع ملف PDF، طرح سؤال، والحصول على إجابة. أربع خطوات بس. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">6-8 دقائق</span>
+      الشرح والتطبيق - أول تجربة عملية
+    </div>
+    <div class="script-section-body">
+
+      <!-- Step 1: Create Notebook -->
+      <div class="script-line highlight">الخطوة 1: إنشاء دفتر جديد</div>
+
+      <div class="script-line screen">أظهر واجهة NotebookLM الرئيسية - أشر على زر "+ New Notebook" أو "دفتر جديد"</div>
+
+      <div class="script-line voiceover">الخطوة الأولى: إنشاء دفتر جديد. فكّر بالدفتر مثل مجلد بتحط فيه كل شي يتعلق بموضوع واحد. مثلاً: دفتر لمادة الرياضيات، ودفتر لمادة العلوم، وهكذا.</div>
+
+      <div class="script-line action">انقر على "+ New Notebook" - أظهر نافذة إنشاء الدفتر</div>
+
+      <div class="script-line voiceover">اضغط على "+ New Notebook". رح يطلب منك اسم للدفتر. خليني سمّيه "منهج الرياضيات - الصف السادس".</div>
+
+      <div class="script-line screen">اكتب اسم الدفتر واضغط Enter أو "إنشاء"</div>
+
+      <div class="script-line voiceover">اكتب اسم واضح بيساعدك تعرف محتوى الدفتر لاحقاً. واضغط إنشاء.</div>
+
+      <div class="script-line screen">أظهر الدفتر الجديد الفارغ</div>
+
+      <div class="script-line voiceover">تمام! الدفتر جاهز. الحين فاضي، بس مش هيك لبكرا. الحين رح نملأه.</div>
+
+      <!-- Step 2: Upload Source -->
+      <div class="script-line highlight">الخطوة 2: رفع أول مصدر</div>
+
+      <div class="script-line screen">أشر على زر "+ Add Source" أو "إضافة مصدر"</div>
+
+      <div class="script-line voiceover">الخطوة الثانية: رفع مصدر. اضغط على "+ Add Source". رح تظهر لك خيارات متعددة.</div>
+
+      <div class="script-line screen">أظهر قائمة أنواع المصادر: PDF، Google Docs، Website، YouTube، Paste Text</div>
+
+      <div class="script-line voiceover">شفت الخيارات؟ في PDF، مستندات جوجل، مواقع ويب، يوتيوب، ولصق نص مباشر. اليوم رح نستخدم PDF لأنه الأكثر شيوعاً عند المعلمين.</div>
+
+      <div class="script-line action">انقر على خيار رفع PDF</div>
+
+      <div class="script-line voiceover">اضغط على رفع PDF. واختار ملف الكتاب من جهازك.</div>
+
+      <div class="script-line screen">أظهر نافذة اختيار الملف - اختر ملف PDF مُجهز مسبقاً (كتاب منهج)</div>
+
+      <div class="script-line note">حضّر مسبقاً ملف PDF لكتاب منهج حقيقي (أو عيّنة منه) على سطح المكتب لاستخدامه في الشرح</div>
+
+      <div class="script-line action">اختر الملف وانتظر رفعه - أظهر شريط التقدم</div>
+
+      <div class="script-line voiceover">بعطيه ثواني ليرتفع... حجم الملف بيساعد يحدد الوقت. كتاب 200 صفحة بياخذ حوالي 30-60 ثانية.</div>
+
+      <div class="script-line screen">أظهر المصدر المرفوع في لوحة المصادر</div>
+
+      <div class="script-line voiceover">شفت؟ الكتاب رفع وظهر بلوحة المصادر على اليسار. الحين NotebookLM قرأ الكتاب كامل وهو جاهز يجاوب أي سؤال عنه!</div>
+
+      <div class="script-line action">توقف ثانيتين - دع الإثارة تبني</div>
+
+      <!-- Step 3: Ask First Question -->
+      <div class="script-line highlight">الخطوة 3: طرح أول سؤال</div>
+
+      <div class="script-line screen">انقر على حقل السؤال بالأسفل</div>
+
+      <div class="script-line voiceover">الخطوة الثالثة: نسأل! انقر على حقل السؤال هون بالأسفل.</div>
+
+      <div class="script-line voiceover">خليني أسأل سؤال بسيط أول مرة: "ما هي المواضيع الرئيسية في هذا الكتاب؟"</div>
+
+      <div class="script-line screen">اكتب السؤال بالعربية واضغط Enter</div>
+
+      <div class="script-line action">انتظر الإجابة - أظهرها وهي تُكتب تدريجياً</div>
+
+      <div class="script-line voiceover">وانتظر... شوف! شوف الإجابة! NotebookLM لخّص الكتاب كامل وعرضلك المواضيع الرئيسية. كل نقطة هون مربوطة بمصدرها من الكتاب.</div>
+
+      <div class="script-line screen">أشر على مراجع المصادر بجانب الإجابة - أظهر أنها قابلة للنقر</div>
+
+      <div class="script-line voiceover">شفت الأرقام الصغيرة بجانب كل نقطة؟ هادي مراجع. إذا ضغطت على أي واحد، بيوديك على المكان بالكتاب اللي أخذ منه المعلومة. هاد معناه إنك تقدر تتأكد من كل شي!</div>
+
+      <!-- Step 4: Try Another Question -->
+      <div class="script-line highlight">الخطوة 4: سؤال أعمق</div>
+
+      <div class="script-line screen">انقر على حقل السؤال مرة أخرى</div>
+
+      <div class="script-line voiceover">خليني أسأل سؤال أشمل: "لخّصلي الوحدة الأولى من الكتاب مع أهم النقاط والمفاهيم الأساسية"</div>
+
+      <div class="script-line screen">اكتب السؤال واضغط Enter - أظهر الإجابة</div>
+
+      <div class="script-line voiceover">شوف الفرق! لما السؤال يكون محدد أكثر، الإجابة بتكون أغنى وأدق. بدل ما سألت "شو بالكتاب" سألت "لخّصلي الوحدة الأولى مع النقاط الأساسية". النتائج أفضل بكثير!</div>
+
+      <div class="script-line note">هذه نقطة مهمة يجب التأكيد عليها: نوعية السؤال تحدد نوعية الإجابة - ستعود لهذا المبدأ في الدروس القادمة</div>
+
+      <div class="script-line voiceover">وهيك صرنا نعرف: لما بدك نتائج ممتازة من NotebookLM، اطلب بشكل محدد. هالنصيحة رح نعمّقها بدرس خصيصاً للأسئلة.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية</div>
+        <p>كل سؤال تسأله، حاول تكون محدد: بدك تلخيص؟ قول أي وحدة. بدك أسئلة؟ قول كم سؤال وبأي مستوى. بدك شرح؟ قول أي مفهوم بالضبط. كل ما كان سؤالك أدق، كانت الإجابة أقوى.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-60 ثانية</span>
+      الخلاصة - ختام الوحدة الأولى
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر الواجهة كاملة مع المصدر والأسئلة والإجابات</div>
+
+      <div class="script-line voiceover">إذن لخصنا الوحدة الأولى كاملة. اتعرفنا على NotebookLM، عرفنا ليش هو الأنسب للمعلم، عملنا حساب جوجل ودخلنا للأداة، تعرفنا على الواجهة، واليوم استخدمناها فعلياً لأول مرة.</div>
+
+      <div class="script-line voiceover">الأربع خطوات اللي اتعلمتها اليوم: أنشأنا دفتر جديد، رفعنا كتاب PDF، سألنا سؤال، وحصلنا إجابة دقيقة مع مراجع. وبس! هاد كل شي بدك تعرفه لتبدأ.</div>
+
+      <div class="script-line voiceover">هل تتصور إنو هاد الشي كان بياخد منك ساعات؟ الحين بصير بدقايق. وهاد بس البداية!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">20-30 ثانية</span>
+      دعوة للعمل - ختام الوحدة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالوحدة الجاية رح نتعمق أكتر: رح نتعلم كيف نرفع أنواع مختلفة من المصادر، كيف ننظّم مصادر متعددة، وكيف نطرح أسئلة احترافية تعطينا أفضل النتائج. الدروس الجاية رح تكون أعمق وأمتع. تابعوا معنا!</div>
+
+      <div class="script-line voiceover">وإذا حابب تتعلم كل شي بشكل منظم وبسرعة، الكورس الكامل متوفر. الرابط تحت. أول 30 شخص بس! لا تفوّت الفرصة.</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~600 كلمة | المدة المتوقعة: 8-10 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+  <div class="footer-note">
+    إجمالي الوحدة الأولى: ~2000 كلمة | المدة الإجمالية المتوقعة: 26-34 دقيقة | 4 دروس فيديو
+  </div>
+
+</div>
+
+</body>
+</html>
