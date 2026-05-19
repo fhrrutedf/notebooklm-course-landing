@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة الثانية - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  /* ===== LESSON HEADER ===== */
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #0d3a8e, #1a56db);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  /* Script sections */
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  /* Script line styles */
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '\1F3A4  ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '\1F3AC  ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '\1F5A5  ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '\1F4DD  ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '\26A1  ';
+    font-size: 10pt;
+  }
+
+  /* Duration indicator */
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* Tips box */
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+  }
+
+  /* Word count */
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">سكريبت فيديو جاهز للتسجيل</div>
+  <h1 class="cover-title">الوحدة الثانية<br>إتقان المصادر والتحليل</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو جاهز للتسجيل مباشرة. كل درس مشروح بالتفصيل مع تعليمات الشاشة والصوت والإجراءات
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المدة التقريبية</span>
+      <span class="value">35-45 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">متوسط - تطبيقي</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 5 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثانية - الدرس 5 من 4</div>
+      <h1 class="lesson-title">أنواع المصادر المدعومة وكيفية رفعها</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 8-10 دقائق</div>
+      <div class="lesson-meta-pill">نوع: شرح تطبيقي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - المشكلة والوعد
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر سطح المكتب - افتح NotebookLM على دفتر فارغ</div>
+      <div class="script-line voiceover">بالدرس السابق رفعنا ملف PDF واحد وسألنا سؤال. بس شو لو بدك ترفع كتب كثيرة؟ أو مقال من الإنترنت؟ أو فيديو يوتيوب؟ أو مستند جوجل دوس؟ اليوم رح نعرف كل أنواع المصادر اللي بتقدر ترفعها وكيف تستفيد من كل نوع.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة - تعريف الدرس
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الخامس من كورس "إتقان NotebookLM للمعلمين". هاد أول درس بالوحدة الثانية: إتقان المصادر والتحليل. رح نتعرف على كل نوع مصدر مدعوم، حدود كل نوع، وأفضل الممارسات لرفع المصادر بشكل صحيح. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">6-8 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: PDF -->
+      <div class="script-line highlight">القسم أ: ملفات PDF - الأكثر استخداماً</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح - أشر على زر "+ Add Source"</div>
+
+      <div class="script-line voiceover">أول نوع وأكتر شي رح تستخدموه: ملفات PDF. أغلب الكتب المدرسية والمناهج متوفرة بصيغة PDF. وبتقدر ترفع حتى 50 مصدر بنفس الدفتر، وكتاب PDF حتى 500 ألف كلمة!</div>
+
+      <div class="script-line action">انقر على "+ Add Source" - أظهر قائمة الخيارات</div>
+
+      <div class="script-line voiceover">لما تضغط "+ Add Source"، رح تظهرلك قائمة بالخيارات. خلينا نبدأ بـ PDF.</div>
+
+      <div class="script-line action">انقر على خيار رفع PDF - اختر ملف كتاب منهج من سطح المكتب</div>
+
+      <div class="script-line voiceover">اضغط على خيار PDF، واختار ملف الكتاب من جهازك. ملاحظة مهمة: الملف لازم يكون PDF نصي مش صورة. يعني لو الكتاب عبارة عن صور ممسوحة ضوئياً، NotebookLM مش رح يقدر يقرأه. لازم يكون فيه نص قابل للنسخ.</div>
+
+      <div class="script-line screen">أظهر شريط تقدم رفع الملف - انتظر حتى يكتمل</div>
+
+      <div class="script-line voiceover">الرفع بياخد عادةً من 10 ثواني لدقيقة، حسب حجم الملف. كتاب 200 صفحة بياخد حوالي 30-40 ثانية. شفت؟ انرفع وظهر بلوحة المصادر.</div>
+
+      <div class="script-line screen">أشر على المصدر المرفوع في لوحة المصادر</div>
+
+      <div class="script-line voiceover">هون بتشوف اسم الملف وعدد الكلمات اللي اتعالجت. تقدر تضغط عليه لتشوف ملخص تلقائي بيعمله NotebookLM عن الملف.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم: PDF صورة مقابل PDF نص</div>
+        <p>إذا كان كتابك عبارة عن صفحات ممسوحة ضوئياً (Scanned)، NotebookLM لن يستطيع قراءته. الحل: استخدم أداة OCR مثل Google Drive لتحويل الصور إلى نص أولاً، ثم ارفع الملف النصي. أو استخدم ميزة "لصق نص" التي سنتعرف عليها لاحقاً.</p>
+      </div>
+
+      <!-- Part B: Google Docs -->
+      <div class="script-line highlight">القسم ب: مستندات Google Docs</div>
+
+      <div class="script-line screen">انقر على "+ Add Source" مرة أخرى - أشر على خيار Google Docs</div>
+
+      <div class="script-line voiceover">النوع التاني: مستندات جوجل دوس. إذا عندك ملاحظات أو ملخصات محفوظة على جوجل دوس، تقدر تربطها مباشرة بدون ما تنزّلها وتعملها رفع. هاد الشي بيوفر وقت كتير، خاصة إذا كنت بحدّث المستند باستمرار.</div>
+
+      <div class="script-line action">انقر على Google Docs - أظهر نافذة اختيار المستند</div>
+
+      <div class="script-line voiceover">اضغط على Google Docs. رح تظهرلك قائمة بمستنداتك. اختار اللي بدك إياه. الميزة الحلوة إنو لو عدّلت المستند على جوجل دوس، NotebookLM بيقدر يعمل تحديث وياخد النسخة الجديدة.</div>
+
+      <div class="script-line screen">أظهر المستند بعد إضافته في لوحة المصادر</div>
+
+      <div class="script-line voiceover">شفت؟ المستند انضاف فوراً. حتى لو كان المستند طويل، البيانات بتتحمل بسرعة لأنها جوجل أصلاً.</div>
+
+      <!-- Part C: Websites -->
+      <div class="script-line highlight">القسم ج: مواقع الويب (Website URLs)</div>
+
+      <div class="script-line screen">انقر على "+ Add Source" - أشر على خيار Website أو URL</div>
+
+      <div class="script-line voiceover">النوع التالت: مواقع الويب. تقدر تحط رابط أي مقال أو صفحة ويب وNotebookLM رح يقرأ المحتوى. هاد مفيد كتير لو عندك مقال تعليمي أو صفحة منهج على الإنترنت وبدك تلخصها.</div>
+
+      <div class="script-line action">انسخ رابط مقال تعليمي والصقه في حقل الرابط</div>
+
+      <div class="script-line voiceover">انسخ الرابط من المتصفح، والصقه هون. واضغط إضافة. NotebookLM رح يزور الصفحة ويقرأ المحتوى. بس انتبه: بعض المواقع بتمنع القراءة الآلية، يعني ممكن ما يقدر يقرأها.</div>
+
+      <div class="script-line screen">أظهر المصدر المضاف من الموقع</div>
+
+      <div class="script-line voiceover">تمام! المقال انضاف كمصدر. الحين تقدر تسأل عنه أي سؤال مثل أي مصدر تاني.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة عملية</div>
+        <p>مواقع الوزارة السورية أو المناهج الرسمية غالباً بتكون متاحة. جرب نسخ رابط صفحة المنهج مباشرة. أما مواقع الأخبار أو المدونات المحمية فقد لا تعمل.</p>
+      </div>
+
+      <!-- Part D: YouTube -->
+      <div class="script-line highlight">القسم د: فيديوهات يوتيوب</div>
+
+      <div class="script-line screen">انقر على "+ Add Source" - أشر على خيار YouTube</div>
+
+      <div class="script-line voiceover">وهاد النوع اللي كتير ناس ما بتعرف عنه: فيديوهات يوتيوب! أي معلم بيعتمد على فيديوهات تعليمية يوتيوب، الحين يقدر يرفع الرابط وNotebookLM بيلخّصلو الفيديو كامل ويستخرج النقاط المهمة.</div>
+
+      <div class="script-line action">انسخ رابط فيديو يوتيوب تعليمي والصقه</div>
+
+      <div class="script-line voiceover">انسخ رابط الفيديو من يوتيوب، والصقه هون. NotebookLM بيستخرج الترجمة النصية للفيديو وبيعمل عليها تحليل. يعني حتى لو الفيديو ساعة كاملة، بتحصل على ملخص بدقيقتين.</div>
+
+      <div class="script-line note">ملاحظة: الفيديو لازم يكون فيه ترجمة نصية (subtitles/captions) حتى يعمل. الفيديوهات بدون ترجمة لن يتمكن NotebookLM من تحليلها.</div>
+
+      <div class="script-line voiceover">تخيل معي: بدل ما تسمع ساعة فيديو عشان تلخصه، بتحط الرابط وبتحصل تلخيص شامل. هاد بيوفر وقت هائل!</div>
+
+      <!-- Part E: Paste Text -->
+      <div class="script-line highlight">القسم هـ: لصق نص مباشر (Paste Text)</div>
+
+      <div class="script-line screen">انقر على "+ Add Source" - أشر على خيار Paste Text أو "لصق نص"</div>
+
+      <div class="script-line voiceover">آخر نوع: لصق نص مباشر. هاد مفيد لما عندك نص من كتاب ورقي، أو ملاحظات مكتوبة إيد، أو حتى محتوى منسوخ من ملف Word. بس انسخ النص والصقه هون.</div>
+
+      <div class="script-line action">انسخ فقرة من نص تعليمي والصقها في حقل النص</div>
+
+      <div class="script-line voiceover">انسخ أي نص بدك، والصقه. حتى لو كان نص قصير من صفحة واحدة، NotebookLM بيقدر يشتغل عليه. هاد مفيد خصوصاً للمعلم اللي عنده ملاحظات مكتوبة بده يحولها لمحتوى منظم.</div>
+
+      <!-- Part F: Google Slides -->
+      <div class="script-line highlight">القسم و: عروض Google Slides</div>
+
+      <div class="script-line screen">أشر على خيار Google Slides إن وجد</div>
+
+      <div class="script-line voiceover">وكمان في خيار Google Slides. إذا عندك عرض تقديمي محفوظ على جوجل، تقدر ترفعه مباشرة. NotebookLM بيقرأ محتوى كل شريحة وبيعمل عليه تحليل. هاد مفيد لو عندك شرائح منهج محضرة مسبقاً وبدك تلخصها أو تعمل أسئلة عنها.</div>
+
+      <div class="script-line action">أظهر لوحة المصادر مع كل المصادر المضافة - نظرة شاملة</div>
+
+      <div class="script-line voiceover">وهيك صرنا نعرف كل أنواع المصادر: PDF للكتب، Google Docs للمستندات، مواقع الويب للمقالات، يوتيوب للفيديوهات، لصق نص للملاحظات، وGoogle Slides للعروض. كل نوع ليه استخدام مختلف وكلهم بيتضافوا بنفس الطريقة: "+ Add Source".</div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-45 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن لخصنا أنواع المصادر الستة: PDF للكتب والمناهج، Google Docs للمستندات، مواقع الويب للمقالات، يوتيوب للفيديوهات التعليمية، لصق نص للملاحظات المكتوبة، وGoogle Slides للعروض. ملاحظة مهمة: تقدر تضيف حتى 50 مصدر بنفس الدفتر! تخيل عندك دفتر فيه كتاب المنهج ومقال تكميلي وفيديو شرح كلهم مع بعض.</div>
+      <div class="script-line action">أظهر لوحة المصادر مع عدة مصادر مضافة</div>
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم كيف ننظّم مصادر متعددة وكيف نختار المصادر النشطة للحصول على أفضل النتائج. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذا استفدت من هالدرس، تابع الكورس. بالدرس الجاي رح نتعلم كيف ندير مصادر متعددة وننظمها. هاد مهم لأنك بالواقع رح تتعامل مع كتب كثيرة مش كتاب واحد. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 8-10 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 6 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثانية - الدرس 6 من 4</div>
+      <h1 class="lesson-title">إدارة مصادر متعددة وتنظيمها</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 8-10 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي متقدم</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">15-25 ثانية</span>
+      الخطاف (Hook)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر دفتر NotebookLM فيه 5-6 مصادر مضافة</div>
+      <div class="script-line voiceover">رفعت 6 مصادر على NotebookLM وبسأل سؤال... بس الإجابة مش دقيقة! ليش؟ لأنو الأداة بتحاول تجاوب من كل المصادر مع بعض، والمصادر مش منظمة. بالدرس هاد رح نتعلم كيف ندير مصادر متعددة ونحصل على إجابات دقيقة.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس السادس. رح نتعلم اليوم كيف ندير مصادر متعددة بنفس الدفتر. لما يكون عندك أكثر من مصدر، بتصير عندك مشكلتين: الأولى، كيف تنظّمهم بحيث تلاقي اللي بدك بسرعة. والتانية، كيف تخلي NotebookLM يجاوبك من المصادر الصح بدون خلط.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">6-8 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Adding Multiple Sources -->
+      <div class="script-line highlight">القسم أ: إضافة مصادر متعددة</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM فيه مصدر واحد فقط</div>
+
+      <div class="script-line voiceover">خلينا نبدأ من البداية. عندي دفتر فيه مصدر واحد: كتاب الرياضيات. بس أنا كمعلم مش بحتاج كتاب الرياضيات بس، بحتاج كمان دليل المعلم وورقة المعايير.</div>
+
+      <div class="script-line action">انقر على "+ Add Source" - أضف مصدرين إضافيين (دليل المعلم + ورقة المعايير)</div>
+
+      <div class="script-line voiceover">رح أضيف دليل المعلم كمصدر تاني، وورقة المعايير كمصدر تالت. تفتكر عملية الإضافة نفسها: "+ Add Source" واختار الملف.</div>
+
+      <div class="script-line screen">أظهر لوحة المصادر فيها 3 مصادر</div>
+
+      <div class="script-line voiceover">شفت؟ صار عندي 3 مصادر. وهلأ بسأل سؤال: "لخّصلي الوحدة الأولى من كتاب الرياضيات".</div>
+
+      <div class="script-line screen">اكتب السؤال واضغط Enter - أظهر الإجابة</div>
+
+      <div class="script-line voiceover">شفت الإجابة؟ NotebookLM حاول يجاوب من المصادر التلاتة كلها مع بعض! بس أنا بدي إجابة من كتاب الطالب بس، مش من دليل المعلم وورقة المعايير. هون بيجي دور تحديد المصادر النشطة.</div>
+
+      <!-- Part B: Selecting Active Sources -->
+      <div class="script-line highlight">القسم ب: تحديد المصادر النشطة (Source Selection)</div>
+
+      <div class="script-line screen">أشر على مربعات الاختيار بجانب كل مصدر في لوحة المصادر</div>
+
+      <div class="script-line voiceover">بجانب كل مصدر في مربع اختيار. هاد المربع بيحدد هل المصدر "نشط" ولا لأ. لما المصدر نشط، NotebookLM بيشملو بالإجابات. لما مش نشط، بيتجاهلو.</div>
+
+      <div class="script-line action">ألغِ تحديد دليل المعلم وورقة المعايير - أبقِ كتاب الطالب فقط</div>
+
+      <div class="script-line voiceover">الحين رح ألغي تحديد دليل المعلم وورقة المعايير، وأبقي كتاب الطالب بس. يعني الأداة رح تجاوب من كتاب الطالب فقط.</div>
+
+      <div class="script-line screen">اكتب نفس السؤال مرة أخرى - أظهر الإجابة</div>
+
+      <div class="script-line voiceover">شوف الفرق! هلأ الإجابة دقيقة ومربوطة بكتاب الطالب بس. ما في خلط مع مصادر تانية. هاد سر مهم: لما بدك إجابة من مصدر محدد، ألغي المصادر التانية وخلي اللي بدك إياه بس.</div>
+
+      <div class="script-line note">هذه النقطة بالغة الأهمية وينبغي التأكيد عليها: تحديد المصادر النشطة هو مفتاح الحصول على إجابات دقيقة وخالية من التشتت</div>
+
+      <!-- Part C: Organizing Sources -->
+      <div class="script-line highlight">القسم ج: تنظيم المصادر وإعادة تسميتها</div>
+
+      <div class="script-line screen">أشر على أيقونة القائمة بجانب مصدر - أظهر خيارات المصدر</div>
+
+      <div class="script-line voiceover">كل مصدر عندو قائمة خيارات. تقدر تعيد تسميته، تحذفه، أو تشوف ملخص عنه. أنا بنفسي بأسمّي المصادر بأسماء واضحة مش أسماء الملفات الأصلية. مثلاً بدل "math_gr6_textbook_2024.pdf" بكتب "كتاب الرياضيات - الصف السادس".</div>
+
+      <div class="script-line action">انقر على إعادة التسمية - غيّر اسم المصدر</div>
+
+      <div class="script-line voiceover">اضغط على إعادة التسمية واكتب اسم واضح. هاد بيساعدك تلاقي المصدر بسرعة لما يكون عندك كتير مصادر.</div>
+
+      <div class="script-line screen">أظهر المصادر بأسمائها الجديدة</div>
+
+      <div class="script-line voiceover">أحلى صح؟ الحين كل مصدر اسمه واضح وبدك تعرف وين بده يوديك. التنظيم بيوفر وقت كتير لما تصير عندك مصادر كثيرة.</div>
+
+      <!-- Part D: Source Guide Notes -->
+      <div class="script-line highlight">القسم د: ملاحظات المصدر (Source Guide)</div>
+
+      <div class="script-line screen">انقر على أحد المصادر - أظهر ملخص المصدر التلقائي</div>
+
+      <div class="script-line voiceover">لما تضغط على أي مصدر، NotebookLM بيعمللك ملخص تلقائي عن المحتوى. هاد الملخص بيساعدك تفهم المصدر بسرعة بدون ما تقرأه كامل. وكمان بيعرضلك النقاط الرئيسية والمفاهيم الأساسية.</div>
+
+      <div class="script-line screen">أشر على قسم "Source Guide" أو "دليل المصدر"</div>
+
+      <div class="script-line voiceover">هاد دليل المصدر. بيعطيك نظرة عامة سريعة على المحتوى. مفيد كتير لما يكون عندك مصادر كثيرة وبدك تتذكر كل مصدر عن شو بيتكلم بدون ما تفتحه.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية لتنظيم المصادر</div>
+        <p>أنشئ دفتر لكل مادة دراسية. دفتر للرياضيات فيه كتاب الطالب + دليل المعلم + ورقة المعايير. ودفتر منفصل للعلوم فيه مصادره الخاصة. ما تخلط مواد مختلفة بنفس الدفتر لأن الأسئلة بتتداخل والنتائج بتصير مش دقيقة.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نضيف مصادر متعددة، كيف نحدد المصادر النشطة للحصول على إجابات دقيقة، كيف ننظم المصادر بإعادة التسمية، وكيف نستفيد من دليل المصدر التلقائي. أهم شي تفتكره: لما بدك إجابة دقيقة من مصدر محدد، ألغي باقي المصادر وخلي بس اللي بدك إياه.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم فن طرح الأسئلة! كيف تسأل NotebookLM السؤال الصح عشان تحصل على الإجابة المثالية. هاد الدرس رح يغيّر طريقة استخدامك للأداة بالكامل. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~600 كلمة | المدة المتوقعة: 8-10 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 7 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثانية - الدرس 7 من 4</div>
+      <h1 class="lesson-title">فن طرح الأسئلة للحصول على إجابات دقيقة</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: شرح + تطبيق مقارن</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - المقارنة الصادمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر NotebookLM مفتوح مع كتاب منهج مرفوع</div>
+      <div class="script-line voiceover">شوف الفرق: لما بسأل "شو بالكتاب؟" بتحصل إجابة عامة مالها طعم. بس لما بسأل "لخّصلي الوحدة الثالثة مع أهم 5 مفاهيم وأعطيني مثال على كل مفهوم"، بتحصل إجابة مذهلة! الفرق كله بالسؤال. واليوم رح تتعلم كيف تسأل صح.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس السابع. هاد ممكن يكون أهم درس بالكورس كله! لأنو حتى لو عرفت ترفع مصادر وتستخدم الواجهة، إذا ما عرفت تسأل صح، ما رح تحصل على نتائج جيدة. NotebookLM أداة قوية بس بتحتاج تعرف كيف تحكي معها. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Bad vs Good Questions -->
+      <div class="script-line highlight">القسم أ: أسئلة سيئة مقابل أسئلة ممتازة</div>
+
+      <div class="script-line screen">أظهر حقل السؤال - اكتب سؤالاً عاماً</div>
+
+      <div class="script-line voiceover">خلينا نجرب. رح أسأل سؤال عام: "شو موجود بالكتاب؟"</div>
+
+      <div class="script-line screen">اكتب "شو موجود بالكتاب؟" واضغط Enter - أظهر الإجابة العامة</div>
+
+      <div class="script-line voiceover">شفت الإجابة؟ عامة كتير. قائمة طويلة من المواضيع بدون تفصيل. هلأ شوفوا لما بسأل بطريقة مختلفة.</div>
+
+      <div class="script-line screen">امسح السؤال - اكتب سؤالاً محدداً</div>
+
+      <div class="script-line voiceover">هلأ رح أسأل: "لخّصلي الوحدة الثالثة - الكسور - مع أهم 5 مفاهيم أساسية وأعطيني مثال تطبيقي على كل مفهوم"</div>
+
+      <div class="script-line screen">اكتب السؤال المحدد واضغط Enter - أظهر الإجابة التفصيلية</div>
+
+      <div class="script-line voiceover">شوفوا الفرق! هلأ حصلت إجابة مفصلة ومنظمة: كل مفهوم مشروح مع مثال. هاد لأنو السؤال كان محدد وواضح. NotebookLM بيجاوبك على قد ما بتسأل. كل ما كان سؤالك أدق، كانت الإجابة أقوى.</div>
+
+      <div class="script-line action">توقف ثانيتين - دع المعلومة تستقر</div>
+
+      <!-- Part B: 5 Principles of Great Questions -->
+      <div class="script-line highlight">القسم ب: 5 مبادئ لأسئلة احترافية</div>
+
+      <div class="script-line voiceover">الحين خليني أعطيكم 5 مبادئ لطرح أسئلة احترافية على NotebookLM.</div>
+
+      <div class="script-line voiceover">المبدأ الأول: كون محدد. بدك تلخيص؟ قول أي وحدة. بدك أسئلة؟ قول كم سؤال وبأي مستوى. بدك شرح؟ قول أي مفهوم بالضبط. كل ما زاد التحديد، زادت دقة الإجابة.</div>
+
+      <div class="script-line voiceover">المبدأ الثاني: حدد الشكل. إذا بدك الإجابة بشكل نقاط، قول "أعطيني إجابة بنقاط". إذا بدك جدول مقارنة، قول "جهّزلي جدول مقارنة بين كذا وكذا". إذا بدك فقرات، قول "اكتبلي بفقرات منظمة".</div>
+
+      <div class="script-line voiceover">المبدأ الثالث: حدد الجمهور. قول "شرحلي هالمفهوم لطالب صف سادس" أو "لخّصلي هالمعلومات لمعلم بدك يشرحها". تحديد الجمهور بيخلي الأداة تختار المستوى المناسب.</div>
+
+      <div class="script-line voiceover">المبدأ الرابع: اطلب المراجع. دايماً أضف "مع ذكر المصدر ورقم الصفحة" بنهاية سؤالك. هيك بتحصل على إجابات مربوطة بمراجع وبتقدر تتأكد منها.</div>
+
+      <div class="script-line voiceover">المبدأ الخامس: جرّب أكتر من سؤال. إذا أول إجابة ما عجبتك، غيّر طريقة السؤال. NotebookLM بيتعامل مع كل سؤال بشكل مستقل. يعني ما في مشكلة تسأل 3 مرات ب3 طرق مختلفة.</div>
+
+      <!-- Part C: Practical Examples -->
+      <div class="script-line highlight">القسم ج: أمثلة عملية للمعلم السوري</div>
+
+      <div class="script-line voiceover">الحين خليني أوريكم أمثلة حقيقية للأسئلة اللي بتستخدموها كمعلمين.</div>
+
+      <div class="script-line screen">اكتب السؤال الأول: "جهّزلي 10 أسئلة اختيار من متعدد عن الوحدة الرابعة - مستوى متوسط - مع الإجابة الصحيحة لكل سؤال"</div>
+
+      <div class="script-line voiceover">مثال أول: "جهّزلي 10 أسئلة اختيار من متعدد عن الوحدة الرابعة، مستوى متوسط، مع الإجابة الصحيحة لكل سؤال". شفت كيف محدد؟ عدد الأسئلة ونوعها ومستواها والوحدة كلها محددة.</div>
+
+      <div class="script-line screen">اكتب السؤال الثاني: "لخّصلي الوحدة الأولى بشكل نقاط مختصرة من 10 نقاط مع ذكر المصدر لكل نقطة"</div>
+
+      <div class="script-line voiceover">مثال تاني: "لخّصلي الوحدة الأولى بشكل نقاط مختصرة من 10 نقاط مع ذكر المصدر لكل نقطة". هيك بتحصل على تلخيص دقيق ومراجع واضحة.</div>
+
+      <div class="script-line screen">اكتب السؤال الثالث: "شرحلي مفهوم الكسور الاعتيادية لطالب صف سادس بأمثلة من الحياة اليومية"</div>
+
+      <div class="script-line voiceover">مثال تالت: "شرحلي مفهوم الكسور الاعتيادية لطالب صف سادس بأمثلة من الحياة اليومية". هيك الأداة بتعرف إنها لازم تشرح بطريقة بسيطة وبأمثلة قريبة من الطالب.</div>
+
+      <div class="script-line note">خلال الشرح، اعرض كل سؤال والإجابة الناتجة عنه. أظهر الفرق الحقيقي بين الأسئلة العامة والمحددة حتى يقتنع المشاهد تماماً.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">القاعدة الذهبية لطرح الأسئلة</div>
+        <p>فكّر بالسؤال مثل طلب من مطعم: لو قلت "جبلي أكل" بتحصل أي شي. بس لو قلت "بدي كباب مشوي مع سلطة ولبن بلا ملح كتير" بتحصل بالضبط على ما تريد. NotebookLM نفس الشي: كل ما كان طلبك أدق، كانت النتيجة أقوى.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-45 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا 5 مبادئ: كون محدد، حدد الشكل، حدد الجمهور، اطلب المراجع، وجرب أكتر من سؤال. والقاعدة الذهبية: نوعية سؤالك بتحدد نوعية إجابتك. إذا حصلت إجابة عامة، لا تلوم الأداة... غيّر سؤالك!</div>
+      <div class="script-line voiceover">هالمبادئ رح تغيّر طريقة استخدامك للأداة بالكامل. بالدرس الجاي رح نطبق كل شي اتعلمونه على حالة حقيقية: تلخيص منهج كامل تلقائياً.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نطبق كل شي اتعلمونه عملياً! رح نلخص منهج كامل باستخدام NotebookLM. هاد الدرس رح يوريك كيف توفر ساعات من العمل بدقايق. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 8 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثانية - الدرس 8 من 4</div>
+      <h1 class="lesson-title">تلخيص المناهج تلقائياً: التطبيق العملي</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيق كامل</div>
+      <div class="lesson-meta-pill">الأهمية: عالية - درس محوري</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - المشكلة الحقيقية
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر كتاب منهج PDF ضخم مفتوح على المتصفح</div>
+      <div class="script-line voiceover">هاد كتاب منهج رياضيات الصف السادس. 180 صفحة. كم مرة جلست تلخص وحدة واحدة من هاد الكتاب؟ ساعتين؟ تلات؟ الحين رح ألخص الكتاب كامل أمامك بأقل من 10 دقايق. مش بس تلخيص، كمان أسئلة وخطط دروس. يلا!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثامن والأخير بالوحدة الثانية. هاد أهم درس تطبيقي لحد هلا. رح نطبق كل شي اتعلموه: رفع المصادر، تنظيمها، وطرح الأسئلة الاحترافية. النتيجة؟ رح نلخص منهج كامل ونستخرج منه كل شي بدك إياه كمعلم. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - التطبيق الكامل
+    </div>
+    <div class="script-section-body">
+
+      <!-- Step 1: Setup -->
+      <div class="script-line highlight">الخطوة 1: إعداد الدفتر ورفع الكتاب</div>
+
+      <div class="script-line screen">أظهر NotebookLM - أنشئ دفتر جديد باسم "منهج الرياضيات - الصف السادس"</div>
+
+      <div class="script-line voiceover">الخطوة الأولى: إنشاء دفتر جديد. سمّيته "منهج الرياضيات - الصف السادس". وكما اتعلموا بالدرس السابق، كل مادة بدلها دفتر منفصل.</div>
+
+      <div class="script-line action">انقر على "+ Add Source" - ارفع ملف PDF كتاب المنهج</div>
+
+      <div class="script-line voiceover">الحين رفع كتاب المنهج. نفس الخطوات اللي اتعلموها: "+ Add Source" وبعدين PDF وبنختار الملف.</div>
+
+      <div class="script-line screen">أظهر المصدر بعد رفعه - انتظر حتى يكتمل المعالجة</div>
+
+      <div class="script-line voiceover">الكتاب انرفع. NotebookLM قرأ الـ 180 صفحة كلها. الحين جاهز نعمل أي شي بدنا إياه.</div>
+
+      <!-- Step 2: Overall Summary -->
+      <div class="script-line highlight">الخطوة 2: تلخيص الكتاب كامل</div>
+
+      <div class="script-line screen">انقر على حقل السؤال</div>
+
+      <div class="script-line voiceover">الخطوة الثانية: تلخيص عام. رح أسأل: "أعطيني فهرس شامل بالوحدات والمواضيع الرئيسية في هاد الكتاب مع عدد الصفحات لكل وحدة".</div>
+
+      <div class="script-line screen">اكتب السؤال واضغط Enter - أظهر الإجابة</div>
+
+      <div class="script-line voiceover">شوف! فهرس كامل بكل وحدة وعدد صفحاتها. هاد أخد أقل من 10 ثواني. تخيل الوقت اللي كان بياخده لو عمليه يدوياً!</div>
+
+      <div class="script-line action">حفظ الإجابة كملاحظة - اضغط على أيقونة الحفظ</div>
+
+      <div class="script-line voiceover">ملاحظة: دايماً احفظ الإجابات المهمة كملاحظات. هيك بترجعلها لاحقاً بدون ما تسأل مرة تانية.</div>
+
+      <!-- Step 3: Unit-by-Unit Summary -->
+      <div class="script-line highlight">الخطوة 3: تلخيص كل وحدة على حدة</div>
+
+      <div class="script-line voiceover">الحين رح نلخص وحدة وحدة. بس مش رح نعمل كل وحدة بالفيديو لأن الوقت محدود. رح أوريكم أول وحدة وبعدين الكم يساووا الباقي.</div>
+
+      <div class="script-line screen">اكتب: "لخّصلي الوحدة الأولى - الأعداد الطبيعية - بشكل نقاط مختصرة مع أهم 10 مفاهيم وأعطيني مثال على كل مفهوم واذكر رقم الصفحة"</div>
+
+      <div class="script-line voiceover">شوفوا كيف السؤال محدد: الوحدة الأولى، بالنقاط، 10 مفاهيم، مع أمثلة، ومع رقم الصفحة. طبقنا كل المبادئ اللي اتعلموها بالدرس السابع.</div>
+
+      <div class="script-line screen">أظهر الإجابة التفصيلية</div>
+
+      <div class="script-line voiceover">شوف النتيجة! تلخيص شامل، منظم، مع أمثلة ومراجع. كل نقطة مربوطة بصفحة بالكتاب. هاد اللي كان بياخد ساعتين، صار بياخد 30 ثانية!</div>
+
+      <div class="script-line action">حفظ الإجابة كملاحظة</div>
+
+      <div class="script-line voiceover">احفظها. وبعدين كرّر نفس العملية لكل وحدة: غيّر اسم الوحدة بالسؤال وخلي الباقي نفسه. بهالطريقة بتلخص الكتاب كامل بنص ساعة بدل أسبوع!</div>
+
+      <!-- Step 4: Generate Questions -->
+      <div class="script-line highlight">الخطوة 4: توليد أسئلة من المنهج</div>
+
+      <div class="script-line screen">اكتب: "جهّزلي 15 سؤال اختيار من متعدد عن الوحدة الأولى - 5 سهلة و5 متوسطة و5 صعبة - مع الإجابة الصحيحة وتبريرها"</div>
+
+      <div class="script-line voiceover">الحين رح نولّد أسئلة. بسأل: "جهّزلي 15 سؤال اختيار من متعدد عن الوحدة الأولى، 5 سهلة و5 متوسطة و5 صعبة، مع الإجابة الصحيحة وتبريرها".</div>
+
+      <div class="script-line screen">أظهر الأسئلة المولّدة</div>
+
+      <div class="script-line voiceover">شوف! 15 سؤال بثلاث مستويات صعوبة، كل واحد مع إجابته وتبريره. هاد ممكن تستخدمه مباشرة كاختبار لطلابك. تخيل الوقت اللي كان بياخده إعداد 15 سؤال يدوياً!</div>
+
+      <div class="script-line note">يمكنك أيضاً طلب أسئلة صح/خطأ، أسئلة مقالية، أو ملء الفراغات بنفس الطريقة. فقط حدد النوع في السؤال.</div>
+
+      <!-- Step 5: Lesson Plan -->
+      <div class="script-line highlight">الخطوة 5: إنشاء خطة درس</div>
+
+      <div class="script-line screen">اكتب: "أعطيني خطة درس كاملة لدرس الأعداد الطبيعية - تتضمن: الأهداف، الأنشطة، طرق التقويم، والواجب المنزلي - مدة الحصة 45 دقيقة"</div>
+
+      <div class="script-line voiceover">وأخيراً، رح نعمل خطة درس. بسأل: "أعطيني خطة درس كاملة لدرس الأعداد الطبيعية، تتضمن الأهداف والأنشطة وطرق التقويم والواجب، مدة الحصة 45 دقيقة".</div>
+
+      <div class="script-line screen">أظهر خطة الدرس المولّدة</div>
+
+      <div class="script-line voiceover">شوفوا! خطة درس كاملة: أهداف محددة، أنشطة متدرجة، طرق تقويم، وواجب. كل شي جاهز. وبس غيّر اسم الدرس والوحدة بتحصل على خطة جديدة.</div>
+
+      <div class="script-line action">أظهر لوحة الملاحظات فيها كل الأعمال المحفوظة</div>
+
+      <div class="script-line voiceover">شوفوا لوحة الملاحظات: تلخيص الكتاب، تلخيص الوحدة الأولى، أسئلة، وخطة درس. كلهم محفوظين وجاهزين. هاد كله أخدنا أقل من 10 دقايق!</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم: راجع دائماً</div>
+        <p>NotebookLM أداة مساعدة وليست بديلاً عن المعلم. راجع دائماً الأسئلة والخطط والتلخيصات قبل تقديمها للطلاب. الأداة ممكن تغلط بأشياء بسيطة. دورك كمعلم إنك تتأكد من الدقة قبل الاستخدام.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-60 ثانية</span>
+      الخلاصة - ختام الوحدة الثانية
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر الواجهة كاملة مع كل الإنجازات</div>
+
+      <div class="script-line voiceover">إذن لخصنا الوحدة الثانية كاملة. اتعلمينا أنواع المصادر الستة وكيفية رفعها. اتعلمينا كيف ندير مصادر متعددة ونحدد المصادر النشطة. اتعلمينا فن طرح الأسئلة اللي بيغير كل شي. واليوم طبقنا كل هالمعرفة على حالة حقيقية: تلخيص منهج كامل.</div>
+
+      <div class="script-line voiceover">الحين أنت عارف إنك تقدر تلخص أي كتاب، تولّد أي نوع أسئلة، وتعمل خطة درس... كل شي بدقايق. هاد معناه إنك بتوفر ساعات طويلة كل أسبوع. ساعات ممكن تستثمرها بدروس خصوصية أو راحة أو تطوير حالك.</div>
+
+      <div class="script-line voiceover">بس هاد بس البداية! بالوحدة الجاية رح نتعمق أكتر: رح نتعلم أدوات متقدمة مخصصة للمعلم. أسئلة امتحانات احترافية، خطط دروس شاملة، البودكاست التعليمي، والجداول والمخططات. الدروس الجاية رح تكون أعمق وأمتع. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">20-30 ثانية</span>
+      دعوة للعمل - ختام الوحدة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذا كنت عم تشوف الدروس وحدة وحدة، فأنت عم تبني مهارة حقيقية. الوحدة التالتة رح تكون أقوى: أدوات متقدمة بتحولك من مستخدم عادي لمحترف. تابع معنا!</div>
+
+      <div class="script-line voiceover">وإذا حابب تتعلم كل شي بشكل منظم وبسرعة، الكورس الكامل متوفر. الرابط تحت. أول 30 شخص بس! لا تفوّت الفرصة.</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~750 كلمة | المدة المتوقعة: 10-12 دقائق | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+  <div class="footer-note">
+    إجمالي الوحدة الثانية: ~2700 كلمة | المدة الإجمالية المتوقعة: 36-44 دقيقة | 4 دروس فيديو
+  </div>
+
+</div>
+
+</body>
+</html>
