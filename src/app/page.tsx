@@ -69,6 +69,50 @@ export default function LandingPage() {
   // Feature 6: Exit Intent Popup
   const [showExitPopup, setShowExitPopup] = useState(false)
 
+  // ===== AI Search Feature =====
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<any[] | null>(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+  const [searchError, setSearchError] = useState('')
+
+  const searchSuggestions = [
+    'أحدث طرق تدريس الرياضيات للمرحلة الابتدائية',
+    'كيف يستخدم الذكاء الاصطناعي في التعليم الجامعي',
+    'استراتيجيات التقييم التكويني في التعليم عن بعد',
+    'طرق تدريس اللغة العربية للناطقين بغيرها',
+    'أبحاث حديثة عن صعوبات التعلم عند الأطفال',
+  ]
+
+  const handleSearch = async (query?: string) => {
+    const q = query || searchQuery
+    if (!q.trim()) return
+
+    setSearchLoading(true)
+    setSearchError('')
+    setSearchResults(null)
+
+    try {
+      const res = await fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q.trim() }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setSearchError(data.error || 'حدث خطأ أثناء البحث')
+        return
+      }
+
+      setSearchResults(data.results || [])
+    } catch {
+      setSearchError('تعذر الاتصال بالخادم، حاول مرة أخرى')
+    } finally {
+      setSearchLoading(false)
+    }
+  }
+
   // ===== COUNTDOWN TIMER =====
   useEffect(() => {
     const STORAGE_KEY = 'course_offer_end'
@@ -798,6 +842,169 @@ export default function LandingPage() {
             </div>
           </div>
 
+          {/* ===== AI RESEARCH SECTION: أعطيه مهمة بحث ===== */}
+          <div className="mb-14 max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-[#8b5cf6]/15 text-[#8b5cf6] px-4 py-2 rounded-full text-sm font-bold mb-4 border border-[#8b5cf6]/20">
+                <Search className="w-4 h-4" />
+                ميزة البحث الذكي
+              </div>
+              <h3 className="text-xl md:text-2xl font-black text-white mb-2">
+                أعطيه مهمة بحث وهو بيعملكلّك كل شي 🎯
+              </h3>
+              <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
+                بدك تبحث عن أحدث الدراسات أو طرق التدريس؟ كبّس بحث والنتائج بتجيك من الإنترنت فوراً - زي ما شايف هون
+              </p>
+            </div>
+
+            {/* Search Input */}
+            <div className="relative mb-4">
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    placeholder="مثال: أحدث طرق تدريس الرياضيات..."
+                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pr-12 pl-4 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#8b5cf6]/50 focus:ring-1 focus:ring-[#8b5cf6]/30 transition-all text-sm md:text-base"
+                  />
+                </div>
+                <button
+                  onClick={() => handleSearch()}
+                  disabled={searchLoading}
+                  className="bg-[#8b5cf6] hover:bg-[#7c3aed] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-6 py-4 rounded-xl transition-all hover:scale-105 flex items-center gap-2 shrink-0"
+                >
+                  {searchLoading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span className="hidden md:inline">يبحث...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Search className="w-5 h-5" />
+                      <span className="hidden md:inline">ابحث</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Search Suggestions */}
+            {!searchResults && !searchLoading && (
+              <div className="flex flex-wrap gap-2 mb-6 justify-center">
+                {searchSuggestions.map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setSearchQuery(s)
+                      handleSearch(s)
+                    }}
+                    className="bg-white/5 hover:bg-[#8b5cf6]/15 hover:border-[#8b5cf6]/30 border border-white/10 rounded-lg px-3 py-1.5 text-xs md:text-sm text-gray-400 hover:text-[#8b5cf6] transition-all"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Search Results */}
+            {searchLoading && (
+              <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 text-center">
+                <div className="w-10 h-10 border-3 border-[#8b5cf6]/30 border-t-[#8b5cf6] rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-gray-400">الذكاء الاصطناعي بيبحث لك...</p>
+                <p className="text-gray-500 text-sm mt-1">بيبحث بالإنترنت عن أفضل النتائج</p>
+              </div>
+            )}
+
+            {searchError && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-center">
+                <p className="text-red-400 text-sm">{searchError}</p>
+              </div>
+            )}
+
+            {searchResults && searchResults.length > 0 && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[#8b5cf6] text-sm font-bold">تم العثور على {searchResults.length} نتائج</p>
+                  <button
+                    onClick={() => {
+                      setSearchResults(null)
+                      setSearchQuery('')
+                    }}
+                    className="text-gray-500 hover:text-white text-xs flex items-center gap-1 transition-colors"
+                  >
+                    <X className="w-3 h-3" />
+                    مسح النتائج
+                  </button>
+                </div>
+                {searchResults.map((result: any, i: number) => (
+                  <a
+                    key={i}
+                    href={result.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-[#1a1a1a] hover:bg-[#1a1a1a]/80 border border-white/5 hover:border-[#8b5cf6]/30 rounded-xl p-4 transition-all group"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-[#8b5cf6]/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#8b5cf6]/20 transition-colors">
+                        <Search className="w-4 h-4 text-[#8b5cf6]" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-white font-bold text-sm group-hover:text-[#8b5cf6] transition-colors line-clamp-2">
+                          {result.name}
+                        </h4>
+                        <p className="text-gray-500 text-xs mt-1 line-clamp-2">
+                          {result.snippet}
+                        </p>
+                        <p className="text-[#8b5cf6]/60 text-xs mt-2 truncate">
+                          {result.host_name}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* How it works - mini steps */}
+            <div className="mt-8 grid grid-cols-3 gap-3">
+              {[
+                { step: '١', emoji: '✍️', text: 'اكتب موضوع البحث' },
+                { step: '٢', emoji: '🔍', text: 'AI بيبحث بالإنترنت' },
+                { step: '٣', emoji: '📋', text: 'نتائج جاهزة فوراً' },
+              ].map((item, i) => (
+                <div key={i} className="bg-[#1a1a1a] rounded-xl p-4 border border-white/5 text-center">
+                  <div className="text-2xl mb-2">{item.emoji}</div>
+                  <div className="text-[#8b5cf6] text-xs font-bold mb-1">خطوة {item.step}</div>
+                  <p className="text-gray-400 text-xs">{item.text}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Use cases for teachers */}
+            <div className="mt-6 bg-[#1a1a1a] rounded-2xl p-6 border border-[#8b5cf6]/20">
+              <h4 className="text-white font-bold text-sm mb-4 text-center">أمثلة على مهام بحث للمعلم والدكتور</h4>
+              <div className="grid md:grid-cols-2 gap-3">
+                {[
+                  { role: 'معلم', example: 'ابحث عن أحدث طرق تدريس الرياضيات للصف الخامس', benefit: 'بدل ما تقعد ساعتين عغوغل' },
+                  { role: 'دكتور', example: 'ابحث عن أبحاث حديثة عن التعلم النشط بالجامعات', benefit: 'مراجع علمية جاهزة لمحاضراتك' },
+                  { role: 'مدرب', example: 'ابحث عن استراتيجيات التدريب التفاعلي للمعلمين', benefit: 'محتوى ورشة تدريبية متجدّد' },
+                  { role: 'معلم', example: 'ابحث عن حلول لصعوبات التعلم عند الطلاب', benefit: 'بدل ما تسأل وتنتظر جواب' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/[0.03] rounded-lg p-3 border border-white/5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="bg-[#8b5cf6]/20 text-[#8b5cf6] text-xs font-bold px-2 py-0.5 rounded">{item.role}</span>
+                    </div>
+                    <p className="text-gray-300 text-xs leading-relaxed">"{item.example}"</p>
+                    <p className="text-[#22c55e] text-xs mt-1.5">→ {item.benefit}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Time Savings Table */}
           <h3 className="text-xl md:text-2xl font-black text-center mb-6">كم وقت بتوفر؟</h3>
           <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
@@ -818,6 +1025,7 @@ export default function LandingPage() {
                   { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
                   { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
                   { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
+                  { task: 'بحث عن أحدث الدراسات وطرق التدريس', old: '2-3 ساعات', ai: 'ثواني', save: '99%' },
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.02]'}>
                     <td className="py-3 px-6 text-right font-medium text-white">{row.task}</td>
