@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://z.ai",
+    "name": "Z.ai - Free AI Chatbot & Agent powered by GLM-5.1 & GLM-5",
+    "snippet": "Meet Z.ai, your free AI-powered assistant. Build websites, create slides, analyze data, and get instant answers. Fast, smart, and reliable, powered by ...",
+    "host_name": "z.ai",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=OHmXgVL6pCI",
+    "name": "Z.ai GLM-5 Tutorial | This AI Agent Built My Telegram Bot Automatically",
+    "snippet": "This Z.ai GLM-5 Tutorial highlights fast project generation, clean structure, and seamless testing in one workflow. How to Use Z AI GLM-5 ...",
+    "host_name": "www.youtube.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://webscraft.org/blog/rezhim-chat-v-zai-yak-pratsyuye-ta-koli-vikoristovuvati-2026?lang=en",
+    "name": "Z.ai Chat Mode 2026 How It Works & When to Use vs Agent - WebCraft",
+    "snippet": "In production recommendations: combine chat mode with RAG (vector search + context insertion) or use it as a \"first stage\" before transitioning ...",
+    "host_name": "webscraft.org",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/ZaiGLM/comments/1rcgnf4/did_zai_removed_agent_mode_from_their_website",
+    "name": "Did z.ai removed agent mode from their website? : r/ZaiGLM - Reddit",
+    "snippet": "Earlier I was using agent mode for my queries and honestly it as very good at it but today I can't see the option anymore.",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://zed.dev/docs/ai/agent-panel",
+    "name": "AI Coding Agent - Zed Agent Panel",
+    "snippet": "The Agent Panel is where you interact with AI agents that can read, write, and run code in your project. It's the core of Zed's AI code editing experience — use ...",
+    "host_name": "zed.dev",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=GBqSjtR34fM",
+    "name": "2026 | This AI Coder from China Is Shockingly Good | How to Use Z.AI",
+    "snippet": "Z.ai Review + Tutorial - 2026 | This AI Coder from China Is Shockingly Good | How to Use Z.AI. 49K views · 6 months ago. #zai #glm #ad.",
+    "host_name": "www.youtube.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.linkedin.com/posts/sayedraheel_zai-free-ai-chatbot-agent-powered-by-activity-7447456837282635776-JNIZ",
+    "name": "Z.ai | Sayed Raheel Hussain - LinkedIn",
+    "snippet": "It's an open-source security observability platform designed specifically to govern AI usage inside your development workflow. Real-time ...",
+    "host_name": "www.linkedin.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=G_UGuW0Ardg",
+    "name": "How to Use ChatGPT Agent Mode (Step-by-Step Tutorial) - YouTube",
+    "snippet": "I am trying so hard to find uses for GPTs & Agent but as a retired senior (66) I don't have work or clerical tasks. Been using all the AI ...",
+    "host_name": "www.youtube.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://chatgpt.com/features/agent",
+    "name": "ChatGPT Agent",
+    "snippet": "Select “agent mode”. Click the '+' in the chat box and select 'Agent mode' from the dropdown. Dropdown menu with a selection of AI actions on a blue gradient ...",
+    "host_name": "chatgpt.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.cline.bot/provider-config/zai",
+    "name": "Z AI (Zhipu AI) - Cline Documentation",
+    "snippet": "Sign Up/Sign In: Go to https://z.ai/model-api. Create an account or sign in. Navigate to API Keys: Access your account dashboard and find the API keys section.",
+    "host_name": "docs.cline.bot",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

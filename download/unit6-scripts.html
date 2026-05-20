@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة السادسة - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #7c3aed;
+    --primary-light: #f3f0ff;
+    --primary-dark: #5b21b6;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 40%, #a78bfa 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-badge.new {
+    background: rgba(251,191,36,0.25);
+    border-color: rgba(251,191,36,0.5);
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '\1F3A4  ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '\1F3AC  ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '\1F5A5  ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '\1F4DD  ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '\26A1  ';
+    font-size: 10pt;
+  }
+
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge new">وحدة جديدة - إضافة حصرية</div>
+  <h1 class="cover-title">الوحدة السادسة<br>وكيل الذكاء الاصطناعي z.ai</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو عن أداة z.ai و AI Agents. من المحادثة البسيطة لبناء وكلاء ذكيين ينفذوا مهام تعليمية بالكامل
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المدة التقريبية</span>
+      <span class="value">35-45 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">متقدم - تقني</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 21 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة السادسة - الدرس 1 من 4</div>
+      <h1 class="lesson-title">ما هو z.ai ولماذا يحتاجه المعلم؟</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تعريفي + تطبيقي</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - من المحادثة إلى التنفيذ
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر شاشة z.ai مفتوحة - وكيل ذكي ينفذ مهمة تلقائياً (يبني موقع أو يحلل بيانات)</div>
+      <div class="script-line voiceover">شفتوا كيف الكمبيوتر نفّذ المهمة لحاله؟ بدون ما أضغط ولا زر! أنا بس كتبتله شو بدي وهو عمل كل شي: بحث وبنّى وحلّل. هاد مش ChatGPT ولا NotebookLM. هاد شي تاني كلياً. اسمه AI Agent، والأداة اسمها z.ai. واليوم رح تتعرفوا على ثورة الذكاء الاصطناعي الحقيقية.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الحادي والعشرين. هاد أول درس بالوحدة السادسة وهي وحدة جديدة انضافت للكورس. رح نتعرّف على أداة z.ai - منصة ذكاء اصطناعي مجانية من شركة Zhipu الصينية. الأداة بتوفّر وكلاء ذكيين أو AI Agents بينفذوا مهام كاملة لحالهم. مش بس بيجاوبوا أسئلة، بيشتغلوا! يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: What is z.ai -->
+      <div class="script-line highlight">القسم أ: ما هو z.ai؟</div>
+
+      <div class="script-line screen">افتح المتصفح على z.ai - أظهر الصفحة الرئيسية</div>
+
+      <div class="script-line voiceover">z.ai هي منصة ذكاء اصطناعي مجانية طوّرتها شركة Zhipu AI الصينية، وهي شركة ناتجة عن جامعة Tsinghua الشهيرة. المنصة بتشتغل بنموذج GLM-5 و GLM-5.1، وهدول من أقوى نماذج الذكاء الاصطناعي بالعالم. الشركة مسجّلة ببورصة هونغ كونغ وبتخدم ملايين المستخدمين.</div>
+
+      <div class="script-line voiceover">بس شو الفرق عن ChatGPT و NotebookLM؟ الفرق الأساسي هو مفهوم الـ AI Agent أو الوكيل الذكي. خليني أوضح:</div>
+
+      <div class="script-line screen">ارسم مقارنة بسيطة على الشاشة: ChatGPT = محادثة، NotebookLM = مصادر + محادثة، z.ai = وكيل ينفذ مهام</div>
+
+      <div class="script-line voiceover">ChatGPT بيجاوبك سؤال بجواب. NotebookLM بيجاوبك من مصادرك. بس z.ai بيشتغل لحاله! يعني بتقوللو "اعمللي موقع تعليمي لمادة الرياضيات" وهو بيخطّط وبينفّذ وبيبني الموقع فعلياً. مش بس بيعطيك كود، بيعمل كل شي.</div>
+
+      <div class="script-line action">توقف ثانيتين - دع المشاهد يستوعب الفرق</div>
+
+      <!-- Part B: Chat vs Agent -->
+      <div class="script-line highlight">القسم ب: الفرق بين وضع المحادثة ووضع الوكيل</div>
+
+      <div class="script-line screen">أظهر وضع Chat العادي على z.ai - اكتب سؤالاً بسيطاً</div>
+
+      <div class="script-line voiceover">على z.ai في وضعين أساسيين: وضع المحادثة أو Chat، ووضع الوكيل أو Agent Mode. وضع المحادثة زي ChatGPT بالضبط: بتسأل وبيجاوبك. مثلاً: "اشرحلي درس الكسور". بيجاوبك شرح نصّي عادي.</div>
+
+      <div class="script-line screen">حوّل إلى وضع Agent - أظهر الفرق</div>
+
+      <div class="script-line voiceover">بس وضع الوكيل أو Agent Mode هو السحر! هون بتقوللو "اعمللي اختبار تفاعلي عن درس الكسور وحوّله لصفحة ويب" وهو بينفذ المهمة كاملة لحاله: بيخطّط، بيكتشف إنو محتاج أسئلة فيولّدها، بيكتشف إنو محتاج كود فيكتبه، وبالنهاية بيطلعلك صفحة ويب جاهزة بتشتغل! كل هاد لحاله!</div>
+
+      <div class="script-line voiceover">الفريق الأساسي: وضع المحادثة بيجاوب أسئلة. وضع الوكيل بينفذ مهام كاملة. كمعلم، وضع المحادثة كفاية لأسئلة بسيطة. بس وضع الوكيل هو اللي رح يغيّر حياتك لأنو بيعمل أشياء كنتِ محتاج ساعات لتعملها.</div>
+
+      <div class="script-line note">التركيز على وضع Agent Mode لأنه الميزة الفريدة - لا تضيع وقتاً طويلاً على وضع Chat العادي</div>
+
+      <!-- Part C: What can z.ai do for teachers -->
+      <div class="script-line highlight">القسم ج: شو بيقدر z.ai يعمل للمعلم؟</div>
+
+      <div class="script-line voiceover">الحين خليني أوريكم 5 أشياء z.ai بيعملها للمعلم ومحدش تاني بيعملها:</div>
+
+      <div class="script-line voiceover">الأولى: بناء صفحات ويب تعليمية. بتقوللو "اعمللي صفحة ويب فيها أسئلة تفاعلية عن درس الخلية" وبيبنيها فعلياً مع أزرار وألوان وبتشتغل بالمتصفح. تقدر تشاركها مع طلابك!</div>
+
+      <div class="script-line voiceover">التانية: تحليل البيانات. عندك درجات طلابك بملف Excel؟ ارفعو على z.ai وقولو "حلّل الدرجات وبيّنلي الطلاب الضعاف واقترح خطة علاجية". بينفذ التحليل كامل ويطلعلك نتائج وتوصيات.</div>
+
+      <div class="script-line voiceover">التالتة: إنشاء عروض تقديمية كاملة. مش بس محتوى مثل NotebookLM، بيبني عرض فعلي بشرائح وصور وتصميم جاهز للتقديم.</div>
+
+      <div class="script-line voiceover">الرابعة: البحث التلقائي. الوكيل بيقدر يبحث بالإنترنت ويجمع معلومات من مواقع مختلفة ويجمّعها بتقرير واحد. مش بس من مصادرك، من الإنترنت كله!</div>
+
+      <div class="script-line voiceover">الخامسة: أتمتة المهام المتكررة. مثلاً: "كل ما يجيني سؤال من طالب على واتساب، جاوبو من المنهج". هاد مستقبل التعليم!</div>
+
+      <div class="script-line screen">أظهر أمثلة مرئية لكل نوع - انتقل بينها بسرعة</div>
+
+      <div class="script-line note">لا تطل في عرض الأمثلة - الهدف هو إثارة الحماس وليس التفصيل التقني. التفصيل بالدروس الجاية</div>
+
+      <!-- Part D: Free and Accessible -->
+      <div class="script-line highlight">القسم د: مجاني ومتاح - هلأ!</div>
+
+      <div class="script-line voiceover">والأهم من هاد كله: z.ai مجاني! مو مجاني لفترة تجريبية، مجاني فعلياً. تقدر تستخدم المحادثة والوكيل بدون ما تدفع ولا ليرة. موجود على الموقع z.ai وتقدر تدخل بحساب جوجل نفسه اللي عندك أصلاً.</div>
+
+      <div class="script-line voiceover">وكمان متاح بالعربية! مش بس إنجليزي. بتكتب عربي وبيجاوبك عربي. ولو كتبت إنجليزي بيجاوبك إنجليزي. بيشتغل باللغة اللي بتكتب فيها.</div>
+
+      <div class="script-line voiceover">وكمان بيشتغل على الهاتف! مو بس الكمبيوتر. افتح المتصفح على الموبايل وادخل z.ai. الواجهة بتكون متجاوبة مع الشاشة الصغيرة.</div>
+
+      <div class="script-line screen">أظهر z.ai على شاشة هاتف</div>
+
+      <div class="script-line voiceover">شوفوا! حتى على الموبايل بيشتغل تمام. هاد مهم كتير لمعلمين ما عندهم كمبيوتر.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">الفرق بين z.ai و NotebookLM</div>
+        <p>NotebookLM بيشتغل على مصادرك أنت: بترفع المنهج وبسألو وبيجاوبك منو. أما z.ai فبيشتغل كوكيل مستقل: بيفكر وبينفذ وبيرتبط بالإنترنت. الاثنين مش متنافسين، الاثنين مكملين لبعض! NotebookLM للمنهج والتحضير، و z.ai للتنفيذ والأتمتة. رح نتعلم بآخر درس كيف ندمجهم مع بعض.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا إنو z.ai هي منصة مجانية من شركة Zhipu الصينية بتشتغل بنموذج GLM-5. الفرق الأساسي عن غيرها هو وضع الوكيل الذكي أو Agent Mode اللي بينفذ مهام كاملة لحاله: بيخطط وبينفذ وبيتحقق من النتائج. z.ai بيقدر يبني صفحات ويب ويحلل بيانات ويعمل عروض تقديمية ويبحث تلقائياً وأتمتة المهام. ومجاني ومتاح بالعربية وعلى الهاتف!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعمّق فعلياً: رح نفتح z.ai ونستخدم وضع الوكيل لعمل أشياء حقيقية للمعلم. بناء صفحة ويب تعليمية وتحليل درجات وإنشاء عرض تقديمي. كله بالتطبيق العملي. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 22 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة السادسة - الدرس 2 من 4</div>
+      <h1 class="lesson-title">وضع الوكيل الذكي - تنفيذ المهام تلقائياً</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 12-15 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي مكثف</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً - درس محوري</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - شوف الوكيل يشتغل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر z.ai مفتوح - شغّل وضع الوكيل واطلب مهمة معقدة أمام المشاهد</div>
+      <div class="script-line voiceover">شوفوا معي هاد: بكتب "اعمللي صفحة ويب تعليمية عن درس الخلية فيها اختبار تفاعلي من 10 أسئلة مع نتيجة فورية". وشوفوا شو رح يصير... الوكيل بدأ يشتغل! بيخطط وبيرتب وبينفذ. كل هاد لحاله! اليوم رح نتعلم كيف نستخدم هالسحر للتعليم.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثاني والعشرين. هاد أهم درس بهالوحدة لأنو رح نتعلم فعلياً كيف نستخدم وضع الوكيل أو Agent Mode على z.ai. رح نعمل 3 مشاريع حقيقية: صفحة ويب تعليمية، وتحليل درجات، وعرض تقديمي. كله بالتطبيق. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">10-12 دقيقة</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Build Educational Webpage -->
+      <div class="script-line highlight">المشروع الأول: بناء صفحة ويب تعليمية تفاعلية</div>
+
+      <div class="script-line screen">افتح z.ai - تأكد إنك على وضع Agent Mode</div>
+
+      <div class="script-line voiceover">المشروع الأول: بناء صفحة ويب تعليمية. أول شي افتح z.ai وتأكد إنك على وضع الوكيل أو Agent Mode. بتشوف الزر بالأعلى أو بجانب مربع الكتابة. اضغط عليه لتفعيل الوضع.</div>
+
+      <div class="script-line screen">اكتب: "اعمل صفحة ويب تعليمية عن درس الخلية للصف السابع. الصفحة لازم تتضمن: عنوان كبير، شرح مبسّط بأمثلة من الحياة اليومية، واختبار تفاعلي من 5 أسئلة اختيار من متعدد مع نتيجة فورية. استخدم ألوان دافئة وتصميم مناسب للطلاب"</div>
+
+      <div class="script-line voiceover">الحين اكتب الطلب بالتفصيل. كل ما كان طلبك أدق كانت النتيجة أفضل. اكتب: "اعمل صفحة ويب تعليمية عن درس الخلية للصف السابع. الصفحة لازم تتضمن: عنوان كبير، شرح مبسّط بأمثلة من الحياة اليومية، واختبار تفاعلي من 5 أسئلة اختيار من متعدد مع نتيجة فورية. استخدم ألوان دافئة وتصميم مناسب للطلاب".</div>
+
+      <div class="script-line screen">أظهر الوكيل يبدأ العمل - يخطط وينفذ خطوة بخطوة</div>
+
+      <div class="script-line voiceover">شوفوا! الوكيل بدأ يشتغل. أولاً بيخطط: بيحدد الخطوات اللي لازم يعملها. بعدين بينفذ كل خطوة: بيكتب الكود وبيتأكد منو وبيراجعو. شوفوا كيف بيحلل المهمة ويقسمها لأجزاء! هاد الفرق بين الوكيل والمحادثة العادية.</div>
+
+      <div class="script-line action">انتظر حتى ينتهي الوكيل - أظهر النتيجة النهائية</div>
+
+      <div class="script-line voiceover">وهيك! الصفحة جاهزة! شوفوا: عنوان جميل، شرح مبسّط، واختبار تفاعلي حقيقي بتقدر تضغط على الخيارات ويطلعلك النتيجة. تقدر تنزّل الصفحة وتشاركها مع طلابك عن طريق رابط أو تحويلها لملف HTML.</div>
+
+      <div class="script-line note">هذه اللحظة مهمة جداً - أظهر حماساً حقيقياً عندما تظهر النتيجة. المشاهد لازم يحس بالـ "واو"</div>
+
+      <!-- Part B: Analyze Student Grades -->
+      <div class="script-line highlight">المشروع الثاني: تحليل درجات الطلاب</div>
+
+      <div class="script-line voiceover">المشروع الثاني: تحليل درجات. هاد مشروع كل معلم بيحتاجو. بدل ما تحلل الدرجات بإيدك وتقضي ساعات، الوكيل بيعملها بدقائق.</div>
+
+      <div class="script-line screen">ارفع ملف Excel أو CSV فيه درجات طلاب - أو اكتب بيانات وهمية كمثال</div>
+
+      <div class="script-line voiceover">أول شي ارفع ملف الدرجات. عندك ملف Excel؟ اضغط على زر رفع الملف وارفعو. أو فيك تكتب البيانات مباشرة إذا كانت قليلة.</div>
+
+      <div class="script-line screen">اكتب: "حلّل هالدرجات وأعطيني: 1) متوسط الدرجات لكل مادة 2) الطلاب اللي درجاتهم أقل من 50 3) المادة الأصعب 4) خطة علاجية للطلاب الضعاف 5) رسم بياني بسيط للتوزيع"</div>
+
+      <div class="script-line voiceover">واكتب الطلب بالتفصيل: "حلّل هالدرجات وأعطيني: متوسط الدرجات لكل مادة، الطلاب اللي درجاتهم أقل من 50، المادة الأصعب، خطة علاجية للطلاب الضعاف، رسم بياني للتوزيع".</div>
+
+      <div class="script-line screen">أظهر الوكيل يحلل البيانات ويطلع النتائج</div>
+
+      <div class="script-line voiceover">شوفوا! الوكيل بيقرأ البيانات ويحللها ويطلعلك كل اللي طلبتو. حتى بيعمل رسم بياني! وهاد كله من دقائق. تخيل الوقت اللي كنتِ بتقضيه بالإكسل.</div>
+
+      <div class="script-line voiceover">والأجمل إنو بيعطيك خطة علاجية. يعني مش بس بيحلل، بيقترح حلول. مثلاً: "الطالب أحمد ضعيف بالرياضيات - اقترح التركيز على الكسور بأمثلة عملية". هاد مساعد حقيقي مش بس آلة حاسبة!</div>
+
+      <!-- Part C: Create Presentation -->
+      <div class="script-line highlight">المشروع الثالث: عرض تقديمي كامل بالتصميم</div>
+
+      <div class="script-line screen">اكتب: "اعمل عرض تقديمي عن درس التمثيل الضوئي - 8 شرائح - تصميم احترافي بألوان خضراء - كل شريحة فيها عنوان ونقاط وصورة توضيحية موصوفة - الشريحة الأخيرة أسئلة مراجعة"</div>
+
+      <div class="script-line voiceover">والمشروع التالت: عرض تقديمي كامل. اكتب: "اعمل عرض تقديمي عن درس التمثيل الضوئي - 8 شرائح - تصميم احترافي بألوان خضراء - كل شريحة فيها عنوان ونقاط وصورة توضيحية - الشريحة الأخيرة أسئلة مراجعة".</div>
+
+      <div class="script-line screen">أظهر العرض التقديمي المُولّد</div>
+
+      <div class="script-line voiceover">شوفوا النتيجة! عرض تقديمي بالتصميم والشرائح والمحتوى. تقدر تنزّلو وتستخدمو بالحصة مباشرة. الفرق عن NotebookLM إنو هون بيتولّد مع تصميم فعلي مش بس نص.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية: التفصيل هو المفتاح</div>
+        <p>كل ما كان طلبك أدق بالوكيل، كانت النتيجة أفضل. لا تكتب "اعمل صفحة تعليمية". اكتب: "اعمل صفحة تعليمية عن درس الخلية للصف السابع بألوان دافئة واختبار تفاعلي من 5 أسئلة". الفرق بالنتيجة كبير جداً! الوكيل بينفذ بالضبط شو بتطلب. لو طلبت شي عام بيجيبك شي عام.</p>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم: الوكيل مو معصوم</div>
+        <p>وكيل z.ai ذكي بس مو معصوم. أحياناً بيعمل أخطاء بالكود أو بيطلع نتيجة مش دقيقة. دايماً راجع النتائج قبل ما تستخدمها مع طلابك. خاصة: صحة المعلومات العلمية، عمل الكود فعلياً، ودقة التحليل. الوكيل مساعد مو بديل عنك!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن طبّقنا 3 مشاريع: بنينا صفحة ويب تعليمية تفاعلية بامتحان فوري، وحلّلنا درجات طلاب وطلعنا خطة علاجية، وعملنا عرض تقديمي احترافي بالتصميم. كل هاد الشغل كان الوكيل بيعمو لحاله - إحنا بس طلبنا! السر بالتفصيل: كل ما كان طلبك أدق كانت النتيجة أفضل. وبس تذكّروا: دايماً راجعوا النتائج!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعلم كيف نستخدم z.ai لأتمتة المهام التعليمية المتكررة: من الرد على أسئلة الطلاب لتجهيز الخطط الدرسية لتوليد المحتوى الأسبوعي. rح نوفر ساعات من العمل كل أسبوع. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~750 كلمة | المدة المتوقعة: 12-15 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 23 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة السادسة - الدرس 3 من 4</div>
+      <h1 class="lesson-title">أتمتة المهام التعليمية بوكيل z.ai</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي متقدم</div>
+      <div class="lesson-meta-pill">الأهمية: عالية</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - المعلم الآلي
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر قائمة مهام طويلة - تحضير دروس + أسئلة + خطط + رد على أولياء الأمور</div>
+      <div class="script-line voiceover">كل أسبوع عندك مهام متكررة: تحضير خطط دروس، كتابة أسئلة، الرد على أولياء الأمور، عمل أوراق عمل، تحديث السجلات. وكل أسبوع بتقضي ساعات على نفس الشغل. شو رأيك لو الوكيل الذكي بيعمل أغلب هالشغل لحاله؟ اليوم رح نتعلم كيف نؤتمت المهام التعليمية بـ z.ai!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثالث والعشرين. رح نتعلم اليوم كيف نستخدم وضع الوكيل على z.ai لأتمتة المهام التعليمية المتكررة. رح أوريكم 4 مهام كانبتعملها يدوياً بساعات والحين بنعملها بدقائق بالوكيل. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Lesson Plans -->
+      <div class="script-line highlight">المهمة الأولى: تحضير خطط الدروس الأسبوعية</div>
+
+      <div class="script-line screen">افتح z.ai على وضع الوكيل</div>
+
+      <div class="script-line voiceover">المهمة الأولى: خطط الدروس. كل أسبوع بدك تحضّر خطط لـ 4-5 حصص. بالطريقة العادية هاد بياخد ساعتين أو أكتر. مع الوكيل؟ 5 دقائق!</div>
+
+      <div class="script-line screen">اكتب: "أنا معلم علوم للصف السابع. اعمللي خطة درس كاملة لأسبوع يتضمن 3 حصص عن درس التمثيل الضوئي. كل خطة لازم تتضمن: أهداف الدرس، التمهيد، الشرح مع أمثلة من البيئة السورية، نشاط عملي، تقييم سريع، وواجب منزلي. خطة كل حصة على حدة"</div>
+
+      <div class="script-line voiceover">اكتب طلب مفصّل: "أنا معلم علوم للصف السابع. اعمللي خطة درس كاملة لأسبوع يتضمن 3 حصص عن درس التمثيل الضوئي. كل خطة لازم تتضمن: أهداف الدرس والتمهيد والشرح مع أمثلة من البيئة السورية ونشاط عملي وتقييم سريع وواجب منزلي". شوفوا كيف حددت كل شي: المادة والصف وعدد الحصص والمحتويات.</div>
+
+      <div class="script-line screen">أظهر الخطط المُولّدة - انتقل بينها</div>
+
+      <div class="script-line voiceover">شوفوا! 3 خطط دروس كاملة وجاهزة. كل خطة فيها الأهداف والتمهيد والشرح والنشاط والتقييم والواجب. والشرح بيشمل أمثلة من البيئة السورية مثل الزراعة بالمناطق السورية. كل هاد بأقل من 5 دقائق!</div>
+
+      <!-- Part B: Worksheets -->
+      <div class="script-line highlight">المهمة الثانية: إنشاء أوراق العمل</div>
+
+      <div class="script-line screen">اكتب: "اعمللي 3 أوراق عمل عن درس الكسور: ورقة عمل أساسية للطلاب الضعاف مع أمثلة محلولة، وورقة عمل متوسطة مع تمارين متنوعة، وورقة عمل متقدمة مع مسائل تحدي. كل ورقة بتصميم واضح وجاهز للطباعة"</div>
+
+      <div class="script-line voiceover">المهمة التانية: أوراق العمل. بدك أوراق عمل بمستويات مختلفة؟ اكتب: "اعمللي 3 أوراق عمل عن درس الكسور: أساسية للطلاب الضعاف مع أمثلة محلولة، ومتوسطة مع تمارين متنوعة، ومتقدمة مع مسائل تحدي. كل ورقة بتصميم واضح وجاهز للطباعة".</div>
+
+      <div class="script-line screen">أظهر أوراق العمل المُولّدة</div>
+
+      <div class="script-line voiceover">شوفوا! 3 أوراق عمل بمستويات مختلفة. الأساسية فيها أمثلة محلولة خطوة بخطوة. والمتوسطة فيها تمارين متنوعة. والمتقدمة فيها تحديات. كل وحدة بتصميم واضح تقدر تطبعو فوراً. هاد كانه عندك مساعد بيعمل الشغل كلو!</div>
+
+      <!-- Part C: Parent Communication -->
+      <div class="script-line highlight">المهمة الثالثة: رسائل لأولياء الأمور</div>
+
+      <div class="script-line screen">اكتب: "اكتبلي 3 رسائل لأولياء الأمور: الأولى رسالة ترحيب بداية الفصل عن مادة العلوم للصف السابع، التانية رسالة عن تحسّن ابنهم أحمد بالدرجات مع تشجيع، والتالتة رسالة دعوة لحصة مفتوحة. كل الرسائل بلباقة وود وبأسلوب رسمي"</div>
+
+      <div class="script-line voiceover">المهمة التالتة: كتابة رسائل لأولياء الأمور. هاد شي بيآكل وقت كتير وبتحبص بالكلمات. الوكيل بيعملها بدقيقة! اكتب: "اكتبلي 3 رسائل لأولياء الأمور: ترحيب بداية الفصل، ورسالة عن تحسّن الطالب أحمد، ودعوة لحصة مفتوحة. كل الرسائل بلباقة وود وبأسلوب رسمي".</div>
+
+      <div class="script-line screen">أظهر الرسائل المُولّدة</div>
+
+      <div class="script-line voiceover">شوفوا! رسائل مكتوبة بلباقة واحترافية. جاهزة للإرسال على واتساب أو طباعة. ولو ما عجبتك صيغة معينة، قولو "أعيد كتابة الرسالة التانية بأسلوب أصدق" وبيعيد كتابتها فوراً!</div>
+
+      <!-- Part D: Student Feedback -->
+      <div class="script-line highlight">المهمة الرابعة: ملاحظات وتغذية راجعة للطلاب</div>
+
+      <div class="script-line screen">اكتب: "عندي درجات طلاب الصف السابع بالرياضيات: أحمد 85، سارة 72، خالد 45، نور 91، عمر 38، لينا 67. اكتبلي ملاحظة تشجيعية مخصصة لكل طالب بناءً على درجتو: المتفوقين شجّعهم يكملوا، والمتوسطين حفّزهم يتحسنوا، والضعاف أعطيهم خطة علاجية مختصرة. كل ملاحظة 3-4 أسطر"</div>
+
+      <div class="script-line voiceover">والمهمة الرابعة: ملاحظات مخصصة لكل طالب. هاد كتير مهم بس كتير بيآخذ وقت. اكتب: "عندي درجات طلاب: أحمد 85، سارة 72، خالد 45، نور 91، عمر 38، لينا 67. اكتبلي ملاحظة تشجيعية مخصصة لكل طالب بناءً على درجتو".</div>
+
+      <div class="script-line screen">أظهر الملاحظات المخصصة لكل طالب</div>
+
+      <div class="script-line voiceover">شوفوا! كل طالب حصل على ملاحظة مخصصة. أحمد المتفوق: "ممتاز! استمر بهالتميّز". خالد الضعيف: "بقدّر جهدك والخطة العلاجية رح تساعدك". كل ملاحظة مختلفة ومناسبة. تخيل تعمل هاد الشي لـ 40 طالب بإيدك!</div>
+
+      <div class="script-line note">هذه المهمة الرابعة هي الأكثر تأثيراً عاطفياً - أظهر كيف الوكيل يوفر وقتاً ثميناً للتواصل الشخصي مع الطلاب</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نظام الأتمتة الأسبوعي</div>
+        <p>خليني أعطيكم نظام عملي: كل أحد افتح z.ai واطلب: 1) خطط دروس الأسبوع 2) أوراق العمل 3) ملاحظات الطلاب بناءً على درجاتهم. بياخد 10-15 دقيقة بدل 4-5 ساعات. والوقت اللي وفرتو استثمروه بالتواصل المباشر مع طلابكم - هاد شي الوكيل ما بيقدر يعملو!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن أتمتنا 4 مهام: تحضير خطط الدروس الأسبوعية بتفصيل كامل، وإنشاء أوراق عمل بثلاث مستويات، وكتابة رسائل لأولياء الأمور باحترافية، وتوليد ملاحظات مخصصة لكل طالب بناءً على درجتو. كل هاد كان بيآخذ ساعات وصار بيآخذ دقائق. والسر: طلبات مفصّلة = نتائج ممتازة!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعلم أخطر درس: كيف ندمج z.ai مع NotebookLM بنظام متكامل. NotebookLM للمنهج والتحضير، و z.ai للتنفيذ والأتمتة. الاثنين مع بعض = منظومة تعليمية ذكية. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 24 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة السادسة - الدرس 4 من 4</div>
+      <h1 class="lesson-title">دمج z.ai مع NotebookLM - المنظومة الذكية للمعلم</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 12-15 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تكاملي تطبيقي شامل</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً - درس ختامي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - فريق الذكاء الاصطناعي
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر NotebookLM و z.ai مفتوحين جنب بعض على الشاشة</div>
+      <div class="script-line voiceover">لو عندك مساعدين: واحد خبير بالمنهج بيجاوبك من الكتاب نفسه، وواحد منفّذ بيساعدك تبني وتحلل وتؤتمت. بتحب تستخدم واحد بس؟ طبعاً لأ! بدك الاثنين مع بعض. NotebookLM هو الخبير بالمنهج، و z.ai هو المنفّذ الذكي. واليوم رح ندمجهم مع بعض وبنظام متكامل!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الرابع والعشرين والأخير بالوحدة السادسة. رح نتعلم كيف ندمج NotebookLM و z.ai بمنظومة ذكية واحدة. NotebookLM للمنهج والتحليل والتقييم، و z.ai للتنفيذ والأتمتة والبناء. الاثنين مع بعض = قوة مضاعفة. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">10-12 دقيقة</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: The Integration Strategy -->
+      <div class="script-line highlight">القسم أ: استراتيجية الدمج - كل أداة بدورها</div>
+
+      <div class="script-line screen">أظهر مخطط بسيط: NotebookLM (منهج ← تحليل ← تقييم) + z.ai (تنفيذ ← بناء ← أتمتة)</div>
+
+      <div class="script-line voiceover">القاعدة الذهبية: كل أداة بدورها. NotebookLM خبير المنهج: بترفع الكتاب وبتسألو عن أي شي وبيعطيك إجابات دقيقة مع مراجع. و z.ai المنفّذ الذكي: بتقولو يعمل شي وبينفذو فعلياً. متل ما بيحكوا: NotebookLM بيفكر، و z.ai بيشتغل!</div>
+
+      <div class="script-line voiceover">متى تستخدم NotebookLM؟ لما بدك إجابات من المنهج نفسه. تلخيص دروس، أسئلة امتحانات، أدلة دراسة، بودكاست تعليمي. كل شي مربوط بالمنهج.</div>
+
+      <div class="script-line voiceover">ومتى تستخدم z.ai؟ لما بدك تنفيذ فعلي. بناء صفحات ويب، تحليل بيانات، أتمتة مهام، إنشاء عروض تقديمية بتصميم، كتابة رسائل، بناء أدوات تفاعلية.</div>
+
+      <!-- Part B: Practical Integration -->
+      <div class="script-line highlight">القسم ب: الدمج العملي - ورشة عمل كاملة</div>
+
+      <div class="script-line voiceover">خليني أوريكم كيف ندمجهم عملياً. رح نعمل خطة أسبوع كامل باستخدام الأداتين مع بعض.</div>
+
+      <div class="script-line screen">الخطوة 1: على NotebookLM - افتح دفتر المنهج</div>
+
+      <div class="script-line voiceover">الخطوة الأولى على NotebookLM: افتح دفتر المنهج واسأل: "لخّصلي دروس الأسبوع الجاي بـ 10 نقاط رئيسية لكل درس، واكتبلي أسئلة تشخيصية لكل درس". NotebookLM بيعطيك ملخصات من الكتاب نفسه وأسئلة دقيقة. هاد شي z.ai ما بيعملو لأنو مش مربوط بمنهجك.</div>
+
+      <div class="script-line screen">الخطوة 2: انسخ الملخصات والأسئلة من NotebookLM</div>
+
+      <div class="script-line voiceover">الخطوة التانية: انسخ المحتوى اللي طلع من NotebookLM. الملخصات والأسئلة. هاد المحتوى الدقيق من المنهج اللي رح نستخدمو كأساس.</div>
+
+      <div class="script-line screen">الخطوة 3: على z.ai - الصق المحتوى واطلب التنفيذ</div>
+
+      <div class="script-line voiceover">الخطوة التالتة: على z.ai وضع الوكيل، الصق المحتوى واكتب: "بناءً على هاد المحتوى التعليمي، اعمللي: صفحة ويب تفاعلية فيها الملخصات والأسئلة، وعرض تقديمي بالتصميم، وأوراق عمل بثلاث مستويات".</div>
+
+      <div class="script-line screen">أظهر الوكيل يبدأ العمل بالتنفيذ</div>
+
+      <div class="script-line voiceover">شوفوا! الوكيل أخذ المحتوى الدقيق من NotebookLM وبناه بأشكال مختلفة: صفحة ويب وعرض تقديمي وأوراق عمل. المحتوى من المنهج نفسه، والتنفيذ احترافي!</div>
+
+      <div class="script-line voiceover">وهاد سر الدمج: NotebookLM بيعطيك المحتوى الدقيق المربوط بالمنهج، و z.ai بيحوّل هاد المحتوى لأشكال تنفيذية جاهزة للاستخدام. الاثنين مع بعض أقوى بألف مرة من كل واحد لحاله!</div>
+
+      <!-- Part C: The Smart Weekly System -->
+      <div class="script-line highlight">القسم ج: النظام الأسبوعي الذكي - الخطوة الأخيرة</div>
+
+      <div class="script-line voiceover">والحين خليني أعطيكم النظام الأسبوعي الذكي الكامل اللي بيدمج الأداتين:</div>
+
+      <div class="script-line screen">أظهر جدول النظام الأسبوعي</div>
+
+      <div class="script-line voiceover">يوم الخميس - جلسة التحضير (20 دقيقة): افتح NotebookLM واطلب ملخصات الدروس وأسئلة التقييم. دقيقة ومربوطة بالمنهج. بعدين افتح z.ai وضع الوكيل واطلب: بناء صفحة ويب تعليمية بناءً على الملخصات، وأوراق عمل بثلاث مستويات، وعرض تقديمي، ورسائل لأولياء الأمور.</div>
+
+      <div class="script-line voiceover">الأحد: استخدم الملخصات والعرض التقديمي بالحصة. وزّع أوراق العمل حسب مستوى كل طالب. NotebookLM أعطاك المحتوى و z.ai صمّموه.</div>
+
+      <div class="script-line voiceover">الاثنين والثلاثاء: استخدم صفحة الويب التفاعلية بالحصة. الطلاب بيحلو الأسئلة وبيشوفوا النتائج فورية. شغّل البودكاست من NotebookLM كمراجعة صوتية.</div>
+
+      <div class="script-line voiceover">الأربعاء: اختبار قصير بالأسئلة من NotebookLM. بعد الاختبار، ارفع الدرجات على z.ai واطلب تحليلها وملاحظات مخصصة لكل طالب.</div>
+
+      <div class="script-line voiceover">الخميس: أرسل رسائل أولياء الأمور اللي أعدّها z.ai. وابدأ جلسة التحضير للأسبوع الجاي!</div>
+
+      <div class="script-line action">أظهر كل المخرجات مجتمعة على الشاشة</div>
+
+      <div class="script-line voiceover">شوفوا كل هالمحتوى! ملخصات من NotebookLM + صفحة ويب + عرض تقديمي + أوراق عمل + رسائل + تحليل درجات + ملاحظات مخصصة. كل هاد الشغل كان بيآخذ 10-15 ساعة بالأسبوع. مع المنظومة الذكية؟ أقل من ساعة!</div>
+
+      <!-- Part D: Future of Teaching -->
+      <div class="script-line highlight">القسم د: مستقبل التعليم مع الذكاء الاصطناعي</div>
+
+      <div class="script-line voiceover">والحين خليني أحكي معكم بصراحة عن مستقبل التعليم مع الذكاء الاصطناعي. المعلم اللي بيستخدم الذكاء الاصطناعي مش بيخسر وظيفتو، المعلم اللي ما بيستخدمو هو اللي رح يواجه صعوبات.</div>
+
+      <div class="script-line voiceover">الذكاء الاصطناعي مش بديل عن المعلم. هو أداة بتوفر الوقت والجهد. والمعلم بيستثمر الوقت اللي وفرّو بشي ما أي أداة بتقدر تعملو: التواصل الإنساني مع الطلاب، الفهم الحقيقي لمشاكلهم، الإلهام والتشجيع. هاد شي بس إنتِ بتقدري تعمليه!</div>
+
+      <div class="script-line voiceover">تخيل: بدل ما تقضي 10 ساعات بالتحضير والتقييم، بقضي ساعة واحدة وبالـ 9 ساعات الباقية بتقدر: تجلس مع الطالب الضعيف وتشرحلو لحاله، وتشجّع الطالب المنطوي، وتعمل نشاط إبداعي بالحصة، وتتواصل مع أهلو. هاد التعليم الحقيقي!</div>
+
+      <div class="script-line note">هذا القسم عاطفي ومهم - أظهر صدق وإيمان حقيقي برسالة التعليم. لا تجعله تسويقياً</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">خريطة الأدوات - ملخص سريع</div>
+        <p>NotebookLM: المنهج والتلخيص والأسئلة والبودكاست وأدلة الدراسة والبطاقات. كل شي مربوط بالمصادر. مجاني بالكامل. z.ai: التنفيذ والبناء والأتمتة وتحليل البيانات وصفحات الويب والعروض التقديمية. كل شي تنفيذي. مجاني بالأساسيات. الاثنان معاً: منظومة ذكية كاملة. NotebookLM بيخطط و z.ai بينفّذ!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-50 ثانية</span>
+      الخلاصة - رسالة ختامية
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف ندمج NotebookLM و z.ai: NotebookLM خبير المنهج اللي بيعطيك محتوى دقيق، و z.ai المنفّذ الذكي اللي بيحوّل المحتوى لأشكال تنفيذية. استراتيجية الدمج: NotebookLM بيفكر و z.ai بيشتغل. والنظام الأسبوعي الذكي بيوفّرلك 9 ساعات من 10. استثمر الوقت اللي وفرّتو بالتواصل المباشر مع طلابكم - هاد شي ما بيقدر يعملو لا NotebookLM ولا z.ai. أنتِ المعلم الحقيقي والأدوات بس بتساعدك!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">15-20 ثانية</span>
+      دعوة للعمل - الختام
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">وهيك خلصنا الكورس كله! 24 درس تعلمنا فيها NotebookLM من الصفر للاحتراف، وتعلمنا z.ai و AI Agents لأتمتة المهام التعليمية. الحين عندك منظومة ذكية كاملة: خبير منهج ومنفّذ ذكي. استخدمهم وحسّن تعليمك! وشاركوا الكورس مع زملائكم. كل معلم سوري بيستاهل يتعلم هالأدوات. بالتوفيق!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~750 كلمة | المدة المتوقعة: 12-15 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+</body>
+</html>

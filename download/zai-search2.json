@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://z.ai/blog/glm-4.5",
+    "name": "GLM-4.5: Reasoning, Coding, and Agentic Abililties - Z.ai",
+    "snippet": "GLM-4.5 is built with 355 billion total parameters and 32 billion active parameters, and GLM-4.5-Air with 106 billion total parameters and 12 ...",
+    "host_name": "z.ai",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://z.ai/blog/glm-5",
+    "name": "GLM-5: From Vibe Coding to Agentic Engineering - Z.ai",
+    "snippet": "With GLM-5, we further enhance complex systems engineering and long-horizon agent capabilities. GLM-5 can turn text or source materials ...",
+    "host_name": "z.ai",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.z.ai/release-notes/new-released",
+    "name": "New Released - Overview - Z.AI DEVELOPER DOCUMENT",
+    "snippet": "Designed for long-horizon tasks, GLM-5.1 can work independently for up to 8 hours in a single run, enabling a full loop from planning and execution to ...",
+    "host_name": "docs.z.ai",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/LocalLLaMA/comments/1ptxm3x/ama_with_zai_the_lab_behind_glm47",
+    "name": "AMA With Z.AI, The Lab Behind GLM-4.7 : r/LocalLLaMA - Reddit",
+    "snippet": "GLM-4.6v understands text, layout, charts, tables, and figures jointly, which enables multimodal agents in real-world business scenarios. One ...",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=m6MF1OR_9kM",
+    "name": "Z.ai GLM 4.6: What We Learned From 100 Million Open  - YouTube",
+    "snippet": "... GLM 4.6, including their move to single-stage Reinforcement Learning (RL), the \"SLIME\" RL framework for handling complex agent trajectories ...",
+    "host_name": "www.youtube.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.facebook.com/groups/developerkaki/posts/2659455084400388",
+    "name": "Z.ai glm-4.6 coding plan review - Facebook",
+    "snippet": "Claude Sonnet 4.5 appears to be superior to GLM-4.6 in coding performance, with users reporting better results and faster coding capabilities. •.",
+    "host_name": "www.facebook.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://mysummit.school/blog/en/glm5-zai-review-2026",
+    "name": "GLM-5 Review: Chat.z.ai Pricing, Benchmarks & Agent Mode (2026)",
+    "snippet": "Zhipu AI – a spinoff from Tsinghua University, founded in 2019 – rebranded to Z.ai by 2025 and went public on the Hong Kong Stock Exchange in ...",
+    "host_name": "mysummit.school",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://z.ai/blog/glm-4.7",
+    "name": "GLM-4.7: Advancing the Coding Capability - Z.ai",
+    "snippet": "Complex Reasoning: GLM-4.7 delivers a substantial boost in mathematical and reasoning capabilities, achieving (42.8%, +12.4%) on the HLE ( ...",
+    "host_name": "z.ai",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.chinatalk.media/p/the-zai-playbook",
+    "name": "The Z.ai Playbook - ChinaTalk",
+    "snippet": "I believe we became famous with the launch of GLM 4.5 and 4.6 because they are very capable in coding, reasoning, and agentic tool use. That's ...",
+    "host_name": "www.chinatalk.media",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=OHmXgVL6pCI",
+    "name": "Z.ai GLM-5 Tutorial | This AI Agent Built My Telegram Bot Automatically",
+    "snippet": "(Discount Link) Try Z.ai Now: https://tinyurl.com/ttzaiGLM-5 Discover how z.ai's GLM-5 streamlines AI-powered coding, from simple prompts to ...",
+    "host_name": "www.youtube.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]
