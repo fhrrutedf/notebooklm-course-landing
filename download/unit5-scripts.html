@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة الخامسة - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #0d3a8e, #1a56db);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '\1F3A4  ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '\1F3AC  ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '\1F5A5  ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '\1F4DD  ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '\26A1  ';
+    font-size: 10pt;
+  }
+
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+  }
+
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">سكريبت فيديو جاهز للتسجيل</div>
+  <h1 class="cover-title">الوحدة الخامسة<br>استراتيجيات المعلم السوري</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو جاهز للتسجيل مباشرة. الوحدة الأخيرة: تطبيق عملي ميداني يناسب واقع المعلم السوري
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المدة التقريبية</span>
+      <span class="value">35-45 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">متقدم - ميداني</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 17 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الخامسة - الدرس 1 من 4</div>
+      <h1 class="lesson-title">التعليم الشامل - دمج طلاب الاحتياجات الخاصة</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: استراتيجيات تطبيقية</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - الواقع الذي نعيشه
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر صورة لصف فيه طلاب بقدرات مختلفة - أو وصف بصري لغرفة صف متنوعة</div>
+      <div class="script-line voiceover">بكل صف عندنا طلاب بقدرات مختلفة. طالب عنده صعوبات تعلّم، وطالب عنده إعاقة سمعية، وطالب موهوب محتاج تحديات أكبر. بالطريقة التقليدية، المستحيل تعطي كل واحد المحتوى اللي يناسبه. بس مع NotebookLM؟ صار ممكن! اليوم رح نتعلم استراتيجيات التعليم الشامل بالذكاء الاصطناعي.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس السابع عشر. هاد أول درس بالوحدة الخامسة والأخيرة: استراتيجيات المعلم السوري. رح نتعلم كيف نستخدم NotebookLM لدمج الطلاب ذوي الاحتياجات الخاصة، وكيف نخصّص المحتوى لكل فئة. هاد الدرس مهم كتير لأنو بيتعامل مع واقعنا الفعلي. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Hearing Impairment -->
+      <div class="script-line highlight">القسم أ: الطلاب ذوو الإعاقة السمعية</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح مع مصادر المنهج</div>
+
+      <div class="script-line voiceover">خلينا نبدأ بالطلاب اللي عندهم إعاقة سمعية. هدول الطلاب ما بيقدروا يسمعوا البودكاست أو المحتوى الصوتي. فشو الحل؟</div>
+
+      <div class="script-line screen">اكتب: "اعمل ملخص مكتوب شامل عن درس الخلية بلغة مبسطة ومباشرة - بدون مصطلحات معقدة - مع صور توضيحية موصوفة بالتفصيل"</div>
+
+      <div class="script-line voiceover">الحل الأول: ملخصات مكتوبة مفصّلة بدل البودكاست. اكتب: "اعمل ملخص مكتوب شامل عن درس الخلية بلغة مبسطة ومباشرة - بدون مصطلحات معقدة - مع صور توضيحية موصوفة بالتفصيل". هيك بتحصل على نص مكتوب واضح بديل الصوت.</div>
+
+      <div class="script-line screen">أظهر الملخص المكتوب المُولّد</div>
+
+      <div class="script-line voiceover">والحل التاني: العروض التقديمية البصرية. الخرائط الذهنية والإنفوجرافيك اللي عملناها بدرس سابق ممتازة للطلاب الصم لأنها بصرية بالكامل. الصورة بتوصّل المعلومة أحسن من الكلام.</div>
+
+      <div class="script-line note">عند ذكر الإعاقة السمعية، استخدم تعبيرات محترمة: "طلاب ذوو إعاقة سمعية" وليس "الصم" أو "الطرشان"</div>
+
+      <!-- Part B: Learning Difficulties -->
+      <div class="script-line highlight">القسم ب: الطلاب ذوو صعوبات التعلّم</div>
+
+      <div class="script-line screen">اكتب: "اشرح درس الكسور الاعتيادية بجمل قصيرة وكلمات بسيطة مع أمثلة يومية كثيرة - كل فكرة بفقرة منفصلة - أضف رموز تعبيرية توضيحية"</div>
+
+      <div class="script-line voiceover">الحين لطلاب صعوبات التعلّم. هدول الطلاب بيحتاجوا شرح أبسط وأبطأ وأمثلة أكتر. اكتب: "اشرح درس الكسور الاعتيادية بجمل قصيرة وكلمات بسيطة مع أمثلة يومية كثيرة - كل فكرة بفقرة منفصلة - أضف رموز تعبيرية توضيحية".</div>
+
+      <div class="script-line screen">أظهر الشرح المبسّط مع الرموز التوضيحية</div>
+
+      <div class="script-line voiceover">شوفوا! كل فكرة بفقرة قصيرة وكلمات بسيطة وأمثلة من حياة الطالب. الرموز التعبيرية بتساعد الطالب يتذكر المعلومة بصرياً. وهاد بيتوافق مع مبادئ التعلّم متعدد الحواس.</div>
+
+      <div class="script-line voiceover">وكمان فيك تعمل بطاقات تعليمية بصور: "اعمل بطاقات تعليمية عن درس الخلية - الوجه الأول صورة أو وصف بصري والوجه التاني معلومة بسيطة". الطالب بيربط الصورة بالمعلومة وبتترسخ أكتر.</div>
+
+      <div class="script-line voiceover">وبالنسبة للبودكاست، فيك تطلب: "اعمل بودكاست بطيء الإيقاع مع تكرار المعلومات المهمة وبأسلوب مبسّط". هيك لو الطالب بيقدر يسمع جزئياً، بيكون الإيقاع بطيء كافي ليتابع.</div>
+
+      <!-- Part C: Gifted Students -->
+      <div class="script-line highlight">القسم ج: الطلاب الموهوبون</div>
+
+      <div class="script-line screen">اكتب: "أعطني 5 تمارين تحدي إضافية عن درس الكسور - مستوى متقدم - تتطلب تفكير نقدي وإبداع - مع الحلول التفصيلية"</div>
+
+      <div class="script-line voiceover">والطلاب الموهوبين كمان محتاجين اهتمام! كتير معلمين بيشتغلوا مع الطلاب الضعاف وينسوا المتفوقين. NotebookLM بيساعدك تعطيهم محتوى إثرائي. اكتب: "أعطني 5 تمارين تحدي إضافية عن درس الكسور - مستوى متقدم - تتطلب تفكير نقدي وإبداع - مع الحلول التفصيلية".</div>
+
+      <div class="script-line screen">أظهر تمارين التحدي المتقدمة</div>
+
+      <div class="script-line voiceover">شوفوا! أسئلة بتتطلب تفكير عميق مش مجرد تطبيق. وكمان فيك تطلب: "اشرح المفهوم بمستوى أعمق مع تطبيقات من الواقع العلمي" أو "اربط الدرس بمواضيع تانية بالمنهج وبيّن العلاقة بينهم". المتفوق بيحتاج يربط الأفكار ويتعمّق.</div>
+
+      <!-- Part D: Visual Impairment -->
+      <div class="script-line highlight">القسم د: الطلاب ذوو الإعاقة البصرية</div>
+
+      <div class="script-line voiceover">والطلاب اللي عندهم إعاقة بصرية، NotebookLM بيساعد بطريقتين:</div>
+
+      <div class="script-line screen">اكتب: "اعمل بودكاست تعليمي عن درس الخلية - إيقاع واضح - مع وصف صوتي دقيق لكل مفهوم - بدون الإشارة لصور أو أشكال بصرية"</div>
+
+      <div class="script-line voiceover">أولاً: البودكاست! هاد أقوى أداة للطالب اللي ما بيقدر يشوف. بيسمع الشرح مثل أي طالب تاني. بس مهم تخصص البودكاست: "اعمل بودكاست تعليمي عن درس الخلية - إيقاع واضح - مع وصف صوتي دقيق لكل مفهوم - بدون الإشارة لصور أو أشكال بصرية". هيك البودكاست بيعتمد على الصوت بس بشكل كامل.</div>
+
+      <div class="script-line voiceover">ثانياً: النصوص المكتوبة اللي بتقدر تحوّلها لصوت ببرامج قارئ الشاشة. اكتب محتوى نصي منظم بدون صور، وبعدين الطالب بيستخدم قارئ الشاشة الموجود بالهاتف أو الكمبيوتر ليسمعه.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">مبدأ التعليم الشامل (UDL)</div>
+        <p>التعليم الشامل مش معناه إنك تعمل محتوى مختلف لكل طالب. معناه إنك تعمل محتوى واحد بأشكال متعددة. الدرس الواحد يتحول لـ: نص مكتوب + بودكاست صوتي + عرض بصري + بطاقات تعليمية. كل طالب بيختار الشكل اللي يناسبه. NotebookLM بيعمل هالشي بسهولة!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نخدم كل فئة من الطلاب: الطلاب ذوي الإعاقة السمعية بالملخصات المكتوبة والوسائل البصرية، وطلاب صعوبات التعلّم بالشرح المبسّط والأمثلة اليومية، والطلاب الموهوبين بالتحديات المتقدمة والإثراء، وطلاب الإعاقة البصرية بالبودكاست المتخصص والنصوص المنظمة. المبدأ الأساسي: نفس المحتوى بأشكال متعددة. كل طالب بيختار اللي يناسبه.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعلم كيف نتعامل مع التحديات الواقعية اللي بيواجهها المعلم السوري: إنترنت ضعيف، أجهزة قديمة، ومناهج ضخمة. حلول عملية مبنية على تجربة حقيقية. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 18 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الخامسة - الدرس 2 من 4</div>
+      <h1 class="lesson-title">التعامل مع التحديات الواقعية للمعلم السوري</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: حلول عملية ميدانية</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - واقعنا الحقيقي
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر رسالة خطأ "No internet connection" على الشاشة - أو إشارة ضعف الإنترنت</div>
+      <div class="script-line voiceover">الإنترنت ضعيف. الكمبيوتر قديم. المنهج ضخم والوقت محدود. ولسه بدك تحضّر 5 حصص لبكرا! هاد واقعنا كمعلمين سوريين. ما بنقدر نتجاهله. بس بنقدر نتعامل معه بذكاء. اليوم رح أشارككم حلول عملية جربتها بنفسي لتجاوز هالتحديات باستخدام NotebookLM.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثامن عشر. هاد درس خاص ومهم لأنو بيتعامل مع واقعنا الفعلي كمعلمين سوريين. الإنترنت الضعيف، الأجهزة القديمة، المناهج الضخمة، وضيق الوقت. رح أوريكم حلول جربتها بنفسي ومشتغلت فعلياً. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Weak Internet -->
+      <div class="script-line highlight">القسم أ: الإنترنت الضعيف - حلول عملية</div>
+
+      <div class="script-line voiceover">أكبر مشكلة عندنا: الإنترنت. بس خليني أوريكم كيف نتغلب عليها.</div>
+
+      <div class="script-line voiceover">الحل الأول: استغل أوقات الإنترنت القوي. غالباً بالليل أو الصبح الباكر الإنترنت بيكون أسرع. خصّص 20-30 دقيقة بهالوقت لرفع المصادر وتوليد المحتوى على NotebookLM. لما الإنترنت ضعيف، اشتغل على المحتوى اللي ولّدته بدون إنترنت: راجعه، عدّله، اطبعه.</div>
+
+      <div class="script-line voiceover">الحل الثاني: اجمع كل أسئلتك وطلباتك بقائمة. لما يتصل الإنترنت، افتح NotebookLM واعمل كل شي مرة وحدة: ارفع المصادر واطلب الملخصات والأسئلة والبودكاست. هيك بتحافظ على اتصال واحد بدل عشر اتصالات.</div>
+
+      <div class="script-line voiceover">الحل الثالث: حمّل كل شي لما تكون متصل. حمّل البودكاست كملف صوتي. حمّل الملخص كـ PDF. حمّل العرض التقديمي. لما الإنترنت يقطع، عندك كل شي محفوظ على جهازك ومش محتاج اتصال.</div>
+
+      <div class="script-line screen">أظهر ملفات محمّلة على سطح المكتب: PDF + ملف صوتي + عرض تقديمي</div>
+
+      <div class="script-line voiceover">شوفوا! كل شي محمّل على الجهاز. الملخص والبودكاست والعرض. بدون إنترنت فيك تشتغل عليهم متل ما بدك.</div>
+
+      <div class="script-line note">هذه النقطة عملية جداً للمعلمين السوريين - ينبغي التركيز عليها وإعطاؤها وقتاً كافياً</div>
+
+      <!-- Part B: Old Devices -->
+      <div class="script-line highlight">القسم ب: الأجهزة القديمة - NotebookLM خفيف!</div>
+
+      <div class="script-line voiceover">المشكلة التانية: الأجهزة القديمة. بس الخبر الحسن إنو NotebookLM مش بيحتاج جهاز قوي! هو بيشتغل على المتصفح، يعني حتى لو عندك كمبيوتر قديم أو لابتوب ضعيف، بيشتغل.</div>
+
+      <div class="script-line screen">أظهر NotebookLM مفتوح على متصفح - أشر على بساطة الواجهة</div>
+
+      <div class="script-line voiceover">شوفوا الواجهة خفيفة ومش فيها رسوميات ثقيلة. حتى على جهاز بـ 4 جيجا رام بيشتغل بسلاسة. المشكلة الوحدة بتكون بالإنترنت مو بالجهاز.</div>
+
+      <div class="script-line voiceover">وكمان فيك تستخدم الهاتف! NotebookLM بيشتغل على متصفح الهاتف. مو بس الكمبيوتر. افتح Chrome على هاتفك وادخل notebooklm.google.com. الواجهة بتكون أصغر شوي بس بتشتغل تمام. هاد مهم كتير لمعلمين ما عندهم كمبيوتر بالبيت.</div>
+
+      <div class="script-line screen">أظهر NotebookLM على شاشة هاتف (إذا أمكن محاكاة شاشة الهاتف على المتصفح)</div>
+
+      <div class="script-line voiceover">وإذا عندك تابلت، هاد أحلى شي. الشاشة أكبر وبتشتغل بسلاسة. حتى تابلت قديم بيسمح بتشغيل NotebookLM بلا مشاكل.</div>
+
+      <!-- Part C: Large Curriculum -->
+      <div class="script-line highlight">القسم ج: المنهج الضخم - استراتيجية التقسيم</div>
+
+      <div class="script-line voiceover">المنهج السوري ضخم. كتاب 200 صفحة فيك ما ترفعه كامل وتسأل عن كل شي مرة وحدة. لازم تكون ذكي بطريقة الشغل.</div>
+
+      <div class="script-line voiceover">الاستراتيجية الأولى: قسم المنهج لفصول. اعمل دفتر لكل فصل دراسي منفصل. داخل كل دفتر، ارفع كل فصل كمصدر منفصل. هيك لما بدك تلخص الفصل الثالث، بتعطل باقي المصادر وبتسأل بس عن الثالث. الإجابات بتكون أدق وأسرع.</div>
+
+      <div class="script-line voiceover">الاستراتيجية الثانية: ابدأ بالأهم. مو لازم تعمل كل شي للمنهج كامل. ابدأ بالوحدة اللي بدك تشرحها هالأسبوع. اعمل ملخص + أسئلة + عرض تقديمي لهالوحدة بس. الأسبوع الجاي اعمل الوحدة التانية. خطوة خطوة مش كله مرة وحدة.</div>
+
+      <div class="script-line voiceover">الاستراتيجية الثالثة: استخدم القوالب الجاهزة. لما تعمل أسئلة لموضوع، احفظ صيغة السؤال: "اكتب لي 10 أسئلة اختيار من متعدد عن [الموضوع] مع الإجابات". الأسبوع الجاي بدّل اسم الموضوع بس. هيك بتوفر وقت كتابة الطلب.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة من واقع التجربة</div>
+        <p>أنا شخصياً بقضي 20 دقيقة يوم الخميس بتجهيز أسبوع كامل. أرفع المصادر وأطلب الملخصات والأسئلة لكل درس بالأسبوع الجاي. أحفظ كل شي على جهازي. وبس! الأسبوع كامل جاهز بـ 20 دقيقة. مقارنة بـ 5-6 ساعات بالطريقة التقليدية.</p>
+      </div>
+
+      <!-- Part D: Time Management -->
+      <div class="script-line highlight">القسم د: ضيق الوقت - نظام الـ20 دقيقة</div>
+
+      <div class="script-line voiceover">والحين خليني أعطيكم نظام عملي بتطبّقوه بأقل وقت ممكن. اسمه "نظام الـ20 دقيقة".</div>
+
+      <div class="script-line voiceover">الدقائق 1-5: افتح NotebookLM وارفع مصادر الأسبوع. كتاب المنهج أو الفصول المطلوبة.</div>
+
+      <div class="script-line voiceover">الدقائق 5-10: اطلب الملخصات. لكل درس بالأسبوع، اطلب ملخص بالنقاط الرئيسية. 4-5 دروس = 4-5 ملخصات.</div>
+
+      <div class="script-line voiceover">الدقائق 10-15: اطلب الأسئلة. لكل درس، اطلب 10 أسئلة اختيار من متعدد. هيك عندك بنك أسئلة جاهز.</div>
+
+      <div class="script-line voiceover">الدقائق 15-20: حمّل كل شي. حمّل الملخصات كـ PDF والأسئلة كنص. احفظهم بمجلد منظم على جهازك.</div>
+
+      <div class="script-line voiceover">وهيك! بأقل من 20 دقيقة جهزت محتوى أسبوع كامل: ملخصات + أسئلة. لو بدك تزيد، اعمل بودكاست وعرض تقديمي بالأسبوع التاني لما يكون عندك وقت أكتر.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم: VPN قد يلزم</div>
+        <p>بعض المناطق في سوريا قد تحتاج VPN للوصول إلى NotebookLM. استخدم أي VPN مجاني موثوق. إذا لم يتوفر VPN، جرّب تغيير DNS في إعدادات الشبكة إلى 8.8.8.8 و8.8.4.4 (DNS جوجل). هذه الطريقة قد تحل المشكلة بدون VPN.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا حلول عملية للتحديات الواقعية: للإنترنت الضعيف، استغل أوقات القوة وحمّل كل شي لما تكون متصلاً. للأجهزة القديمة، NotebookLM خفيف ويشتغل حتى على الهاتف. للمنهج الضخم، قسمه لفصول وابدأ بالأهم. ولضيق الوقت، نظام الـ20 دقيقة بيجّهزلك أسبوع كامل. الواقع صعب بس الحلول موجودة!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعلم كيف نبني خطة أسبوعية متكاملة باستخدام NotebookLM - من التحضير للتدريس للتقييم. الخطة الشاملة اللي رح تغيّر تنظيمك بالكامل. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 19 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الخامسة - الدرس 3 من 4</div>
+      <h1 class="lesson-title">الخطة الأسبوعية المتكاملة مع NotebookLM</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تخطيط تطبيقي شامل</div>
+      <div class="lesson-meta-pill">الأهمية: عالية - درس محوري</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - الأسبوع المثالي
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر جدولاً أسبوعياً منظماً (يمكن عرضه كملف أو على الشاشة)</div>
+      <div class="script-line voiceover">تخيل أسبوعك كمعلم: الأحد حصة محضّرة بملخص + عرض + أسئلة. الاثنين مراجعة ببودكاست + بطاقات تعليمية. الثلاثاء شرح جديد بالعرض التقديمي. الأربعاء تقييم بأسئلة تشخيصية. الخميس مراجعة شاملة بدليل دراسة. كل شي جاهز ومنظم ومربوط بالمنهج. وكل هالتحضير أخد 30 دقيقة بس! اليوم رح أوريكم كيف.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس التاسع عشر. رح نتعلم اليوم كيف نبني خطة أسبوعية متكاملة باستخدام NotebookLM. من التحضير للتدريس للتقييم، كل شي مربوط ومنظم. وهاد الدرس بيلمّ كل اللي تعلمناه بالكورس كله. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Thursday Prep -->
+      <div class="script-line highlight">القسم أ: الخميس - يوم التحضير (30 دقيقة)</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح - ابدأ العملية خطوة بخطوة</div>
+
+      <div class="script-line voiceover">الخطة بتبدأ يوم الخميس. هاد يوم التحضير. 30 دقيقة وبس. خليني أوريكم بالتفصيل.</div>
+
+      <div class="script-line screen">الخطوة 1: افتح الدفتر - تأكد إنو المصادر مرفوعة</div>
+
+      <div class="script-line voiceover">الخطوة الأولى: افتح الدفتر اللي فيه المنهج. إذا كان جاهز من أسبوع سابق، ممتاز. إذا لأ، ارفع كتاب المنهج كـ PDF. بياخد حوالي 30-40 ثانية.</div>
+
+      <div class="script-line screen">الخطوة 2: اطلب ملخصات الدروس - اكتب: "لخّصلي الدروس الثلاثة اللي رح أشرحها الأسبوع الجاي: [أسماء الدروس] - كل درس بـ 10 نقاط رئيسية"</div>
+
+      <div class="script-line voiceover">الخطوة الثانية: اطلب ملخصات. اكتب أسماء الدروس واطلب تلخيص كل واحد بعشر نقاط. شغل واطلبهم كلهم بطلب واحد. NotebookLM بيجاوبك عن كل درس بالتتابع.</div>
+
+      <div class="script-line screen">الخطوة 3: اطلب أسئلة - اكتب: "لكل درس من الدروس الثلاثة، اكتب 10 أسئلة اختيار من متعدد مع الإجابات"</div>
+
+      <div class="script-line voiceover">الخطوة الثالثة: اطلب أسئلة. نفس الشيء، اطلب أسئلة لكل درس بطلب واحد. بتحصل على بنك أسئلة كامل للأسبوع.</div>
+
+      <div class="script-line screen">الخطوة 4: اعمل عرض تقديمي لأهم درس بالأسبوع</div>
+
+      <div class="script-line voiceover">الخطوة الرابعة: اختر أهم درس بالأسبوع واعملله عرض تقديمي من Studio. هاد العرض رح تستخدمه بالحصة الرئيسية.</div>
+
+      <div class="script-line screen">الخطوة 5: حمّل كل شي - احفظ الملخصات والأسئلة والعرض</div>
+
+      <div class="script-line voiceover">الخطوة الخامسة والأخيرة: حمّل كل شي. الملخصات كـ PDF، والأسئلة كنص، والعرض كـ PDF. احفظهم بمجلد اسمه "الأسبوع [الرقم]".</div>
+
+      <div class="script-line voiceover">وهيك! 30 دقيقة وأسبوعك جاهز. خليني أوريكم كيف بتوزّعوا هالمحتوى على أيام الأسبوع.</div>
+
+      <!-- Part B: Weekly Schedule -->
+      <div class="script-line highlight">القسم ب: توزيع المحتوى على أيام الأسبوع</div>
+
+      <div class="script-line screen">أظهر جدول الأسبوع - الأحد للخميس</div>
+
+      <div class="script-line voiceover">الأحد: أول حصة بالأسبوع. استخدم الملخص كمرجع للشرح. اعرض العرض التقديمي على الطلاب. واعطيهم الملخص المطبوع كمرجع. هيك الطالب بيحس إنو الحصة منظمة ومرتبة ومش عشوائية.</div>
+
+      <div class="script-line voiceover">الاثنين: حصة التعزيز. لو في درس تاني، شرّحه بالملخص. ولو نفس الدرس، اعمل مراجعة بأسئلة سريعة من الأسئلة اللي ولّدتها. مسابقة بين المجموعات: مين بيجاوب أكتر؟</div>
+
+      <div class="script-line voiceover">الثلاثاء: حصة البودكاست. شغّل البودكاست التعليمي أول 5 دقايق من الحصة. خلّي الطلاب يسمعوا وبعدين ناقشهم: "شو أهم شي سمعتوه؟ شو جديد تعلمتوه؟". البودكاست بيضيف تنويعة بتجذب الطلاب.</div>
+
+      <div class="script-line voiceover">الأربعاء: حصة التقييم. وزّع أسئلة الاختيار من متعدد كاختبار قصير. 10 دقايق بس. راجع الإجابات مع الطلاب. وشوف مين فهم ومين محتاج مراجعة. هاد التقييم بيساعدك تعدّل خطتك للأسبوع الجاي.</div>
+
+      <div class="script-line voiceover">الخميس: حصة المراجعة الشاملة. استخدم بطاقات Flashcards للمراجعة التفاعلية. ووزّع دليل الدراسة المختصر كمراجعة للطلاب. واختم الأسبوع بودكاست مراجعة قصير بيتشتركه بمجموعة واتساب.</div>
+
+      <div class="script-line note">يمكن عرض الجدول كملف على الشاشة أثناء الشرح ليتابع المشاهد التوزيع الزمني بصرياً</div>
+
+      <!-- Part C: Multi-Subject -->
+      <div class="script-line highlight">القسم ج: التعامل مع أكثر من مادة</div>
+
+      <div class="script-line voiceover">والحين سؤال مهم: أنا بدرّس أكتر من مادة. كيف أدير كلهم؟</div>
+
+      <div class="script-line voiceover">القاعدة الأولى: دفتر منفصل لكل مادة. ما تخلط مواد مختلفة بنفس الدفتر لأنو الأسئلة والإجابات بتتداخل. دفتر للرياضيات ودفتر للعلوم ودفتر للغة العربية. كل دفتر مستقل.</div>
+
+      <div class="script-line voiceover">القاعدة الثانية: دوّر التحضير. الأسبوع الأول ركّز على الرياضيات. الأسبوع التاني ركّز على العلوم. مش لازم تحضّر كل المواد بنفس المستوى كل أسبوع. دوّر بينهم.</div>
+
+      <div class="script-line voiceover">القاعدة الثالثة: استخدم القوالب الموحّدة. نفس صيغة الأسئلة والملخصات لكل المواد. هيك ما بتحتاج تفكر بالصيغة كل مرة، بس بدّل اسم الموضوع. مثلاً: "لخّصلي [الموضوع] بـ 10 نقاط" - نفس الطلب بس غيّر اسم الموضوع.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية: مجلد لكل أسبوع</div>
+        <p>أنشئ مجلد على جهازك اسمه "أسبوع 1" و"أسبوع 2" وهكذا. بكل مجلد حط: ملخصات PDF + أسئلة Word + عرض تقديمي + ملف صوتي بودكاست. هيك بترجع لأي أسبوع لاحقاً وتلاقي كل شي جاهز. السنة الجاية بتعيد استخدام نفس المحتوى مع تعديلات بسيطة!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا نظام الخطة الأسبوعية: يوم الخميس 30 دقيقة تحضير كامل: ملخصات + أسئلة + عرض تقديمي. وتوزيع المحتوى على الأيام: الأحد شرح بالعرض، الاثنين تعزيز بالأسئلة، الثلاثاء تنويع بالبودكاست، الأربعاء تقييم قصير، والخميس مراجعة شاملة. ومع أكتر من مادة: دفتر منفصل لكل مادة ودوّر التحضير واستخدم قوالب موحّدة.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">وبكرة الدرس الأخير بالكورس كله! رح نعمل ورشة عمل حية: من الصفر لاختبار كامل. رح نطبق كل شي تعلمناه بدرس واحد. ونهاية الكورس وهديتك! لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 20 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الخامسة - الدرس 4 من 4</div>
+      <h1 class="lesson-title">ورشة العمل النهائية: من الصفر لاختبار كامل</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 15-18 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: ورشة عمل شاملة</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً - درس ختامي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخطاف (Hook) - اللحظة الحاسمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر شاشة فارغة - لا أي برنامج مفتوح</div>
+      <div class="script-line voiceover">هاد الدرس الأخير بالكورس. وما رح أشرح شي جديد. رح نعمل كل شي مع بعض! من الصفر: فتح NotebookLM، رفع المنهج، تلخيصه، عمل عرض تقديمي، توليد أسئلة، عمل بودكاست، وبناء خطة أسبوعية. كل شي بدرس واحد. وإذا قدرت تتابع وتطبّق معي، بتعرف إنك جاهز تستخدم الأداة لحالك! يلا نبدأ.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس العشرين والأخير من كورس "إتقان NotebookLM للمعلمين". هاد درس ورشة عمل كاملة. رح نطبق كل اللي تعلمناه بالـ19 درس اللي فاتوا. إذا بدك تتابع معي وتطبّق على جهازك، هاد أحلى شي. وإذا بدك بس تتفرج، ما في مشكلة. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">12-15 دقيقة</span>
+      الشرح والتطبيق - ورشة العمل الكاملة
+    </div>
+    <div class="script-section-body">
+
+      <!-- Step 1 -->
+      <div class="script-line highlight">الخطوة 1: إنشاء دفتر جديد ورفع المنهج (2 دقيقة)</div>
+
+      <div class="script-line screen">افتح المتصفح واكتب notebooklm.google.com</div>
+
+      <div class="script-line voiceover">يلا نبدأ! افتح المتصفح واكتب notebooklm.google.com. ادخل بحساب جوجل.</div>
+
+      <div class="script-line action">انقر على "+ New Notebook" - سمّيه "منهج العلوم - الأسبوع الخامس"</div>
+
+      <div class="script-line voiceover">اعمل دفتر جديد وسمّيه "منهج العلوم - الأسبوع الخامس". الاسم الواضح بيساعدك تلاقيه بعدين.</div>
+
+      <div class="script-line action">انقر "+ Add Source" - ارفع ملف PDF لكتاب المنهج</div>
+
+      <div class="script-line voiceover">اضغط "+ Add Source" وارفع ملف PDF لكتاب المنهج. أنا رح أرفع كتاب العلوم للصف السابع. انتظر لحد ما يكتمل الرفع... تمام! المصدر جاهز.</div>
+
+      <!-- Step 2 -->
+      <div class="script-line highlight">الخطوة 2: تلخيص دروس الأسبوع (3 دقائق)</div>
+
+      <div class="script-line screen">اكتب: "لخّصلي الدروس الثلاثة اللي بالوحدة الثالثة - كل درس بـ 8 نقاط رئيسية مع ذكر المصدر"</div>
+
+      <div class="script-line voiceover">الحين اطلب الملخصات: "لخّصلي الدروس الثلاثة اللي بالوحدة الثالثة - كل درس بـ 8 نقاط رئيسية مع ذكر المصدر". شوف كيف حددت: عدد الدروس وعدد النقاط وطلبت المراجع. هيك بتحصل على ملخص دقيق وموثوق.</div>
+
+      <div class="script-line screen">أظهر الملخصات المُولّدة - انتقل بينها</div>
+
+      <div class="script-line voiceover">شوفوا! ثلاث ملخصات منظمة ومرتبة. كل نقطة مذكور مصدرها. هاد بياخد مني 30 ثانية بدل ساعتين بالطريقة التقليدية!</div>
+
+      <!-- Step 3 -->
+      <div class="script-line highlight">الخطوة 3: إنشاء عرض تقديمي (2 دقيقة)</div>
+
+      <div class="script-line screen">من Studio، اختر "Slide Deck" - اكتب تعليمات: "اعمل عرض تقديمي عن الدرس الأول من الوحدة الثالثة - 8 شرائح - ركّز على المفاهيم الأساسية"</div>
+
+      <div class="script-line voiceover">الحين العرض التقديمي. من Studio، اختار Slide Deck واكتب: "اعمل عرض تقديمي عن الدرس الأول - 8 شرائح - ركّز على المفاهيم الأساسية".</div>
+
+      <div class="script-line screen">أظهر العرض المُولّد - انتقل بين الشرائح بسرعة</div>
+
+      <div class="script-line voiceover">تمام! عرض تقديمي جاهز. 8 شرائح منظمة. ممكن أحوّله على Canva للتصميم أو أستخدمه كماهو. الحين حمّلته كـ PDF.</div>
+
+      <!-- Step 4 -->
+      <div class="script-line highlight">الخطوة 4: توليد أسئلة (3 دقائق)</div>
+
+      <div class="script-line screen">اكتب: "اعمل اختبار كامل عن الوحدة الثالثة يتضمن: 5 اختيار من متعدد، 3 صح وخطأ مع التصحيح، 2 سؤال مقالي قصير مع نموذج إجابة. أضف مفتاح الإجابات. الاختبار من 20 درجة"</div>
+
+      <div class="script-line voiceover">الحين الأسئلة. اكتب طلب الاختبار الكامل: "اعمل اختبار كامل عن الوحدة الثالثة يتضمن: 5 اختيار من متعدد، 3 صح وخطأ مع التصحيح، 2 سؤال مقالي قصير مع نموذج إجابة. أضف مفتاح الإجابات. الاختبار من 20 درجة".</div>
+
+      <div class="script-line screen">أظهر الاختبار المُولّد - انتقل بين الأسئلة</div>
+
+      <div class="script-line voiceover">شوفوا! اختبار كامل جاهز للطباعة بكل أنواع الأسئلة ومفتاح الإجابات. والأسئلة من المنهج نفسه مش عامة.</div>
+
+      <div class="script-line screen">اكتب: "اعمل 15 بطاقة تعليمية عن الوحدة الثالثة - متنوعة بين سؤال وجواب ومصطلح وتعريف"</div>
+
+      <div class="script-line voiceover">وكمان بطاقات تعليمية: "اعمل 15 بطاقة تعليمية متنوعة". شوفوا البطاقات جاهزة كمان!</div>
+
+      <!-- Step 5 -->
+      <div class="script-line highlight">الخطوة 5: إنشاء بودكاست (2 دقيقة)</div>
+
+      <div class="script-line screen">من Notebook Guide، اضغط "Customize" على Audio Overview</div>
+
+      <div class="script-line voiceover">والحين البودكاست. اضغط Customize على Audio Overview واكتب: "ركّز على الوحدة الثالثة واشرح المفاهيم الصعبة بأمثلة من الحياة اليومية السورية".</div>
+
+      <div class="script-line action">اضغط Generate - أظهر بدء التوليد</div>
+
+      <div class="script-line voiceover">اضغط Generate. البودكاست بياخد 2-5 دقائق يتولّد. بنتظره وبنكمل شغلنا بالوقت هاد.</div>
+
+      <div class="script-line note">بينما يُتولّد البودكاست، اشرح كيف يملأ المعلم الفراغ بالعمل على شيء آخر (أسئلة إضافية أو تعديل العرض)</div>
+
+      <!-- Step 6 -->
+      <div class="script-line highlight">الخطوة 6: تجميع الخطة الأسبوعية (2 دقيقة)</div>
+
+      <div class="script-line voiceover">والحين خليني أجمّع كل شي بخطة أسبوعية:</div>
+
+      <div class="script-line screen">أظهر جدول الخطة الأسبوعية مع توزيع المحتوى</div>
+
+      <div class="script-line voiceover">الأحد: شرح الدرس الأول باستخدام العرض التقديمي + توزيع الملخص المطبوع.</div>
+
+      <div class="script-line voiceover">الاثنين: شرح الدرس الثاني + أسئلة مراجعة سريعة عن الدرس الأول.</div>
+
+      <div class="script-line voiceover">الثلاثاء: شرح الدرس الثالث + تشغيل البودكاست أول 5 دقايق.</div>
+
+      <div class="script-line voiceover">الأربعاء: اختبار قصير عن الدروس التلاتة باستخدام الأسئلة المُولّدة.</div>
+
+      <div class="script-line voiceover">الخميس: مراجعة بالبطاقات التعليمية + توزيع دليل دراسة مختصر + مشاركة بودكاست مراجعة بواتساب.</div>
+
+      <div class="script-line voiceover">وهيك أسبوع كامل جاهز! من الصفر لاختبار كامل.</div>
+
+      <div class="script-line action">أظهر كل الملفات المُولّدة مجتمعة على الشاشة - الملخص + العرض + الأسئلة + البطاقات + البودكاست</div>
+
+      <div class="script-line voiceover">شوفوا كل هالمحتوى! ملخصات + عرض تقديمي + اختبار + بطاقات تعليمية + بودكاست + خطة أسبوعية. كل هاد الشغل كان بياخد 8-10 ساعات بالطريقة التقليدية. مع NotebookLM أخد 20-30 دقيقة!</div>
+
+      <!-- Closing -->
+      <div class="script-line highlight">الختام: رسالة الكورس</div>
+
+      <div class="script-line voiceover">وهيك خلصنا الكورس كله! 20 درس تعلمنا فيها كل شي عن NotebookLM للمعلم السوري. من فتح الحساب لبناء مسارات تعلّم مخصصة. من رفع أول مصدر لتوليد اختبار كامل.</div>
+
+      <div class="script-line voiceover">بس أهم شي تعلمناه مو كيف نستخدم الأداة. أهم شي هو التفكير: كيف نستخدم التكنولوجيا لحل مشاكلنا الحقيقية كمعلمين. كيف نوفر وقتنا لنستثمره بطلابنا. كيف نخلي التعليم أفضل لكل طالب بغض النظر عن مستواه.</div>
+
+      <div class="script-line voiceover">NotebookLM هو أداة. والإنت الحقيقي هو أنت يا معلم. الأداة بتوفرلك الوقت، والإنت بتستثمر هالوقت بطلابك. هاد سر النجاح الحقيقي.</div>
+
+      <div class="script-line action">توقف 3 ثوانٍ - لحظة ختامية</div>
+
+      <div class="script-line voiceover">إذا استفدت من هالكورس، شاركه مع زملائك المعلمين. كل معلم سوري بيستاهل يعرف عن هالأداة. وتذكّر: التعليم بيبدأ منك، والذكاء الاصطناعي بس أداة بتساعدك.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">هدية الكورس!</div>
+        <p>حضّرتلكم ملف فيه كل القوالب الجاهزة: قوالب الأسئلة والملخصات والبطاقات والخطط الأسبوعية. كل اللي بدك ياه تغيّر اسم الموضوع وبس. حمّل الملف من الرابط واتبدأ فوراً!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-50 ثانية</span>
+      الخلاصة - رسالة الختام
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بهالدرس عملنا ورشة عمل كاملة من الصفر: أنشأنا دفتر ورفعنا المنهج ولخّصنا الدروس واعملنا عرض تقديمي وولّدنا اختبار وبطاقات وبودكاست وبنينا خطة أسبوعية. كل هاد الشغل بـ20-30 دقيقة بدل 8-10 ساعات. وهيك خلصنا كورس "إتقان NotebookLM للمعلمين"! 20 درس من الصفر للاحتراف. تذكّروا: الأداة بتوفر الوقت والإنت بيستثمره بطلابو. شكراً لمتابعتكم، ووفقكم الله!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 15-18 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+</body>
+</html>
