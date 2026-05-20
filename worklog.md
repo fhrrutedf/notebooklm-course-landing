@@ -23,3 +23,25 @@ Stage Summary:
   3. `/home/z/my-project/download/course-brief-report-preview.png` (2.1MB, preview)
 - Report covers all aspects of the course project from start to finish
 - Includes scriptwriting templates, tone guidelines, technical setup instructions, and marketing strategies
+
+---
+Task ID: 1
+Agent: main
+Task: كتابة سكريبتات الوحدة الثالثة - العروض التقديمية والوسائط
+
+Work Log:
+- قراءة ملف course-content.md لمعرفة هيكل الوحدة الثالثة
+- قراءة ملفات unit1-scripts.html و unit2-scripts.html لمعرفة التنسيق المستخدم
+- كتابة 4 دروس كاملة بصيغة HTML بنفس التنسيق:
+  - الدرس 9: إنشاء عرض تقديمي احترافي من محتواك (~650 كلمة)
+  - الدرس 10: الخرائط الذهنية والإنفوجرافيك (~650 كلمة)
+  - الدرس 11: ملخص الفيديو وتحويله لمحتوى متعدد (~600 كلمة)
+  - الدرس 12: دمج NotebookLM مع أدوات العرض: Gamma وCanva AI (~700 كلمة)
+- تحويل HTML إلى PDF باستخدام Playwright
+
+Stage Summary:
+- ملف unit3-scripts.html تم إنشاؤه في /home/z/my-project/download/
+- ملف unit3-scripts.pdf تم إنشاؤه في /home/z/my-project/download/ (859KB)
+- كل درس يحتوي على: Hook, Intro, Main Content (أقسام متعددة), Summary, CTA
+- أنواع السطور: voiceover, action, screen, note, highlight
+- يتضمن tip-boxes و warning-boxes

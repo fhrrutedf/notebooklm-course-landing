@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة الثالثة - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  /* ===== LESSON HEADER ===== */
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #0d3a8e, #1a56db);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  /* Script sections */
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  /* Script line styles */
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '\1F3A4  ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '\1F3AC  ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '\1F5A5  ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '\1F4DD  ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '\26A1  ';
+    font-size: 10pt;
+  }
+
+  /* Duration indicator */
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* Tips box */
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+  }
+
+  /* Word count */
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">سكريبت فيديو جاهز للتسجيل</div>
+  <h1 class="cover-title">الوحدة الثالثة<br>العروض التقديمية والوسائط</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو جاهز للتسجيل مباشرة. كل درس مشروح بالتفصيل مع تعليمات الشاشة والصوت والإجراءات
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المدة التقريبية</span>
+      <span class="value">35-45 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">متوسط - إبداعي</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 9 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثالثة - الدرس 1 من 4</div>
+      <h1 class="lesson-title">إنشاء عرض تقديمي احترافي من محتواك</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: شرح تطبيقي</div>
+      <div class="lesson-meta-pill">الأهمية: عالية</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - المشكلة والوعد
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر سطح المكتب - افتح عرضاً تقديمياً يدوياً قديماً (لو عندك واحد، أو أظهر ملف PowerPoint عادي)</div>
+      <div class="script-line voiceover">هل عملت عرض تقديمي للحصة من قبل؟ كم ساعة قضيتها؟ ساعتين؟ ثلاث؟ تصميم الشرائح وترتيب المحتوى وكتابة النقاط... كل هاد الوقت ولسه ما خلصت! شو رأيك تعمل نفس العرض بـ5 دقايق بس؟ اليوم رح نتعلم كيف NotebookLM بيولّدلك عرض تقديمي كامل من محتواك بضغطة زر.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة - تعريف الدرس
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس التاسع من كورس "إتقان NotebookLM للمعلمين". هاد أول درس بالوحدة الثالثة: العروض التقديمية والوسائط. رح نتعلم كيف نحوّل محتوى المنهج لعرض تقديمي جاهز للصف، وكيف نخصصه وكيف نصدره. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Access the feature -->
+      <div class="script-line highlight">القسم أ: الوصول لميزة العرض التقديمي</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح وفيه مصدر منهج مرفوع</div>
+
+      <div class="script-line voiceover">أول شي لازم يكون عندك دفتر فيه مصادر. أنا هون عندي دفتر "منهج العلوم - الصف السابع" وفيه كتاب المنهج مرفوع. بدون مصادر، ما رح تقدر تعمل عرض.</div>
+
+      <div class="script-line action">انقر على "Notebook Guide" أعلى الصفحة</div>
+
+      <div class="script-line voiceover">الحين اضغط على "Notebook Guide" بأعلى الصفحة. هاد القسم فيه عدة خيارات للإخراج: الملخص، البودكاست، والعرض التقديمي.</div>
+
+      <div class="script-line screen">أظهر قسم Notebook Guide - أشر على خيار الشرائح أو "Slide Deck"</div>
+
+      <div class="script-line voiceover">حتلاقي خيار اسمه "Slide Deck" أو "Generate" بجانب أيقونة الشرائح. أو ممكن تدخل من القائمة الجانبية وتختار "Studio" وبعدين "Slide Deck". الطريقتين توصلان لنفس النتيجة.</div>
+
+      <div class="script-line action">انقر على "Generate" أو "Slide Deck" - أظهر بدء التوليد</div>
+
+      <div class="script-line voiceover">اضغط Generate. NotebookLM رح يبدأ يقرأ مصادرك ويبني عرض تقديمي كامل. العملية بتاخد حوالي 30 ثانية لدقيقة واحدة حسب حجم المحتوى.</div>
+
+      <div class="script-line note">أثناء الانتظار، يمكن أن تملأ الفراغ بالحديث عن أهمية العروض التقديمية في التعليم وكيف توفر وقت المعلم</div>
+
+      <!-- Part B: Review generated slides -->
+      <div class="script-line highlight">القسم ب: مراجعة العرض المُولّد</div>
+
+      <div class="script-line screen">أظهر العرض التقديمي المُولّد - انتقل بين الشرائح ببطء</div>
+
+      <div class="script-line voiceover">وهيك! العرض جاهز. شوفوا كم شريحة: عنوان رئيسي، شرائح محتوى، كل وحدة بغطي فكرة رئيسية، وشريحة خاتمة. NotebookLM بيولّد عرض متكامل بعناوين ونقاط منظمة. وكل شريحة بتحكي عن موضوع محدد من المنهج.</div>
+
+      <div class="script-line action">انقر على شريحة محتوى - كبّر النص</div>
+
+      <div class="script-line voiceover">خليني أقرألك محتوى هالشريحة: "الخلية الحيوانية - المكونات الأساسية". شفت كيف النقاط مرتبة ومنظمة؟ كل شريحة بتحكي عن فكرة وحدة بنقاط مختصرة. هاد بالضبط اللي بدك ياه بالحصة.</div>
+
+      <div class="script-line screen">انتقل بين 3-4 شرائح مختلفة - أظهر التنوع</div>
+
+      <div class="script-line voiceover">وكمان شوف التنوع: شريحة عن التعريف، وشريحة عن المكونات، وشريحة عن الوظائف. العرض بيغطي الموضوع من كل الجوانب. مو بس تعريف وخلاص!</div>
+
+      <div class="script-line note">تأكد من التمرير ببطء على كل شريحة حتى يتمكن المشاهد من قراءة المحتوى. لا تنتقل بسرعة</div>
+
+      <!-- Part C: Customizing before generation -->
+      <div class="script-line highlight">القسم ج: التخصيص المسبق للعرض</div>
+
+      <div class="script-line screen">ارجع لقسم Notebook Guide - أشر على خيار التخصيص أو Customize</div>
+
+      <div class="script-line voiceover">الحين شو لو بدك العرض يركز على جزء معين من المنهج؟ أو بدك عدد شرائح محدد؟ قبل ما تضغط Generate، فيك تكتب تعليمات مخصصة.</div>
+
+      <div class="script-line action">اكتب تعليمات مخصصة: "اعمل عرض تقديمي من 8 شرائح عن درس الخلية مع التركيز على المقارنة بين الخلية النباتية والحيوانية"</div>
+
+      <div class="script-line voiceover">مثلاً: "اعمل عرض تقديمي من 8 شرائح عن درس الخلية مع التركيز على المقارنة بين الخلية النباتية والحيوانية". هيك بتحصل على عرض مخصص بالضبط زي ما بدك. مو عرض عام عن كل المنهج.</div>
+
+      <div class="script-line voiceover">أمثلة تانية على تعليمات مفيدة:</div>
+      <div class="script-line voiceover">"اعرض أهم 5 تجارب عملية بالمنهج مع خطوات كل تجربة"</div>
+      <div class="script-line voiceover">"ركّز على المفاهيم الصعبة واعطِ أمثلة توضيحية بكل شريحة"</div>
+      <div class="script-line voiceover">"اعمل عرض مراجعة لامتحان نهاية الفصل الأول"</div>
+
+      <div class="script-line screen">اضغط Generate بالتعليمات المخصصة - أظهر النتيجة</div>
+
+      <div class="script-line voiceover">شوفوا الفرق! هلأ العرض مركز على المقارنة بين الخلية النباتية والحيوانية فقط، مو على كل المنهج. التخصيص بيخلي العرض أدق وأنفع لطلابك.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية</div>
+        <p>العرض المُولّد من NotebookLM ممتاز كمسودة أولية. خذه وعدّل عليه وحسّنه - هاد أسرع بـ10 مرات من البدء من الصفر! أضف صورك الخاصة وعدّل الألوان وفق ذوقك. الفكرة إنك توفر 80% من الوقت والجهد.</p>
+      </div>
+
+      <!-- Part D: Exporting -->
+      <div class="script-line highlight">القسم د: تصدير العرض واستخدامه</div>
+
+      <div class="script-line screen">أشر على خيارات التصدير أو التحميل</div>
+
+      <div class="script-line voiceover">الحين كيف تستخدم العرض؟ عندك عدة خيارات: فيك تحمّله كملف PDF وتطبعه أو تعرضه من أي جهاز. أو تنسخ المحتوى وتلصقه ببرنامج PowerPoint أو Canva عشان تصمّمه وتزيّنه أكتر.</div>
+
+      <div class="script-line action">انقر على تحميل كـ PDF - أظهر الملف المحمّل</div>
+
+      <div class="script-line voiceover">حمّلته كـ PDF. الحين تقدر تفتحه على أي جهاز بالصف وتبدأ الشرح. بسيطة وسريعة!</div>
+
+      <div class="script-line voiceover">أو إذا بدك تصميم أجمل، انسخ النص من كل شريحة والصقه على Canva. اختار قالب عرض تقديمي وحط المحتوى. بتحصل على عرض احترافي بصمة أقل من 15 دقيقة بدل ساعتين!</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم</div>
+        <p>ميزة العرض التقديمي قد تختلف حسب إصدار NotebookLM. إذا لم تجد خيار "Slide Deck"، ابحث عن "Studio" في القائمة الجانبية أو استخدم طريقة بديلة: اطلب من NotebookLM كتابة محتوى عرض تقديمي كنص، ثم انقله إلى PowerPoint أو Canva يدوياً.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-45 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن لخصنا كيف نعمل عرض تقديمي من NotebookLM: نتأكد إنو عندنا مصادر، ندخل على Notebook Guide أو Studio، نختار Slide Deck، ونضغط Generate. وعرفنا كيف نخصص العرض بكتابة تعليمات قبل التوليد، وكيف نصدره كـ PDF أو ننقله على Canva. القاعدة الذهبية: العرض المُولّد مسودة ممتازة، عدّل عليها وحسّنها.</div>
+      <div class="script-line action">أظهر العرض التقديمي النهائي</div>
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم ميزتين بصريتين رهيبتين: الخرائط الذهنية والإنفوجرافيك. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذا استفدت من هالدرس، تابع الكورس. بالدرس الجاي رح نتعلم نحوّل المحتوى لخرائط ذهنية وإنفوجرافيك - أدوات بصرية بتخلي طلابك يفهموا أحسن بكثير. لا يفوتك!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 10 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثالثة - الدرس 2 من 4</div>
+      <h1 class="lesson-title">الخرائط الذهنية والإنفوجرافيك</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: شرح + تطبيق بصري</div>
+      <div class="lesson-meta-pill">الأهمية: عالية</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - ليش البصري مهم
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر صفحة كتاب مدرسي مليئة بالنصوص - ثم أظهر خريطة ذهنية لنفس المحتوى</div>
+      <div class="script-line voiceover">شو بتفهم أكتر: صفحة نص كثيف وممل، ولا خريطة ذهنية واضحة ومنظمة؟ الدراسات بتقول إنو الدماغ بيستوعب المعلومات البصرية 60 ألف مرة أسرع من النص! واليوم رح نتعلم كيف نحوّل أي محتوى لخرائط ذهنية وإنفوجرافيك باستخدام NotebookLM.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس العاشر. رح نتعلم اليوم ميزتين بصريتين ممتازتين: الخريطة الذهنية اللي بتساعد طلابك يفهموا العلاقة بين المفاهيم، والإنفوجرافيك اللي بيحوّل المعلومة الجافة لشي بصري جذاب. كلتينهم بضغطة زر من NotebookLM. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Mind Map -->
+      <div class="script-line highlight">القسم أ: الخريطة الذهنية (Mind Map)</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح مع مصادر محملة</div>
+
+      <div class="script-line voiceover">خلينا نبدأ بالخريطة الذهنية. هاد النوع من العرض البصري بيحط المفهوم الرئيسي بالوسط والفروع حوله. ممتاز لتوضيح كيف المفاهيم متربطة ببعضها.</div>
+
+      <div class="script-line action">من Notebook Guide أو Studio، اختر "Mind Map"</div>
+
+      <div class="script-line voiceover">اضغط على Notebook Guide أو ادخل على Studio واختار "Mind Map". NotebookLM رح يولّد خريطة ذهنية تفاعلية من المحتوى.</div>
+
+      <div class="script-line screen">أظهر الخريطة الذهنية المُولّدة - المفهوم الرئيسي بالوسط والفروع حوله</div>
+
+      <div class="script-line voiceover">شوفوا! المفهوم الرئيسي "الخلية" بالوسط، والفروع حوله: المكونات، الوظائف، الأنواع، التكاثر. كل فرع بيتفرع لتفاصيل أكتر. هيك الطالب بيشوف الصورة الكاملة وبيفهم كيف كل شي متربط.</div>
+
+      <div class="script-line action">انقر على أحد الفروع - أظهر التفاصيل المتفرعة</div>
+
+      <div class="script-line voiceover">والميزة الحلوة إنك تقدر تضغط على أي فرع لتشوف التفاصيل. مثلاً أضغط على "المكونات"... شفت؟ ظهرتلي التفاصيل: الغشاء، السيتوبلازم، النواة. كل مفهوم بيتفرع بشكل منطقي.</div>
+
+      <div class="script-line screen">أشر على خيار تحميل الخريطة كصورة</div>
+
+      <div class="script-line voiceover">وفيك تحمّل الخريطة كصورة وتطبعها أو تعرضها على الشاشة بالحصة. حتى فيك تطبعها وتوزّعها على الطلاب كأداة مراجعة.</div>
+
+      <!-- Part B: Using Mind Maps in Teaching -->
+      <div class="script-line highlight">القسم ب: استخدام الخريطة الذهنية بالتدريس</div>
+
+      <div class="script-line voiceover">الحين كيف نستفيد منها عملياً بالصف؟ عندي 4 طرق:</div>
+
+      <div class="script-line voiceover">الطريقة الأولى: اعرضها على الشاشة بأول الحصة كتمهيد. الطالب بيشوف الصورة الكاملة قبل ما تبدي بالشرح وبيفهم وين رايحين.</div>
+
+      <div class="script-line voiceover">الطريقة الثانية: اطبعها ووزّعها على الطلاب. كل طالب بيكون عندو نسخة يرجعلها وقت المراجعة. هيك بدل ما يقلّب 20 صفحة بالكتاب، بيقلّب ورقة وحدة.</div>
+
+      <div class="script-line voiceover">الطريقة الثالثة: خلّي الطلاب يرسموا خريطتهم الذهنية بعد ما يفهموا الدرس. أعطيهم الخريطة المُولّدة كمرجع وخلّيهم يضيفوا عليها بأفكارهم الخاصة. هاد بيعمّق الفهم.</div>
+
+      <div class="script-line voiceover">الطريقة الرابعة: استخدمها كأداة مراجعة قبل الامتحان. الخريطة بتلخّص المنهج كامل بصفحة وحدة. الطالب بيقدر يراجع كل شي بنظرة سريعة.</div>
+
+      <div class="script-line note">هذا القسم نظري - يمكن إظهار أمثلة مطبوعة أو على الشاشة أثناء الشرح لتوضيح كل طريقة</div>
+
+      <!-- Part C: Infographic -->
+      <div class="script-line highlight">القسم ج: الإنفوجرافيك (Infographic)</div>
+
+      <div class="script-line screen">من Studio أو Notebook Guide، اختر "Infographic"</div>
+
+      <div class="script-line voiceover">الحين ننتقل لميزة تانية: الإنفوجرافيك. هاد تصميم بصري بيلخّص المعلومات بشكل مرئي جذاب. تخيله مثل ملصق تعليمي بتحطه على جدار الصف.</div>
+
+      <div class="script-line action">اضغط على خيار Infographic - انتظر التوليد</div>
+
+      <div class="script-line voiceover">اختار Infographic. NotebookLM رح يولّد تصميم بصري بيلخّص أهم المعلومات بشكل مرتب وجذاب. ممكن ما يكون احترافي 100% من حيث التصميم، بس كنقطة انطلاق ممتاز جداً.</div>
+
+      <div class="script-line screen">أظهر الإنفوجرافيك المُولّد</div>
+
+      <div class="script-line voiceover">شوفوا! الإنفوجرافيك بيجمع أهم المعلومات بشكل بصري. الأرقام والنسب والخطوات كلها ظاهرة بوضوح. هاد شي ممتاز لتعليقه على جدار الصف أو توزيعه على الطلاب.</div>
+
+      <div class="script-line voiceover">وكمان فيك تسأل NotebookLM مباشرة: "اعمل لي إنفوجرافيك عن درس التمثيل الضوئي". بيجاوبك بنص منظم تقدر تحوّله لإنفوجرافيك على Canva بسهولة.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة عملية: الإنفوجرافيك + Canva</div>
+        <p>إذا أردت إنفوجرافيك احترافي بشكل أكبر، انسخ المحتوى المُولّد من NotebookLM والصقه على Canva. اختار قالب "Infographic" وبدّل النص. بتحصل على تصميم احترافي بأقل من 10 دقائق!</p>
+      </div>
+
+      <!-- Part D: External Visual Tools -->
+      <div class="script-line highlight">القسم د: أدوات بصرية خارجية مدعومة</div>
+
+      <div class="script-line voiceover">وكمان في أدوات خارجية بتتكامل مع NotebookLM بشكل ممتاز:</div>
+
+      <div class="script-line voiceover">أولاً: Gamma على gamma.app. فيك تنسخ محتوى NotebookLM وتعمل عرض تقديمي احترافي عليه. Gamma بيصمّم الشرائح بذكاء وبحط ألوان وخطوط حلوة.</div>
+
+      <div class="script-line voiceover">ثانياً: Canva AI. اضغط على "Magic Design" على Canva والصق المحتوى. Canva AI بيصمّم عرض كامل مع قوالب وألوان. فيك تغيّر كل شي بضغطة زر.</div>
+
+      <div class="script-line voiceover">ثالثاً: Napkin AI على napkin.ai. بيحوّل النص لرسوم بيانية وإنفوجرافيك جميلة. الصق أي نص من NotebookLM وشوف النتيجة.</div>
+
+      <div class="script-line note">لا تحتاج لفتح هذه المواقع في الفيديو - يكفي ذكرها مع عرض شاشة سريعة لموقع كل أداة إن أمكن</div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا ميزتين بصريتين قويتين: الخريطة الذهنية اللي بتوضح العلاقة بين المفاهيم بشكل تفاعلي، والإنفوجرافيك اللي بيحوّل المعلومة لملصق بصري جذاب. وعرفنا أدوات خارجية مثل Gamma وCanva وNapkin AI اللي بتكمل الشغل. المحتوى البصري بيخلي الدرس أقوى 10 مرات لأنو الطلاب بيذكروا الصور أكتر من الكلام.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم كيف نستفيد من فيديوهات يوتيوب كمصادر تعليمية وكيف نحوّلها لمحتوى متعدد الأنواع. فيديو واحد ممكن يولّدلك محتوى لأسبوع كامل! لا يفوتكم.</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 11 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثالثة - الدرس 3 من 4</div>
+      <h1 class="lesson-title">ملخص الفيديو وتحويله لمحتوى متعدد</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 8-10 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي مبتكر</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - المشكلة والحل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر فيديو يوتيوب تعليمي طويل - أشر على شريط التقدم (30+ دقيقة)</div>
+      <div class="script-line voiceover">عندك فيديو تعليمي 45 دقيقة وبدك تلخصه لطلابك؟ أو معلم بالصف لازم يفهم محتوى فيديو بدون ما يشوفه كامل؟ النتيجة: إما تضيع 45 دقيقة بمشاهدة، أو تسيبه وبتفوت معلومات مهمة. اليوم رح نتعلم كيف NotebookLM بيخليك تستخرج كل شي مهم من أي فيديو بدقيقتين بس!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الحادي عشر. رح نتعلم اليوم ميزة قوية: رفع فيديوهات يوتيوب كمصادر على NotebookLM وتحويلها لمحتوى متعدد. فيديو واحد يتحول لملخص وبودكاست وأسئلة وعرض تقديمي! يلا نبدأ.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">6-8 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Upload YouTube Video -->
+      <div class="script-line highlight">القسم أ: رفع فيديو يوتيوب كمصدر</div>
+
+      <div class="script-line screen">أظهر دفتر جديد فارغ على NotebookLM</div>
+
+      <div class="script-line voiceover">خلينا نعمل تجربة حية. رح أفتح دفتر جديد وارفع فيديو تعليمي من يوتيوب.</div>
+
+      <div class="script-line action">انقر على "+ Add Source" - أشر على خيار رابط يوتيوب أو URL</div>
+
+      <div class="script-line voiceover">اضغط "+ Add Source". عندك خيار رفع رابط URL أو فيديو يوتيوب. الحين رح أرفع رابط فيديو تعليمي عن الخلية.</div>
+
+      <div class="script-line action">انسخ رابط فيديو يوتيوب من المتصفح والصقه في حقل الرابط - اضغط إضافة</div>
+
+      <div class="script-line voiceover">انسخ الرابط من يوتيوب والصقه هون. NotebookLM بيستخرج الترجمة النصية للفيديو وبيعمل عليها تحليل. بياخد حوالي 30-60 ثانية.</div>
+
+      <div class="script-line screen">أظهر المصدر المضاف - أشر على عدد الكلمات المستخرجة</div>
+
+      <div class="script-line voiceover">شفت؟ الفيديو انضاف كمصدر. والكلمات المستخرجة ظاهرة. حتى لو الفيديو 45 دقيقة، NotebookLM بيستخرج كل المحتوى المهم.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم حول الفيديوهات</div>
+        <p>الفيديو لازم يكون فيه ترجمة نصية (Subtitles/Captions) حتى يقدر NotebookLM يحلله. الفيديوهات بدون ترجمة لن يتم التعامل معها. أغلب الفيديوهات التعليمية العربية عليها ترجمة تلقائية من يوتيوب.</p>
+      </div>
+
+      <!-- Part B: Generate Summary from Video -->
+      <div class="script-line highlight">القسم ب: تلخيص الفيديو واستخراج النقاط</div>
+
+      <div class="script-line screen">اكتب سؤالاً في حقل المحادثة: "لخّصلي أهم النقاط بهاد الفيديو بـ10 نقاط"</div>
+
+      <div class="script-line voiceover">الحين نخلي NotebookLM يشتغل. بسأله: "لخّصلي أهم النقاط بهاد الفيديو بـ10 نقاط".</div>
+
+      <div class="script-line screen">أظهر الإجابة - الملخص المنظم</div>
+
+      <div class="script-line voiceover">شوفوا! بدقيقتين حصلت على ملخص شامل لفيديو 45 دقيقة. كل نقطة واضحة ومحددة. بدل ما أسمع الفيديو كامل، حصلت على الجوهر مباشرة.</div>
+
+      <div class="script-line action">اكتب سؤالاً آخر: "ما هي أهم 5 معلومات علمية بالفيديو اللي لازم كل طالب يعرفها؟"</div>
+
+      <div class="script-line voiceover">وكمان فيك تسأل أسئلة محددة: "ما هي أهم 5 معلومات علمية؟" أو "استخرج التعريفات اللي ذكرها الفيديو" أو "ما هي التجارب العملية اللي عرضها؟". كل سؤال بيجاوبك من محتوى الفيديو مباشرة.</div>
+
+      <div class="script-line screen">أظهر الإجابة التفصيلية</div>
+
+      <div class="script-line voiceover">هيك فيك تستخرج أي نوع معلومات من أي فيديو تعليمي. تخيل الكم من الوقت اللي بتوفره!</div>
+
+      <!-- Part C: Create Multiple Content Types -->
+      <div class="script-line highlight">القسم ج: تحويل الفيديو لمحتوى متعدد الأنواع</div>
+
+      <div class="script-line voiceover">وهون بيجي السحر الحقيقي. من فيديو واحد، فيك تعمل أنواع محتوى كثيرة:</div>
+
+      <div class="script-line screen">اكتب: "اعمل بودكاست عن محتوى هاد الفيديو - ركّز على النقاط العملية"</div>
+
+      <div class="script-line voiceover">أولاً: بودكاست! فيك تحوّل محتوى الفيديو لبودكاست تعليمي. تخصّصه وتركّز على النقاط اللي بدك ياه. الطلاب بيسمعوه بأي وقت.</div>
+
+      <div class="script-line screen">اكتب: "اكتبلي 10 أسئلة اختيار من متعدد عن محتوى الفيديو"</div>
+
+      <div class="script-line voiceover">ثانياً: أسئلة امتحان! من محتوى الفيديو مباشرة. أسئلة دقيقة لأنها من المصدر مش من الإنترنت العشوائي.</div>
+
+      <div class="script-line screen">اكتب: "اعمل عرض تقديمي عن أهم المفاهيم بالفيديو"</div>
+
+      <div class="script-line voiceover">ثالثاً: عرض تقديمي! تحوّل الفيديو لشرائح جاهزة للعرض بالحصة.</div>
+
+      <div class="script-line voiceover">رابعاً: ملخص مكتوب منظم، وخريطة ذهنية، وإنفوجرافيك. كلهم من نفس الفيديو!</div>
+
+      <div class="script-line action">أظهر قائمة بالأنواع المختلفة - نظرة شاملة</div>
+
+      <div class="script-line voiceover">يعني فيديو واحد ممكن يتحول لـ5 أنواع محتوى مختلفة! ملخص، بودكاست، أسئلة، عرض، وخريطة ذهنية. هاد معناه إنو فيديو واحد بيولّدلك محتوى تعليمي لأسبوع كامل.</div>
+
+      <!-- Part D: Practical Tips for Syrian Teachers -->
+      <div class="script-line highlight">القسم د: نصائح عملية للمعلم السوري</div>
+
+      <div class="script-line voiceover">وكمان عندي نصائح مهمة للمعلم السوري:</div>
+
+      <div class="script-line voiceover">النصيحة الأولى: لو عندك فيديوهات تعليمية عربية ممتازة - مثل فيديوهات شرح المنهج السوري - ارفعها كمصادر بدمترك. هيك بتحصل على محتوى غني ومتنوع.</div>
+
+      <div class="script-line voiceover">النصيحة الثانية: فيك ترفع أكثر من فيديو بنفس الدفتر. مثلاً فيديو شرح + فيديو مراجعة + كتاب المنهج. NotebookLM بيجاوبك من كل المصادر مع بعض.</div>
+
+      <div class="script-line voiceover">النصيحة الثالثة: لو الفيديو ما عليه ترجمة، فيك تستخدم أداة لتحويل الصوت لنص مثل خدمة الترجمة التلقائية بجوجل، وبعدين تلصق النص كمصدر "Paste Text" على NotebookLM.</div>
+
+      <div class="script-line voiceover">النصيحة الرابعة: استغل فيديوهات اليوتيوب التعليمية المجانية. في قنوات كتير ممتازة بشرح المنهج السوري. بدل ما تقضي وقت تلخص فيديو، ارفع الرابط وخلي NotebookLM يعمل الشغل.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">فكرة مبتكرة</div>
+        <p>اجمع 3-4 فيديوهات شرح مختلفة لنفس الدرس برفتر واحد. بعدين اسأل NotebookLM: "قارن بين الشروحات واعطني أهم النقاط المشتركة". هاد بيطّلع لك ملخص شامل من عدة مصادر!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نرفع فيديو يوتيوب كمصدر على NotebookLM وكيف نلخصه ونستخرج المعلومات المهمة. والأهم: فيديو واحد يتحول لعدة أنواع محتوى - ملخص وبودكاست وأسئلة وعرض وخريطة ذهنية. الفكرة الذهبية: استغل فيديوهات اليوتيوب التعليمية المجانية وخلّي NotebookLM يعمل الباقي.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم كيف ندمج NotebookLM مع أدوات التصميم الاحترافية: Gamma وCanva AI. هاد الدرس رح يرفع مستوى عروضك التقديمية لدرجة احترافية. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~600 كلمة | المدة المتوقعة: 8-10 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 12 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الثالثة - الدرس 4 من 4</div>
+      <h1 class="lesson-title">دمج NotebookLM مع أدوات العرض: Gamma وCanva AI</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي متكامل</div>
+      <div class="lesson-meta-pill">الأهمية: عالية - درس ختامي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - النتيجة النهائية
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر عرضاً تقديمياً احترافياً مصمماً على Canva (من إنتاجك أو نموذج جاهز)</div>
+      <div class="script-line voiceover">شوفوا هاد العرض التقديمي! تصميم احترافي، ألوان متناسقة، خطوط واضحة، ومحتوى دقيق من المنهج. تتوقعوا إنه أخد ساعتين؟ لأ! أخد 15 دقيقة بس. السر؟ NotebookLM للمحتوى وCanva للتصميم. واليوم رح تتعلموا هالسر بالتفصيل.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثاني عشر والأخير بالوحدة الثالثة. رح نتعلم اليوم كيف ندمج قوة NotebookLM مع أدوات التصميم. الفكرة بسيطة: NotebookLM بيولّد المحتوى الذكي، وأدوات التصميم بتحوّله لشي بصري احترافي. النتيجة: عمل تعليمي مذهل بأقل جهد. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: NotebookLM + Gamma -->
+      <div class="script-line highlight">القسم أ: NotebookLM + Gamma</div>
+
+      <div class="script-line screen">افتح gamma.app على المتصفح - أظهر الصفحة الرئيسية</div>
+
+      <div class="script-line voiceover">أول أداة: Gamma. هي أداة مجانية بتعمل عروض تقديمية احترافية من النص. يعني بتدخل نص عادي وبتطلع عرض مصمم بخلفيات وألوان وخطوط حلوة.</div>
+
+      <div class="script-line action">سجّل دخول على Gamma (مجاني) - أظهر لوحة التحكم</div>
+
+      <div class="script-line voiceover">سجّل دخول مجاناً ببحساب جوجل. ما بدك اشتراك مدفوع.</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مع ملخص درس مُولّد - انسخ المحتوى</div>
+
+      <div class="script-line voiceover">الحين ارجع على NotebookLM. عندي ملخص درس جاهز. رح أنسخه. إما الملخص من Notebook Guide أو أي إجابة مفصلة من المحادثة.</div>
+
+      <div class="script-line action">انقل لـ Gamma - اضغط "Create New" واختر "Generate"</div>
+
+      <div class="script-line voiceover">ارجع على Gamma واضغط "Create New" واختار "Generate". الصق المحتوى اللي نسخته من NotebookLM.</div>
+
+      <div class="script-line screen">الصق المحتوى في Gamma - اختر قالب ونمط</div>
+
+      <div class="script-line voiceover">الصق النص. Gamma رح يسألك عن نوع المحتوى - اختار "Presentation". واختار نمط أو قالب يناسبك. في قوالب كثيرة مجانية.</div>
+
+      <div class="script-line action">اضغط Generate - انتظر عرض Gamma المُولّد</div>
+
+      <div class="script-line voiceover">اضغط Generate. Gamma رح يصمّم عرض كامل من النص اللي لصقته. بياخد حوالي 30-60 ثانية.</div>
+
+      <div class="script-line screen">أظهر العرض التقديمي المُولّد على Gamma - انتقل بين الشرائح</div>
+
+      <div class="script-line voiceover">شوفوا النتيجة! عرض احترافي بخلفيات وألوان وتصميم حلو. كل شريحة مصممة بشكل منفصل ومتناسق. وفيك تعدّل أي شريحة: تغيّر الصورة، تعدّل النص، تبدّل الألوان.</div>
+
+      <div class="script-line note">Gamma يوفر نسخة مجانية كافية للاستخدام التعليمي. لا حاجة للاشتراك المدفوع في البداية</div>
+
+      <!-- Part B: NotebookLM + Canva AI -->
+      <div class="script-line highlight">القسم ب: NotebookLM + Canva AI</div>
+
+      <div class="script-line screen">افتح canva.com على المتصفح - أظهر الصفحة الرئيسية</div>
+
+      <div class="script-line voiceover">الأداة التانية: Canva. هاد أشهر أداة تصميم بالعالم والنسخة المجانية منها أكثر من كافية للمعلم. Canva فيها ميزة "Magic Design" بتعمل عرض كامل بالذكاء الاصطناعي.</div>
+
+      <div class="script-line action">اضغط على "Presentations" - اختر "Magic Design"</div>
+
+      <div class="script-line voiceover">اضغط على "Presentations" واختار "Magic Design". هاد خيار Canva AI اللي بيصمّملك عرض كامل من النص.</div>
+
+      <div class="script-line screen">الصق محتوى NotebookLM في Canva Magic Design</div>
+
+      <div class="script-line voiceover">الصق محتوى NotebookLM. نفس المحتوى اللي نسخناه سابقاً. Canva AI بيقرأ النص وبيصمّملك عرض كامل.</div>
+
+      <div class="script-line action">اضغط Generate - انتظر التصميم</div>
+
+      <div class="script-line voiceover">اضغط Generate. Canva AI رح يولّد عدة خيارات تصميم. اختار اللي بيعجبك. وفيك تعدّل كل شي: الألوان والخطوط والصور والتخطيط.</div>
+
+      <div class="script-line screen">أظهر العرض المُولّد على Canva - انتقل بين الشرائح</div>
+
+      <div class="script-line voiceover">شوفوا! عرض Canva مختلف عن Gamma بالتصميم بس نفس المحتوى الدقيق من NotebookLM. فيك تختار الأداة اللي بتكون أسهل عليك. الاتنين ممتازين.</div>
+
+      <div class="script-line voiceover">وميزة Canva الكبيرة إنها فيها قوالب عربية جاهزة وفيك تضيف صور وأيقونات بسهولة. وكمان فيك تحمّل العرض كـ PDF أو PowerPoint.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية: Canva المجاني كافي</div>
+        <p>لا تحتاج اشتراك Canva Pro. النسخة المجانية فيها أكثر من 250 ألف قالب مجاني وكافية تماماً للمعلم. إذا أعجبك قالب عليه علامة "Pro"، ابحث عن بديل مجاني - ستجد الكثير!</p>
+      </div>
+
+      <!-- Part C: NotebookLM + Napkin AI -->
+      <div class="script-line highlight">القسم ج: NotebookLM + Napkin AI (للرسوم البيانية)</div>
+
+      <div class="script-line screen">افتح napkin.ai على المتصفح</div>
+
+      <div class="script-line voiceover">والأداة التالتة: Napkin AI. هاد بيحوّل النص لرسوم بيانية وإنفوجرافيك بشكل تلقائي. مفيد كتير لعمل وسائل تعليمية جدارية للصف.</div>
+
+      <div class="script-line action">الصق نصاً من NotebookLM على Napkin AI</div>
+
+      <div class="script-line voiceover">الصق أي نص من NotebookLM. Napkin بيحلل النص وبيرجعلك عدة خيارات رسوم بيانية: مخططات، رسوم توضيحية، إنفوجرافيك. اختار اللي بدك ياه وعدّل عليه.</div>
+
+      <div class="script-line screen">أظهر الرسوم البيانية المُولّدة من Napkin AI</div>
+
+      <div class="script-line voiceover">شوفوا كيف النص تحوّل لرسوم جميلة! هاد ممتاز لطباعته وتعليقه بجدار الصف. الطلاب بيحبوا الوسائل البصرية وبيذكروها أكتر.</div>
+
+      <!-- Part D: Complete Workflow -->
+      <div class="script-line highlight">القسم د: سير العمل المثالي (المسار الكامل)</div>
+
+      <div class="script-line voiceover">والحين خليني أوريكم المسار الكامل من البداية للنهاية. هاد سير العمل اللي أنا شخصياً باستخدمه:</div>
+
+      <div class="script-line screen">أظهر مخطط سير العمل - يمكن عرضه كنص على الشاشة</div>
+
+      <div class="script-line voiceover">الخطوة 1: ارفع المنهج على NotebookLM. كتاب PDF + أي مصادر تكميلية.</div>
+
+      <div class="script-line voiceover">الخطوة 2: اطلب ملخص الدرس من NotebookLM. اكتب: "لخّصلي الدرس الثالث بالنقاط الرئيسية".</div>
+
+      <div class="script-line voiceover">الخطوة 3: انسخ الملخص وانتقل لـ Gamma أو Canva. الصق المحتوى واختار قالب مناسب.</div>
+
+      <div class="script-line voiceover">الخطوة 4: عدّل العرض. أضف صور وألوان وضبط النصوص. هاد بياخد 10-15 دقيقة بس لأن المحتوى جاهز.</div>
+
+      <div class="script-line voiceover">الخطوة 5: ارجع لـ NotebookLM واطلب أسئلة عن الدرس. "جهّزلي 10 أسئلة اختيار من متعدد".</div>
+
+      <div class="script-line voiceover">الخطوة 6: شارك العرض والأسئلة مع طلابك. العرض عبر واتساب أو بالحصة، والأسئلة كورقة عمل.</div>
+
+      <div class="script-line action">أظهر النتيجة النهائية: عرض تقديمي احترافي + أسئلة جاهزة</div>
+
+      <div class="script-line voiceover">وهيك من دفتر واحد على NotebookLM، حصلت على عرض تقديمي احترافي وأسئلة امتحان جاهزة وملخص مكتوب. كل هاد بأقل من 30 دقيقة! مقارنة بـ3-4 ساعات لو كنت عم بتشتغل بالطريقة التقليدية.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تذكّر دائماً</div>
+        <p>الأدوات الذكية بتوفر عليك الوقت، بس مو بتمنعك من المراجعة. دايماً راجع المحتوى المُولّد قبل ما تشاركه مع الطلاب. NotebookLM ممتاز بس مو معصوم. تأكد من دقة الأرقام والتواريخ والمعلومات العلمية.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-45 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن لخصنا الوحدة الثالثة كاملة: اتعلمنا كيف نعمل عرض تقديمي من NotebookLM، كيف نحوّل المحتوى لخرائط ذهنية وإنفوجرافيك، كيف نستفيد من فيديوهات يوتيوب كمصادر، وكيف ندمج NotebookLM مع أدوات التصميم: Gamma للعروض السريعة، Canva للتصميم الاحترافي، وNapkin AI للرسوم البيانية. القاعدة الذهبية: NotebookLM للمحتوى وأدوات التصميم للشكل. الاتنين مع بعض = نتيجة احترافية بوقت قياسي.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">15-20 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">وهيك خلصنا الوحدة الثالثة! بالوحدة الرابعة رح ندخل عالم التقييم والدراسة: كيف تولّد أسئلة وامتحانات بضغطة زر، كيف تعمل بطاقات تعليمية، وكيف تبني أدلة دراسة مخصصة. الوحدة الرابعة رح تغيّر طريقة تقييمك للطلاب بالكامل. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+</body>
+</html>
