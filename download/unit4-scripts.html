@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سكريبت الوحدة الرابعة - كورس NotebookLM للمعلمين السوريين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8eefb;
+    --primary-dark: #0d3a8e;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-page: #ffffff;
+    --bg-section: #f8fafc;
+    --bg-highlight: #eff6ff;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-page);
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-dark);
+    background: var(--bg-page);
+    line-height: 1.85;
+    font-size: 12pt;
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0d3a8e 0%, #1a56db 40%, #3b82f6 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 30px;
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 35px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10pt;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  /* ===== LESSON HEADER ===== */
+  .lesson-page {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+
+  .lesson-page:first-of-type {
+    page-break-before: auto;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #0d3a8e, #1a56db);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-header-right {
+    flex: 1;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .lesson-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .lesson-header-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 10pt;
+    font-weight: 500;
+  }
+
+  /* Script sections */
+  .script-section {
+    margin: 18px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .script-section-header {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .script-section-header.hook {
+    background: #fef3c7;
+    color: #92400e;
+    border-bottom: 2px solid #fbbf24;
+  }
+
+  .script-section-header.intro {
+    background: #ecfdf5;
+    color: #065f46;
+    border-bottom: 2px solid #10b981;
+  }
+
+  .script-section-header.main {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .script-section-header.summary {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  .script-section-header.cta {
+    background: #fef2f2;
+    color: #991b1b;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .script-section-body {
+    padding: 15px 20px;
+  }
+
+  /* Script line styles */
+  .script-line {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12pt;
+    line-height: 1.9;
+  }
+
+  .script-line.voiceover {
+    background: #f8fafc;
+    border-right: 3px solid var(--primary);
+  }
+
+  .script-line.voiceover::before {
+    content: '\1F3A4  ';
+    font-size: 10pt;
+  }
+
+  .script-line.action {
+    background: #fffbeb;
+    border-right: 3px solid var(--accent);
+    font-weight: 600;
+    color: #92400e;
+  }
+
+  .script-line.action::before {
+    content: '\1F3AC  ';
+    font-size: 10pt;
+  }
+
+  .script-line.screen {
+    background: #f0f9ff;
+    border-right: 3px solid #38bdf8;
+    color: #0c4a6e;
+  }
+
+  .script-line.screen::before {
+    content: '\1F5A5  ';
+    font-size: 10pt;
+  }
+
+  .script-line.note {
+    background: #f5f3ff;
+    border-right: 3px solid #a78bfa;
+    color: #5b21b6;
+    font-style: italic;
+    font-size: 11pt;
+  }
+
+  .script-line.note::before {
+    content: '\1F4DD  ';
+    font-size: 10pt;
+  }
+
+  .script-line.highlight {
+    background: #fef2f2;
+    border-right: 3px solid #ef4444;
+    font-weight: 600;
+    color: #991b1b;
+  }
+
+  .script-line.highlight::before {
+    content: '\26A1  ';
+    font-size: 10pt;
+  }
+
+  /* Duration indicator */
+  .duration-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* Tips box */
+  .tip-box {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .tip-box-title {
+    font-weight: 700;
+    color: #065f46;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 11pt;
+    color: #065f46;
+    margin: 0;
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+
+  .warning-box-title {
+    font-weight: 700;
+    color: #991b1b;
+    font-size: 11pt;
+    margin-bottom: 4px;
+  }
+
+  .warning-box p {
+    font-size: 11pt;
+    color: #991b1b;
+    margin: 0;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+  }
+
+  /* Word count */
+  .word-count {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 30px;
+    padding: 12px 18px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: var(--text-medium);
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 8px 20px 12px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  @media screen {
+    body {
+      max-width: 210mm;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+  <div class="cover-badge">سكريبت فيديو جاهز للتسجيل</div>
+  <h1 class="cover-title">الوحدة الرابعة<br>التقييم والدراسة</h1>
+  <p class="cover-subtitle">
+    سكريبت كامل لـ 4 دروس فيديو جاهز للتسجيل مباشرة. كل درس مشروح بالتفصيل مع تعليمات الشاشة والصوت والإجراءات
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">عدد الدروس</span>
+      <span class="value">4 دروس</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المدة التقريبية</span>
+      <span class="value">35-45 دقيقة</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">النوع</span>
+      <span class="value">تسجيل شاشة + صوت</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">المستوى</span>
+      <span class="value">متقدم - تطبيقي</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON 13 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الرابعة - الدرس 1 من 4</div>
+      <h1 class="lesson-title">توليد أسئلة وامتحانات بضغطة زر</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 12-15 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: شرح تطبيقي مكثف</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - المشكلة اليومية
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر مكتباً عليه أوراق امتحانات مكتوبة يدوياً - أو أظهر ملف Word فيه أسئلة امتحان</div>
+      <div class="script-line voiceover">كم مرة قضيت ساعتين أو أكتر بتكتب أسئلة امتحان؟ وبتنتبه إنو الأسئلة متكررة، أو ما بتغطي كل المنهج، أو مستواها مش مناسب؟ والسنة الجاية بدك تعمل أسئلة جديدة لأنو الطلاب شاركوا الأسئلة القديمة! اليوم رح نتعلم كيف NotebookLM بيولّدلك أسئلة بكل أنواعها من المنهج مباشرة بـ5 دقايق بدل ساعتين.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة - تعريف الدرس
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الثالث عشر من كورس "إتقان NotebookLM للمعلمين". هاد أول درس بالوحدة الرابعة: التقييم والدراسة. رح نتعلم كيف نولّد أسئلة اختيار من متعدد، صح وخطأ، أسئلة مقالية، واختبارات كاملة من المنهج مباشرة. والسر إنو الأسئلة بتكون من محتواك أنت، مو عامة. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">10-12 دقيقة</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Multiple Choice -->
+      <div class="script-line highlight">القسم أ: أسئلة الاختيار من متعدد</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح وفيه مصدر المنهج</div>
+
+      <div class="script-line voiceover">خلينا نبدأ بأكتر نوع أسئلة بنستخدمه: الاختيار من متعدد. لازم يكون عندك دفتر فيه مصادر المنهج مرفوعة. أنا هون عندي كتاب العلوم للصف السابع.</div>
+
+      <div class="script-line screen">اكتب في حقل المحادثة: "اكتب لي 10 أسئلة اختيار من متعدد عن الوحدة الثالثة - الخلية - كل سؤال بـ 4 خيارات مع الإجابة الصحيحة"</div>
+
+      <div class="script-line voiceover">الحين اكتب السؤال بالطريقة هادي: "اكتب لي 10 أسئلة اختيار من متعدد عن الوحدة الثالثة - الخلية - كل سؤال بـ 4 خيارات مع الإجابة الصحيحة". شفت كيف محدد؟ عدد الأسئلة ونوعها والوحدة وطلب الإجابة كلها محددة.</div>
+
+      <div class="script-line screen">أظهر الإجابة - الأسئلة المُولّدة مع الخيارات</div>
+
+      <div class="script-line voiceover">شوفوا النتيجة! 10 أسئلة اختيار من متعدد، كل سؤال بـ 4 خيارات، والإجابة الصحيحة مذكورة بعد كل سؤال. والآن الشغلة إنو الأسئلة من المنهج نفسه، مو من الإنترنت. يعني دقيقة ومربوطة بالمحتوى اللي بتدرّسوه.</div>
+
+      <div class="script-line action">توقف ثانيتين - دع المشاهد يقرأ بعض الأسئلة</div>
+
+      <div class="script-line voiceover">بس انتبهوا: دايماً راجعوا الأسئلة. أحياناً بيسأل عن تفصيلة صغيرة أو بيكون فيه خيارين متقاربين كتير. راجعوا وعدّلوا إذا لزم الأمر. NotebookLM ممتاز بس مو معصوم.</div>
+
+      <!-- Part B: True/False -->
+      <div class="script-line highlight">القسم ب: أسئلة الصح والخطأ</div>
+
+      <div class="script-line screen">اكتب سؤالاً جديداً: "اكتب لي 10 عبارات صح وخطأ عن درس التمثيل الضوئي مع تصحيح العبارات الخاطئة"</div>
+
+      <div class="script-line voiceover">النوع التاني: صح وخطأ. اكتب: "اكتب لي 10 عبارات صح وخطأ عن درس التمثيل الضوئي مع تصحيح العبارات الخاطئة". ملاحظة كيف طلبت تصحيح الخاطئة؟ هاد بيوفر عليك وقت التصحيح لاحقاً.</div>
+
+      <div class="script-line screen">أظهر الأسئلة المُولّدة - صح وخطأ مع التصحيح</div>
+
+      <div class="script-line voiceover">شوفوا! كل عبارة محددة صح أو خطأ، والعبارات الخاطئة بيجي تصحيحها. هاد النوع ممتاز للمراجعة السريعة بالحصة. فيك تعمل مسابقة سريعة: مين بيجاوب أكتر أسئلة صح بدقيقتين؟</div>
+
+      <div class="script-line voiceover">وكمان فيك تحدد مستوى الصعوبة. مثلاً: "اكتب 5 عبارات صح وخطأ مستوى سهل" أو "مستوى متقدم". هاد بيساعدك تفرّق بين الطلاب.</div>
+
+      <!-- Part C: Essay Questions -->
+      <div class="script-line highlight">القسم ج: الأسئلة المقالية</div>
+
+      <div class="script-line screen">اكتب: "اكتب لي 3 أسئلة مقالية عن درس التكاثر في الكائنات الحية مع نموذج إجابة لكل سؤال"</div>
+
+      <div class="script-line voiceover">النوع التالت: الأسئلة المقالية. اكتب: "اكتب لي 3 أسئلة مقالية عن درس التكاثر مع نموذج إجابة لكل سؤال". نموذج الإجابة بيساعدك كتير بالتصحيح، خاصّة لما عندك أكتر من 30 طالب.</div>
+
+      <div class="script-line screen">أظهر الأسئلة المقالية مع نماذج الإجابة</div>
+
+      <div class="script-line voiceover">شوفوا! كل سؤال مقالي مع نموذج إجابة مفصل. فيك تحدد كمان طول الإجابة: "إجابة قصيرة سطرين" أو "إجابة تفصيلية فقرة كاملة". هيك بتحصل على الأسئلة اللي بدك ياهابالضبط.</div>
+
+      <div class="script-line note">عند عرض الأسئلة المقالية، اقرأ سؤالاً واحداً ونموذج إجابته بالكامل لإظهار جودة المحتوى المُولّد</div>
+
+      <!-- Part D: Complete Test -->
+      <div class="script-line highlight">القسم د: اختبار كامل جاهز للطباعة</div>
+
+      <div class="script-line screen">اكتب: "اعمل لي اختبار كامل عن الوحدة الرابعة يتضمن: 5 اختيار من متعدد، 3 صح وخطأ، 2 سؤال مقالي قصير. أضف مفتاح الإجابات. الاختبار من 20 درجة ومدته 30 دقيقة"</div>
+
+      <div class="script-line voiceover">والحين الشغلة الأقوى: اختبار كامل بكل أنواع الأسئلة! اكتب: "اعمل لي اختبار كامل عن الوحدة الرابعة يتضمن: 5 اختيار من متعدد، 3 صح وخطأ، 2 سؤال مقالي قصير. أضف مفتاح الإجابات. الاختبار من 20 درجة ومدته 30 دقيقة".</div>
+
+      <div class="script-line screen">أظهر الاختبار الكامل المُولّد</div>
+
+      <div class="script-line voiceover">شوفوا! اختبار كامل جاهز: أسئلة متنوعة، مفتاح إجابات، الدرجة محددة، والمدة محددة. كل شي منظم وجاهز للطباعة. من 5 دقايق بس!</div>
+
+      <div class="script-line voiceover">وفيك تنسخ الاختبار وتلصقه على Word أو Google Docs وتعدّل التنسيق وتطبعه. أو تحوّله لـ PDF مباشرة. الاختبار جاهز!</div>
+
+      <!-- Part E: Review Questions -->
+      <div class="script-line highlight">القسم هـ: أسئلة مراجعة تفاعلية</div>
+
+      <div class="script-line screen">اكتب: "اكتب لي 5 أسئلة مراجعة سريعة عن درس الخلية - سؤال وجواب قصير - بطريقة تشويقية"</div>
+
+      <div class="script-line voiceover">وآخر نوع: أسئلة مراجعة سريعة. اكتب: "اكتب لي 5 أسئلة مراجعة سريعة عن درس الخلية - سؤال وجواب قصير - بطريقة تشويقية". هالأسئلة ممتازة لبداية الحصة كمراجعة سريعة، أو بنهاية الحصة كتقييم سريع للفهم.</div>
+
+      <div class="script-line screen">أظهر أسئلة المراجعة المُولّدة</div>
+
+      <div class="script-line voiceover">شوفوا كيف الأسئلة مكتوبة بطريقة مشوّقة! مش جافة ومملة. هاد بيخلي الطلاب يحبوا يجاوبوا. فيك تحولها كمان لبطاقات فلاش - وهي اللي رح نتعلمها بدرس بكرة.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه مهم جداً: راجع دائماً</div>
+        <p>دايماً راجع الأسئلة قبل ما تعطيها للطلاب. NotebookLM ممتاز بس مو معصوم. تأكد من: 1) دقة المعلومات العلمية 2) صحة الإجابات 3) مناسبة المستوى 4) عدم وجود أسئلة مكررة. خاصة الأرقام والتواريخ والأسماء تحتاج مراجعة دقيقة.</p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية: أسئلة مختلفة كل مرة</div>
+        <p>كل مرة بتولّد أسئلة، رح تطلع أسئلة مختلفة حتى لو نفس الموضوع. استغل هالشي! ولّد 3 نسخ مختلفة من نفس الاختبار ووزّع نسخة مختلفة على كل صف. هيك بتنهي الغش من أساسه!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-50 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نولّد 5 أنواع أسئلة: اختيار من متعدد مع الإجابات، صح وخطأ مع التصحيح، أسئلة مقالية مع نماذج الإجابة، اختبار كامل جاهز للطباعة بمفتاح إجابات، وأسئلة مراجعة سريعة مشوّقة. والسر كله بالتحديد: كل ما كان طلبك أدق، كانت النتيجة أفضل. ولا تنسوا: دايماً راجعوا الأسئلة قبل التوزيع!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بكرة رح نتعلم ميزة رهيبة: البطاقات التعليمية! Flashcards بيتولّدوا تلقائياً من المنهج وبساعدوا الطلاب يراجعوا بسرعة وبشكل ممتع. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 12-15 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 14 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الرابعة - الدرس 2 من 4</div>
+      <h1 class="lesson-title">البطاقات التعليمية (Flashcards) للمراجعة السريعة</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 8-10 دقائق</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي تفاعلي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر بطاقات تعليمية ورقية مقطوعة (أو صورة لبطاقات فلاش) - اقلب بطاقة أمام الكاميرا</div>
+      <div class="script-line voiceover">شو هي البطاقات التعليمية؟ بطاقة صغيرة: الوجه الأول سؤال أو مصطلح، والوجه التاني الجواب أو التعريف. الدراسات بتقول إنو المراجعة بالبطاقات من أقوى طرق التعلّم بالعالم. واليوم رح نتعلم كيف NotebookLM بيولّدها تلقائياً من المنهج! مش لازم تكتب ولا بطاقة بإيدك.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الرابع عشر. رح نتعلم اليوم كيف نعمل بطاقات تعليمية أو Flashcards من محتوى المنهج مباشرة. بطاقات سؤال وجواب، مصطلح وتعريف، مفهوم ومثال، وحتى بطاقات أخطاء شائعة. يلا نبدأ!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">6-8 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Generating Flashcards -->
+      <div class="script-line highlight">القسم أ: توليد البطاقات التعليمية</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح مع مصادر المنهج</div>
+
+      <div class="script-line voiceover">أول شي افتح الدفتر اللي فيه المنهج. لازم يكون عندك مصادر مرفوعة عشان NotebookLM يقدر يشتغل.</div>
+
+      <div class="script-line action">من Notebook Guide أو Studio، ابحث عن خيار "Flashcards"</div>
+
+      <div class="script-line voiceover">الحين فيك تتولّد البطاقات بطريقتين: إما من Notebook Guide أو Studio باختيار "Flashcards"، أو بسؤال مباشر بالمحادثة.</div>
+
+      <div class="script-line screen">اكتب في المحادثة: "اعمل لي 15 بطاقة تعليمية عن درس الخلية - الوجه الأول سؤال والوجه التاني إجابة"</div>
+
+      <div class="script-line voiceover">خليني أوريكم الطريقة الثانية اللي هي أكتر مرونة. اكتب: "اعمل لي 15 بطاقة تعليمية عن درس الخلية - الوجه الأول سؤال والوجه التاني إجابة".</div>
+
+      <div class="script-line screen">أظهر البطاقات المُولّدة - انتقل بينها ببطء</div>
+
+      <div class="script-line voiceover">شوفوا! 15 بطاقة جاهزة. كل بطاقة فيها سؤال بإيجاز وإجابة واضحة. فيك تطبعها وتقطعها، أو تستخدمها رقمياً. خليني أوريكم أنواع مختلفة من البطاقات.</div>
+
+      <!-- Part B: Types of Flashcards -->
+      <div class="script-line highlight">القسم ب: أنواع البطاقات المختلفة</div>
+
+      <div class="script-line voiceover">فيك تعمل أنواع كثيرة من البطاقات حسب اللي بدك ياه:</div>
+
+      <div class="script-line screen">اكتب: "اعمل 10 بطاقات مصطلح وتعريف عن درس التمثيل الضوئي"</div>
+
+      <div class="script-line voiceover">النوع الأول: مصطلح وتعريف. الوجه الأول المصطلح مثل "الكلوروفيل" والوجه التاني التعريف. هاد ممتاز لحفظ المفردات العلمية.</div>
+
+      <div class="script-line screen">أظهر النتيجة - بطاقات المصطلحات</div>
+
+      <div class="script-line screen">اكتب: "اعمل 10 بطاقات مفهوم ومثال عن درس الكسور - الوجه الأول المفهوم والوجه التاني مثال تطبيقي"</div>
+
+      <div class="script-line voiceover">النوع الثاني: مفهوم ومثال. الوجه الأول المفهوم النظري والوجه التاني مثال عملي. هاد بيساعد الطالب يربط النظرية بالتطبيق.</div>
+
+      <div class="script-line screen">أظهر النتيجة - بطاقات المفاهيم والأمثلة</div>
+
+      <div class="script-line voiceover">والنوع التالت: سؤال وجواب، وهو اللي عملناه أول شي. والأجمل إنك تقدر تطلب بطاقات مختلطة: "اعمل بطاقات متنوعة: بعضها مصطلح وتعريف وبعضها سؤال وجواب وبعضها مفهوم ومثال". هيك بتحصل على تنوع بيشوق الطالب.</div>
+
+      <!-- Part C: Using Flashcards with Students -->
+      <div class="script-line highlight">القسم ج: استخدام البطاقات مع الطلاب - أفكار عملية</div>
+
+      <div class="script-line voiceover">الحين كيف نستخدمها عملياً بالصف؟ عندي 5 طرق ممتعة:</div>
+
+      <div class="script-line voiceover">الطريقة الأولى: لعبة الأزواج. وزّع البطاقات على الطلاب بشكل أزواج. واحد يقرأ السؤال والتاني يجاوب. وبعدين يبدّلوا الأدوار. هاد بيعمّل تفاعل كتير حلو.</div>
+
+      <div class="script-line voiceover">الطريقة الثانية: مسابقة السرعة. اعرض البطاقات واحدة ورا التانية وخلّي الطلاب يتنافسوا مين بيجاوب أكتر بطاقات بـ60 ثانية. الشغلة التنافسية بتخليهم يركزوا أكتر.</div>
+
+      <div class="script-line voiceover">الطريقة الثالثة: مراجعة ذاتية. وزّع البطاقات على كل طالب وخلّيه يراجع لحاله. اللي بيعرف الإجابة بيحط البطاقة على جنب واللي ما بيعرفها بيرجع يدرسها. هاد اسمه أسلوب التكرار المتباعد وهو من أقوى طرق التعلّم.</div>
+
+      <div class="script-line voiceover">الطريقة الرابعة: واجب منزلي. اعرض البطاقات كمجموعة واتساب وخلّي الطلاب يراجعوا بالبيت. فيك تعمل ملف PDF من البطاقات وترسله.</div>
+
+      <div class="script-line voiceover">الطريقة الخامسة: تعليقها بالصف. اطبع البطاقات بشكل كبير وعلّقها على جدران الصف. الطلاب بيشوفوها كل يوم وبتترسخ المعلومة بدون ما يحسوا إنهم بيدرسوا.</div>
+
+      <!-- Part D: Error Cards -->
+      <div class="script-line highlight">القسم د: بطاقات الأخطاء الشائعة - سلاح سري</div>
+
+      <div class="script-line screen">اكتب: "اعمل 8 بطاقات عن الأخطاء الشائعة في درس الكسور - الوجه الأول الغلط الشائع والوجه التاني الصح مع الشرح"</div>
+
+      <div class="script-line voiceover">وهاد النوع اللي كتير معلمين بيحبوه: بطاقات الأخطاء الشائعة! اكتب: "اعمل 8 بطاقات عن الأخطاء الشائعة في درس الكسور - الوجه الأول الغلط الشائع والوجه التاني الصح مع الشرح".</div>
+
+      <div class="script-line screen">أظهر بطاقات الأخطاء الشائعة المُولّدة</div>
+
+      <div class="script-line voiceover">شوفوا! كل بطاقة بتبين غلط شائع والتصحيح مع الشرح. الطلاب بيحبوا هالنوع كتير لأنو ببيّن لهم أخطاءهم بدون حرج. وكمان بيعالج المفاهيم الخاطئة اللي ممكن تكون مترسخة عندهم من سنين.</div>
+
+      <div class="script-line note">هذا النوع من البطاقات فعال جداً - ينبغي التركيز عليه وإعطاؤه وقتاً كافياً في الشرح</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة عملية للطباعة</div>
+        <p>للطباعة: انسخ البطاقات على Google Docs، رتّبها بجدول (عمودين: سؤال وجواب)، واطبعها. اقطع كل بطاقة واطوِها من المنتصف. بهالطريقة الوجه الأول ظاهر والوجه التاني مخفي لحد ما الطالب يقلبها. تكلفة الطباعة قليلة جداً!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نولّد بطاقات تعليمية بأنواعها: سؤال وجواب، مصطلح وتعريف، مفهوم ومثال، وبطاقات الأخطاء الشائعة. وعرفنا 5 طرق لاستخدامها بالصف: لعبة الأزواج، مسابقة السرعة، مراجعة ذاتية، واجب منزلي، وتعليقها بالصف. البطاقات التعليمية أداة مراجعة ممتازة - سريعة وتفاعلية وبتثبت المعلومة.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي رح نتعلم كيف نعمل أدلة دراسة مخصصة لكل مستوى من الطلاب: دليل للطلاب المتفوقين ودليل للطلاب الضعاف ودليل للمراجعة السريعة. ميزة رح تفرق كتير بنتائج طلابك. لا يفوتكم!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~600 كلمة | المدة المتوقعة: 8-10 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 15 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الرابعة - الدرس 3 من 4</div>
+      <h1 class="lesson-title">أدلة الدراسة المخصصة</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي متقدم</div>
+      <div class="lesson-meta-pill">الأهمية: عالية</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">20-30 ثانية</span>
+      الخطاف (Hook) - مشكلة التفاوت
+    </div>
+    <div class="script-section-body">
+      <div class="script-line screen">أظهر صورتين: طالب يدرس بسهولة وطالب آخر محتار ومتعب (أو وصف بصري)</div>
+      <div class="script-line voiceover">بكل صف عندك 3 أنواع طلاب: المتفوق اللي بده تحديات أكبر، والمتوسط اللي بده شرح عادي، والضعيف اللي بده شرح مبسّط وأمثلة كثيرة. بس أنت معلم واحد ومعك 40 طالب! كيف تقدر تعطي كل واحد المحتوى اللي يناسبه؟ اليوم رح نتعلم كيف NotebookLM بيعمللك أدلة دراسة مخصصة لكل مستوى!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس الخامس عشر. رح نتعلم اليوم كيف نعمل أدلة دراسة مخصصة من المنهج مباشرة. دليل للمتفوقين ودليل للطلاب الضعاف ودليل للمراجعة السريعة. كل واحد بمحتوى ومستوى مختلف. والنتيجة؟ كل طالب بيحصل على اللي بيناسبه. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Comprehensive Study Guide -->
+      <div class="script-line highlight">القسم أ: دليل الدراسة الشامل</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح مع مصادر المنهج الكامل</div>
+
+      <div class="script-line voiceover">أول شي خلينا نعمل دليل دراسة شامل عام. لازم يكون عندك الدفتر فيه المنهج الكامل مرفوع.</div>
+
+      <div class="script-line screen">اكتب: "اعمل لي دليل دراسة شامل لامتحان نهاية الفصل يتضمن: أهم المفاهيم، التعريفات الأساسية، القوانين، أمثلة محلولة، وأسئلة تدريبية"</div>
+
+      <div class="script-line voiceover">اكتب: "اعمل لي دليل دراسة شامل لامتحان نهاية الفصل يتضمن: أهم المفاهيم، التعريفات الأساسية، القوانين، أمثلة محلولة، وأسئلة تدريبية". شفت كيف حددت كل الأقسام اللي بدك ياه؟ هاد بيضمن إنو الدليل بيغطي كل شي.</div>
+
+      <div class="script-line screen">أظهر دليل الدراسة المُولّد - انتقل بين الأقسام</div>
+
+      <div class="script-line voiceover">شوفوا! دليل شامل ومنظم: المفاهيم الأساسية بتصدر، بعدين التعريفات، بعدين القوانين، بعدين أمثلة محلولة، وفي النهاية أسئلة تدريبية. كل شي مرتب وواضح. الطالب بيقدر يدرس من هالدليل لحاله بدون مساعدة.</div>
+
+      <div class="script-line action">توقف ثانيتين - أظهر حجم المحتوى المُولّد</div>
+
+      <!-- Part B: Customized Study Guides -->
+      <div class="script-line highlight">القسم ب: أدلة مخصصة حسب المستوى</div>
+
+      <div class="script-line voiceover">الحين بيجي السحر: تخصيص الدليل حسب مستوى الطالب!</div>
+
+      <div class="script-line screen">اكتب: "اعمل دليل دراسة متقدم لطالب متفوق عن درس التكاثر - يتضمن أسئلة تحليلية وتطبيقية ومواضيع إثرائية"</div>
+
+      <div class="script-line voiceover">للطالب المتفوق: "اعمل دليل دراسة متقدم لطالب متفوق عن درس التكاثر - يتضمن أسئلة تحليلية وتطبيقية ومواضيع إثرائية". شوفوا كيف طلبت أسئلة تحليلية وإثرائية؟ هاد بيحفّز الطالب المتفوق وما بيخلّيه يمل.</div>
+
+      <div class="script-line screen">أظهر دليل الدراسة المتقدم</div>
+
+      <div class="script-line voiceover">شوفوا الفرق! هاد الدليل فيه تحديات أكبر وأسئلة تفكير عميق ومواضيع إضافية مش بالمنهج بس بتوسّع فهمه. الطالب المتفوق رح يحب هالدليل لأنو بيحس بالتحدي.</div>
+
+      <div class="script-line screen">اكتب: "اعمل دليل دراسة مبسّط لطالب ضعيف عن درس التكاثر - شرح مفصّل بأمثلة يومية كثيرة وبجمل قصيرة بسيطة"</div>
+
+      <div class="script-line voiceover">والحين للطالب الضعيف: "اعمل دليل دراسة مبسّط لطالب ضعيف عن درس التكاثر - شرح مفصّل بأمثلة يومية كثيرة وبجمل قصيرة بسيطة".</div>
+
+      <div class="script-line screen">أظهر دليل الدراسة المبسّط</div>
+
+      <div class="script-line voiceover">شوفوا الفرق عن الدليل المتقدم! هاد فيه شرح أبطأ وأمثلة أكتر وجمل أبسط. كل مفهوم بيتشرح خطوة بخطوة مع أمثلة من حياة الطالب اليومية. الطالب الضعيف رح يفهم من هالدليل لأنو متل ما بده بالضبط.</div>
+
+      <div class="script-line note">من المهم جداً إظهار الفرق بين الدليلين جنباً إلى جنب - إذا أمكن، اعرض جزء من كل منهما على الشاشة للمقارنة</div>
+
+      <div class="script-line voiceover">وهاد سر مهم: من نفس المنهج، عملت أدلة مختلفة لطلاب مختلفين. كل طالب بيحصل على المحتوى اللي بيناسبه. هاد اسمه "التعلّم المخصص" وهو مستقبل التعليم.</div>
+
+      <!-- Part C: Quick Review Guide -->
+      <div class="script-line highlight">القسم ج: دليل المراجعة السريعة</div>
+
+      <div class="script-line screen">اكتب: "اعمل دليل مراجعة سريعة مختصر - أهم النقاط فقط - بشكل نقاط مختصرة - صفحة واحدة"</div>
+
+      <div class="script-line voiceover">وكمان في نوع تالت مهم: دليل المراجعة السريعة. هاد للطالب اللي بيحب يراجع قبل الامتحان بسرعة. اكتب: "اعمل دليل مراجعة سريعة مختصر - أهم النقاط فقط - بشكل نقاط مختصرة - صفحة واحدة".</div>
+
+      <div class="script-line screen">أظهر دليل المراجعة السريعة</div>
+
+      <div class="script-line voiceover">شوفوا! صفحة وحدة فيها أهم النقاط بس. لا شرح مفصّل ولا أمثلة طويلة. مجرد ذكر للمفاهيم الأساسية والقوانين والتعريفات. ممتاز للمراجعة الليلة اللي قبل الامتحان.</div>
+
+      <!-- Part D: Visual and Interactive Study Guide -->
+      <div class="script-line highlight">القسم د: دليل دراسة مرئي وتفاعلي</div>
+
+      <div class="script-line voiceover">وكمان فيك تعمل أدلة دراسة مرئية:</div>
+
+      <div class="script-line screen">اكتب: "اعمل لي خريطة ذهنية لدليل دراسة درس الخلية"</div>
+
+      <div class="script-line voiceover">مثلاً: "اعمل لي خريطة ذهنية لدليل دراسة درس الخلية". هيك الطالب بيحصل على دليل بصري بدل نصي. الطلاب البصريين بيستفيدوا أكتر من الخرائط الذهنية.</div>
+
+      <div class="script-line voiceover">وكمان فيك تدمج عدة أنواع محتوى بدليل واحد متكامل:</div>
+
+      <div class="script-line voiceover">القسم الأول: ملخص مكتوب بالنقاط.</div>
+      <div class="script-line voiceover">القسم الثاني: خريطة ذهنية للصورة الكبيرة.</div>
+      <div class="script-line voiceover">القسم الثالث: بطاقات تعليمية للمراجعة السريعة.</div>
+      <div class="script-line voiceover">القسم الرابع: بودكاست مراجعة للاستماع.</div>
+      <div class="script-line voiceover">القسم الخامس: أسئلة تدريبية للاختبار الذاتي.</div>
+
+      <div class="script-line voiceover">هيك الطالب بيدرس بشكل متكامل: يقرأ ويسمع ويتدرّب ويراجع. كل حاسة بتعمل شغل والنتيجة فهم أعمق وثبات أقوى.</div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">فكرة مبتكرة: رمز QR بالدليل</div>
+        <p>أضف رموز QR بدليل الدراسة بتوصّل للبودكاست أو الأسئلة التفاعلية. كيف؟ ارفع البودكاست على Google Drive واعمل رابط مشاركة. ثم استخدم أي موقع مجاني لإنشاء رمز QR من الرابط. الصق الرمز بدليل الدراسة. الطالب بمسح الرمز وبيسمع البودكاست مباشرة!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">30-40 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن اتعلمنا كيف نعمل أدلة دراسة مخصصة: دليل شامل عام، دليل متقدم للمتفوقين، دليل مبسّط للطلاب الضعاف، ودليل مراجعة سريعة. وكمان أدلة مرئية بالخرائط الذهنية وأدلة تفاعلية تدمج عدة أنواع محتوى. القاعدة الذهبية: كل طالب بيستاهل محتوى يناسب مستواه. NotebookLM بيخلي هالشي ممكن عملياً!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">10-15 ثانية</span>
+      دعوة للعمل
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">بالدرس الجاي و الأخير بالوحدة الرابعة رح نتعلم كيف نقيم فهم الطلاب فعلياً وكيف نبني مسارات تعلّم مخصصة لكل طالب. هاد الدرس رح يغيّر طريقة تعاملك مع الفروق الفردية. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~650 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+<!-- ==================== LESSON 16 ==================== -->
+<div class="lesson-page">
+
+  <div class="lesson-header">
+    <div class="lesson-header-right">
+      <div class="lesson-number">الوحدة الرابعة - الدرس 4 من 4</div>
+      <h1 class="lesson-title">تقييم الفهم والتعلّم التكيفي</h1>
+    </div>
+    <div class="lesson-header-left">
+      <div class="lesson-meta-pill">المدة: 10-12 دقيقة</div>
+      <div class="lesson-meta-pill">نوع: تطبيقي متقدم</div>
+      <div class="lesson-meta-pill">الأهمية: عالية جداً - درس ختامي</div>
+    </div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="script-section">
+    <div class="script-section-header hook">
+      <span class="duration-tag">25-35 ثانية</span>
+      الخطاف (Hook) - السؤال الصعب
+    </div>
+    <div class="script-section-body">
+      <div class="script-line action">أظهر صورة لصف مزدحم بالطلاب - أو وصف بصري لغرفة صف</div>
+      <div class="script-line voiceover">40 طالب بالصف. 10 فاهمين كل شي. 15 فاهمين نص شي. و15 ضايعين بالكامل. وأنت معلم واحد بتشرح نفس الدرس للجميع. كيف تعرف مين فهم ومين ما فهم؟ وكيف تعطي كل طالب المحتوى اللي يناسبه؟ اليوم رح نتعلم كيف NotebookLM بيساعدك تقيم الفهم وتبني مسارات تعلّم مخصصة لكل طالب!</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-section-header intro">
+      <span class="duration-tag">15-20 ثانية</span>
+      المقدمة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">أهلاً بكم بالدرس السادس عشر والأخير بالوحدة الرابعة. رح نتعلم اليوم كيف نستخدم NotebookLM لتقييم فهم الطلاب بشكل سريع ودقيق، وكيف نبني مسارات تعلّم مخصصة تناسب مستوى كل طالب. هاد سر المعلم الناجح: يعطي كل طالب اللي بيحتاجه. يلا!</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="script-section">
+    <div class="script-section-header main">
+      <span class="duration-tag">8-10 دقائق</span>
+      الشرح والتطبيق - المحتوى الأساسي
+    </div>
+    <div class="script-section-body">
+
+      <!-- Part A: Diagnostic Questions -->
+      <div class="script-line highlight">القسم أ: أسئلة التشخيص - اعرف مستوى طالبك</div>
+
+      <div class="script-line screen">أظهر دفتر NotebookLM مفتوح مع مصادر المنهج</div>
+
+      <div class="script-line voiceover">أول خطوة: التشخيص. قبل ما تبدأ تعالج المشكلة، لازم تعرف وين الطالب واقف. أسئلة التشخيص بتساعدك تحدد مستوى كل طالب بـ5 دقايق بس.</div>
+
+      <div class="script-line screen">اكتب: "اكتب لي 5 أسئلة تشخيصية سريعة عن درس الكسور لمعرفة إذا الطالب فهم الأساسيات - كل سؤال بيت проверить مهارة مختلفة"</div>
+
+      <div class="script-line voiceover">اكتب: "اكتب لي 5 أسئلة تشخيصية سريعة عن درس الكسور لمعرفة إذا الطالب فهم الأساسيات - كل سؤال بيتحقق من مهارة مختلفة". شفت كيف طلبت مهارة مختلفة لكل سؤال؟ هاد بيضمن إنك بتشخّص كل الجوانب.</div>
+
+      <div class="script-line screen">أظهر الأسئلة التشخيصية المُولّدة</div>
+
+      <div class="script-line voiceover">شوفوا! 5 أسئلة كل واحد بيتحقق من مهارة: الأول على التعريف، التاني على التحويل، التالت على الجمع، الرابع على الطرح، والخامس على التطبيق. هيك بتعرف بالضبط وين المشكلة.</div>
+
+      <div class="script-line voiceover">كيف تقرأ النتائج؟ إذا الطالب أجاب صح على 4 أو 5 من 5: مستوى متقدم، يحتاج تحديات. إذا أجاب على 2 أو 3: مستوى متوسط، يحتاج تعزيز. إذا أجاب على أقل من 2: مستوى ضعيف، يحتاج مراجعة الأساسيات من الصفر.</div>
+
+      <!-- Part B: Customized Content by Level -->
+      <div class="script-line highlight">القسم ب: محتوى مخصص حسب المستوى</div>
+
+      <div class="script-line voiceover">الحين بعد ما عرفت مستوى كل طالب، كيف تعطيه المحتوى المناسب؟</div>
+
+      <div class="script-line screen">اكتب: "اشرح درس الكسور الاعتيادية بمستوى متقدم مع تطبيقات معقدة وأسئلة تفكير نقدي"</div>
+
+      <div class="script-line voiceover">للطالب المتقدم: "اشرح درس الكسور الاعتيادية بمستوى متقدم مع تطبيقات معقدة وأسئلة تفكير نقدي". هيك بتحصل على شرح عميق بيتجاوز المنهج الأساسي ويحفّز الطالب.</div>
+
+      <div class="script-line screen">أظهر الشرح المتقدم - أشر على التفاصيل الإضافية</div>
+
+      <div class="script-line screen">اكتب: "اشرح درس الكسور الاعتيادية بطريقة عادية مع أمثلة متنوعة من الكتاب المدرسي"</div>
+
+      <div class="script-line voiceover">للطالب المتوسط: "اشرح درس الكسور الاعتيادية بطريقة عادية مع أمثلة متنوعة من الكتاب المدرسي". شرح عادي بدون تعقيد وبأمثلة من المنهج مباشرة.</div>
+
+      <div class="script-line screen">اكتب: "اشرح درس الكسور الاعتيادية بطريقة مبسطة جداً مع أمثلة يومية كثيرة - كأنك بتحكي لطالب عمره 10 سنين - خطوة بخطوة"</div>
+
+      <div class="script-line voiceover">وللطالب الضعيف: "اشرح درس الكسور الاعتيادية بطريقة مبسطة جداً مع أمثلة يومية كثيرة - كأنك بتحكي لطالب عمره 10 سنين - خطوة بخطوة". شفت كيف حددت المستوى بطريقة واضحة؟</div>
+
+      <div class="script-line screen">أظهر الشرح المبسّط - أشر على البساطة والأمثلة اليومية</div>
+
+      <div class="script-line voiceover">شوفوا الفرق! هاد الشرح بيتكلم عن الكسور بأمثلة من الحياة: قسمت البيتزا لـ4 أجزاء وأكلت وحدة = ربع البيتزا. الطالب الضعيف بيفهم من هالأمثلة لأنها قريبة من حياته.</div>
+
+      <div class="script-line note">من المفيد جداً عرض أجزاء من كل مستوى جنباً إلى جنب لإظهار الفرق الحقيقي في المستوى والأسلوب</div>
+
+      <!-- Part C: Identifying Weak Points -->
+      <div class="script-line highlight">القسم ج: تحديد نقاط الضعف ومعالجتها</div>
+
+      <div class="script-line screen">اكتب: "ما هي أكثر المفاهيم صعوبة في درس الكسور اللي الطلاب بيخطئوا فيها؟ أعطني قائمة مع طرق شرح بديلة لكل مفهوم"</div>
+
+      <div class="script-line voiceover">وكمان فيك تسأل NotebookLM عن نقاط الضعف الشائعة: "ما هي أكثر المفاهيم صعوبة في درس الكسور اللي الطلاب بيخطئوا فيها؟ أعطني قائمة مع طرق شرح بديلة لكل مفهوم".</div>
+
+      <div class="script-line screen">أظهر قائمة نقاط الضعف مع طرق الشرح البديلة</div>
+
+      <div class="script-line voiceover">شوفوا! NotebookLM بيحدّدلك النقاط الصعبة: جمع الكسور ذات المقامات المختلفة، تحويل الكسر الاعتيادي لعدد عشري، المقارنة بين الكسور. وبيعطيكل نقطة طريقة شرح بديلة. هاد بيعملك خطة علاجية جاهزة!</div>
+
+      <div class="script-line voiceover">يعني بدل ما تحزر وين المشكلة، NotebookLM بيقولك بالضبط وين الطلاب بيصعب عليهم وكيف تعالجها. هاد بيوفر عليك وقت كتير وبيحسّن نتائج طلابك فعلياً.</div>
+
+      <!-- Part D: Custom Learning Path -->
+      <div class="script-line highlight">القسم د: مسار تعلّم مخصص لكل طالب</div>
+
+      <div class="script-line screen">اكتب: "صمّم لي مسار تعلّم لدرس الكسور يبدأ من الأساسيات ويوصل للمتقدم - 5 مراحل - كل مرحلة فيها: شرح + أمثلة + أسئلة تدريبية + معيار انتقال للمرحلة التالية"</div>
+
+      <div class="script-line voiceover">والآن الشغلة الأقوى: مسار تعلّم كامل مخصص! اكتب: "صمّم لي مسار تعلّم لدرس الكسور يبدأ من الأساسيات ويوصل للمتقدم - 5 مراحل - كل مرحلة فيها: شرح + أمثلة + أسئلة تدريبية + معيار انتقال للمرحلة التالية".</div>
+
+      <div class="script-line screen">أظهر مسار التعلّم المُولّد - المراحل الخمس</div>
+
+      <div class="script-line voiceover">شوفوا! 5 مراحل واضحة: المرحلة الأولى فهم مفهوم الكسر. المرحلة الثانية المقارنة والترتيب. المرحلة الثالثة الجمع والطرح. المرحلة الرابعة الضرب والقسمة. المرحلة الخامسة التطبيقات العملية. وكل مرحلة فيها شرح وأمثلة وأسئلة ومعيار للانتقال. الطالب بيمشي على المسار حسب سرعته!</div>
+
+      <div class="script-line voiceover">الطالب المتقدم بيتخطى المرحلتين الأولى والثانية بسرعة وبيروح على التحديات. والطالب الضعيف بياخد وقته بالمراحل الأولى لحد ما يفهم صح. كل واحد بيمشي بسرعته الخاصة.</div>
+
+      <div class="script-line action">أظهر المسار كاملاً - نظرة شاملة</div>
+
+      <div class="script-line voiceover">وهاد معناه إنك كمعلم مش لازم تعيد الشرح لكل طالب على حدة. بتوزّع المسار على كل طالب وكل واحد بيدرس حسب مستواه. وأنت بتركّز على اللي بيحتاج مساعدة فعلية.</div>
+
+      <div class="warning-box">
+        <div class="warning-box-title">تنبيه واقعي</div>
+        <p>التعلّم التكيفي فكرة ممتازة، لكن بتطلب منك كمعلم وقت إضافي بالبداية لإعداد المسارات. نصيحتي: ابدأ بمادة وحدة وصف واحد. جرّب المسار على 5 طلاب بس. شوف النتائج وبعدين وسّع. ما تحاول تعمل كل شي مرة وحدة!</p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">نصيحة ذهبية: واتساب كمكوّن تفاعلي</div>
+        <p>وزّع مسارات التعلّم عبر مجموعات واتساب منفصلة: مجموعة للمتقدمين ومجموعة للمتوسطين ومجموعة للطلاب اللي بيحتاجوا دعم إضافي. هيك كل مجموعة بتشوف المحتوى المناسب لها بس. وأنت تقدر تتابع تقدم كل مجموعة بسهولة.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="script-section">
+    <div class="script-section-header summary">
+      <span class="duration-tag">40-50 ثانية</span>
+      الخلاصة
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">إذن لخصنا الوحدة الرابعة كاملة! بالدرس الأول اتعلمنا توليد 5 أنواع أسئلة: اختيار من متعدد وصح وخطأ ومقالية واختبار كامل وأسئلة مراجعة. بالدرس التاني اتعلمنا البطاقات التعليمية بأنواعها. بالدرس التالت اتعلمنا أدلة الدراسة المخصصة لكل مستوى. واليوم اتعلمنا تقييم الفهم بالأسئلة التشخيصية، وتخصيص المحتوى حسب المستوى، وتحديد نقاط الضعف، وبناء مسارات تعلّم مخصصة. القاعدة الذهبية: كل طالب بيستاهل محتوى يناسبه، وNotebookLM بيخلي هالشي ممكن!</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="script-section">
+    <div class="script-section-header cta">
+      <span class="duration-tag">15-20 ثانية</span>
+      دعوة للعمل (CTA)
+    </div>
+    <div class="script-section-body">
+      <div class="script-line voiceover">وهيك خلصنا الوحدة الرابعة! بالوحدة الخامسة والأخيرة رح ندخل عالم استراتيجيات المعلم السوري: كيف ندمج الطلاب ذوي الاحتياجات الخاصة، وكيف نتعامل مع الواقع السوري الميداني، وكيف نبني خطة أسبوعية كاملة باستخدام NotebookLM. الوحدة الأخيرة رح تكون الأقوى. تابعوا معنا!</div>
+    </div>
+  </div>
+
+  <div class="word-count">
+    عدد الكلمات التقريبي للسكريبت: ~700 كلمة | المدة المتوقعة: 10-12 دقيقة | نسبة الكلام: 120-130 كلمة/دقيقة
+  </div>
+
+</div>
+
+</body>
+</html>

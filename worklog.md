@@ -45,3 +45,22 @@ Stage Summary:
 - كل درس يحتوي على: Hook, Intro, Main Content (أقسام متعددة), Summary, CTA
 - أنواع السطور: voiceover, action, screen, note, highlight
 - يتضمن tip-boxes و warning-boxes
+
+---
+Task ID: 2
+Agent: main
+Task: كتابة سكريبتات الوحدة الرابعة - التقييم والدراسة
+
+Work Log:
+- كتابة 4 دروس كاملة بصيغة HTML بنفس التنسيق المستخدم بالوحدات السابقة:
+  - الدرس 13: توليد أسئلة وامتحانات بضغطة زر (~700 كلمة)
+  - الدرس 14: البطاقات التعليمية Flashcards للمراجعة السريعة (~600 كلمة)
+  - الدرس 15: أدلة الدراسة المخصصة (~650 كلمة)
+  - الدرس 16: تقييم الفهم والتعلّم التكيفي (~700 كلمة)
+- تحويل HTML إلى PDF باستخدام Playwright
+
+Stage Summary:
+- ملف unit4-scripts.html تم إنشاؤه في /home/z/my-project/download/
+- ملف unit4-scripts.pdf تم إنشاؤه في /home/z/my-project/download/ (825KB)
+- كل درس يحتوي على: Hook, Intro, Main Content (أقسام متعددة), Summary, CTA
+- يتضمن tip-boxes و warning-boxes ونصائح عملية للمعلم السوري
