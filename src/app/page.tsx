@@ -339,6 +339,27 @@ export default function LandingPage() {
             <GuaranteeBadge />
           </div>
 
+          {/* Hero Video */}
+          <div className="mt-8 max-w-3xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-[#f59e0b]/10 group">
+              <video
+                id="hero-video"
+                className="w-full aspect-video bg-black"
+                poster="/videos/hero-poster.jpg"
+                preload="metadata"
+                controls
+                playsInline
+              >
+                <source src="/videos/hero-intro-web.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو
+              </video>
+              <div className="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-l from-[#f59e0b] via-[#8b5cf6] to-[#22c55e]" />
+            </div>
+            <p className="text-center text-gray-500 text-xs mt-2">
+              شوف كيف بيتغيّر يومك كمعلم — فيديو تعريفي 7 دقائق
+            </p>
+          </div>
+
           {/* Social Proof Counters */}
           <div className="grid grid-cols-2 gap-4 mt-8 max-w-lg mx-auto">
             <div className="bg-[#1a1a1a] rounded-2xl p-4 text-center border border-[#f59e0b]/20">
