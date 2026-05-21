@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   BookOpen,
   CheckCircle2,
@@ -19,6 +19,50 @@ import {
   X,
   Globe,
 } from 'lucide-react'
+
+// Animated Count-Up Component
+function CountUp({ target, duration = 2000, suffix = '', color = 'text-[#f59e0b]' }: { target: number; duration?: number; suffix?: string; color?: string }) {
+  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true)
+        }
+      },
+      { threshold: 0.3 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [started])
+
+  useEffect(() => {
+    if (!started) return
+    const steps = 60
+    const increment = target / steps
+    const interval = duration / steps
+    let current = 0
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= target) {
+        setCount(target)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, interval)
+    return () => clearInterval(timer)
+  }, [started, target, duration])
+
+  return (
+    <div ref={ref} className={`text-3xl md:text-4xl font-black ${color}`}>
+      {count}{suffix}
+    </div>
+  )
+}
 
 // Guarantee Badge (reused in 3 locations)
 function GuaranteeBadge() {
@@ -295,32 +339,50 @@ export default function LandingPage() {
             <GuaranteeBadge />
           </div>
 
+          {/* Social Proof Counters */}
+          <div className="grid grid-cols-2 gap-4 mt-8 max-w-lg mx-auto">
+            <div className="bg-[#1a1a1a] rounded-2xl p-4 text-center border border-[#f59e0b]/20">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Users className="w-5 h-5 text-[#f59e0b]" />
+              </div>
+              <CountUp target={465} suffix="+" />
+              <div className="text-gray-400 text-xs mt-1 font-bold">معلم ومدرب ودكتور سجّلو</div>
+            </div>
+            <div className="bg-[#1a1a1a] rounded-2xl p-4 text-center border border-[#8b5cf6]/20">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Globe className="w-5 h-5 text-[#8b5cf6]" />
+              </div>
+              <CountUp target={106} suffix="+" color="text-[#8b5cf6]" />
+              <div className="text-gray-400 text-xs mt-1 font-bold">منصة ومدرسة سجّلو</div>
+            </div>
+          </div>
+
           {/* Trust stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-4 gap-4 mt-4 max-w-xl mx-auto">
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-black text-[#f59e0b]">20</div>
-              <div className="text-gray-500 text-xs mt-1">درس عملي</div>
+              <div className="text-lg md:text-xl font-black text-[#f59e0b]">20</div>
+              <div className="text-gray-500 text-[10px] mt-0.5">درس عملي</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-black text-[#f59e0b]">5</div>
-              <div className="text-gray-500 text-xs mt-1">وحدات أدوات</div>
+              <div className="text-lg md:text-xl font-black text-[#f59e0b]">5</div>
+              <div className="text-gray-500 text-[10px] mt-0.5">وحدات أدوات</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-black text-[#22c55e]">مجاني</div>
-              <div className="text-gray-500 text-xs mt-1">الأداة الأساسية</div>
+              <div className="text-lg md:text-xl font-black text-[#22c55e]">مجاني</div>
+              <div className="text-gray-500 text-[10px] mt-0.5">الأداة الأساسية</div>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-0.5">
                 {[1,2,3,4,5].map((s) => (
-                  <Star key={s} className="w-4 h-4 fill-[#f59e0b] text-[#f59e0b]" />
+                  <Star key={s} className="w-3 h-3 fill-[#f59e0b] text-[#f59e0b]" />
                 ))}
               </div>
-              <div className="text-gray-500 text-xs mt-1">4.9/5 تقييم المشتركين</div>
+              <div className="text-gray-500 text-[10px] mt-0.5">4.9/5 تقييم</div>
             </div>
           </div>
 
           {/* Credibility: Google product + Verified */}
-          <div className="flex items-center justify-center gap-4 mt-5">
+          <div className="flex items-center justify-center gap-4 mt-4">
             <span className="flex items-center gap-1.5 text-xs text-gray-500">
               <Globe className="w-3.5 h-3.5 text-blue-400" />
               أداة من Google
