@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import {
   BookOpen,
-  Brain,
   CheckCircle2,
-  Clock,
   ChevronDown,
   FileText,
   MessageCircle,
@@ -14,15 +12,15 @@ import {
   Star,
   Zap,
   FileOutput,
-  Download,
   Users,
   CreditCard,
   Send,
   ArrowLeft,
   X,
+  Globe,
 } from 'lucide-react'
 
-// Feature 4: Guarantee Badge (used in 3 locations)
+// Guarantee Badge (reused in 3 locations)
 function GuaranteeBadge() {
   return (
     <div className="flex items-center justify-center gap-2 text-[#22c55e] text-sm font-bold bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg px-4 py-2.5">
@@ -35,94 +33,61 @@ function GuaranteeBadge() {
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
-  const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
-
-  // Feature 2: Limited Seats Counter (logic kept, visual removed)
-  const [seatsLeft, setSeatsLeft] = useState(50)
-
-  // Feature 3: Sticky Mobile CTA Bar
   const [showStickyBar, setShowStickyBar] = useState(false)
-
-  // Feature 6: Exit Intent Popup
   const [showExitPopup, setShowExitPopup] = useState(false)
 
-  // ===== TASK 7: Dual Pricing =====
+  // IP-based region detection
   const [region, setRegion] = useState<'syria' | 'gulf'>('syria')
+  const [geoLoaded, setGeoLoaded] = useState(false)
 
   const PRICING = {
-    syria: { price: '$12', oldPrice: '$35', currency: 'شام كاش / تحويل بنكي', whatsappText: 'مرحباً، بدي اشترك بكورس NotebookLM - سوريا $12' },
-    gulf: { price: '$29', oldPrice: '$75', currency: 'تحويل بنكي / PayPal', whatsappText: 'مرحباً، بدي اشترك بكورس NotebookLM - الخليج $29' },
+    syria: {
+      price: '$12',
+      oldPrice: '$35',
+      currency: 'شام كاش / تحويل بنكي',
+      dailyCost: 'أقل من 400 ليرة باليوم',
+      whatsappText: 'مرحباً، بدي اشترك بكورس NotebookLM - $12',
+    },
+    gulf: {
+      price: '$120',
+      oldPrice: '$300',
+      currency: 'تحويل بنكي / PayPal / بطاقة',
+      dailyCost: 'أقل من دولار باليوم',
+      whatsappText: 'مرحباً، بدي اشترك بكورس NotebookLM - $120',
+    },
   }
 
   const currentPricing = PRICING[region]
   const WHATSAPP_NUMBER = '963985323170'
   const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(currentPricing.whatsappText)}`
 
-  // ===== COUNTDOWN TIMER =====
+  // ===== IP GEOLOCATION =====
   useEffect(() => {
-    const STORAGE_KEY = 'course_offer_end'
-    const stored = localStorage.getItem(STORAGE_KEY)
-    let endTime: number
+    const GEO_KEY = 'user_country'
+    const cached = localStorage.getItem(GEO_KEY)
 
-    if (stored) {
-      endTime = parseInt(stored, 10)
-    } else {
-      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000
-      localStorage.setItem(STORAGE_KEY, endTime.toString())
+    if (cached) {
+      setRegion(cached === 'SY' ? 'syria' : 'gulf')
+      setGeoLoaded(true)
+      return
     }
 
-    const updateTimer = () => {
-      const diff = Math.max(0, endTime - Date.now())
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-      setTimeLeft({ days, hours, minutes, seconds })
-    }
-
-    updateTimer()
-    queueMicrotask(() => setMounted(true))
-    const timer = setInterval(updateTimer, 1000)
-    return () => clearInterval(timer)
+    fetch('/api/geo')
+      .then((r) => r.json())
+      .then((data) => {
+        const isSyria = data.country === 'SY'
+        setRegion(isSyria ? 'syria' : 'gulf')
+        localStorage.setItem(GEO_KEY, data.country || 'OTHER')
+        setGeoLoaded(true)
+      })
+      .catch(() => {
+        setRegion('gulf') // Default to gulf on error
+        setGeoLoaded(true)
+      })
   }, [])
 
-  // ===== Feature 2: Limited Seats Counter (logic kept, visual removed) =====
-  useEffect(() => {
-    if (!mounted) return
-
-    const SEATS_KEY = 'course_seats_left'
-    const storedSeats = localStorage.getItem(SEATS_KEY)
-
-    if (storedSeats) {
-      queueMicrotask(() => setSeatsLeft(parseInt(storedSeats, 10)))
-    } else {
-      const initialSeats = Math.floor(Math.random() * 5) + 5 // 5-9
-      queueMicrotask(() => setSeatsLeft(initialSeats))
-      localStorage.setItem(SEATS_KEY, initialSeats.toString())
-    }
-
-    // Decrease seats every 5-8 minutes
-    let seatTimeout: ReturnType<typeof setTimeout>
-
-    const scheduleSeatDecrease = () => {
-      const delay = (5 + Math.random() * 3) * 60 * 1000
-      seatTimeout = setTimeout(() => {
-        setSeatsLeft(prev => {
-          const newVal = Math.max(prev - 1, 2)
-          localStorage.setItem(SEATS_KEY, newVal.toString())
-          return newVal
-        })
-        scheduleSeatDecrease()
-      }, delay)
-    }
-
-    scheduleSeatDecrease()
-
-    return () => clearTimeout(seatTimeout)
-  }, [mounted])
-
-  // ===== Feature 3: Sticky Mobile CTA Bar =====
+  // ===== Sticky Mobile CTA Bar =====
   useEffect(() => {
     const handleScroll = () => {
       setShowStickyBar(window.scrollY > 400)
@@ -131,14 +96,13 @@ export default function LandingPage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // ===== Feature 6: Exit Intent Popup =====
+  // ===== Exit Intent Popup =====
   useEffect(() => {
     if (!mounted) return
 
     const EXIT_KEY = 'exit_popup_shown'
     if (localStorage.getItem(EXIT_KEY)) return
 
-    // Desktop: mouse leaves viewport top
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !localStorage.getItem(EXIT_KEY)) {
         setShowExitPopup(true)
@@ -146,12 +110,9 @@ export default function LandingPage() {
       }
     }
 
-    // Mobile: rapid scroll to top after scrolling down
     let hasScrolledDown = false
     const handleScrollMobile = () => {
-      if (window.scrollY > 600) {
-        hasScrolledDown = true
-      }
+      if (window.scrollY > 600) hasScrolledDown = true
       if (hasScrolledDown && window.scrollY < 50 && !localStorage.getItem(EXIT_KEY)) {
         setShowExitPopup(true)
         localStorage.setItem(EXIT_KEY, 'true')
@@ -167,9 +128,13 @@ export default function LandingPage() {
     }
   }, [mounted])
 
-  const pad = (n: number) => n.toString().padStart(2, '0')
+  // Mark mounted after first render
+  useEffect(() => {
+    queueMicrotask(() => setMounted(true))
+  }, [])
 
-  // WhatsApp chats - Real customer reviews with hidden names
+  // ===== DATA =====
+
   const whatsappChats = [
     {
       title: 'رأي مشترك - معلم رياضيات',
@@ -177,7 +142,7 @@ export default function LandingPage() {
       messages: [
         { from: 'them', text: 'السلام عليكم نواف، بدي أشكرك على الكورس فعلاً غير حياتي' },
         { from: 'me', text: 'الله يبارك فيك! شو أكثر شي استفدت منه؟' },
-        { from: 'them', text: 'والله كل شي حلو بس أكتر شي عمللك اختبار بنسختين بـ 5 دقائق! قبل هيك كنت بقعد ساعة ونص بكتب أسئلة بإيدي. هلأ بعمل اختبار كامل بنسختين مختلفات مع الإجابات النموذجية بأقل من 5 دقائق 😍' },
+        { from: 'them', text: 'أكتر شي عمللك اختبار بنسختين بـ 5 دقائق! قبل هيك كنت بقعد ساعة ونص بكتب أسئلة بإيدي. هلأ بعمل اختبار كامل بنسختين مختلفات مع الإجابات النموذجية بأقل من 5 دقائق' },
         { from: 'them', text: 'وطول ما بعمل الاختبار بكون من الكتاب المدرسي وكل إجادة مكتوب جنبها رقم الصفحة. هاد اللي بيخلي الآباء والأمهات يثقوا بالاختبار' },
       ],
     },
@@ -187,8 +152,7 @@ export default function LandingPage() {
       messages: [
         { from: 'them', text: 'نواف بجد الكورس من أحلى الكورسات اللي أخدتها! صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي' },
         { from: 'me', text: 'حلو كتير! والطلاب كيف ردة فعلهم؟' },
-        { from: 'them', text: 'الطلاب صاروا يطلبوا كتير من هالملفات! بوزعهم عليهم واتساب وبيفهموا المادة وهم بالمشي. وكمان بعمل مذكرات PDF احترافية كلها من الكتاب مش من بره' },
-        { from: 'them', text: 'وأكتر شي حبيته إنو ما بتحتاج خبرة تقنية، أنا معلمة عربي ما بعرّف بالتكنولوجيا كتير بس قدرت أشتغل عليهن بسهولة ✅' },
+        { from: 'them', text: 'الطلاب صاروا يطلبوا كتير من هالملفات! بوزعهم عليهم واتساب وبيفهموا المادة وهم بالمشي. وأكتر شي حبيته إنو ما بتحتاج خبرة تقنية، أنا معلمة عربي بس قدرت أشتغل عليهن بسهولة' },
       ],
     },
     {
@@ -197,46 +161,35 @@ export default function LandingPage() {
       messages: [
         { from: 'them', text: 'دكتور نواف، الأداة رائعة فعلاً! قدرت أعمل محاضرة كاملة عن الانقسام الخلوي من المرجع الجامعي' },
         { from: 'me', text: 'ممتاز! أسئلة جامعية كمان عملت؟' },
-        { from: 'them', text: 'أي نعم! عملت 10 أسئلة مقالية وموضوعية بمستوى الطالب الجامعي وكلها من الكتاب صفحات 120-145. والملف PDF طلع بتنسيق احترافي غلاف وأرقام صفحات ومخططات 🎓' },
-      ],
-    },
-    {
-      title: 'رأي مشتركة - مدربة معلمين',
-      contactName: 'ف***** م',
-      messages: [
-        { from: 'them', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة' },
-        { from: 'me', text: 'هاد هدفنا! شو صار معك هلأ؟' },
-        { from: 'them', text: 'الحين بعمل مذكرات PDF وأوراق عمل لورشات التدريب أسرع بكثير. الأداة بتعمللي ملخصات من المذكرة التدريبية اللي برفعها وبنطبعها جاهزة. وفّرتلي وقت كتير صرت ركّز على التدريب نفسه مش على التحضير 💪' },
+        { from: 'them', text: 'أي نعم! عملت 10 أسئلة مقالية وموضوعية بمستوى الطالب الجامعي وكلها من الكتاب صفحات 120-145. والملف PDF طلع بتنسيق احترافي غلاف وأرقام صفحات ومخططات' },
       ],
     },
   ]
 
   const faqs = [
     {
-      q: 'أنا معلم أو دكتور جامعي ما بعرف شي بالتكنولوجيا، فيي أستفيد من الكورس؟',
-      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين والدكاترة والمدربين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر، من أول ما تفتح الأداة لحد ما تطبع ملف PDF جاهز.',
+      q: 'أنا معلم أو دكتور جامعي ما بعرف شي بالتكنولوجيا، فيي أستفيد؟',
+      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين والدكاترة والمدربين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر.',
     },
     {
       q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
-      a: 'الأداة الأولى مجانية تماماً. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ. الكورس بيعلمك تستغل النسخ المجانية لأقصى درجة.',
+      a: 'الأداة الأولى مجانية تماماً. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ.',
     },
     {
-      q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج السوري؟',
-      a: 'هاد أكتر شي بيميزها عن ChatGPT! الأداة بترجع للكتاب المدرسي اللي رفعته وبتجاوب منه بس. كل إجادة بيكون مكتوب جنبها رقم الصفحة. ما بتطلع معلومات من بره المنهج. هاد اللي بيخليها آمنة وموثوقة للمعلم.',
-    },
-    {
-      q: 'شو الفرق بين هالأدوات وChatGPT العادي؟',
-      a: 'الفرق كبير! ChatGPT بيعطيك إجابات عامة من الإنترنت مش من الكتاب المدرسي. أما هالأدوات فبتشتغل على الكتاب اللي أنت بترفعه يعني كل إجابة من المصدر وموثقة. كمان الأداة التانية بتنسقلك PDF احترافي جاهز للطباعة - شي ChatGPT ما بيعملو.',
+      q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج؟',
+      a: 'هاد أكتر شي بيميزها عن ChatGPT! الأداة بترجع للكتاب المدرسي اللي رفعته وبتجاوب منه بس. كل إجادة بيكون مكتوب جنبها رقم الصفحة. ما بتطلع معلومات من بره المنهج.',
     },
     {
       q: 'كيف بدفع؟',
-      a: 'الدفع عبر شام كاش أو تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة. العملية سهلة وسريعة.',
+      a: region === 'syria'
+        ? 'الدفع عبر شام كاش أو تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة.'
+        : 'الدفع عبر تحويل بنكي أو PayPal أو بطاقة ائتمان. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة.',
     },
   ]
 
   const courseModules = [
     {
-      title: 'الوحدة 1: أساسيات NotebookLM',
+      title: 'الوحدة 1: أدوات الأساسيات - NotebookLM',
       lessons: 4,
       time: '60 دقيقة',
       items: [
@@ -247,18 +200,18 @@ export default function LandingPage() {
       ],
     },
     {
-      title: 'الوحدة 2: البودكاست التعليمي',
+      title: 'الوحدة 2: أدوات البودكاست التعليمي',
       lessons: 4,
       time: '60 دقيقة',
       items: [
         'إنشاء بودكاست تعليمي من أي محتوى',
         'تخصيص البودكاست المتقدم - تحكّم كامل بالمحتوى',
         'مشاركة البودكاست مع الطلاب - قنوات التوزيع',
-        'ربط البودكاست بالمنهج السوري - استراتيجيات متقدمة',
+        'ربط البودكاست بالمنهج - استراتيجيات متقدمة',
       ],
     },
     {
-      title: 'الوحدة 3: العروض التقديمية والوسائط',
+      title: 'الوحدة 3: أدوات العروض والوسائط',
       lessons: 4,
       time: '60 دقيقة',
       items: [
@@ -269,7 +222,7 @@ export default function LandingPage() {
       ],
     },
     {
-      title: 'الوحدة 4: التقييم والدراسة',
+      title: 'الوحدة 4: أدوات التقييم والدراسة',
       lessons: 4,
       time: '60 دقيقة',
       items: [
@@ -280,7 +233,7 @@ export default function LandingPage() {
       ],
     },
     {
-      title: 'الوحدة 5: استراتيجيات المعلم السوري',
+      title: 'الوحدة 5: أدوات الاستراتيجيات المتقدمة',
       lessons: 4,
       time: '60 دقيقة',
       items: [
@@ -292,82 +245,38 @@ export default function LandingPage() {
     },
   ]
 
-  // Reduced from 6 to 3 bonuses for credibility
   const bonuses = [
-    { title: '15 برومبت جاهز', subtitle: 'PROMPTS جاهزة', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين والدكاترة والمدربين السوريين. كل برومبت مجرّب وبيدي نتائج ممتازة مع المناهج السورية.', icon: Zap },
-    { title: 'ورقة مرجعية سريعة', subtitle: 'CHEAT SHEET', value: '$10', desc: 'ورقة مرجعية سريعة بتلخص أهم الأوامر والخطوات. طباعها وحطها جنبك. بثواني بتلاقي اللي بدك ياه.', icon: FileText },
-    { title: 'وصول دائم + تحديثات', subtitle: 'LIFETIME ACCESS', value: '$20', desc: 'ادفع مرة واحتفظ بالكورس للأبد. مفيش اشتراك شهري ولا تجديد. بمجرد اشتراكك، عندك وصول دائم لكل المحتوى وأي تحديثات مستقبلية.', icon: Shield },
-  ]
-
-  const testimonials = [
-    { name: 'أحمد', role: 'معلم رياضيات - حلب', text: 'كنت بقعد 3 ساعات بتحضير درس واحد وتصحيح الاختبارات بياخد وقت كتير. الحين بعمل اختبار بنسختين بـ 5 دقائق، وبتصلا الإجابات النموذجية جاهزة!' },
-    { name: 'سارة', role: 'معلمة لغة عربية - دمشق', text: 'صرت بعمل شروحات مكتوبة وملفات صوتية لطلابي وبوزعها عليهم واتساب. الطلاب صاروا يطلبوا كتير من هالملفات!' },
-    { name: 'د. خالد', role: 'دكتور جامعي - كلية العلوم - دمشق', text: 'كنت بقعد وقت طويل بتحضير المحاضرات وكتابة الأسئلة الجامعية. الأداة بتشتغل على الكتاب الجامعي مباشرة وبتعمللي أسئلة بمستوى الطالب الجامعي مع الإجابات النموذجية!' },
-    { name: 'فاطمة', role: 'مدربة معلمين - حماة', text: 'كنت خايفة من الذكاء الاصطناعي وبحس إنه مش ياني. الكورس بيوصل المعلومة ببساطة. الحين بعمل مذكرات PDF وأوراق عمل لورشات التدريب أسرع بكثير.' },
-  ]
-
-  const exampleOutputs = [
-    { img: '/images/math-textbook-1.png', title: 'مذكرة رياضيات - الأعداد النسبية', desc: 'شرح + أمثلة + تمارين + إجابات نموذجية جاهزة للطباعة' },
-    { img: '/images/math-textbook-2.png', title: 'مذكرة رياضيات - مراجعة الأعداد الكسرية', desc: 'ملخص + جدول عمليات + خصائص + خط الأعداد' },
-    { img: '/images/exam-paper.png', title: 'اختبار الشهر الأول - بكلوريا', desc: 'أسئلة نظرية وتطبيقية + إجابات نموذجية بنسختين' },
-    { img: '/images/lesson-plan.png', title: 'خطة درس - اللغة العربية', desc: 'أهداف + أنشطة + تقييم + جدول زمني مرتب' },
+    { title: '15 برومبت جاهز', subtitle: 'PROMPTS', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين والدكاترة والمدربين. كل برومبت مجرّب وبيدي نتائج ممتازة.', icon: Zap },
+    { title: 'ورقة مرجعية سريعة', subtitle: 'CHEAT SHEET', value: '$10', desc: 'ورقة مرجعية سريعة بتلخص أهم الأوامر والخطوات. طباعها وحطها جنبك.', icon: FileText },
+    { title: 'وصول دائم + تحديثات', subtitle: 'LIFETIME', value: '$20', desc: 'ادفع مرة واحتفظ بالكورس للأبد. مفيش اشتراك شهري ولا تجديد.', icon: Shield },
   ]
 
   return (
     <div dir="rtl" className="min-h-screen flex flex-col bg-[#0a0a0a] font-sans text-white">
 
-      {/* ===== TOP URGENCY BAR ===== */}
-      <div className="bg-gradient-to-r from-[#c0392b] via-[#e74c3c] to-[#c0392b] py-3 text-center">
-        <p className="text-white font-bold text-sm md:text-base">
-          🔥 عرض التسجيل المبكر بـ {currentPricing.price} بدل {currentPricing.oldPrice}
-        </p>
-      </div>
-
-      {/* ===== HERO SECTION ===== */}
+      {/* ===== SECTION 1: HERO ===== */}
       <section className="relative bg-[#0a0a0a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#f59e0b]/8 rounded-full blur-[150px]" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#8b5cf6]/8 rounded-full blur-[120px]" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-12 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 pt-12 pb-6 md:pt-16 md:pb-8 text-center">
+          {/* Urgency badge */}
           <div className="inline-flex items-center gap-2 bg-[#f59e0b]/15 text-[#f59e0b] px-5 py-2 rounded-full text-sm font-bold mb-6 border border-[#f59e0b]/20">
             <Sparkles className="w-4 h-4" />
             كورس عملي - المدرب نواف البوسطه
           </div>
 
-          {/* Region Selector */}
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <button
-              onClick={() => setRegion('syria')}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                region === 'syria'
-                  ? 'bg-[#f59e0b] text-black shadow-lg shadow-[#f59e0b]/30'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
-              }`}
-            >
-              🇸🇾 سوريا
-            </button>
-            <button
-              onClick={() => setRegion('gulf')}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                region === 'gulf'
-                  ? 'bg-[#f59e0b] text-black shadow-lg shadow-[#f59e0b]/30'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
-              }`}
-            >
-              🇸🇦 الخليج
-            </button>
-          </div>
-
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
-            15 دقيقة بدل 3 ساعات
+          {/* Single punchy headline */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-5">
+            حوّل 3 ساعات تحضير
             <br />
-            <span className="text-[#f59e0b]">تحضير</span>
+            لـ <span className="text-[#f59e0b]">15 دقيقة</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            تعلم تستخدم NotebookLM لإعداد اختبارات بنسختين، مذكرات PDF احترافية، وشروحات صوتية — كل شي من الكتاب المدرسي وموثق بأرقام الصفحات
+            أدوات AI مجانية بتحول الكتاب المدرسي لاختبارات بنسختين، مذكرات PDF احترافية، وشروحات صوتية — كل شي موثق بأرقام الصفحات
           </p>
 
           {/* CTA */}
@@ -381,22 +290,48 @@ export default function LandingPage() {
             <MessageCircle className="w-6 h-6" />
           </a>
 
-          {/* Feature 4: Guarantee Badge (Hero) */}
+          {/* Guarantee */}
           <div className="mt-4">
             <GuaranteeBadge />
           </div>
 
-          {/* Social Proof under hero CTA */}
-          <div className="flex items-center justify-center gap-6 mt-4 text-sm text-gray-500">
-            <span className="flex items-center gap-1.5">
-              <Users className="w-4 h-4 text-[#22c55e]" />
-              معلمين من كل المحافظات السورية اشتركوا
+          {/* Trust stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 max-w-3xl mx-auto">
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-black text-[#f59e0b]">20</div>
+              <div className="text-gray-500 text-xs mt-1">درس عملي</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-black text-[#f59e0b]">5</div>
+              <div className="text-gray-500 text-xs mt-1">وحدات أدوات</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-black text-[#22c55e]">مجاني</div>
+              <div className="text-gray-500 text-xs mt-1">الأداة الأساسية</div>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-0.5">
+                {[1,2,3,4,5].map((s) => (
+                  <Star key={s} className="w-4 h-4 fill-[#f59e0b] text-[#f59e0b]" />
+                ))}
+              </div>
+              <div className="text-gray-500 text-xs mt-1">4.9/5 تقييم المشتركين</div>
+            </div>
+          </div>
+
+          {/* Credibility: Google product + Verified */}
+          <div className="flex items-center justify-center gap-4 mt-5">
+            <span className="flex items-center gap-1.5 text-xs text-gray-500">
+              <Globe className="w-3.5 h-3.5 text-blue-400" />
+              أداة من Google
             </span>
-            <span className="flex items-center gap-1">
-              {[1,2,3,4,5].map((s) => (
-                <Star key={s} className="w-3.5 h-3.5 fill-[#f59e0b] text-[#f59e0b]" />
-              ))}
-              <span className="mr-1">4.9/5</span>
+            <span className="flex items-center gap-1.5 text-xs text-gray-500">
+              <Users className="w-3.5 h-3.5 text-[#22c55e]" />
+              معلمين من كل المحافظات اشتركوا
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-gray-500">
+              <Shield className="w-3.5 h-3.5 text-[#22c55e]" />
+              مجرّب على مناهج حقيقية
             </span>
           </div>
 
@@ -405,7 +340,7 @@ export default function LandingPage() {
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
                 { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
-                { icon: CreditCard, step: '٢', text: `حول ${currentPricing.price} ${currentPricing.currency}` },
+                { icon: CreditCard, step: '٢', text: `حول ${currentPricing.price}` },
                 { icon: Send, step: '٣', text: 'استلم الرابط فوراً' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 md:gap-3">
@@ -426,89 +361,44 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== TRUST & CREDIBILITY ===== */}
-      <section className="py-10 bg-[#0a0a0a] border-y border-white/5">
+      {/* ===== SECTION 2: BEFORE/AFTER ===== */}
+      <section className="py-12 md:py-16 bg-[#0a0a0a] border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-[#f59e0b]">20</div>
-              <div className="text-gray-400 text-sm mt-1">درس عملي</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-[#f59e0b]">5</div>
-              <div className="text-gray-400 text-sm mt-1">وحدات تعليمية</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-[#22c55e]">مجاني</div>
-              <div className="text-gray-400 text-sm mt-1">الأداة الأساسية</div>
-            </div>
-            <div>
-              <div className="flex items-center justify-center gap-1">
-                {[1,2,3,4,5].map((s) => (
-                  <Star key={s} className="w-5 h-5 fill-[#f59e0b] text-[#f59e0b]" />
-                ))}
-              </div>
-              <div className="text-gray-400 text-sm mt-1">4.9/5 تقييم المشتركين</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== VISUAL BEFORE/AFTER (with merged loss aversion mini-box) ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">
             <span className="text-red-400">قبل</span> الكورس vs <span className="text-[#22c55e]">بعد</span> الكورس
           </h2>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto text-sm">
             الفرق واضح - شوف كيف بيتغير يومك كمعلم
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* BEFORE */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border-2 border-red-900/30 relative">
-              <div className="absolute -top-3 right-6 bg-red-500 text-white text-sm font-black px-4 py-1 rounded-full">قبل ❌</div>
-              <div className="space-y-4 mt-3">
+              <div className="absolute -top-3 right-6 bg-red-500 text-white text-sm font-black px-4 py-1 rounded-full">قبل</div>
+              <div className="space-y-4 mt-2">
                 <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">⏰</span>
+                  <span className="text-red-400 mt-0.5">⏰</span>
                   <div>
-                    <p className="text-white font-bold">2-3 ساعات بتحضير درس واحد</p>
-                    <p className="text-gray-500 text-sm">بتقعد من العصر للمغرب</p>
+                    <p className="text-white font-bold text-sm">2-3 ساعات بتحضير درس واحد</p>
+                    <p className="text-gray-500 text-xs">بتقعد من العصر للمغرب</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">📝</span>
+                  <span className="text-red-400 mt-0.5">📝</span>
                   <div>
-                    <p className="text-white font-bold">أكتب الأسئلة بإيدي</p>
-                    <p className="text-gray-500 text-sm">ساعة ونص عشان 20 سؤال</p>
+                    <p className="text-white font-bold text-sm">أكتب الأسئلة بإيدي - ساعة ونص عشان 20 سؤال</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">📄</span>
+                  <span className="text-red-400 mt-0.5">📄</span>
                   <div>
-                    <p className="text-white font-bold">نسخة وحدة من الاختبار</p>
-                    <p className="text-gray-500 text-sm">الطلاب بينقلوا من بعض</p>
+                    <p className="text-white font-bold text-sm">نسخة وحدة من الاختبار - الطلاب بينقلوا</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">❌</span>
+                  <span className="text-red-400 mt-0.5">💻</span>
                   <div>
-                    <p className="text-white font-bold">بدون إجابات نموذجية</p>
-                    <p className="text-gray-500 text-sm">بتصحح بإيدك وتاخد وقت كتير</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">💻</span>
-                  <div>
-                    <p className="text-white font-bold">تنسيق الوورد بياخد ساعات</p>
-                    <p className="text-gray-500 text-sm">وبالنهاية بيطلع مو مرتب</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-red-400 text-xl mt-0.5">🌙</span>
-                  <div>
-                    <p className="text-white font-bold">11 بالليل لسه بتحضّر</p>
-                    <p className="text-gray-500 text-sm">والأولاد نايمين وأنت شغّال</p>
+                    <p className="text-white font-bold text-sm">تنسيق الوورد بياخد ساعات وبالنهاية مو مرتب</p>
                   </div>
                 </div>
               </div>
@@ -516,163 +406,94 @@ export default function LandingPage() {
 
             {/* AFTER */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border-2 border-[#22c55e]/30 relative shadow-lg shadow-[#22c55e]/5">
-              <div className="absolute -top-3 right-6 bg-[#22c55e] text-white text-sm font-black px-4 py-1 rounded-full">بعد ✅</div>
-              <div className="space-y-4 mt-3">
+              <div className="absolute -top-3 right-6 bg-[#22c55e] text-white text-sm font-black px-4 py-1 rounded-full">بعد</div>
+              <div className="space-y-4 mt-2">
                 <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">⚡</span>
+                  <span className="text-[#22c55e] mt-0.5">⚡</span>
                   <div>
-                    <p className="text-white font-bold">15 دقيقة بتحضير نفس الدرس</p>
-                    <p className="text-[#22c55e] text-sm">بتخلص وأنت مستغرب!</p>
+                    <p className="text-white font-bold text-sm">15 دقيقة بتحضير نفس الدرس</p>
+                    <p className="text-[#22c55e] text-xs">بتخلص وأنت مستغرب!</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">🤖</span>
+                  <span className="text-[#22c55e] mt-0.5">🤖</span>
                   <div>
-                    <p className="text-white font-bold">AI بيعمللك 20 سؤال بـ 3 دقائق</p>
-                    <p className="text-[#22c55e] text-sm">من الكتاب وموثق بأرقام الصفحات</p>
+                    <p className="text-white font-bold text-sm">AI بيعمللك 20 سؤال بـ 3 دقائق من الكتاب</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">📋</span>
+                  <span className="text-[#22c55e] mt-0.5">📋</span>
                   <div>
-                    <p className="text-white font-bold">نسختين مختلفات من الاختبار</p>
-                    <p className="text-[#22c55e] text-sm">لا نسخ ولا غش!</p>
+                    <p className="text-white font-bold text-sm">نسختين مختلفات + إجابات نموذجية + رقم الصفحة</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">✅</span>
+                  <span className="text-[#22c55e] mt-0.5">🖨️</span>
                   <div>
-                    <p className="text-white font-bold">إجابات نموذجية + رقم الصفحة</p>
-                    <p className="text-[#22c55e] text-sm">الآباء بيثقوا بالاختبار 100%</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">🖨️</span>
-                  <div>
-                    <p className="text-white font-bold">PDF احترافي جاهز للطباعة</p>
-                    <p className="text-[#22c55e] text-sm">بغلاف وأرقام وتنسيق مرتب</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#22c55e] text-xl mt-0.5">🏠</span>
-                  <div>
-                    <p className="text-white font-bold">4 العصر خلصت كل شي</p>
-                    <p className="text-[#22c55e] text-sm">وقت للأولاد ولنفسك!</p>
+                    <p className="text-white font-bold text-sm">PDF احترافي جاهز للطباعة بغلاف وتنسيق مرتب</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Merged Loss Aversion Mini-Box */}
-          <div className="max-w-3xl mx-auto mt-8 bg-[#1a0a0a] rounded-xl p-5 border border-red-900/20">
-            <p className="text-center text-white font-bold">
+          {/* Loss Aversion */}
+          <div className="max-w-3xl mx-auto mt-8 bg-[#1a0a0a] rounded-xl p-4 border border-red-900/20">
+            <p className="text-center text-white font-bold text-sm">
               كل أسبوع بتأخر = <span className="text-red-400 font-black">5 ساعات</span> ضائعة × 40 أسبوع = <span className="text-red-400 font-black">200 ساعة بسنة</span>
             </p>
-            <p className="text-center text-gray-400 text-sm mt-1">
-              الكورس بـ <span className="text-[#22c55e] font-black">{currentPricing.price}</span> = أقل من 400 ليرة باليوم — وبتحفّظ 200 ساعة
+            <p className="text-center text-gray-400 text-xs mt-1">
+              الكورس بـ <span className="text-[#22c55e] font-black">{currentPricing.price}</span> = {currentPricing.dailyCost} — وبتحفّظ 200 ساعة
             </p>
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-8">
             <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-5 rounded-xl text-xl transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-black px-10 py-4 rounded-xl text-lg transition-all hover:scale-105 shadow-lg shadow-[#25D366]/30"
             >
-              بدّل يومك - اشترك الآن {currentPricing.price}
-              <MessageCircle className="w-6 h-6" />
+              اشترك الآن {currentPricing.price}
+              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* ===== MERGED: What you learn + Tools + Time savings ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
+      {/* ===== SECTION 3: TOOLS & RESULTS ===== */}
+      <section className="py-12 md:py-16 bg-[#0a0a0a] border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شو رح تتعلم تعمل كمعلم أو دكتور أو مدرب؟
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">
+            شو رح تتعلم تعمل؟
           </h2>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-            من رفع المصدر (كتاب مدرسي أو جامعي أو مذكرة تدريبية) لحد إخراج اختبار وملف PDF جاهز للطباعة - كل شي عملياً
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto text-sm">
+            من رفع المصدر لحد إخراج اختبار وملف PDF جاهز للطباعة - كل شي عملي
           </p>
 
-          {/* Presentation Slides - Sample Output */}
-          <div className="mb-12">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
-              <h3 className="text-xl md:text-2xl font-black text-[#f59e0b]">مثال عملي: درس الخلية - علوم الصف السابع</h3>
-              <div className="flex items-center gap-3">
-                <a
-                  href="/downloads/cell-lesson-presentation.pdf"
-                  download
-                  className="flex items-center gap-2 bg-[#f59e0b]/15 hover:bg-[#f59e0b]/25 text-[#f59e0b] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#f59e0b]/20"
-                >
-                  <Download className="w-4 h-4" />
-                  تحميل PDF
-                </a>
-                <a
-                  href="/downloads/cell-lesson-presentation.pptx"
-                  download
-                  className="flex items-center gap-2 bg-[#8b5cf6]/15 hover:bg-[#8b5cf6]/25 text-[#8b5cf6] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#8b5cf6]/20"
-                >
-                  <Download className="w-4 h-4" />
-                  تحميل عرض تقديمي
-                </a>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {[
-                { src: '/images/slides/slide-1.png', label: 'العنوان' },
-                { src: '/images/slides/slide-2.png', label: 'تركيب الخلية' },
-                { src: '/images/slides/slide-3.png', label: 'مقارنة نباتية وحيوانية' },
-                { src: '/images/slides/slide-4.png', label: 'ملخص الدرس' },
-                { src: '/images/slides/slide-5.png', label: 'أسئلة تقييمية' },
-                { src: '/images/slides/slide-6.png', label: 'خطة الدرس' },
-              ].map((slide, i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="rounded-xl overflow-hidden border border-white/5 group-hover:border-[#f59e0b]/30 transition-colors">
-                    <img src={slide.src} alt={slide.label} className="w-full h-auto group-hover:scale-105 transition-transform duration-300" />
-                  </div>
-                  <p className="text-center text-xs text-gray-500 mt-2">{slide.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-4">هاد مثال حقيقي لشي ممكن تعمله بهالأدوات - كله من الكتاب المدرسي وموثق بأرقام الصفحات</p>
-          </div>
-
-          {/* Short Section: Not... */}
-          <div className="mb-10 max-w-3xl mx-auto">
-            <h3 className="text-lg md:text-xl font-black text-[#f59e0b] text-center mb-3">كتير فيك تعمل عروض تقديمية بأسلوب الورقة والقلم 📝</h3>
-            <div className="rounded-xl overflow-hidden border border-white/5 hover:border-[#f59e0b]/30 transition-colors">
-              <img src="/images/notebook-presentation.jpg" alt="مثال عرض تقديمي بأسلوب الورقة والقلم - القوى المتوازنة وغير المتوازنة" className="w-full h-auto" />
-            </div>
-            <p className="text-center text-xs text-gray-500 mt-3">مثال: شرح القوى المتوازنة وغير المتوازنة - رسومات توضيحية وأسهم من الكتاب</p>
-          </div>
-
           {/* Tool Cards */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
             {/* Tool 1 */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-purple-900/30 hover:border-purple-500/50 transition-colors">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-5">
                 <div className="w-12 h-12 bg-[#8b5cf6]/20 rounded-xl flex items-center justify-center">
                   <BookOpen className="w-6 h-6 text-[#8b5cf6]" />
                 </div>
                 <div>
                   <h3 className="font-bold text-white text-lg">أداة رفع المصادر والأسئلة</h3>
-                  <span className="text-sm text-[#8b5cf6]">مجانية تماماً</span>
+                  <span className="text-sm text-[#8b5cf6]">مجانية تماماً - من Google</span>
                 </div>
               </div>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {[
                   'ارفع كتابك المدرسي واسألو أي سؤال عنه',
                   'بيعمللك اختبارات وأسئلة بنسختين مختلفة',
                   'كل إجابة موثقة بأرقام الصفحات من الكتاب',
-                  'بيعمل شرح صوتي للطلاب ترسله واتساب',
+                  'بيعمل شرح صوتي (بودكاست) للطلاب ترسله واتساب',
                   'يعمل شروحات وملخصات من الكتاب فقط',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-[#8b5cf6] mt-0.5 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#8b5cf6] mt-0.5 shrink-0" />
                     <span className="text-gray-300 text-sm">{item}</span>
                   </li>
                 ))}
@@ -681,7 +502,7 @@ export default function LandingPage() {
 
             {/* Tool 2 */}
             <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-amber-900/30 hover:border-amber-500/50 transition-colors">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-5">
                 <div className="w-12 h-12 bg-[#f59e0b]/20 rounded-xl flex items-center justify-center">
                   <FileOutput className="w-6 h-6 text-[#f59e0b]" />
                 </div>
@@ -690,7 +511,7 @@ export default function LandingPage() {
                   <span className="text-sm text-[#f59e0b]">لإنشاء ملفات PDF احترافية</span>
                 </div>
               </div>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {[
                   'يحول المحتوى لملف PDF احترافي جاهز للطباعة',
                   'بيعمل عروض تقديمية تعليمية بأسلوب الورقة والقلم',
@@ -699,7 +520,7 @@ export default function LandingPage() {
                   'كل شي جاهز للطباعة والتوزيع على الطلاب',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-[#f59e0b] mt-0.5 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#f59e0b] mt-0.5 shrink-0" />
                     <span className="text-gray-300 text-sm">{item}</span>
                   </li>
                 ))}
@@ -708,15 +529,15 @@ export default function LandingPage() {
           </div>
 
           {/* Time Savings Table */}
-          <h3 className="text-xl md:text-2xl font-black text-center mb-6">كم وقت بتوفر؟</h3>
+          <h3 className="text-lg md:text-xl font-black text-center mb-4">كم وقت بتوفر؟</h3>
           <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5">
             <table className="w-full">
               <thead>
                 <tr className="bg-[#f59e0b]/10 border-b border-white/10">
-                  <th className="py-4 px-6 text-right text-[#f59e0b] font-bold">المهمة</th>
-                  <th className="py-4 px-6 text-center text-red-400 font-bold">الطريقة العادية</th>
-                  <th className="py-4 px-6 text-center text-[#22c55e] font-bold">بـ AI</th>
-                  <th className="py-4 px-6 text-center text-[#f59e0b] font-bold">التوفير</th>
+                  <th className="py-3 px-4 text-right text-[#f59e0b] font-bold text-sm">المهمة</th>
+                  <th className="py-3 px-4 text-center text-red-400 font-bold text-sm">الطريقة العادية</th>
+                  <th className="py-3 px-4 text-center text-[#22c55e] font-bold text-sm">بـ AI</th>
+                  <th className="py-3 px-4 text-center text-[#f59e0b] font-bold text-sm">التوفير</th>
                 </tr>
               </thead>
               <tbody>
@@ -724,16 +545,15 @@ export default function LandingPage() {
                   { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
                   { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
                   { task: 'عمل عرض تقديمي تعليمي', old: '3-4 ساعات', ai: '10 دقائق', save: '95%' },
-                  { task: 'تصحيح اختبارات 40 طالب', old: '3-4 ساعات', ai: '15 دقيقة', save: '94%' },
                   { task: 'تصميم مذكرة PDF', old: 'ساعتين', ai: '10 دقائق', save: '92%' },
                   { task: 'عمل ملف صوتي تعليمي', old: 'مستحيل', ai: '5 دقائق', save: '∞' },
                   { task: 'بحث عن أحدث الدراسات وطرق التدريس', old: '2-3 ساعات', ai: 'ثواني', save: '99%' },
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.02]'}>
-                    <td className="py-3 px-6 text-right font-medium text-white">{row.task}</td>
-                    <td className="py-3 px-6 text-center text-red-400">{row.old}</td>
-                    <td className="py-3 px-6 text-center text-[#22c55e] font-medium">{row.ai}</td>
-                    <td className="py-3 px-6 text-center text-[#f59e0b] font-bold">{row.save}</td>
+                    <td className="py-2.5 px-4 text-right font-medium text-white text-sm">{row.task}</td>
+                    <td className="py-2.5 px-4 text-center text-red-400 text-sm">{row.old}</td>
+                    <td className="py-2.5 px-4 text-center text-[#22c55e] font-medium text-sm">{row.ai}</td>
+                    <td className="py-2.5 px-4 text-center text-[#f59e0b] font-bold text-sm">{row.save}</td>
                   </tr>
                 ))}
               </tbody>
@@ -742,22 +562,92 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== MERGED: Customer Reviews + Example Outputs ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-4">
-            شو قالوا المشتركين عن الكورس؟
-          </h2>
-          <p className="text-gray-400 text-center mb-12">محادثات حقيقية مع مشتركين - باللهجة السورية</p>
+      {/* ===== SECTION 4: COURSE CONTENT + BONUSES ===== */}
+      <section className="py-12 md:py-16 bg-[#111]">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-2">أدوات الكورس التعليمية</h2>
+          <p className="text-gray-400 text-center mb-10 text-sm">5 وحدات - 20 درس عملي مباشر</p>
 
-          <div className="space-y-8">
+          <div className="space-y-3 mb-12">
+            {courseModules.map((mod, i) => (
+              <div key={i} className="bg-[#1a1a1a] rounded-2xl border border-white/5 overflow-hidden">
+                <button
+                  onClick={() => setOpenModule(openModule === i ? null : i)}
+                  className="w-full flex items-center justify-between p-4 md:p-5 text-right hover:bg-white/[0.02] transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-[#f59e0b]/15 rounded-lg flex items-center justify-center shrink-0">
+                      <BookOpen className="w-4 h-4 text-[#f59e0b]" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-white text-base">{mod.title}</span>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-xs bg-[#f59e0b]/15 text-[#f59e0b] px-2 py-0.5 rounded-full">{mod.lessons} محاضرات</span>
+                        <span className="text-xs text-gray-500">{mod.time}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-500 transition-transform shrink-0 ${openModule === i ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {openModule === i && (
+                  <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-white/5 pt-3">
+                    <ul className="space-y-2">
+                      {mod.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-[#22c55e] mt-0.5 shrink-0" />
+                          <span className="text-gray-300 text-sm">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Bonuses */}
+          <h3 className="text-xl md:text-2xl font-black text-center mb-2">مازلت متردد؟</h3>
+          <p className="text-gray-400 text-center mb-8 text-sm">
+            هدايا مجانية بقيمة <span className="text-[#f59e0b] font-bold">$45</span> تحصل عليها مجاناً
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-4">
+            {bonuses.map((bonus, i) => (
+              <div key={i} className="bg-[#1a1a1a] rounded-2xl p-5 border border-[#f59e0b]/10 hover:border-[#f59e0b]/30 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <bonus.icon className="w-7 h-7 text-[#f59e0b]" />
+                  <span className="text-xs font-bold text-gray-500 tracking-wider">{bonus.subtitle}</span>
+                </div>
+                <h4 className="font-bold text-white mb-1">{bonus.title}</h4>
+                <p className="text-gray-400 text-xs leading-relaxed mb-3">{bonus.desc}</p>
+                <div className="border-t border-white/5 pt-2">
+                  <span className="text-xs text-gray-500">سعره </span>
+                  <span className="text-[#f59e0b] font-bold line-through text-xs">{bonus.value}</span>
+                  <span className="text-xs text-gray-500">، </span>
+                  <span className="text-[#22c55e] font-bold text-xs">لكن هتحصل عليه مجاناً!</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 5: REVIEWS + TRAINER ===== */}
+      <section className="py-12 md:py-16 bg-[#0a0a0a] border-t border-white/5">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-2">شو قالوا المشتركين؟</h2>
+          <p className="text-gray-400 text-center mb-10 text-sm">محادثات حقيقية مع مشتركين</p>
+
+          <div className="space-y-6">
             {whatsappChats.map((chat, ci) => (
               <div key={ci}>
-                <h3 className="text-lg font-bold text-[#f59e0b] mb-4 text-center">{chat.title}</h3>
-                <div className="max-w-lg mx-auto">
+                <h3 className="text-base font-bold text-[#f59e0b] mb-3 text-center">{chat.title}</h3>
+                <div className="max-w-md mx-auto">
                   {/* WhatsApp Header */}
-                  <div className="bg-[#075e54] rounded-t-2xl px-4 py-3 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                  <div className="bg-[#075e54] rounded-t-2xl px-4 py-2.5 flex items-center gap-3">
+                    <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold">
                       {chat.contactName.charAt(0)}
                     </div>
                     <div>
@@ -766,14 +656,14 @@ export default function LandingPage() {
                     </div>
                   </div>
                   {/* Chat Messages */}
-                  <div className="bg-[#ece5dd] p-4 space-y-2 rounded-b-2xl" dir="rtl">
+                  <div className="bg-[#ece5dd] p-3 space-y-1.5 rounded-b-2xl" dir="rtl">
                     {chat.messages.map((msg, mi) => (
                       <div key={mi} className={`flex ${msg.from === 'them' ? 'justify-start' : 'justify-end'}`}>
                         <div
-                          className={`max-w-[85%] px-3 py-2 rounded-xl text-sm leading-relaxed whitespace-pre-line ${
+                          className={`max-w-[85%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
                             msg.from === 'them'
-                              ? 'bg-white text-gray-800 rounded-tr-none shadow-sm'
-                              : 'bg-[#dcf8c6] text-gray-800 rounded-tl-none'
+                              ? 'bg-white text-gray-800'
+                              : 'bg-[#dcf8c6] text-gray-800'
                           }`}
                         >
                           {msg.text}
@@ -786,66 +676,38 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Example Outputs - Merged here */}
-          <h3 className="text-xl md:text-2xl font-black text-center mt-12 mb-6">شو بتطلع النتيجة؟</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {exampleOutputs.map((ex, i) => (
-              <div key={i} className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 group">
-                <div className="aspect-[3/4] overflow-hidden bg-gray-900">
-                  <img
-                    src={ex.img}
-                    alt={ex.title}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-[#f59e0b] mb-1">{ex.title}</h3>
-                  <p className="text-gray-500 text-sm">{ex.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== TRAINER ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-            كيف الذكاء الاصطناعي غيّر حياتي كمعلم ومدرب - <span className="text-[#f59e0b]">نواف البوسطه</span>
-          </h2>
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5 flex flex-col md:flex-row items-center gap-8">
+          {/* Trainer */}
+          <div className="mt-12 bg-[#1a1a1a] rounded-2xl p-6 border border-white/5 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto">
             <div className="shrink-0">
               <img
                 src="/images/trainer-nawaf.jpg"
                 alt="نواف البوسطه - مدرب الذكاء الاصطناعي بالتعليم"
-                className="w-32 h-32 rounded-full object-cover border-4 border-[#f59e0b]/30 shadow-lg shadow-[#f59e0b]/20"
+                className="w-24 h-24 rounded-full object-cover border-4 border-[#f59e0b]/30 shadow-lg shadow-[#f59e0b]/20"
               />
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-2xl font-black text-white mb-1">نواف البوسطه</h3>
-              <p className="text-[#f59e0b] font-bold mb-3">مدرب في الذكاء الاصطناعي التطبيقي بالتعليم</p>
-              <p className="text-gray-400 leading-relaxed mb-4">
-                أنا معلم متلكم، كنت بقعد ساعات بتحضير الدروس وبكتابة الأسئلة وبالتنسيق عالوورد. لما اكتشفت هالأدوات حياتي انقلبت. صرت بعمل اختبار بنسختين بـ 5 دقائق، وبصحح اختبارات الطلاب بكسر وقت، وبعمل مذكرات PDF احترافية بدقائق. مؤمن إن كل معلم سوري يقدر يستفيد من هالأدوات بغض النظر عن خلفيته التقنية - لأنها فعلاً سهلة وبسيطة.
+              <h3 className="text-xl font-black text-white mb-1">نواف البوسطه</h3>
+              <p className="text-[#f59e0b] font-bold text-sm mb-2">مدرب في الذكاء الاصطناعي التطبيقي بالتعليم</p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                أنا معلم متلكم، كنت بقعد ساعات بتحضير الدروس. لما اكتشفت هالأدوات حياتي انقلبت. صرت بعمل اختبار بنسختين بـ 5 دقائق وبعمل مذكرات PDF احترافية بدقائق. مؤمن إن كل معلم يقدر يستفيد من هالأدوات بغض النظر عن خلفيته التقنية.
               </p>
-              {/* Social Media Links */}
-              <div className="flex items-center gap-4 justify-center md:justify-start">
+              <div className="flex items-center gap-3 justify-center md:justify-start">
                 <a
                   href="https://www.facebook.com/share/18UPsSwfwQ/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-[#1877F2] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#1877F2]/20"
+                  className="flex items-center gap-1.5 bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-[#1877F2] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors border border-[#1877F2]/20"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                   فيسبوك
                 </a>
                 <a
                   href="https://instagram.com/noaf.ai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-[#E4405F]/15 hover:bg-[#E4405F]/25 text-[#E4405F] px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-[#E4405F]/20"
+                  className="flex items-center gap-1.5 bg-[#E4405F]/15 hover:bg-[#E4405F]/25 text-[#E4405F] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors border border-[#E4405F]/20"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                   noaf.ai
                 </a>
               </div>
@@ -854,127 +716,37 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== COURSE CONTENT ACCORDION ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">محتوى الكورس</h2>
-          <p className="text-gray-400 text-center mb-12">5 وحدات - 20 درس عملي مباشر</p>
-
-          <div className="space-y-3">
-            {courseModules.map((mod, i) => (
-              <div key={i} className="bg-[#1a1a1a] rounded-2xl border border-white/5 overflow-hidden">
-                <button
-                  onClick={() => setOpenModule(openModule === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-right hover:bg-white/[0.02] transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-[#f59e0b]/15 rounded-lg flex items-center justify-center shrink-0">
-                      <BookOpen className="w-5 h-5 text-[#f59e0b]" />
-                    </div>
-                    <div>
-                      <span className="font-bold text-white text-lg">{mod.title}</span>
-                      <div className="flex items-center gap-3 mt-1">
-                        <span className="text-xs bg-[#f59e0b]/15 text-[#f59e0b] px-2 py-0.5 rounded-full">{mod.lessons} محاضرات</span>
-                        <span className="text-xs text-gray-500">{mod.time}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronDown
-                    className={`w-6 h-6 text-gray-500 transition-transform shrink-0 ${openModule === i ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                {openModule === i && (
-                  <div className="px-5 md:px-6 pb-5 md:pb-6 border-t border-white/5 pt-4">
-                    <ul className="space-y-3">
-                      {mod.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-[#22c55e] mt-0.5 shrink-0" />
-                          <span className="text-gray-300">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== BONUSES - REDUCED to 3 ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">مازلت متردد؟</h2>
-          <h3 className="text-xl md:text-3xl font-black text-center mb-12">
-            هدايا مجانية بقيمة <span className="text-[#f59e0b]">$45</span> تحصل عليها <span className="text-[#22c55e]">مجاناً</span>
-          </h3>
-
-          <div className="grid sm:grid-cols-3 gap-5">
-            {bonuses.map((bonus, i) => (
-              <div key={i} className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#f59e0b]/10 hover:border-[#f59e0b]/30 transition-colors">
-                <div className="flex items-center justify-between mb-3">
-                  <bonus.icon className="w-8 h-8 text-[#f59e0b]" />
-                  <span className="text-xs font-bold text-gray-500 tracking-wider">{bonus.subtitle}</span>
-                </div>
-                <h4 className="font-bold text-white text-lg mb-2">{bonus.title}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{bonus.desc}</p>
-                <div className="border-t border-white/5 pt-3">
-                  <span className="text-sm text-gray-500">سعره </span>
-                  <span className="text-[#f59e0b] font-bold line-through">{bonus.value}</span>
-                  <span className="text-sm text-gray-500">، </span>
-                  <span className="text-[#22c55e] font-bold">لكن هتحصل عليه مجاناً!</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 bg-[#1a1a1a] rounded-2xl p-6 border border-[#f59e0b]/20">
-            <p className="text-gray-400 text-lg">
-              قيمة البونصات <span className="text-[#f59e0b] font-bold line-through">$45</span> ولكن ستحصل عليها
-              <span className="text-[#22c55e] font-black text-2xl mr-2"> مجاناً عند اشتراك</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PRICING SUMMARY ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
+      {/* ===== SECTION 6: PRICING + FAQ + FINAL CTA ===== */}
+      <section className="py-12 md:py-16 bg-[#111] border-t border-white/5">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-10">كل ما ستحصل عليه عند اشتراكك</h2>
+          {/* Pricing Summary */}
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-8">كل ما ستحصل عليه</h2>
 
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
+          <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-white/5 mb-10">
             {[
               { title: 'كورس الذكاء الاصطناعي بالتعليم', desc: 'محتوى عملي مباشر', value: currentPricing.oldPrice },
               ...bonuses.map((b) => ({ title: b.title, desc: '', value: b.value })),
             ].map((item, i) => (
-              <div key={i} className={`flex items-center justify-between ${i > 0 ? 'border-t border-white/5 pt-4 mt-4' : 'pb-4'}`}>
+              <div key={i} className={`flex items-center justify-between ${i > 0 ? 'border-t border-white/5 pt-3 mt-3' : 'pb-3'}`}>
                 <div>
-                  <h4 className="font-bold text-white">{item.title}</h4>
-                  {item.desc && <p className="text-sm text-gray-500">{item.desc}</p>}
+                  <h4 className="font-bold text-white text-sm">{item.title}</h4>
+                  {item.desc && <p className="text-xs text-gray-500">{item.desc}</p>}
                 </div>
-                <span className="text-[#f59e0b] font-bold shrink-0 mr-4">
-                  {item.value} <span className="text-[#22c55e] text-sm">مجاناً</span>
+                <span className="text-[#f59e0b] font-bold shrink-0 mr-3 text-sm">
+                  {item.value} <span className="text-[#22c55e] text-xs">مجاناً</span>
                 </span>
               </div>
             ))}
 
-            <div className="border-t-2 border-[#f59e0b]/30 mt-6 pt-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-gray-400">إجمالي قيمة هذه الباقة يتجاوز</span>
-                <span className="text-[#f59e0b] font-bold line-through text-xl">$70</span>
-              </div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-400">لكن… هتحصل عليها كلها الآن مقابل</span>
-              </div>
+            <div className="border-t-2 border-[#f59e0b]/30 mt-4 pt-4">
               <div className="text-center">
-                <span className="text-5xl md:text-6xl font-black text-[#22c55e]">{currentPricing.price}</span>
-                <p className="text-gray-400 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">{currentPricing.oldPrice}</span> - عرض التسجيل المبكر</p>
-                <p className="text-gray-400 mt-1">دفع واحد - وصول دائم</p>
+                <span className="text-4xl md:text-5xl font-black text-[#22c55e]">{currentPricing.price}</span>
+                <p className="text-gray-400 mt-1 text-sm">بدل <span className="text-[#f59e0b] line-through font-bold">{currentPricing.oldPrice}</span></p>
+                <p className="text-gray-400 text-xs">دفع واحد - وصول دائم</p>
               </div>
             </div>
 
-            {/* Feature 4: Guarantee Badge (Pricing) */}
-            <div className="mt-4 flex justify-center">
+            <div className="mt-3 flex justify-center">
               <GuaranteeBadge />
             </div>
 
@@ -982,89 +754,49 @@ export default function LandingPage() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full mt-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
+              className="w-full mt-4 bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن - {currentPricing.price} فقط
-              <MessageCircle className="w-6 h-6" />
+              اشترك الآن - {currentPricing.price}
+              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
-        </div>
-      </section>
 
-      {/* ===== TESTIMONIALS - REDUCED to 4 ===== */}
-      <section className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">شو بيقولوا المعلمين؟</h2>
-          <p className="text-gray-400 text-center mb-12">آراء حقيقية من معلمين جربوا الكورس</p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {testimonials.map((item, i) => (
-              <div key={i} className="bg-[#1a1a1a] rounded-2xl p-6 border border-white/5">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className="w-4 h-4 fill-[#f59e0b] text-[#f59e0b]" />
-                  ))}
-                </div>
-                <p className="text-gray-300 mb-4 leading-relaxed text-sm">&ldquo;{item.text}&rdquo;</p>
-                <div className="border-t border-white/5 pt-3">
-                  <div className="font-bold text-[#f59e0b]">{item.name}</div>
-                  <div className="text-xs text-gray-500">{item.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FAQ ===== */}
-      <section className="py-16 md:py-20 bg-[#111]">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-12">الأسئلة الشائعة</h2>
+          {/* FAQ */}
+          <h3 className="text-xl md:text-2xl font-black text-center mb-6">الأسئلة الشائعة</h3>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
               <div key={i} className="bg-[#1a1a1a] rounded-2xl border border-white/5 overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-right hover:bg-white/[0.02] transition-colors"
+                  className="w-full flex items-center justify-between p-4 text-right hover:bg-white/[0.02] transition-colors"
                 >
-                  <span className="font-bold text-white text-base md:text-lg ml-4">{faq.q}</span>
+                  <span className="font-bold text-white text-sm ml-4">{faq.q}</span>
                   <ChevronDown
-                    className={`w-6 h-6 text-gray-500 transition-transform shrink-0 ${openFaq === i ? 'rotate-180' : ''}`}
+                    className={`w-5 h-5 text-gray-500 transition-transform shrink-0 ${openFaq === i ? 'rotate-180' : ''}`}
                   />
                 </button>
                 {openFaq === i && (
-                  <div className="px-5 md:px-6 pb-5 md:pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4">
+                  <div className="px-4 pb-4 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-3">
                     {faq.a}
                   </div>
                 )}
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ===== FINAL CTA (with guarantee) ===== */}
-      <section id="register" className="py-16 md:py-20 bg-[#0a0a0a]">
-        <div className="max-w-xl mx-auto px-4">
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-[#25D366]/20 text-center">
-            <div className="w-20 h-20 bg-[#25D366]/15 rounded-full flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-10 h-10 text-[#25D366]" />
+          {/* Final CTA */}
+          <div className="mt-10 bg-[#1a1a1a] rounded-2xl p-6 border border-[#25D366]/20 text-center">
+            <div className="w-16 h-16 bg-[#25D366]/15 rounded-full flex items-center justify-center mx-auto mb-4">
+              <MessageCircle className="w-8 h-8 text-[#25D366]" />
             </div>
-            <h2 className="text-2xl md:text-4xl font-black mb-3">جاهز تبدأ؟</h2>
-            <p className="text-gray-400 text-lg mb-6">تواصل عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
+            <h3 className="text-xl md:text-2xl font-black mb-2">جاهز تبدأ؟</h3>
+            <p className="text-gray-400 text-sm mb-4">تواصل عبر واتساب ورح نبعثلك رابط الكورس فوراً</p>
 
-            <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5">
-              <div className="text-4xl font-black text-[#22c55e]">{currentPricing.price}</div>
-              <p className="text-gray-500 mt-1">بدل <span className="text-[#f59e0b] line-through font-bold">{currentPricing.oldPrice}</span></p>
-              <p className="text-gray-500 text-sm">عرض التسجيل المبكر</p>
-            </div>
-
-            {/* Purchase Steps Reminder */}
-            <div className="bg-[#0a0a0a] rounded-xl p-4 mb-6 border border-white/5 text-sm">
-              <p className="text-gray-500 mb-3 font-bold">كيف تشترك؟</p>
-              <div className="flex items-center justify-center gap-3">
+            <div className="bg-[#0a0a0a] rounded-xl p-3 mb-4 border border-white/5 text-sm">
+              <div className="flex items-center justify-center gap-2">
                 <span className="text-[#22c55e]">١. تواصل واتساب</span>
                 <span className="text-gray-600">←</span>
-                <span className="text-[#22c55e]">٢. حول {currentPricing.price} {currentPricing.currency}</span>
+                <span className="text-[#22c55e]">٢. حول {currentPricing.price}</span>
                 <span className="text-gray-600">←</span>
                 <span className="text-[#22c55e]">٣. استلم الرابط</span>
               </div>
@@ -1074,39 +806,33 @@ export default function LandingPage() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-5 rounded-xl text-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
+              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30"
             >
-              اشترك الآن - {currentPricing.price} فقط
-              <MessageCircle className="w-6 h-6" />
+              اشترك الآن - {currentPricing.price}
+              <MessageCircle className="w-5 h-5" />
             </a>
 
-            {/* Feature 4: Guarantee Badge (Final CTA) */}
-            <div className="mt-4 flex justify-center">
+            <div className="mt-3 flex justify-center">
               <GuaranteeBadge />
-            </div>
-
-            <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
-              <span className="flex items-center gap-1"><Shield className="w-4 h-4 text-[#22c55e]" /> وصول دائم</span>
-              <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> رابط الكورس فوراً</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="bg-[#050505] py-8 mt-auto border-t border-white/5">
+      <footer className="bg-[#050505] py-6 mt-auto border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <div className="mb-3">
-            <span className="text-[#f59e0b] font-black text-lg">نواف البوسطه</span>
+          <div className="mb-2">
+            <span className="text-[#f59e0b] font-black">نواف البوسطه</span>
             <span className="text-gray-600 mx-2">|</span>
-            <span className="text-gray-400">المدرب</span>
+            <span className="text-gray-400 text-sm">المدرب</span>
           </div>
-          <p className="text-gray-600 text-sm">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والدكاترة الجامعيين والمدربين في سوريا</p>
-          <p className="text-xs mt-2 text-gray-700">جميع الحقوق محفوظة 2026</p>
+          <p className="text-gray-600 text-xs">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والدكاترة الجامعيين والمدربين</p>
+          <p className="text-xs mt-1 text-gray-700">جميع الحقوق محفوظة 2026</p>
         </div>
       </footer>
 
-      {/* ===== FLOATING WHATSAPP BUTTON (hidden on mobile when sticky bar is shown) ===== */}
+      {/* ===== FLOATING WHATSAPP BUTTON ===== */}
       <a
         href={WHATSAPP_LINK}
         target="_blank"
@@ -1117,7 +843,7 @@ export default function LandingPage() {
         <MessageCircle className="w-7 h-7 text-white" />
       </a>
 
-      {/* ===== Feature 3: Sticky Mobile CTA Bar ===== */}
+      {/* ===== STICKY MOBILE CTA BAR ===== */}
       {mounted && showStickyBar && (
         <div
           className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 px-4 py-3 flex items-center justify-between"
@@ -1125,7 +851,7 @@ export default function LandingPage() {
         >
           <div>
             <span className="text-[#22c55e] font-black text-xl">{currentPricing.price}</span>
-            <span className="text-gray-500 text-sm mr-1">بدل <span className="line-through">{currentPricing.oldPrice}</span></span>
+            <span className="text-gray-500 text-xs mr-1">بدل <span className="line-through">{currentPricing.oldPrice}</span></span>
           </div>
           <a
             href={WHATSAPP_LINK}
@@ -1139,41 +865,36 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* ===== Feature 6: Exit Intent Popup ===== */}
+      {/* ===== EXIT INTENT POPUP ===== */}
       {mounted && showExitPopup && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4"
           style={{ animation: 'fadeIn 0.3s ease-out' }}
         >
-          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowExitPopup(false)} />
           <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={() => setShowExitPopup(false)}
-          />
-          {/* Popup Card */}
-          <div
-            className="relative bg-[#1a1a1a] rounded-2xl p-8 max-w-md w-full border border-[#f59e0b]/30 shadow-2xl text-center"
+            className="relative bg-[#1a1a1a] rounded-2xl p-6 max-w-sm w-full border border-[#f59e0b]/30 shadow-2xl text-center"
             style={{ animation: 'scaleIn 0.3s ease-out' }}
           >
             <button
               onClick={() => setShowExitPopup(false)}
-              className="absolute top-4 left-4 text-gray-500 hover:text-white transition-colors"
+              className="absolute top-3 left-3 text-gray-500 hover:text-white transition-colors"
               aria-label="إغلاق"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="text-4xl mb-4">⏳</div>
-            <h3 className="text-2xl font-black text-white mb-3">لحظة! فيه عرض خاص</h3>
-            <p className="text-gray-300 leading-relaxed mb-6">
-              قبل ما تروح، بدي قلك إنو عرض {currentPricing.price} لفترة محدودة بس. لما يخلص السعر بيرجع {currentPricing.oldPrice}. سجّل هلأ قبل ما يخلص العرض
+            <div className="text-3xl mb-3">⏳</div>
+            <h3 className="text-xl font-black text-white mb-2">لحظة! فيه عرض خاص</h3>
+            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+              عرض {currentPricing.price} لفترة محدودة بس. لما يخلص السعر بيرجع {currentPricing.oldPrice}. سجّل هلأ قبل ما يخلص العرض
             </p>
 
             <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 mb-3"
+              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-black py-3 rounded-xl text-base transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 mb-2"
               onClick={() => setShowExitPopup(false)}
             >
               سجّل الآن {currentPricing.price}
@@ -1182,7 +903,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowExitPopup(false)}
-              className="text-gray-500 hover:text-gray-400 text-sm transition-colors"
+              className="text-gray-500 hover:text-gray-400 text-xs transition-colors"
             >
               لا شكراً
             </button>
@@ -1190,45 +911,19 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* ===== Custom Keyframe Animations ===== */}
+      {/* ===== ANIMATIONS ===== */}
       <style jsx global>{`
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-100%);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
         @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(100%);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(100%); }
+          to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
         @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
         }
       `}</style>
     </div>
