@@ -64,6 +64,72 @@ function CountUp({ target, duration = 2000, suffix = '', color = 'text-[#f59e0b]
   )
 }
 
+// Countdown Timer Component
+function CountdownTimer() {
+  const OFFER_KEY = 'offer_start_date'
+  const OFFER_DAYS = 14
+
+  const [endDate, setEndDate] = useState<Date | null>(null)
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+
+  useEffect(() => {
+    let stored = localStorage.getItem(OFFER_KEY)
+    let start: Date
+    if (stored) {
+      start = new Date(stored)
+    } else {
+      start = new Date()
+      localStorage.setItem(OFFER_KEY, start.toISOString())
+    }
+    const end = new Date(start.getTime() + OFFER_DAYS * 24 * 60 * 60 * 1000)
+    setEndDate(end)
+  }, [])
+
+  useEffect(() => {
+    if (!endDate) return
+    const tick = () => {
+      const now = new Date()
+      const diff = endDate.getTime() - now.getTime()
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        return
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      })
+    }
+    tick()
+    const interval = setInterval(tick, 1000)
+    return () => clearInterval(interval)
+  }, [endDate])
+
+  if (!endDate) return null
+
+  return (
+    <div className="bg-red-950/40 border border-red-500/30 rounded-xl px-5 py-3 inline-flex items-center gap-3">
+      <span className="text-red-400 font-bold text-sm">⏰ العرض ينتهي خلال:</span>
+      <div className="flex items-center gap-1.5">
+        {[
+          { value: timeLeft.days, label: 'يوم' },
+          { value: timeLeft.hours, label: 'ساعة' },
+          { value: timeLeft.minutes, label: 'دقيقة' },
+          { value: timeLeft.seconds, label: 'ثانية' },
+        ].map((item, i) => (
+          <div key={i} className="flex items-center gap-1.5">
+            <div className="bg-[#0a0a0a] rounded-lg px-2 py-1 min-w-[40px] text-center">
+              <span className="text-red-400 font-black text-lg">{String(item.value).padStart(2, '0')}</span>
+            </div>
+            {i < 3 && <span className="text-red-500/50 text-lg font-bold">:</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // Guarantee Badge (reused in 3 locations)
 function GuaranteeBadge() {
   return (
@@ -233,18 +299,18 @@ export default function LandingPage() {
 
   const courseModules = [
     {
-      title: 'الوحدة 1: أدوات الأساسيات - NotebookLM',
+      title: 'الوحدة 1: الأساسيات والتحضير الذكي',
       lessons: 4,
       time: '60 دقيقة',
       items: [
-        'ما هو NotebookLM ولماذا يحتاجه كل معلم؟',
+        'ما هو الذكاء الاصطناعي بالتعليم ولماذا يحتاجه كل معلم؟',
         'رفع المصادر وتنظيم الدفتر الذكي',
         'المحادثة الذكية مع محتواك - أسئلة تفتح بوابات',
         'تغيير اللغة للعربية والإعدادات المخصصة',
       ],
     },
     {
-      title: 'الوحدة 2: أدوات البودكاست التعليمي',
+      title: 'الوحدة 2: البودكاست التعليمي',
       lessons: 4,
       time: '60 دقيقة',
       items: [
@@ -255,34 +321,34 @@ export default function LandingPage() {
       ],
     },
     {
-      title: 'الوحدة 3: أدوات العروض والوسائط',
+      title: 'الوحدة 3: العروض والوسائط المتقدمة',
       lessons: 4,
       time: '60 دقيقة',
       items: [
         'إنشاء عرض تقديمي احترافي من محتواك',
         'الخرائط الذهنية والإنفوجرافيك',
         'ملخص الفيديو والنظرة العامة',
-        'دمج NotebookLM مع أدوات العرض - Gamma وCanva AI',
+        'دمج أدوات العرض والتصميم المتقدمة',
       ],
     },
     {
-      title: 'الوحدة 4: أدوات التقييم والدراسة',
+      title: 'الوحدة 4: التقييم والدراسة',
       lessons: 4,
       time: '60 دقيقة',
       items: [
         'توليد أسئلة وامتحانات بضغطة زر',
-        'البطاقات التعليمية (Flashcards) للمراجعة السريعة',
+        'البطاقات التعليمية للمراجعة السريعة',
         'أدلة الدراسة المخصصة',
         'تقييم الفهم والتعلّم التكيفي',
       ],
     },
     {
-      title: 'الوحدة 5: أدوات الاستراتيجيات المتقدمة',
+      title: 'الوحدة 5: الاستراتيجيات المتقدمة',
       lessons: 4,
       time: '60 دقيقة',
       items: [
         'التعليم الشامل - دمج طلاب الاحتياجات الخاصة',
-        'دمج NotebookLM مع Google Classroom',
+        'دمج مع منصات التعليم الإلكتروني',
         'خطة الدرس الذكية - تحضير كامل بالذكاء الاصطناعي',
         'بناء نظامك التعليمي الذكي المتكامل',
       ],
@@ -312,6 +378,11 @@ export default function LandingPage() {
             كورس عملي - المدرب نواف البوسطه
           </div>
 
+          {/* Offer Countdown */}
+          <div className="mt-4 flex justify-center">
+            <CountdownTimer />
+          </div>
+
           {/* Single punchy headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-5">
             حوّل 3 ساعات تحضير
@@ -320,7 +391,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            أدوات AI مجانية بتحول الكتاب المدرسي لاختبارات بنسختين، مذكرات PDF احترافية، وشروحات صوتية — كل شي موثق بأرقام الصفحات
+            أدوات ذكاء اصطناعي مجانية بتحول الكتاب المدرسي لاختبارات بنسختين، مذكرات PDF احترافية، وشروحات صوتية — كل شي موثق بأرقام الصفحات
           </p>
 
           {/* CTA */}
@@ -386,7 +457,7 @@ export default function LandingPage() {
             </div>
             <div className="text-center">
               <div className="text-lg md:text-xl font-black text-[#f59e0b]">5</div>
-              <div className="text-gray-500 text-[10px] mt-0.5">وحدات أدوات</div>
+              <div className="text-gray-500 text-[10px] mt-0.5">وحدات</div>
             </div>
             <div className="text-center">
               <div className="text-lg md:text-xl font-black text-[#22c55e]">مجاني</div>
@@ -673,10 +744,68 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ===== EXAM SAMPLES ===== */}
+      <section className="py-12 md:py-16 bg-[#0a0a0a] border-t border-white/5">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-3">
+            أسئلة وامتحانات <span className="text-[#f59e0b]">جاهزة</span>
+          </h2>
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto text-sm">
+            اختبارات بنسختين مختلفات مع الإجابات النموذجية وأرقام الصفحات — بثواني من الكتاب المدرسي
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#22c55e]/20 hover:border-[#22c55e]/40 transition-colors text-center">
+              <div className="w-14 h-14 bg-[#22c55e]/15 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <FileText className="w-7 h-7 text-[#22c55e]" />
+              </div>
+              <h3 className="font-bold text-white text-lg mb-2">اختبار بنسختين</h3>
+              <p className="text-gray-400 text-sm">نسخة A ونسخة B — الطلاب ما بيقدروا ينقلوا. كل نسخة بترتيب وأسئلة مختلفة</p>
+            </div>
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#8b5cf6]/20 hover:border-[#8b5cf6]/40 transition-colors text-center">
+              <div className="w-14 h-14 bg-[#8b5cf6]/15 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="w-7 h-7 text-[#8b5cf6]" />
+              </div>
+              <h3 className="font-bold text-white text-lg mb-2">إجابات نموذجية</h3>
+              <p className="text-gray-400 text-sm">كل سؤال بيكون مكتوب جنبو رقم الصفحة من الكتاب المدرسي — دقة عالية وموثوقة</p>
+            </div>
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#f59e0b]/20 hover:border-[#f59e0b]/40 transition-colors text-center">
+              <div className="w-14 h-14 bg-[#f59e0b]/15 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Zap className="w-7 h-7 text-[#f59e0b]" />
+              </div>
+              <h3 className="font-bold text-white text-lg mb-2">بـ 3 دقائق فقط</h3>
+              <p className="text-gray-400 text-sm">ارفع الكتاب → اطلب الاختبار → جاهز بتنسيق PDF احترافي للطباعة والتوزيع</p>
+            </div>
+          </div>
+
+          {/* Exam Preview */}
+          <div className="mt-8 max-w-3xl mx-auto">
+            <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/10">
+              <div className="p-4 border-b border-white/5 flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#22c55e]/15 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-[#22c55e]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-sm">نموذج اختبار حقيقي — كيمياء</h4>
+                  <p className="text-gray-500 text-xs">من الكتاب المدرسي مع الإجابات وأرقام الصفحات</p>
+                </div>
+              </div>
+              <iframe
+                src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview"
+                className="w-full border-0"
+                style={{ height: '450px' }}
+                allow="autoplay"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== SECTION 4: COURSE CONTENT + BONUSES ===== */}
       <section className="py-12 md:py-16 bg-[#111]">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black text-center mb-2">أدوات الكورس التعليمية</h2>
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-2">محتوى الكورس التعليمي</h2>
           <p className="text-gray-400 text-center mb-10 text-sm">5 وحدات - 20 درس عملي مباشر</p>
 
           <div className="space-y-3 mb-12">
@@ -751,37 +880,22 @@ export default function LandingPage() {
           <h2 className="text-2xl md:text-4xl font-black text-center mb-2">شو قالوا المشتركين؟</h2>
           <p className="text-gray-400 text-center mb-10 text-sm">محادثات حقيقية مع مشتركين</p>
 
-          <div className="space-y-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {whatsappChats.map((chat, ci) => (
-              <div key={ci}>
-                <h3 className="text-base font-bold text-[#f59e0b] mb-3 text-center">{chat.title}</h3>
-                <div className="max-w-md mx-auto">
-                  {/* WhatsApp Header */}
-                  <div className="bg-[#075e54] rounded-t-2xl px-4 py-2.5 flex items-center gap-3">
-                    <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                      {chat.contactName.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-white text-sm font-bold">{chat.contactName}</p>
-                      <p className="text-green-200 text-xs">متصل</p>
-                    </div>
-                  </div>
-                  {/* Chat Messages */}
-                  <div className="bg-[#ece5dd] p-3 space-y-1.5 rounded-b-2xl" dir="rtl">
-                    {chat.messages.map((msg, mi) => (
-                      <div key={mi} className={`flex ${msg.from === 'them' ? 'justify-start' : 'justify-end'}`}>
-                        <div
-                          className={`max-w-[85%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
-                            msg.from === 'them'
-                              ? 'bg-white text-gray-800'
-                              : 'bg-[#dcf8c6] text-gray-800'
-                          }`}
-                        >
-                          {msg.text}
-                        </div>
-                      </div>
+              <div key={ci} className="bg-[#1a1a1a] rounded-2xl p-5 border border-white/5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex gap-0.5">
+                    {[1,2,3,4,5].map((s) => (
+                      <Star key={s} className="w-3.5 h-3.5 fill-[#f59e0b] text-[#f59e0b]" />
                     ))}
                   </div>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                  &ldquo;{chat.messages.filter(m => m.from === 'them').map(m => m.text).join(' ')}&rdquo;
+                </p>
+                <div className="border-t border-white/5 pt-2">
+                  <p className="text-[#f59e0b] font-bold text-xs">{chat.contactName}</p>
+                  <p className="text-gray-500 text-xs">{chat.title}</p>
                 </div>
               </div>
             ))}
@@ -854,6 +968,15 @@ export default function LandingPage() {
                 <span className="text-4xl md:text-5xl font-black text-[#22c55e]">{currentPricing.price}</span>
                 <p className="text-gray-400 mt-1 text-sm">بدل <span className="text-[#f59e0b] line-through font-bold">{currentPricing.oldPrice}</span></p>
                 <p className="text-gray-400 text-xs">دفع واحد - وصول دائم</p>
+                {region === 'syria' ? (
+                  <div className="mt-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg px-4 py-2.5 inline-block">
+                    <span className="text-[#22c55e] font-black text-sm">🇸🇾 سعر خاص لداخل سوريا — خصم يصل الى 90%</span>
+                  </div>
+                ) : (
+                  <div className="mt-3 bg-[#f59e0b]/10 border border-[#f59e0b]/20 rounded-lg px-4 py-2.5 inline-block">
+                    <span className="text-[#f59e0b] font-black text-sm">🇸🇾 داخل سوريا سعر خاص — خصم يصل الى 90%</span>
+                  </div>
+                )}
               </div>
             </div>
 
