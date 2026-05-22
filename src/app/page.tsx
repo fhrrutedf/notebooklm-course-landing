@@ -642,6 +642,34 @@ export default function LandingPage() {
               </tbody>
             </table>
           </div>
+
+          {/* ===== Results Gallery CTA ===== */}
+          <div className="mt-12 text-center">
+            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#111] rounded-3xl p-8 md:p-10 border border-[#f59e0b]/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#f59e0b]/5 rounded-full blur-[100px]" />
+              <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#8b5cf6]/5 rounded-full blur-[80px]" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  {['✨', '🧠', '📄', '📊', '🎬', '🎙️'].map((icon, i) => (
+                    <span key={i} className="text-2xl md:text-3xl">{icon}</span>
+                  ))}
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-white mb-3">
+                  شوف عينات حقيقية من نتائج الشغل
+                </h3>
+                <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
+                  إنفوجرافيك، عروض تقديمية، فيديوهات، وبودكاست — ملفات حقيقية من كتب كيمياء وعلوم وانكليزي
+                </p>
+                <a
+                  href="/results"
+                  className="inline-flex items-center gap-3 bg-[#f59e0b] hover:bg-[#d97706] text-black font-black px-8 py-4 rounded-xl text-lg transition-all hover:scale-105 shadow-lg shadow-[#f59e0b]/30"
+                >
+                  شوف العينات الحقيقية
+                  <ArrowLeft className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
