@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   X,
   Globe,
+  Building2,
 } from 'lucide-react'
 
 // Animated Count-Up Component
@@ -332,8 +333,12 @@ export default function LandingPage() {
     <div dir="rtl" className="min-h-screen flex flex-col bg-[#000] text-white" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
 
       {/* ===== STICKY TOP URGENCY BAR ===== */}
-      <div className="bg-[#FF0000] text-white py-2 px-4 text-center sticky top-0 z-50">
+      <div className="bg-[#FF0000] text-white py-2 px-4 sticky top-0 z-50 flex items-center justify-center gap-4">
         <p className="text-sm font-bold">🔥 عرض محدود — خصم ينتهي قريباً!{geoLoaded ? ` سجّل الآن بـ ${currentPricing.price} بدل ${currentPricing.oldPrice}` : ''}</p>
+        <a href="/schools" className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded-full transition-colors flex items-center gap-1.5 shrink-0 border border-white/30">
+          <Building2 className="w-3.5 h-3.5" />
+          للمدارس
+        </a>
       </div>
 
       {/* ===== SECTION 1: HERO ===== */}
@@ -1044,6 +1049,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ===== SCHOOLS BANNER — Before Footer ===== */}
+      <section className="py-10 md:py-14 bg-[#011839]">
+        <div className="max-w-[1000px] mx-auto px-4">
+          <div className="bg-white rounded-[20px] p-6 md:p-8 shadow-[0_6px_16px_rgba(0,0,0,0.12)] relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-[#614BEB]/5 rounded-full blur-[100px]" />
+            <div className="absolute bottom-0 right-0 w-[200px] h-[200px] bg-[#A735D7]/5 rounded-full blur-[80px]" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
+              <div className="shrink-0">
+                <div className="w-16 h-16 rounded-[16px] flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #614BEB, #A735D7)' }}>
+                  <Building2 className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              <div className="text-center md:text-right flex-1">
+                <h3 className="text-xl md:text-2xl font-black text-[#111] mb-2">
+                  مدير مدرسة أو مشرف تربوي؟
+                </h3>
+                <p className="text-[#565A7C] text-sm leading-relaxed">
+                  وفّر على مدرستك ساعات من التحضير اليومي. اشتراكات جماعية بأسعار خاصة للمدارس والمنصات التعليمية — بدءاً من 5 معلمين فقط
+                </p>
+              </div>
+              <a
+                href="/schools"
+                className="inline-flex items-center gap-3 bg-[#FF0000] hover:bg-[#E93D3D] text-white font-black px-8 py-4 rounded-xl text-lg transition-all hover:scale-105 shadow-lg shadow-[#FF0000]/30 shrink-0"
+              >
+                عروض المدارس
+                <ArrowLeft className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== FOOTER — Black ===== */}
       <footer className="bg-[#000] py-6 mt-auto border-t border-white/5">
         <div className="max-w-[1000px] mx-auto px-4 text-center">
@@ -1060,6 +1097,16 @@ export default function LandingPage() {
             </span>
             <span className="text-white/30 mx-2">|</span>
             <span className="text-white/70 text-sm">المدرب</span>
+          </div>
+          <div className="flex items-center justify-center gap-4 mt-3 mb-2">
+            <a href="/schools" className="text-white/50 hover:text-white text-xs transition-colors flex items-center gap-1">
+              <Building2 className="w-3.5 h-3.5" />
+              عروض المدارس
+            </a>
+            <span className="text-white/20">|</span>
+            <a href="/results" className="text-white/50 hover:text-white text-xs transition-colors">
+              عينات النتائج
+            </a>
           </div>
           <p className="text-white/40 text-xs">كورس الذكاء الاصطناعي بالتعليم | للمعلمين والدكاترة الجامعيين والمدربين</p>
           <p className="text-xs mt-1 text-white/25">جميع الحقوق محفوظة 2026</p>
