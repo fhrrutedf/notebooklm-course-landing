@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "العنوان: \"التفاعلات الكهروكيميائية: خلية غالvاني\" (الخلية الجلفانية).  \nالموضوع: شرح خلية غالvاني (الخلية الكهروكيميائية) باستخدام Mg كأنود وسبيكة Ag ككاثود، مع توضيح التفاعلات (أكسدة Mg وإعادة تثبيت Ag+)، دور الجسر الملحي، وقياس الجهد بواسطة الفولتميتر.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1779385050,
+  "id": "202605220137251e4e81d81df24f7a",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202605220137251e4e81d81df24f7a",
+  "usage": {
+    "completion_tokens": 115,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2336,
+    "prompt_tokens_details": {
+      "cached_tokens": 4
+    },
+    "total_tokens": 2451
+  }
+}

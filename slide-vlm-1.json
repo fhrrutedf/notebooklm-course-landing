@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "### العنوان (Title):  \nمن خلال التفاعلات الكيميائية إلى خصائص المادة: رحلة من الذرة إلى الكون  \n\n\n### المحتوى (Content):  \n- **النص العلوي (Top Text):** \"من خلال التفاعلات الكيميائية إلى خصائص المادة: رحلة من الذرة إلى الكون\"  \n  (Translation: \"From chemical reactions to the properties of matter: A journey from the atom to the universe\")  \n\n- **النص السفلي (Bottom Text):** \"بسم الله الرحمن الرحيم: في سلسلة محاضرات الكيمياء العامة، الفيزياء، الأحياء\"  \n  (Translation: \"In the name of God, the Most Gracious, the Most Merciful: In the series of lectures on general chemistry, physics, biology\")  \n\n- **الصورة (Image):** رسم بياني لذرة (تمثيل للبنية الذرية مع مدارات الإلكترونات ومستوى كروي dashed) يوضح الانتقال من المستوى الذري (atomic) إلى المستوى الكوني (macro).  \n\n- **التعليقات (Annotations):**  \n  - في الأعلى: `[SCALING CHEMISTRY_V11]` (إشارة إلى نسخة/إصدار العرض التقديمي).  \n  - في الأسفل: `[SCALE: ATOMIC_TO_MACRO]` (إشارة إلى نطاق التدرج من الذرة إلى الكون).  \n\n\n**الخلاصة:** العرض التقديمي يركز على ربط التفاعلات الكيميائية بالخصائص المادية، مع التأكيد على رحلة من المستوى الذري (الذرة) إلى المستوى الكوني (الكون)، ضمن سلسلة محاضرات متعددة العلوم (كيمياء، فيزياء، أحياء).",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1779384990,
+  "id": "20260522013617e4a2e95dfb6446b4",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "20260522013617e4a2e95dfb6446b4",
+  "usage": {
+    "completion_tokens": 425,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2354,
+    "prompt_tokens_details": {
+      "cached_tokens": 4
+    },
+    "total_tokens": 2779
+  }
+}

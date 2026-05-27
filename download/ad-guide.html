@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل إنشاء إعلان كورس NotebookLM بأدوات AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&display=swap');
+
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e3a8a;
+    --accent: #f59e0b;
+    --accent-dark: #d97706;
+    --bg-white: #ffffff;
+    --bg-light: #f8fafc;
+    --bg-blue: #eff6ff;
+    --bg-dark: #0f172a;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --success: #10b981;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    background: var(--bg-white);
+    font-family: 'Noto Sans Arabic', 'Noto Kufi Arabic', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 13.5px;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    width: 210mm;
+    height: 297mm;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e3a8a 50%, var(--primary) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.15);
+    filter: blur(80px);
+  }
+
+  .cover-badge {
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 6px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+    max-width: 480px;
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 30px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== BODY CONTENT ===== */
+  .content {
+    padding: 16mm 20mm;
+  }
+
+  /* Section headers */
+  .section-header {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--primary);
+    page-break-after: avoid;
+  }
+
+  .section-number {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 34px;
+    font-weight: 800;
+    font-size: 15px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  .section-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    display: inline;
+    vertical-align: middle;
+  }
+
+  .subsection-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 18px;
+    margin-bottom: 10px;
+    padding-right: 12px;
+    border-right: 4px solid var(--accent);
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+    line-height: 1.85;
+  }
+
+  ul, ol {
+    margin: 8px 20px 12px 0;
+    padding-right: 16px;
+  }
+
+  li { margin-bottom: 5px; line-height: 1.75; }
+
+  /* Cards */
+  .info-card {
+    background: var(--bg-blue);
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .info-card .card-title {
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .warning-card {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .warning-card .card-title {
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .success-card {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .success-card .card-title {
+    font-weight: 700;
+    color: #166534;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  /* Ad copy boxes */
+  .ad-copy-box {
+    background: var(--bg-dark);
+    color: white;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+
+  .platform-badge {
+    display: inline-block;
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .badge-facebook { background: #1877f2; }
+  .badge-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .badge-whatsapp { background: #25d366; color: #075e54; }
+  .badge-tiktok { background: #000; border: 1px solid #ff0050; color: #ff0050; }
+
+  .ad-copy-box .ad-text {
+    font-size: 14px;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+
+  .ad-copy-box .ad-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 6px 20px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12.5px;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+
+  tr:nth-child(even) td { background: var(--bg-light); }
+
+  /* Steps */
+  .step-flow { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+  .step-item { display: flex; align-items: flex-start; gap: 12px; }
+  .step-num {
+    background: var(--primary); color: white; min-width: 28px; height: 28px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-content h4 { font-weight: 700; color: var(--primary-dark); margin-bottom: 2px; font-size: 13.5px; }
+  .step-content p { font-size: 12.5px; margin-bottom: 2px; color: var(--text-medium); }
+
+  /* Video scripts */
+  .script-box {
+    background: #1a1a2e; color: #e2e8f0; border-radius: 12px; padding: 18px;
+    margin: 14px 0; border-right: 4px solid var(--accent);
+    page-break-inside: avoid;
+  }
+  .script-box .script-timing { color: var(--accent); font-weight: 700; font-size: 11.5px; margin-bottom: 4px; }
+  .script-box .script-stage { color: var(--primary-light); font-weight: 600; font-size: 12px; margin-bottom: 3px; }
+  .script-box .script-text { font-size: 13px; line-height: 1.85; color: #e2e8f0; }
+  .script-box .script-direction { color: var(--text-light); font-style: italic; font-size: 11.5px; }
+
+  /* Tool cards */
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .tool-card {
+    background: var(--bg-light); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; text-align: center;
+  }
+  .tool-card .tool-name { font-weight: 800; color: var(--primary-dark); font-size: 13px; margin-bottom: 3px; }
+  .tool-card .tool-desc { font-size: 11px; color: var(--text-medium); line-height: 1.5; }
+  .tool-card .tool-price { font-size: 10.5px; color: var(--success); font-weight: 700; margin-top: 4px; }
+
+  /* Image showcase */
+  .image-showcase { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .image-showcase img { width: 100%; border-radius: 8px; border: 2px solid var(--border); }
+  .image-label { text-align: center; font-size: 11px; color: var(--text-medium); font-weight: 600; margin-top: 4px; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 6px 12px 6px 6px; border-radius: 6px; margin-bottom: 4px;
+    font-size: 12.5px; position: relative; padding-right: 28px;
+  }
+  .checklist li::before {
+    content: '\2713'; position: absolute; right: 8px; color: var(--success); font-weight: 800; font-size: 14px;
+  }
+  .checklist li:nth-child(odd) { background: var(--bg-light); }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: white; border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center;
+  }
+  .highlight-box .highlight-number { font-size: 42px; font-weight: 900; color: var(--accent); line-height: 1; }
+  .highlight-box .highlight-label { font-size: 13px; opacity: 0.9; margin-top: 6px; }
+
+  /* Tip box */
+  .tip-box {
+    background: linear-gradient(to left, #eff6ff, #dbeafe);
+    border-radius: 10px; padding: 14px; margin: 12px 0; border-right: 4px solid var(--primary);
+  }
+  .tip-box strong { color: var(--primary-dark); }
+
+  /* Page breaks for major sections */
+  .page-break { page-break-before: always; }
+
+  /* TOC */
+  .toc-table td { padding: 6px 10px; font-size: 13.5px; border: none; }
+  .toc-table tr:nth-child(even) td { background: transparent; }
+
+  /* Stats row */
+  .stats-row {
+    display: flex; justify-content: space-around; margin: 14px 0;
+  }
+  .stat-item { text-align: center; }
+  .stat-value { font-size: 36px; font-weight: 900; color: var(--primary-dark); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--text-medium); margin-top: 4px; }
+
+  @media screen {
+    .cover { margin: 10px auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    html { background: #e2e8f0; }
+    body { display: flex; flex-direction: column; align-items: center; }
+    .content { box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 10px auto; background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="cover-badge">دليل عملي شامل</div>
+  <h1 class="cover-title">إنشاء إعلان كورس NotebookLM<br>بأدوات الذكاء الاصطناعي</h1>
+  <p class="cover-subtitle">دليل خطوة بخطوة لإنشاء حملة إعلانية احترافية لكورسك من الصفر باستخدام أدوات AI مجانية ومتاحة</p>
+  <div class="cover-meta">
+    <span>الإصدار 1.0</span>
+    <span>|</span>
+    <span>مايو 2026</span>
+    <span>|</span>
+    <span>20+ أداة AI</span>
+  </div>
+</div>
+
+<!-- ===== BODY ===== -->
+<div class="content">
+
+  <!-- TOC -->
+  <h2 style="font-family: 'Noto Kufi Arabic'; font-size: 20px; font-weight: 800; color: var(--primary-dark); margin-bottom: 16px; border-bottom: 3px solid var(--primary); padding-bottom: 8px;">فهرس المحتويات</h2>
+  
+  <table class="toc-table" style="margin-bottom: 24px;">
+    <tr><td style="font-weight:700; color: var(--primary-dark); width: 36px;">01</td><td>لماذا تحتاج إعلان احترافي لكورسك؟</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">02</td><td>تحديد الجمهور المستهدف والرسالة الإعلانية</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">03</td><td>كتابة النص الإعلاني بأدوات AI</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">04</td><td>تصميم الصور الإعلانية بأدوات AI</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">05</td><td>إنشاء فيديو إعلاني بأدوات AI</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">06</td><td>إعداد الحملة الإعلانية على المنصات</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">07</td><td>نصائح متقدمة لتحسين الأداء الإعلاني</td></tr>
+    <tr><td style="font-weight:700; color: var(--primary-dark);">08</td><td>الملحق: موارد وأدوات إضافية</td></tr>
+  </table>
+
+  <!-- SECTION 1 -->
+  <div class="section-header">
+    <span class="section-number">1</span>
+    <h2 class="section-title">لماذا تحتاج إعلان احترافي لكورسك؟</h2>
+  </div>
+
+  <p>في عصر الذكاء الاصطناعي، لم يعد إنشاء إعلان احترافي حكراً على وكالات الدعاية والإعلان. أصبح بإمكان أي صانع محتوى تعليمي إنشاء حملة إعلانية متكاملة باستخدام أدوات AI المجانية أو منخفضة التكلفة. هذا الدليل سيرافقك خطوة بخطوة من الفكرة حتى إطلاق الإعلان، مع نصوص جاهزة وصور مولدة وسكربتات فيديو يمكنك استخدامها مباشرة.</p>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-value">5</div>
+      <div class="stat-label">خطوات فقط لإعلانك</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$0</div>
+      <div class="stat-label">تكلفة البداية</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">20+</div>
+      <div class="stat-label">أداة AI متاحة</div>
+    </div>
+  </div>
+
+  <p>الفكرة بسيطة: أنت خبير في محتواك التعليمي، وأدوات AI هي فريقك الإبداعي. بدلاً من دفع مئات الدولارات لمصمم ومونتير وكاتب إعلاني، يمكنك الحصول على نتائج احترافية بنسبة 80-90% من الجودة المهنية باستخدام أدوات مجانية. الـ 10-20% المتبقية تحتاج فقط لمساتك الشخصية ومعرفتك بالجمهور السوري المستهدف. الجمهور السوري له خصائص فريدة: دخل محدود بين 70 و120 دولار شهرياً، تواصل باللهجة السورية، استخدام عالي لواتساب وفيسبوك بنسبة تصل لـ 90%، واهتمام كبير بالتعليم كمخرج اقتصادي حقيقي. هذا الدليل مصمم خصيصاً لهذا الجمهور مع نصوص إعلانية مكتوبة بالعربية السورية.</p>
+
+  <!-- SECTION 2 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">2</span>
+    <h2 class="section-title">تحديد الجمهور المستهدف والرسالة</h2>
+  </div>
+
+  <p>قبل كتابة أي نص إعلاني أو تصميم أي صورة، يجب أن تحدد بدقة: لمن تتحدث؟ وماذا تريد منهم؟ هذه الخطوة هي الأساس الذي يبنى عليه كل شيء لاحق. إذا لم تعرف جمهورك، فإن إعلانك سيكون كمن يرمي سهماً في الظلام. الجمهور الذي نستهدفه هنا هو المعلمون السوريون، وهم فئة لها خصائص ديموغرافية وسلوكية محددة يجب فهمها جيداً قبل إطلاق أي حملة.</p>
+
+  <div class="subsection-title">جمهورنا المستهدف: المعلمون السوريون</div>
+
+  <table>
+    <tr><th style="width:28%;">المعيار</th><th>التفاصيل</th></tr>
+    <tr><td style="font-weight:700;">الفئة العمرية</td><td>25-50 سنة</td></tr>
+    <tr><td style="font-weight:700;">المهنة</td><td>معلمون، مدرسون، أساتذة جامعيون، طلاب تربية</td></tr>
+    <tr><td style="font-weight:700;">الدخل الشهري</td><td>70-120$ (سعر الكورس 12$ = 10-17% من الدخل)</td></tr>
+    <tr><td style="font-weight:700;">المنصات المفضلة</td><td>فيسبوك (80%)، واتساب (90%)، إنستغرام (40%)</td></tr>
+    <tr><td style="font-weight:700;">الدافع الأساسي</td><td>تحسين الدخل عبر مهارات رقمية جديدة</td></tr>
+    <tr><td style="font-weight:700;">المعوقات</td><td>ضعف الإنترنت، انقطاع الكهرباء، ضعف القدرة الشرائية</td></tr>
+    <tr><td style="font-weight:700;">اللغة</td><td>عربية سورية (لهجة شامية مألوفة)</td></tr>
+  </table>
+
+  <div class="subsection-title">الرسالة الإعلانية الأساسية</div>
+
+  <p>كل إعلان يجب أن يوصل رسالة واحدة واضحة. لا تحاول أن تقول كل شيء في إعلان واحد، بل ركز على رسالة واحدة قوية تركز على الفائدة الرئيسية. رسالتنا الأساسية للكورس هي أن NotebookLM أداة مجانية من جوجل توفر ساعات العمل اليومي للمعلم، ويمكن تعلمها بكورس عملي بسعر 12 دولار فقط.</p>
+
+  <div class="info-card">
+    <div class="card-title">الرسالة الأساسية</div>
+    <p style="margin:0; font-size: 15px; font-weight: 700; color: var(--primary-dark); line-height: 1.9;">
+      "NotebookLM أداة مجانية من جوجل توفّر عليك ساعات عمل يومياً كمعلم. تعلّمها بكورس عملي بـ 12$ فقط."
+    </p>
+  </div>
+
+  <div class="subsection-title">زرّ الإجراء (CTA) المقترح</div>
+  <p>الـ CTA هو أهم كلمة في إعلانك. هو ما يريد الزائر فعله بعد أن يرى إعلانك. كل منصة لها CTA مناسب يختلف عن الأخرى، لذلك اختر الكلمة المناسبة حسب السياق والمنصة التي تنشر عليها.</p>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-name">سجّل الآن</div>
+      <div class="tool-desc">الأقوى للفيسبوك عندما يكون هناك رابط تسجيل مباشر</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">ابدأ التعلّم</div>
+      <div class="tool-desc">أكثر تشجيعاً، مناسب للإنستغرام والتيك توك</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">أرسل رسالة</div>
+      <div class="tool-desc">مثالي للواتساب حيث التواصل شخصي ومباشر</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">احجز مقعدك</div>
+      <div class="tool-desc">يخلق إحساس بالندرة وسرعة الحجز</div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>نصيحة مهمة:</strong> لا تستخدم "اشتري الآن" أو "ادفع" لأنها تخلق مقاومة نفسية عند جمهور حساس للسعر. استخدم كلمات إيجابية تركز على القيمة لا على الدفع.
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">3</span>
+    <h2 class="section-title">كتابة النص الإعلاني بأدوات AI</h2>
+  </div>
+
+  <p>كتابة النص الإعلاني (Ad Copy) هي المهارة الأهم في التسويق الرقمي. الخبر الجيد هو أن أدوات AI مثل ChatGPT وClaude يمكنها كتابة نصوص إعلانية مذهلة إذا أعطيتها التعليمات الصحيحة. المفتاح كله في الـ Prompt (الأمر) الذي تعطيه للذكاء الاصطناعي: كلما كان أدق وأشمل، كانت النتيجة أفضل. فيما يلي قالب شامل يمكنك استخدامه مباشرة.</p>
+
+  <div class="subsection-title">كيف تكتب Prompt احترافي لنص إعلاني؟</div>
+
+  <div class="info-card">
+    <div class="card-title">قالب Prompt شامل للنص الإعلاني</div>
+    <p style="font-family: monospace; direction: ltr; text-align: left; font-size: 11px; line-height: 1.8; background: var(--bg-dark); color: #a5f3fc; padding: 14px; border-radius: 8px; margin-top: 8px;">
+اكتب نص إعلاني لكورس [اسم الكورس] على منصة [فيسبوك/إنستغرام/واتساب]<br>
+الجمهور: [وصف الجمهور]<br>
+المشكلة: [ما يعاني منه الجمهور]<br>
+الحل: [ما يقدمه الكورس]<br>
+السعر: [السعر مع التخفيض]<br>
+CTA: [الإجراء المطلوب]<br>
+اللغة: عربية سورية (لهجة شامية)<br>
+النبرة: [حماسية/ودية/احترافية]<br>
+الطول: [قصير/متوسط/طويل]
+    </p>
+  </div>
+
+  <div class="warning-card">
+    <div class="card-title">تحذير: لا تنسخ وألصق!</div>
+    <p style="margin:0; font-size: 12.5px;">النصوص التي يعطيك إياها AI هي مسودة أولية. عدّل عليها بأسلوبك الشخصي وأضف تجربتك الحقيقية. الجمهور السوري يشمّ النص المكتوب آلياً من أول سطر. أضف لمسة إنسانية: قصة شخصية، تعبير سوري مألوف، أو تجربة حقيقية مررت بها.</p>
+  </div>
+
+  <div class="subsection-title">نص إعلاني جاهز: فيسبوك / إنستغرام</div>
+
+  <div class="ad-copy-box">
+    <span class="platform-badge badge-facebook">فيسبوك</span>
+    <div class="ad-text">يا معلم، هل عم تضيع ساعات كل أسبوع بتحضير الدروس وبحث عن مصادر؟
+
+NotebookLM أداة مجانية من جوجل بتخلّيك:
+تحضّر درسك بـ 10 دقائق بدل ساعة
+تعمل اختبارات وملخصات أوتوماتيكياً
+تساعد طلابك بذكاء اصطناعي
+
+الكورس: 20 درس عملي | 5 وحدات شاملة
+السعر: 12$ بس (بدل 35$)
+
+أول 30 شخص بيسجلوا بيحصلوا على бонус إضافي
+
+المقاعد محدودة - سجّل الآن</div>
+    <span class="ad-cta">سجّل الآن</span>
+  </div>
+
+  <div class="subsection-title">نص إعلاني جاهز: واتساب</div>
+
+  <div class="ad-copy-box">
+    <span class="platform-badge badge-whatsapp">واتساب</span>
+    <div class="ad-text">مرحبا! عندك كورس NotebookLM للمعلمين
+
+أداة جوجل المجانية يلي بتوفّر وقتك بتحضير الدروس
+
+20 درس عملي بـ 12$ بس
+من تحضير الدروس لتقييم الطلاب
+
+اهتم؟ رد علي وبعثلك التفاصيل</div>
+    <span class="ad-cta">أرسل رسالة</span>
+  </div>
+
+  <div class="subsection-title">نص إعلاني جاهز: تيك توك</div>
+
+  <div class="ad-copy-box">
+    <span class="platform-badge badge-tiktok">تيك توك</span>
+    <div class="ad-text">معلم بتحضّر درسك بساعة؟
+أنا بصير بـ 10 دقائق
+
+NotebookLM + كورس عملي = وفّر 5 ساعات أسبوعياً
+12$ بس - الرابط بالبايو</div>
+    <span class="ad-cta">ابدأ التعلّم</span>
+  </div>
+
+  <div class="subsection-title">نص إعلاني ثاني: فيسبوك (نبرة قصصية)</div>
+
+  <div class="ad-copy-box">
+    <span class="platform-badge badge-facebook">فيسبوك - قصة</span>
+    <div class="ad-text">قبل ما أعرف NotebookLM كنت عم أضيع 3 ساعات يومياً بالتحضير والبحث عن مصادر.
+
+حالاً؟ بـ 15 دقيقة بيكون درسي جاهز مع ملخصات وأسئلة تقييم.
+
+السر؟ أداة مجانية من جوجل اسمها NotebookLM. وكورسنا بيعلّمك إياها خطوة بخطوة بلهجتنا وبأمثلة من واقعنا.
+
+20 درس | 12$ | خصم لأول 30 شخص
+
+لا تضيّع فرصة توفّر عليك ساعات كل يوم</div>
+    <span class="ad-cta">احجز مقعدك</span>
+  </div>
+
+  <div class="tip-box">
+    <strong>سر النص الإعلاني الناجح:</strong> ابدأ بمشكلة حقيقية يعيشها المعلم السوري (وليس ميزة المنتج). ثم قدّم الحل. ثم اذكر السعر والتخفيض. ثم الـ CTA مع إحساس بالندرة. هذه المعادلة: مشكلة ← حل ← سعر ← ندرة ← إجراء.
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">4</span>
+    <h2 class="section-title">تصميم الصور الإعلانية بأدوات AI</h2>
+  </div>
+
+  <p>الصورة الإعلانية هي أول شيء يلاحظه المستخدم. في فيسبوك، الصورة مسؤولة عن 70-80% من نجاح الإعلان. النص الجيد بصورة سيئة يساوي إعلان فاشل. لحسن الحظ، أدوات AI يمكنها توليد صور احترافية بثواني معدودة، ويمكنك تعديلها بسهولة في Canva لإضافة النصوص والأزرار.</p>
+
+  <div class="subsection-title">أدوات تصميم الصور الإعلانية</div>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-name">Canva</div>
+      <div class="tool-desc">أسهل أداة تصميم. قوالب جاهزة للإعلانات مع دراج آند دروب</div>
+      <div class="tool-price">مجاني + Pro بـ 13$/شهر</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Leonardo AI</div>
+      <div class="tool-desc">توليد صور بالذكاء الاصطناعي. جودة عالية مع تحكم كامل بالأسلوب</div>
+      <div class="tool-price">مجاني (150 توكن/يوم)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Ideogram AI</div>
+      <div class="tool-desc">الأفضل لإدراج النص العربي داخل الصورة المولّدة</div>
+      <div class="tool-price">مجاني (25 صورة/يوم)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Microsoft Designer</div>
+      <div class="tool-desc">توليد صور + قوالب إعلانية. تكامل مع Bing Image Creator</div>
+      <div class="tool-price">مجاني بالكامل</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Remove.bg</div>
+      <div class="tool-desc">إزالة خلفية الصور بنقرة واحدة لتركيبها على تصميماتك</div>
+      <div class="tool-price">مجاني (1 صورة/يوم)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">PhotoRoom</div>
+      <div class="tool-desc">إنشاء صور منتج احترافية بخلفيات نظيفة فوراً</div>
+      <div class="tool-price">مجاني + Pro</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">الصور المولّدة لكورس NotebookLM</div>
+  <p>هذه الصور تم توليدها باستخدام أداة AI ويمكنك استخدامها مباشرة في إعلاناتك أو تعديلها في Canva لإضافة النصوص الإعلانية:</p>
+
+  <div class="image-showcase">
+    <div>
+      <img src="./ad-facebook.png" alt="إعلان فيسبوك">
+      <div class="image-label">إعلان فيسبوك (1344x768)</div>
+    </div>
+    <div>
+      <img src="./ad-instagram.png" alt="إعلان إنستغرام">
+      <div class="image-label">إعلان إنستغرام (1024x1024)</div>
+    </div>
+    <div>
+      <img src="./ad-whatsapp.png" alt="إعلان واتساب">
+      <div class="image-label">إعلان واتساب (768x1344)</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">نصائح لصورة إعلانية ناجحة</div>
+
+  <ul class="checklist">
+    <li>استخدم ألوان الدرجات الزرقاء والذهادية (تعكس الثقة والقيمة)</li>
+    <li>أضف النص الأساسي على الصورة: السعر والتخفيض (12$ بدل 35$)</li>
+    <li>تجنب الصور المزدحمة - كلما كانت أبسط كانت أقوى تأثيراً</li>
+    <li>استخدم أيقونات بدل صور أشخاص حقيقيين (أكثر احترافية وأنظف)</li>
+    <li>اجعل الـ CTA مرئياً على الصورة نفسها بشكل واضح</li>
+    <li>اختبر صورتين مختلفتين على الأقل لكل إعلان (A/B Testing)</li>
+    <li>حجم الصورة: فيسبوك 1200x628 أو 1080x1080، إنستغرام 1080x1080 أو 1080x1350</li>
+  </ul>
+
+  <div class="success-card">
+    <div class="card-title">سر الصورة الناجحة</div>
+    <p style="margin:0; font-size: 12.5px;">الصورة الإعلانية الأنجح ليست الأجمل، بل الأكثر وضوحاً. المعلم السوري يتصفح فيسبوك بسرعة وعندك أقل من ثانية لتلفت انتباهه. استخدم تباين عالٍ، خط كبير واضح، ورسالة واحدة فقط على الصورة.</p>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">5</span>
+    <h2 class="section-title">إنشاء فيديو إعلاني بأدوات AI</h2>
+  </div>
+
+  <p>الفيديو هو صيغة الإعلان الأقوى على كل المنصات. فيسبوك يعطي أولوية للفيديو في الخوارزمية، تيك توك فيديو فقط، وإنستغرام Reels يصل لجمهور أبعد بكثير من الصور العادية. أدوات AI تجعل إنشاء الفيديو أسهل بكثير مما تتخيل، حتى لو لم تكن لديك خبرة سابقة في المونتاج.</p>
+
+  <div class="subsection-title">أدوات إنشاء الفيديو الإعلاني</div>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-name">CapCut</div>
+      <div class="tool-desc">أفضل أداة مونتاج مجانية. قوالب جاهزة، ترجمة أوتوماتيكية</div>
+      <div class="tool-price">مجاني بالكامل</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">HeyGen</div>
+      <div class="tool-desc">صنع فيديو بمقدم افتراضي يتحدث بالعربية بطبيعية</div>
+      <div class="tool-price">مجاني (1 فيديو/يوم)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">ElevenLabs</div>
+      <div class="tool-desc">أفضل صوت AI بالعربية. طبيعي جداً ومقنع</div>
+      <div class="tool-price">مجاني (10 دقائق/شهر)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Pictory</div>
+      <div class="tool-desc">تحويل النص لفيديو تلقائياً مع صور وموسيقى مناسبة</div>
+      <div class="tool-price">تجربة مجانية</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">InVideo AI</div>
+      <div class="tool-desc">أدخل فكرة الإعلان ويولّد فيديو كامل بتوليد آلي</div>
+      <div class="tool-price">مجاني (مع واترمارك)</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Runway ML</div>
+      <div class="tool-desc">توليد مقاطع فيديو من النص. مثالي لخلفيات إعلانية</div>
+      <div class="tool-price">مجاني (125 ثانية)</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">سكربت فيديو: 30 ثانية (تيك توك / ريلز)</div>
+
+  <div class="script-box">
+    <div class="script-timing">0:00 - 0:03 (هوك - لفت انتباه)</div>
+    <div class="script-stage">[شاشة: نص كبير "بتحضّر درسك بساعة؟"]</div>
+    <div class="script-text">معلم بتحضّر درسك بساعة؟ أنا بصير بـ 10 دقائق!</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:03 - 0:15 (الحل)</div>
+    <div class="script-stage">[شاشة: عرض سريع لواجهة NotebookLM]</div>
+    <div class="script-text">NotebookLM أداة مجانية من جوجل. بتاخد أي ملف وبتلخّصو وبتعملك أسئلة جاهزة. الكورس بيعلّمك إياها خطوة بخطوة.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:15 - 0:25 (العرض)</div>
+    <div class="script-stage">[شاشة: "20 درس | 12$ بس | خصم لأول 30 شخص"]</div>
+    <div class="script-text">20 درس عملي، 5 وحدات، بـ 12$ بس. خصم خاص لأول 30 شخص.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:25 - 0:30 (CTA)</div>
+    <div class="script-stage">[شاشة: سهم يشير للرابط]</div>
+    <div class="script-text">الرابط بالبايو - سجّل الآن!</div>
+  </div>
+
+  <div class="subsection-title">سكربت فيديو: 60 ثانية (فيسبوك / يوتيوب)</div>
+
+  <div class="script-box">
+    <div class="script-timing">0:00 - 0:05 (هوك - مشكلة)</div>
+    <div class="script-stage">[شاشة: معلم مجهد أمام كمبيوتر]</div>
+    <div class="script-text">قبل سنة كنت عم أضيع 3 ساعات يومياً بالتحضير. بحث، تلخيص، أسئلة... كل يوم نفس الروتين المرهق.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:05 - 0:20 (التحول)</div>
+    <div class="script-stage">[شاشة: انتقال لعرض NotebookLM]</div>
+    <div class="script-text">بعدين اكتشفت NotebookLM. أداة مجانية من جوجل بتخلّيك تحمّل أي ملف وهي بتلخّصو وبتعملك أسئلة تقييم جاهزة. يعني درسك بيكون جاهز بـ 10 دقائق بدل ساعة.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:20 - 0:40 (العرض التفصيلي)</div>
+    <div class="script-stage">[شاشة: لقطات سريعة من الكورس + نقاط رئيسية]</div>
+    <div class="script-text">عملت كورس عملي بـ 20 درس بيعلّمك كل شيء عن NotebookLM. من الأساسيات لأتمتة المهام التعليمية. باللهجة السورية وبأمثلة من واقعنا.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:40 - 0:55 (السعر + الندرة)</div>
+    <div class="script-stage">[شاشة: "12$ بدل 35$" + عداد تنازلي]</div>
+    <div class="script-text">السعر 12$ بس بدل 35$. وأول 30 شخص بيسجلوا بيحصلوا على جلسة استشارية مجانية. المقاعد محدودة.</div>
+
+    <div class="script-timing" style="margin-top: 12px;">0:55 - 1:00 (CTA)</div>
+    <div class="script-stage">[شاشة: زر سجل الآن + الرابط]</div>
+    <div class="script-text">وفّر وقتك وابدأ اليوم. سجّل الآن من الرابط!</div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">6</span>
+    <h2 class="section-title">إعداد الحملة الإعلانية على المنصات</h2>
+  </div>
+
+  <p>بعد تجهيز النصوص والصور والفيديو، حان وقت نشرها على المنصات المناسبة. كل منصة لها طريقة مختلفة في استهداف الجمهور وأفضل الممارسات. هذا القسم يشرح بالتفصيل كيف تطلق إعلانك على كل منصة من المنصات الرئيسية الثلاث: فيسبوك، واتساب، وتيك توك.</p>
+
+  <div class="subsection-title">فيسبوك / إنستغرام (Meta Ads)</div>
+
+  <div class="step-flow">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>أنشئ صفحة فيسبوك احترافية</h4>
+        <p>إذا ما عندك صفحة، أنشئ واحدة باسمك أو باسم علامتك التعليمية. أضف صورة غلاف وصورة بروفايل واضحة.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>اذهب لمدير الإعلانات (Ads Manager)</h4>
+        <p>من صفحتك اختر تعزيز المنشور أو إنشاء إعلان. اختر هدف "رسائل" أو "زيارات للموقع".</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>حدد الجمهور المستهدف</h4>
+        <p>الموقع: سوريا + الدول المجاورة (تركيا، لبنان، الأردن). العمر: 25-50. الاهتمامات: تعليم، تدريس، تكنولوجيا التعليم.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>حدد الميزانية والمدة</h4>
+        <p>ابدأ بـ 3-5$/يوم لمدة 5-7 أيام. هذا يكفي لاختبار الإعلان ورؤية النتائج الأولية.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>اربط الإعلان بصفحة الهبوط</h4>
+        <p>الرابط يوجه الزائر لصفحة الهبوط (Landing Page) التي بنيناها مسبقاً مع نموذج التسجيل.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection-title">واتساب (التسويق المباشر)</div>
+
+  <p>واتساب هو أهم منصة للجمهور السوري. 90% من المعلمين يستخدمونه يومياً. التسويق عبر واتساب شخصي ومباشر ومجاني، لكن يحتاج أسلوب مختلف تماماً عن الإعلانات المدفوعة. القاعدة الذهبية: قدم قيمة أولاً ثم اذكر الكورس.</p>
+
+  <ul class="checklist">
+    <li>أنشئ حساب واتساب بزنس مجاني - يعطيك كتالوج منتجات ورسائل تلقائية</li>
+    <li>أضف رابط واتساب مباشر في إعلان فيسبوك: wa.me/رقمك?text=مرحبا</li>
+    <li>أرسل الرسالة الإعلانية للجهات التي تعرفها واطلب منهم إعادة الإرسال</li>
+    <li>انضم لمجموعات المعلمين السوريين وشارك محتوى تعليمي مجاني أولاً ثم اذكر الكورس</li>
+    <li>لا ترسل رسائل غير مرغوبة (Spam) - هذا يدمر سمعتك بسرعة</li>
+  </ul>
+
+  <div class="warning-card">
+    <div class="card-title">تنبيه مهم لواتساب</div>
+    <p style="margin:0; font-size: 12.5px;">واتساب بيحظر الحسابات التي ترسل رسائل كثيرة لأشخاص لم يتحدثوا معك. استخدمه كقناة تواصل شخصية وليس كأداة إرسال جماعي. الأفضل: اطرح محتوى مفيد مجاناً وخلّي الناس تسألك عن الكورس.</p>
+  </div>
+
+  <div class="subsection-title">تيك توك</div>
+
+  <p>تيك توك يصل لجمهور أبعد بكثير من أي منصة أخرى حتى بدون دفع مال. الخوارزمية تعرض فيديوك لأشخاص لا يتابعونك. السر هو المحتوى القصير الجذاب بين 15 و60 ثانية مع استخدام الصوت الرائج والهاشتاقات المناسبة.</p>
+
+  <ul class="checklist">
+    <li>ارفع الفيديو الإعلاني (30 ثانية) مع هاشتاقات: #تعليم #سوريا #NotebookLM #ذكاء_اصطناعي #معلمين</li>
+    <li>استخدم الصوت الرائج (Trending Sound) لزيادة الوصول بشكل كبير</li>
+    <li>أضف الرابط في البايو واذكره في الفيديو: "الرابط بالبايو"</li>
+    <li>انشر 2-3 فيديوهات يومياً بأفكار مختلفة لاختبار ما يعمل أفضل</li>
+    <li>رد على كل التعليقات بسرعة - الخوارزمية تحب التفاعل</li>
+  </ul>
+
+  <!-- SECTION 7 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">7</span>
+    <h2 class="section-title">نصائح متقدمة لتحسين الأداء</h2>
+  </div>
+
+  <div class="subsection-title">اختبار A/B: المفتاح السحري</div>
+
+  <p>لا تنشر إعلاناً واحداً وتنتظر. انشر نسختين مختلفتين وشوف أيهما أفضل. هذا يسمى اختبار A/B، وهو أهم استراتيجية لتحسين إعلاناتك. جرّب نصوص مختلفة وصور مختلفة وعروض مختلفة. بعد 48 ساعة، اعتمد النسخة الفائقة وأوقف الخاسرة. هذا المبدأ البسيط يمكن أن يضاعف من فعالية إعلانك خلال أسبوع واحد فقط.</p>
+
+  <table>
+    <tr><th>العنصر</th><th>النسخة A</th><th>النسخة B</th></tr>
+    <tr><td>العنوان</td><td>بتحضّر درسك بساعة؟</td><td>وفّر 5 ساعات أسبوعياً</td></tr>
+    <tr><td>الصورة</td><td>لابتوب مع أيقونات AI</td><td>شخص ينظر لشاشة بسعادة</td></tr>
+    <tr><td>السعر</td><td>12$ بس</td><td>خصم 65% - 12$ بدل 35$</td></tr>
+    <tr><td>CTA</td><td>سجّل الآن</td><td>احجز مقعدك</td></tr>
+  </table>
+
+  <div class="subsection-title">مؤشرات الأداء الرئيسية (KPIs)</div>
+
+  <p>لا تقيس نجاح إعلانك بالشعور. قسه بالأرقام. هذه أهم 4 مؤشرات يجب مراقبتها يومياً لضمان أن حملتك تسير في الاتجاه الصحيح وأن ميزانيتك تُنفق بفعالية:</p>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-name">CTR (نسبة النقر)</div>
+      <div class="tool-desc">الهدف: 2-5% للفيسبوك. أقل من 1% = الصورة أو النص يحتاج تغيير فوري</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">CPC (تكلفة النقرة)</div>
+      <div class="tool-desc">الهدف: أقل من 0.30$ في الشرق الأوسط. أعلى = الجمهور ضيق جداً</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">CVR (معدل التحويل)</div>
+      <div class="tool-desc">الهدف: 5-15%. أقل = صفحة الهبوط تحتاج تحسين وتعديل</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">CPA (تكلفة التسجيل)</div>
+      <div class="tool-desc">الهدف: أقل من 3$ (بسعر 12$ = هامش ربح 75%). راقب أسبوعياً</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">جدول زمني مقترح للحملة</div>
+
+  <table>
+    <tr><th>اليوم</th><th>النشاط</th><th>الميزانية</th></tr>
+    <tr><td>اليوم 1-2</td><td>نشر إعلانين A/B على فيسبوك</td><td>3$/يوم</td></tr>
+    <tr><td>اليوم 3</td><td>تحليل النتائج + إيقاف الإعلان الضعيف</td><td>-</td></tr>
+    <tr><td>اليوم 3-5</td><td>تعزيز الإعلان الفائز + نشر فيديو تيك توك</td><td>5$/يوم</td></tr>
+    <tr><td>اليوم 5-7</td><td>إطلاق حملة واتساب + إنستغرام</td><td>3$/يوم</td></tr>
+    <tr><td>اليوم 7+</td><td>مضاعفة الميزانية على أفضل قناة</td><td>حسب النتائج</td></tr>
+  </table>
+
+  <div class="subsection-title">نصائح ذهبية للجمهور السوري</div>
+
+  <p>الجمهور السوري له خصائص فريدة تجعل بعض الاستراتيجيات أكثر فعالية من غيرها. أولاً، السعر حساس جداً: 12 دولار يمثل نسبة كبيرة من الدخل الشهري، لذا ركز على القيمة المحسوبة (كم ساعة توفر؟ كم دولار تساوي كل ساعة توفرها؟). ثانياً، الثقة مكتسبة بصعوبة: المعلم السوري تعرض للكثير من الكورسات الوهمية، لذا قدم محتوى مجاني أولاً يثبت جودتك. ثالثاً، اللهجة السورية تخلق ارتباطاً فورياً: استخدم تعبيرات مألوفة مثل "يا معلم" و"بتخلّيك" بدل العربية الفصحى. رابعاً، واتساب هو الأقوى: حتى لو أطلقت إعلاناً مدفوعاً على فيسبوك، اجعل الوجهة النهائية واتساب لأنه يبني علاقة شخصية.</p>
+
+  <!-- SECTION 8 -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <span class="section-number">8</span>
+    <h2 class="section-title">الملحق: موارد وأدوات إضافية</h2>
+  </div>
+
+  <div class="subsection-title">ملخص أدوات AI الموصى بها</div>
+
+  <table>
+    <tr><th>الفئة</th><th>الأداة</th><th>السعر</th><th>الاستخدام</th></tr>
+    <tr><td>كتابة نصوص</td><td>ChatGPT</td><td>مجاني</td><td>كتابة النصوص الإعلانية</td></tr>
+    <tr><td>كتابة نصوص</td><td>Claude</td><td>مجاني</td><td>تنقيح وتحسين النصوص</td></tr>
+    <tr><td>تصميم صور</td><td>Canva</td><td>مجاني/Pro</td><td>تصميم الصور الإعلانية</td></tr>
+    <tr><td>توليد صور</td><td>Leonardo AI</td><td>مجاني</td><td>توليد صور بالذكاء الاصطناعي</td></tr>
+    <tr><td>توليد صور</td><td>Ideogram</td><td>مجاني</td><td>صور مع نص عربي</td></tr>
+    <tr><td>مونتاج فيديو</td><td>CapCut</td><td>مجاني</td><td>مونتاج احترافي وسهل</td></tr>
+    <tr><td>صوت AI</td><td>ElevenLabs</td><td>مجاني</td><td>تعليق صوتي بالعربية</td></tr>
+    <tr><td>أفاتار فيديو</td><td>HeyGen</td><td>مجاني</td><td>مقدم افتراضي عربي</td></tr>
+    <tr><td>نص لفيديو</td><td>Pictory</td><td>تجربة مجانية</td><td>تحويل السكربت لفيديو</td></tr>
+    <tr><td>إزالة خلفية</td><td>Remove.bg</td><td>مجاني</td><td>تنظيف الصور</td></tr>
+  </table>
+
+  <div class="subsection-title">ورقة عمل: خطواتك القادمة</div>
+
+  <p>استخدم هذه القائمة لتتبع تقدمك في إنشاء حملتك الإعلانية. اشطب كل خطوة بعد إنجازها:</p>
+
+  <ul class="checklist">
+    <li>حددت الجمهور المستهدف والرسالة الإعلانية</li>
+    <li>كتبت النص الإعلاني لفيسبوك (باستخدام AI)</li>
+    <li>كتبت النص الإعلاني لواتساب</li>
+    <li>كتبت النص الإعلاني لتيك توك</li>
+    <li>صممت صورة إعلانية لفيسبوك (باستخدام Canva أو AI)</li>
+    <li>صممت صورة إعلانية لإنستغرام</li>
+    <li>صممت صورة إعلانية لواتساب</li>
+    <li>سجلت سكربت الفيديو الإعلاني (30 ثانية)</li>
+    <li>أنشأت الفيديو باستخدام CapCut أو Pictory</li>
+    <li>أنشأت صفحة فيسبوك احترافية</li>
+    <li>أنشأت حساب واتساب بزنس</li>
+    <li>أطلقت أول إعلان A/B على فيسبوك</li>
+    <li>حللت النتائج بعد 48 ساعة</li>
+    <li>عززت الإعلان الفائز</li>
+    <li>نشرت الفيديو على تيك توك</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div class="highlight-number" style="font-size: 22px;">تذكر</div>
+    <div class="highlight-label" style="font-size: 14px; margin-top: 10px; line-height: 1.9;">
+      أفضل إعلان ليس الأجمل، بل الأكثر وضوحاً وتأثيراً. ابدأ بسيط، قيس النتائج، حسّن باستمرار. أدوات AI توفّر عليك الوقت والمال، لكن لمستك الشخصية ومعرفتك بجمهورك هي ما يجعل الإعلان حقيقياً ومقنعاً.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

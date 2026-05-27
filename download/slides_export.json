@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html style=\"height: 100%;\"><head><meta name=\"viewport\" content=\"width=device-width, minimum-scale=0.1\"><title>clean_Chemistry_Blueprint.pptx.png</title></head><body style=\"margin: 0px; height: 100%; background-color: rgb(14, 14, 14);\"><p>PowerPoint slide showing the molecular orbital structure of oxygen atoms</p></body></html>",
+    "title": "clean_Chemistry_Blueprint.pptx.png",
+    "url": "https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/export",
+    "usage": {
+      "tokens": 94
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 94
+    }
+  },
+  "status": 20000
+}

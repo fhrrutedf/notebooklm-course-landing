@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://audiorelay.net",
+    "name": "AudioRelay: Stream audio between your devices",
+    "snippet": "Stream your phone's mic and send it to your PC over Wi-Fi. Speaker for PC ... Use a USB connection to get the best experience possible. Multiple devices.",
+    "host_name": "audiorelay.net",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.audiorelay.net/t/usb-tethering-cannot-connect-can-still-ping-device/884",
+    "name": "USB Tethering cannot connect (can still ping device) - AudioRelay",
+    "snippet": "My device is rooted (Magisk). The USB tethering function itself works well and when I ping my phones ip from my PC, the response time is 1ms.",
+    "host_name": "community.audiorelay.net",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=2uCleWTTwis",
+    "name": "AudioRelay: Stream Audio Between Devices - YouTube",
+    "snippet": "This video is about an application called AudioRelay, which streams your PC's audio to your Android phone, which can then be sent to your ...",
+    "host_name": "www.youtube.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/Twitch/comments/7zsrvk/usb_microphone_audio_relay_delay_solutions",
+    "name": "USB Microphone audio relay delay solutions? : r/Twitch - Reddit",
+    "snippet": "Go to Recording Devices -> Properties of your mic -> Uncheck Listen if it is on. Then go to Playback Devices -> Properties of your mic (listed as speakers) -> ...\nGo to Recording Devices -> Properties of your mic -> Uncheck Listen if it is on. Then go to Playback Devices -> Properties of your mic (listed ...",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://play.google.com/store/apps/details?id=com.azefsw.audioconnect&hl=en_US",
+    "name": "AudioRelay: Stream audio & mic - Apps on Google Play",
+    "snippet": "Easily receive all your PC audio over Wi-Fi or USB. Listen wirelessly to music, movies, or games on your Android device with low delay.\nListen to your PC audio, use your phone as a mic or stream audio from your phone. ... Easily receive all your PC audio over Wi-Fi or USB.",
+    "host_name": "play.google.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

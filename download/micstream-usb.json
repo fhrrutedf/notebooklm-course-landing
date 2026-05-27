@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://micstream.io",
+    "name": "Micstream - Use Your Phone as an External Windows Microphone",
+    "snippet": "Turn your Android phone into a standalone PC microphone for Windows. Crystal-clear 32-bit audio, ultra-low latency, works with any Windows app.",
+    "host_name": "micstream.io",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://play.google.com/store/apps/details?id=com.totech.phoneasmic&hl=en_US",
+    "name": "Micstream - PC Mic for Windows - Apps on Google Play",
+    "snippet": "• USB and WiFi compatibility • Automatic PC client discovery • High-quality, low-latency Opus codec • Stereo recording on supported devices\n1. Download the Windows Client from micstream.io · 2. In Windows, select Micstream as your audio input device · 3. Launch the app and connect to ...",
+    "host_name": "play.google.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/pcmasterrace/comments/1qw0vwf/is_there_a_good_program_to_use_my_phone_as_a_pc",
+    "name": "Is there a good program to use my phone as a PC mic? - Reddit",
+    "snippet": "Is there a good program to use my phone as a PC mic? ... AndroidMic is close to good, being open source and all, but its glitchy as all hell.\nWoMic seemingly has a backdoor built into its PC client MicStream forces ads onto you AudioRelay wants you to pay for it",
+    "host_name": "www.reddit.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=i7tyDopajes",
+    "name": "How To Use Phone As a Mic On PC - YouTube",
+    "snippet": "This was very helpful, I tried it myself and was able to set up within two minutes, though for those who use usb tethering on their phone ...\nThis is my simple way to use my phone as a wireless microphone for my PC using an app called WO Mic. I show how to install WO Mic on both ...",
+    "host_name": "www.youtube.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://micstream-virtual-pc-mic.en.uptodown.com/android",
+    "name": "Micstream - Virtual PC Mic for Android - Uptodown",
+    "snippet": "Micstream - Virtual PC Mic is a powerful tool that transforms your Android device into a high-quality PC microphone, eliminating the need for a separate USB ...",
+    "host_name": "micstream-virtual-pc-mic.en.uptodown.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]
