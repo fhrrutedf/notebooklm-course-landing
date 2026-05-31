@@ -244,7 +244,7 @@ export default function LandingPage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-8 border border-[#0D9488]/20">
             <Sparkles className="w-4 h-4" />
-            برنامج تدريبي عملي — المدرب نواف البوطة
+            برنامج تدريبي عملي — المدرب نواف البوسطه
           </div>
 
           {/* H1 */}
@@ -307,7 +307,7 @@ export default function LandingPage() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
-                title="تعريف بالبرنامج التدريبي — المدرب نواف البوطة"
+                title="تعريف بالبرنامج التدريبي — المدرب نواف البوسطه"
               />
             </div>
             <p className="text-center text-[#64748B] text-xs mt-2">
@@ -681,12 +681,12 @@ export default function LandingPage() {
             <div className="shrink-0">
               <img
                 src="/images/trainer-nawaf.jpg"
-                alt="المدرب نواف البوطة — متخصص في تطبيقات الذكاء الاصطناعي في التعليم"
+                alt="المدرب نواف البوسطه — متخصص في تطبيقات الذكاء الاصطناعي في التعليم"
                 className="w-24 h-24 rounded-full object-cover border-3 border-[#0D9488]/20"
               />
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوطة</h3>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطه</h3>
               <p className="text-[#0D9488] font-bold text-sm mb-3">
                 متخصص في تطبيقات الذكاء الاصطناعي في التعليم
               </p>

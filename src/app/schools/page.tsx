@@ -613,7 +613,7 @@ export default function SchoolsLandingPage() {
                 { icon: FileCheck, text: 'تقرير إتمام تفصيلي', note: 'الباقة القياسية فما فوق', noteColor: '#0D9488' },
                 { icon: FileText, text: 'فاتورة ضريبية رسمية', note: 'جميع الباقات', noteColor: '#1E3A5F' },
                 { icon: ClipboardList, text: 'عقد استخدام مؤسسي', note: 'الباقة المؤسسية', noteColor: '#D4A853' },
-                { icon: GraduationCap, text: 'جلسة تدريبية مباشرة مع المدرب نواف البوطة', note: 'الباقة المؤسسية', noteColor: '#D4A853' },
+                { icon: GraduationCap, text: 'جلسة تدريبية مباشرة مع المدرب نواف البوسطه', note: 'الباقة المؤسسية', noteColor: '#D4A853' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white border border-[#E2E8F0] rounded-xl px-5 py-3.5">
                   <item.icon className="w-5 h-5 text-[#1E3A5F] shrink-0" />
@@ -653,7 +653,7 @@ export default function SchoolsLandingPage() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
-                title="تعريف بالبرنامج التدريبي — المدرب نواف البوطة"
+                title="تعريف بالبرنامج التدريبي — المدرب نواف البوسطه"
               />
             </div>
           </div>
@@ -667,12 +667,12 @@ export default function SchoolsLandingPage() {
             <div className="shrink-0">
               <img
                 src="/images/trainer-nawaf.jpg"
-                alt="المدرب نواف البوطة — متخصص في تطبيقات الذكاء الاصطناعي في التعليم"
+                alt="المدرب نواف البوسطه — متخصص في تطبيقات الذكاء الاصطناعي في التعليم"
                 className="w-24 h-24 rounded-full object-cover border-3 border-[#0D9488]/20"
               />
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوطة</h3>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطه</h3>
               <p className="text-[#0D9488] font-bold text-sm mb-3">
                 متخصص في تطبيقات الذكاء الاصطناعي في التعليم
               </p>
@@ -939,7 +939,7 @@ export default function SchoolsLandingPage() {
             <a href="/results" className="text-white/60 text-sm hover:text-white transition-colors">عينات النتائج</a>
           </div>
           <p className="text-white/40 text-xs mb-2">
-            نواف البوطة | المدرب | برنامج الذكاء الاصطناعي في التعليم — للمؤسسات التعليمية
+            نواف البوسطه | المدرب | برنامج الذكاء الاصطناعي في التعليم — للمؤسسات التعليمية
           </p>
           <p className="text-white/30 text-xs">
             جميع الحقوق محفوظة 2026
