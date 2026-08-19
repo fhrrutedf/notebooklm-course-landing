@@ -147,7 +147,7 @@ export default function LandingPage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-8 border border-[#0D9488]/20">
             <Sparkles className="w-4 h-4" />
-            كورس متكامل عملي — المدرب نواف البوسطه
+            كورس متكامل عملي — المدرب نواف البوسطة
           </div>
 
           {/* H1 */}
@@ -157,26 +157,26 @@ export default function LandingPage() {
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-كورس متكامل للمعلم السوري: تتعلم فيه طريقة عملية تبدأ من الكتاب أو الدرس، ثم تخرج منه شرحًا أو اختبارًا أو PDF أو عرضًا أو فيديوً تعليميًا بعد مراجعة النتيجة بنفسك.
+            شاهد نماذج حقيقية لخرائط ذهنية واختبارات وملفات PDF وعروض وفيديوهات تعليمية، ثم تعلّم داخل الكورس الطريقة العملية التي تبدأ من مصدرك وتنتهي بمخرج مناسب لطلابك.
           </p>
 
           {/* Two CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
+              href="/results"
+              className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
+            >
+              <Presentation className="w-5 h-5" />
+              شاهد نماذج حقيقية
+            </a>
+            <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
+              className="inline-flex items-center gap-2 bg-white border-2 border-[#1B2A4A]/20 hover:border-[#0D9488] text-[#1B2A4A] font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
               اطلب تفاصيل التسجيل
               <MessageCircle className="w-5 h-5" />
-            </a>
-            <a
-              href="/results"
-              className="inline-flex items-center gap-2 bg-transparent border-2 border-[#1B2A4A]/20 hover:border-[#1B2A4A]/40 text-[#1B2A4A] font-bold px-8 py-4 rounded-xl text-base transition-colors"
-            >
-              <Presentation className="w-4 h-4" />
-شاهد نماذج حقيقية
             </a>
           </div>
 
@@ -211,16 +211,16 @@ export default function LandingPage() {
               <div className="text-[#64748B] text-xs mt-1">مدة الـCourse</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">ملفات عملية</div>
-              <div className="text-[#64748B] text-xs mt-1">قابلة للمراجعة والطباعة</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">مخرجات تعليمية</div>
+              <div className="text-[#64748B] text-xs mt-1">اختبار، خريطة ذهنية، عرض وشرح</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">أقساط</div>
-              <div className="text-[#64748B] text-xs mt-1">نتفق على التفاصيل</div>
+              <div className="text-[#64748B] text-xs mt-1">لمن لا يتوفر معه المبلغ كاملًا</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">PDF</div>
-              <div className="text-[#64748B] text-xs mt-1">جاهز للطباعة</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">نماذج حقيقية</div>
+              <div className="text-[#64748B] text-xs mt-1">شاهدها قبل التسجيل</div>
             </div>
           </div>
 
@@ -527,7 +527,7 @@ export default function LandingPage() {
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">آراء طلابنا بعد التدريب</h2>
             <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 items-start">
+          <div className="mx-auto flex max-w-md flex-col gap-3 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
             {[
               '/images/training/student-feedback-01.png',
               '/images/training/student-feedback-02.png',
@@ -535,8 +535,8 @@ export default function LandingPage() {
               '/images/training/student-feedback-04.png',
               '/images/training/student-feedback-05.png',
             ].map((image, index) => (
-              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className={`block bg-white border border-[#E2E8F0] rounded-xl overflow-hidden ${index === 0 ? 'col-span-2 md:col-span-1' : ''}`}>
-                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[360px] object-contain" loading="lazy" />
+              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-[#E2E8F0] bg-white">
+                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
               </a>
             ))}
           </div>
@@ -632,17 +632,17 @@ export default function LandingPage() {
             <div className="shrink-0">
               <img
                 src="/images/trainer-nawaf.jpg"
-                alt="المدرب نواف البوسطه — متخصص في تطبيقات الذكاء الاصطناعي في التعليم ومدرب أدوات الذكاء الاصطناعي"
+                alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية"
                 className="w-32 h-32 rounded-2xl object-cover border-3 border-[#0D9488]/20"
               />
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطه</h3>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطة</h3>
               <p className="text-[#0D9488] font-bold text-sm mb-3">
-                متخصص في تطبيقات الذكاء الاصطناعي في التعليم ومدرب أدوات الذكاء الاصطناعي
+                مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية
               </p>
               <p className="text-[#64748B] text-sm leading-loose mb-4">
-                نواف البوسطه مدرب أدوات ذكاء اصطناعي وباحث، يدرّب الأفراد والشركات والمؤسسات التعليمية على تحويل التقنيات الحديثة إلى حلول عملية في التعليم والإنتاجية والأتمتة.
+                نواف البوسطة مدرب أدوات ذكاء اصطناعي وباحث، يدرّب الأفراد والشركات والمؤسسات التعليمية على تحويل التقنيات الحديثة إلى حلول عملية في التعليم والإنتاجية والأتمتة.
               </p>
               <Link href="/about" className="inline-flex items-center gap-2 text-[#0D9488] font-bold text-sm hover:text-[#0B7C72]">
                 عرض المزيد عن المدرب
