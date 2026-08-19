@@ -59,7 +59,7 @@ export default function AboutTrainerPage() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 text-[#0D9488] px-4 py-2 text-sm font-bold mb-5">عن المدرب</div>
             <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-5">نواف البوسطه</h1>
-            <p className="text-xl text-[#0D9488] font-bold mb-5">مدرب أدوات الذكاء الاصطناعي وباحث — سوريا</p>
+            <p className="text-xl text-[#0D9488] font-bold mb-5">باحث ومدرب في أدوات الذكاء الاصطناعي — سوريا</p>
             <p className="text-[#64748B] leading-loose max-w-3xl">مدرب وخبير متخصص في أدوات الذكاء الاصطناعي، يعمل على تحويل التقنيات الحديثة إلى حلول عملية قابلة للتطبيق للأفراد والشركات والمؤسسات التعليمية. يجمع بين التدريب، البحث، تصميم المحتوى، وتطوير حلول الأتمتة، مع تركيز على جعل الذكاء الاصطناعي مفهومًا وقابلًا للاستخدام.</p>
           </div>
         </div>
