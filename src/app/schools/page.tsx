@@ -54,7 +54,19 @@ export default function SchoolsLandingPage() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    const message = [
+      'مرحباً أستاذ/ة، أريد الاستفسار عن Course الذكاء الاصطناعي العملي للمعلمين والمؤسسات.',
+      `اسم المركز/المدرسة: ${formData.schoolName}`,
+      `اسم المسؤول: ${formData.contactName}`,
+      `الصفة: ${formData.jobTitle}`,
+      `البلد/المدينة: ${formData.country}`,
+      `عدد المعلمين: ${formData.teacherCount}`,
+      `الهاتف: ${formData.phone}`,
+      `البريد: ${formData.email}`,
+      `ملاحظات: ${formData.notes}`,
+    ].join('\\n')
     setFormSubmitted(true)
+    window.location.href = `https://wa.me/963985323170?text=${encodeURIComponent(message)}`
   }
 
   // ===== DATA =====
@@ -63,7 +75,7 @@ export default function SchoolsLandingPage() {
     {
       title: 'الوحدة 1: الأساسيات والتحضير الذكي',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'ما هو الذكاء الاصطناعي بالتعليم ولماذا يحتاجه كل معلم؟',
         'رفع المصادر وتنظيم الدفتر الذكي',
@@ -74,7 +86,7 @@ export default function SchoolsLandingPage() {
     {
       title: 'الوحدة 2: البودكاست التعليمي',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'إنشاء بودكاست تعليمي من أي محتوى',
         'تخصيص البودكاست المتقدم — تحكّم كامل بالمحتوى',
@@ -85,7 +97,7 @@ export default function SchoolsLandingPage() {
     {
       title: 'الوحدة 3: العروض والوسائط المتقدمة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'إنشاء عرض تقديمي احترافي من محتواك',
         'الخرائط الذهنية والإنفوجرافيك',
@@ -96,7 +108,7 @@ export default function SchoolsLandingPage() {
     {
       title: 'الوحدة 4: التقييم والدراسة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'توليد أسئلة وامتحانات بضغطة زر',
         'البطاقات التعليمية للمراجعة السريعة',
@@ -107,7 +119,7 @@ export default function SchoolsLandingPage() {
     {
       title: 'الوحدة 5: الاستراتيجيات المتقدمة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'التعليم الشامل — دمج طلاب الاحتياجات الخاصة',
         'دمج مع منصات التعليم الإلكتروني',
@@ -188,7 +200,7 @@ export default function SchoolsLandingPage() {
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            برنامج تدريبي عملي معتمد بنتائج ملموسة: اختبارات بنسختين خلال 3 دقائق، مذكرات PDF احترافية خلال 10 دقائق، وشروحات صوتية فورية — مجرّب على مناهج حقيقية وموثّق بأرقام الصفحات
+            Course عملي مدته 4 ساعات تقريباً، يعرّف فريقكم بسير عمل واضح لإنتاج الشروحات والملخصات والأسئلة والاختبارات وأوراق PDF والعروض باستخدام أدوات مجانية أو بخطط مجانية.
           </p>
 
           {/* Two CTA buttons */}
@@ -213,31 +225,31 @@ export default function SchoolsLandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <FileText className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>فواتير ضريبية رسمية</span>
+              <span>تنسيق مؤسسي واضح</span>
             </div>
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Award className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>شهادات معتمدة</span>
+              <span>محتوى عملي قابل للتطبيق</span>
             </div>
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Shield className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>ضمان استرداد 7 أيام</span>
+              <span>تواصل مباشر قبل الاتفاق</span>
             </div>
           </div>
 
           {/* Stats bar */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">106+</div>
-              <div className="text-[#64748B] text-sm mt-1">مؤسسة تعليمية</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
+              <div className="text-[#64748B] text-sm mt-1">مدة الـCourse</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">465+</div>
-              <div className="text-[#64748B] text-sm mt-1">معلم متدرّب</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">دفعتان</div>
+              <div className="text-[#64748B] text-sm mt-1">خيار دفع متاح</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">20</div>
-              <div className="text-[#64748B] text-sm mt-1">درس عملي</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">320,000</div>
+              <div className="text-[#64748B] text-sm mt-1">ليرة سورية للـCourse</div>
             </div>
           </div>
         </div>
@@ -251,7 +263,7 @@ export default function SchoolsLandingPage() {
               أثر حقيقي على مؤسستك التعليمية
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              يوفّر كل معلم 200 ساعة سنوياً من التحضير اليدوي — تخيّل الأثر على مؤسستك بالكامل
+              يساعد فريقكم على تقليل الوقت المهدور في إعداد المواد، مع اعتماد خطوات قابلة للتكرار والمراجعة.
             </p>
           </div>
 

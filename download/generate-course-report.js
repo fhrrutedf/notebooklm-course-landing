@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { Document, Packer, Paragraph, TextRun, Header, Footer, Table, TableRow, TableCell,
   AlignmentType, HeadingLevel, PageNumber, BorderStyle, ShadingType, WidthType,
   PageOrientation, NumberFormat } = require("docx");
-const fs = require("fs");
+const fs = require("node:fs");
 
 // ── Palette: Education / Training (Warm Sun) ──
 const P = {

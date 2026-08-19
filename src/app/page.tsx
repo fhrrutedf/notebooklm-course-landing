@@ -73,57 +73,14 @@ export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
 
-  // IP-based region detection
-  const [region, setRegion] = useState<'syria' | 'gulf'>('gulf')
-  const [geoLoaded, setGeoLoaded] = useState(false)
-
-  const PRICING = {
-    syria: {
-      price: '$14',
-      oldPrice: '$35',
-      currency: 'شام كاش / تحويل بنكي',
-      dailyCost: 'أقل من 500 ليرة باليوم',
-      whatsappText: 'مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $14',
-    },
-    gulf: {
-      price: '$120',
-      oldPrice: '$300',
-      currency: 'تحويل بنكي / PayPal / بطاقة',
-      dailyCost: 'أقل من دولار باليوم',
-      whatsappText: 'مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم - $120',
-    },
+  const currentPricing = {
+    price: '320,000 ليرة سورية',
+    currency: 'شام كاش / تحويل بنكي / تنسيق الدفع على دفعتين',
+    whatsappText: 'مرحباً، أريد تفاصيل التسجيل في Course الذكاء الاصطناعي العملي في التعليم، وأريد معرفة طريقة الدفع على دفعتين.',
   }
-
-  const currentPricing = PRICING[region]
   const WHATSAPP_NUMBER = '963985323170'
   const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(currentPricing.whatsappText)}`
-
-  // ===== IP GEOLOCATION =====
-  useEffect(() => {
-    const GEO_KEY = 'user_country'
-    const cached = localStorage.getItem(GEO_KEY)
-
-    if (cached) {
-      queueMicrotask(() => {
-        setRegion(cached === 'SY' ? 'syria' : 'gulf')
-        setGeoLoaded(true)
-      })
-      return
-    }
-
-    fetch('/api/geo')
-      .then((r) => r.json())
-      .then((data) => {
-        const isSyria = data.country === 'SY'
-        setRegion(isSyria ? 'syria' : 'gulf')
-        localStorage.setItem(GEO_KEY, data.country || 'OTHER')
-        setGeoLoaded(true)
-      })
-      .catch(() => {
-        setRegion('gulf')
-        setGeoLoaded(true)
-      })
-  }, [])
+  const COURSE_DURATION = '4 ساعات تقريباً'
 
   // ===== DATA =====
 
@@ -131,7 +88,7 @@ export default function LandingPage() {
     {
       title: 'الوحدة 1: الأساسيات والتحضير الذكي',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'ما هو الذكاء الاصطناعي بالتعليم ولماذا يحتاجه كل معلم؟',
         'رفع المصادر وتنظيم الدفتر الذكي',
@@ -142,7 +99,7 @@ export default function LandingPage() {
     {
       title: 'الوحدة 2: البودكاست التعليمي',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'إنشاء بودكاست تعليمي من أي محتوى',
         'تخصيص البودكاست المتقدم — تحكّم كامل بالمحتوى',
@@ -153,7 +110,7 @@ export default function LandingPage() {
     {
       title: 'الوحدة 3: العروض والوسائط المتقدمة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'إنشاء عرض تقديمي احترافي من محتواك',
         'الخرائط الذهنية والإنفوجرافيك',
@@ -164,7 +121,7 @@ export default function LandingPage() {
     {
       title: 'الوحدة 4: التقييم والدراسة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'توليد أسئلة وامتحانات بضغطة زر',
         'البطاقات التعليمية للمراجعة السريعة',
@@ -175,7 +132,7 @@ export default function LandingPage() {
     {
       title: 'الوحدة 5: الاستراتيجيات المتقدمة',
       lessons: 4,
-      time: '60 دقيقة',
+      time: '48 دقيقة',
       items: [
         'التعليم الشامل — دمج طلاب الاحتياجات الخاصة',
         'دمج مع منصات التعليم الإلكتروني',
@@ -206,9 +163,7 @@ export default function LandingPage() {
     },
     {
       q: 'كيف بدفع؟',
-      a: region === 'syria'
-        ? 'الدفع عبر شام كاش أو تحويل بنكي أو مكتب صرافة. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة.'
-        : 'الدفع عبر تحويل بنكي أو PayPal أو بطاقة ائتمان. بعد التحويل، أرسل إثبات الدفع عبر واتساب ورح نبعثلك رابط الكورس خلال ساعات قليلة.',
+      a: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو مكتب صرافة. ويمكن تنسيق الدفع على دفعتين. بعد التحويل، أرسل إثبات الدفع عبر واتساب ونرسل لك تفاصيل الوصول إلى الـCourse.',
     },
   ]
 
@@ -249,13 +204,12 @@ export default function LandingPage() {
 
           {/* H1 */}
           <h1 className="text-3xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.4] mb-6 text-[#1B2A4A]">
-            حوّل 3 ساعات تحضير لـ{' '}
-            <span className="text-[#0D9488]">15 دقيقة</span>
+            من الدرس إلى مادة تعليمية جاهزة بوقت أقل
           </h1>
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            أدوات ذكاء اصطناعي مجانية بتحول الكتاب المدرسي لاختبارات بنسختين، مذكرات PDF احترافية، وشروحات صوتية — كل شي موثق بأرقام الصفحات
+            Course عملي يعلّم المعلمين والمدربين وأعضاء الهيئة التدريسية إنتاج الشروحات والملخصات والأسئلة والاختبارات وأوراق PDF والعروض والأنشطة باستخدام أدوات الذكاء الاصطناعي التعليمية.
           </p>
 
           {/* Two CTA buttons */}
@@ -266,7 +220,7 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
-              سجّل الآن — {currentPricing.price}
+              اطلب تفاصيل التسجيل
               <MessageCircle className="w-5 h-5" />
             </a>
             <a
@@ -283,17 +237,17 @@ export default function LandingPage() {
             {/* Syria Price */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <span className="text-base">🇸🇾</span>
-              <span>داخل سوريا: <span className="text-[#0D9488] font-bold">$14</span> بدل $35</span>
+              <span>سعر الـCourse: <span className="text-[#0D9488] font-bold">320,000 ليرة سورية</span></span>
             </div>
             {/* Guarantee */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Shield className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>ضمان استرداد 7 أيام</span>
+              <span>الدفع على دفعتين متاح</span>
             </div>
             {/* Google tool */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Globe className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>أداة من Google — مجانية</span>
+              <span>أدوات تعليمية مجانية أو بخطط مجانية</span>
             </div>
           </div>
 
@@ -318,24 +272,20 @@ export default function LandingPage() {
           {/* Stats bar */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <CountUp target={465} suffix="+" />
-              <div className="text-[#64748B] text-xs mt-1">معلم ومدرب سجّلوا</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
+              <div className="text-[#64748B] text-xs mt-1">مدة الـCourse</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <CountUp target={106} suffix="+" />
-              <div className="text-[#64748B] text-xs mt-1">مؤسسة تعليمية</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">ملفات عملية</div>
+              <div className="text-[#64748B] text-xs mt-1">قابلة للمراجعة والطباعة</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">20</div>
-              <div className="text-[#64748B] text-xs mt-1">درس عملي</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">دفعتان</div>
+              <div className="text-[#64748B] text-xs mt-1">خيار دفع متاح</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="flex items-center justify-center gap-0.5 mb-1">
-                {[1,2,3,4,5].map((s) => (
-                  <Star key={s} className="w-4 h-4 fill-[#0D9488] text-[#0D9488]" />
-                ))}
-              </div>
-              <div className="text-[#64748B] text-xs mt-1">4.9/5 تقييم</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">PDF</div>
+              <div className="text-[#64748B] text-xs mt-1">جاهز للطباعة</div>
             </div>
           </div>
 
@@ -344,8 +294,8 @@ export default function LandingPage() {
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
                 { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
-                { icon: CreditCard, step: '٢', text: `حول ${currentPricing.price}` },
-                { icon: Send, step: '٣', text: 'استلم الرابط فوراً' },
+                { icon: CreditCard, step: '٢', text: 'نسّق الدفع' },
+                { icon: Send, step: '٣', text: 'استلم التفاصيل' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 md:gap-3">
                   <div className="flex items-center gap-2">
@@ -417,20 +367,20 @@ export default function LandingPage() {
                 <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 text-[#0D9488] mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-[#1E293B] font-medium text-sm">15 دقيقة بتحضير نفس الدرس</p>
-                    <p className="text-[#0D9488] text-xs font-bold">بتخلص وأنت مستغرب!</p>
+                    <p className="text-[#1E293B] font-medium text-sm">وقت أقل لتحضير نفس الدرس</p>
+                    <p className="text-[#0D9488] text-xs font-bold">بحسب المادة وطريقة العمل</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#0D9488] mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-[#1E293B] font-medium text-sm">AI بيعمللك 20 سؤال بـ 3 دقائق من الكتاب</p>
+                    <p className="text-[#1E293B] font-medium text-sm">تتعلم إنشاء أسئلة واختبارات من مصدرك</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#0D9488] mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-[#1E293B] font-medium text-sm">نسختين مختلفات + إجابات نموذجية + رقم الصفحة</p>
+                    <p className="text-[#1E293B] font-medium text-sm">نسخ متعددة ونموذج إجابة بعد المراجعة</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -446,10 +396,10 @@ export default function LandingPage() {
           {/* Loss Aversion */}
           <div className="mt-8 bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-xl p-5 text-center">
             <p className="text-[#1B2A4A] font-bold text-base">
-              كل أسبوع بتأخر = <span className="text-[#EF4444] font-bold">5 ساعات</span> ضائعة × 40 أسبوع = <span className="text-[#EF4444] font-bold">200 ساعة بالسنة</span>
+              الوقت الذي توفره يعتمد على المادة وطريقة عملك
             </p>
             <p className="text-[#64748B] text-sm mt-1">
-              الكورس بـ <span className="text-[#0D9488] font-bold">{currentPricing.price}</span> = {currentPricing.dailyCost} — وبتحفّظ 200 ساعة سنوياً
+              تعلّم سير عمل عملي يساعدك على تقليل وقت إعداد المواد
             </p>
           </div>
         </div>
@@ -759,7 +709,7 @@ export default function LandingPage() {
             جاهز تبدأ رحلتك مع الذكاء الاصطناعي؟
           </h2>
           <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose mb-8">
-            سجّل الآن واحصل على وصول دائم للبرنامج التدريبي + الهدايا المجانية + ضمان استرداد 7 أيام
+            اطلب تفاصيل التسجيل واحصل على Course مسجّل مدته 4 ساعات تقريباً، مع إمكانية الدفع على دفعتين.
           </p>
 
           {/* Price card */}
@@ -767,14 +717,11 @@ export default function LandingPage() {
             <div className="text-[#64748B] text-sm mb-1">السعر</div>
             <div className="flex items-baseline justify-center gap-3 mb-2">
               <span className="text-3xl font-bold text-[#1B2A4A]">{currentPricing.price}</span>
-              <span className="text-[#64748B] line-through text-lg">{currentPricing.oldPrice}</span>
             </div>
             <div className="text-[#0D9488] text-sm font-bold mb-4">{currentPricing.currency}</div>
-            {region === 'syria' && (
-              <div className="bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-lg p-3 mb-4 text-sm">
-                <span className="text-[#0D9488] font-bold">سعر خاص لسوريا</span> — لأننا مانعرف نترك المعلم السوري لحاله
-              </div>
-            )}
+            <div className="bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-lg p-3 mb-4 text-sm">
+              <span className="text-[#0D9488] font-bold">الدفع على دفعتين متاح</span> — تواصل معنا لتنسيق الدفعتين
+            </div>
             <a
               href={WHATSAPP_LINK}
               target="_blank"

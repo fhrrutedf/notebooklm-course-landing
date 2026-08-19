@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   BookOpen,
   FileText,
@@ -16,6 +17,41 @@ import Link from 'next/link'
 
 const WHATSAPP_NUMBER = '963985323170'
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم')}`
+
+function LazyEmbed({ src, title, height = 350 }: { src: string; title: string; height?: number }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  if (!isOpen) {
+    return (
+      <div className="relative flex items-center justify-center bg-[#F8FAFC]" style={{ height }}>
+        <div className="text-center px-6">
+          <FileText className="w-9 h-9 text-[#0D9488] mx-auto mb-3" />
+          <p className="text-[#1B2A4A] font-bold text-sm mb-2">العينة جاهزة للعرض</p>
+          <p className="text-[#64748B] text-xs mb-4">نفتحها عند الطلب فقط حتى تبقى الصفحة سريعة.</p>
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="inline-flex items-center gap-2 bg-[#0D9488] text-white font-bold px-4 py-2 rounded-lg text-sm"
+          >
+            افتح العينة
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <iframe
+      src={src}
+      title={title}
+      className="w-full border-0"
+      style={{ height }}
+      allow="autoplay"
+      loading="lazy"
+    />
+  )
+}
 
 export default function ResultsPage() {
   return (
@@ -106,13 +142,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">بثواني من كتابك المدرسي</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1GSoYmYvVRESBmufHbArniTMeSrhLZ4qI/preview"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1GSoYmYvVRESBmufHbArniTMeSrhLZ4qI/preview" title="إنفوجرافيك كيمياء" />
             </div>
 
             {/* Mind Map */}
@@ -126,13 +156,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">ارفع كتابك → خريطة ذهنية جاهزة</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1g3woKWaQwzBx26aKSAv-2bwyMcdQnjDk/preview"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1g3woKWaQwzBx26aKSAv-2bwyMcdQnjDk/preview" title="خريطة ذهنية" />
             </div>
 
             {/* Chemistry Blueprint PDF */}
@@ -146,13 +170,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">ملف PDF احترافي جاهز للطباعة</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="مخطط كيمياء PDF" />
             </div>
 
             {/* Chemistry Presentation PPTX */}
@@ -166,13 +184,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">شرائح احترافية من محتواك</p>
                 </div>
               </div>
-              <iframe
-                src="https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/embed"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/embed" title="عرض تقديمي مخطط كيمياء" />
             </div>
 
             {/* Science Video */}
@@ -186,13 +198,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">شاركو مع طلابك عبر واتساب</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1gVPnr4gh-Oh7Nm2Js5KddZTXxVhofZJs/preview"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1gVPnr4gh-Oh7Nm2Js5KddZTXxVhofZJs/preview" title="فيديو تعليمي علوم" />
             </div>
 
             {/* Chemistry Video */}
@@ -206,13 +212,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">من كتابك → فيديو شرح جاهز</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1xIGeh3bGBgZvUdsKJCKwE21sYWe9-1Qo/preview"
-                className="w-full border-0"
-                style={{ height: '350px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1xIGeh3bGBgZvUdsKJCKwE21sYWe9-1Qo/preview" title="فيديو تعليمي كيمياء" />
             </div>
           </div>
         </div>
@@ -243,13 +243,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">أهم العبارات الأساسية — بثواني</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1N8abwytlmW7VMr0ZK_aBzJ9EOFbz1lXq/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1N8abwytlmW7VMr0ZK_aBzJ9EOFbz1lXq/preview" title="إنفوجرافيك انكليزي" height={400} />
             </div>
 
             {/* English Presentation PPTX */}
@@ -263,13 +257,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">شرائح احترافية من كتاب الانكليزي</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1FvdVE4FBXI97g2LpTbarBTRRJQH7sWEd/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1FvdVE4FBXI97g2LpTbarBTRRJQH7sWEd/preview" title="عرض تقديمي لغة إنكليزية" height={400} />
             </div>
 
             {/* English Video */}
@@ -283,13 +271,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">شاركو مع طلابك عبر واتساب</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/preview" title="فيديو تعليمي انكليزي" height={400} />
             </div>
 
             {/* English Audio / Podcast */}
@@ -303,13 +285,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">ملف صوتي من محتوى المنهج</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1-D0YiQFieS9uYRKbnYJfDqNUd5gmQlNI/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1-D0YiQFieS9uYRKbnYJfDqNUd5gmQlNI/preview" title="بودكاست انكليزي" height={400} />
             </div>
           </div>
         </div>
@@ -365,13 +341,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">من الكتاب المدرسي مع الإجابات وأرقام الصفحات</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="ملف PDF إضافي" height={400} />
             </div>
 
             {/* Chemistry Blueprint PDF */}
@@ -385,13 +355,7 @@ export default function ResultsPage() {
                   <p className="text-[#64748B] text-xs">اختبار منسق جاهز للطباعة مع الإجابات</p>
                 </div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview"
-                className="w-full border-0"
-                style={{ height: '400px' }}
-                allow="autoplay"
-                loading="lazy"
-              />
+              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="ملف PDF إضافي" height={400} />
             </div>
           </div>
         </div>
