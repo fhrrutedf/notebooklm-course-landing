@@ -1,407 +1,204 @@
 'use client'
 
-import { useState } from 'react'
-import {
-  BookOpen,
-  FileText,
-  FileOutput,
-  Globe,
-  MessageCircle,
-  Sparkles,
-  ArrowRight,
-  Headphones,
-  Presentation,
-  Shield,
-} from 'lucide-react'
 import Link from 'next/link'
+import {
+  ArrowRight,
+  BookOpen,
+  Download,
+  ExternalLink,
+  FileOutput,
+  FileText,
+  Headphones,
+  MessageCircle,
+  Presentation,
+  Sparkles,
+  Video,
+} from 'lucide-react'
 
 const WHATSAPP_NUMBER = '963985323170'
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، بدي اشترك بكورس الذكاء الاصطناعي بالتعليم')}`
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، شاهدت نماذج المخرجات وأريد تفاصيل الكورس المتكامل لأدوات الذكاء الاصطناعي.')}`
 
-function LazyEmbed({ src, title, height = 350 }: { src: string; title: string; height?: number }) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  if (!isOpen) {
-    return (
-      <div className="relative flex items-center justify-center bg-[#F8FAFC]" style={{ height }}>
-        <div className="text-center px-6">
-          <FileText className="w-9 h-9 text-[#0D9488] mx-auto mb-3" />
-          <p className="text-[#1B2A4A] font-bold text-sm mb-2">العينة جاهزة للعرض</p>
-          <p className="text-[#64748B] text-xs mb-4">نفتحها عند الطلب فقط حتى تبقى الصفحة سريعة.</p>
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="inline-flex items-center gap-2 bg-[#0D9488] text-white font-bold px-4 py-2 rounded-lg text-sm"
-          >
-            افتح العينة
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <iframe
-      src={src}
-      title={title}
-      className="w-full border-0"
-      style={{ height }}
-      allow="autoplay"
-      loading="lazy"
-    />
-  )
+type LocalSample = {
+  title: string
+  subtitle: string
+  preview?: string
+  file: string
+  fileLabel: string
+  icon: typeof FileText
+  kind: 'image' | 'file' | 'audio'
 }
+
+const localSamples: LocalSample[] = [
+  {
+    title: 'إنفوجرافيك كيمياء',
+    subtitle: 'تحويل محتوى الدرس إلى ملخص بصري منظم',
+    preview: '/samples/previews/chemistry-infographic.webp',
+    file: '/samples/chemistry-infographic.png',
+    fileLabel: 'فتح النموذج الكامل',
+    icon: Sparkles,
+    kind: 'image',
+  },
+  {
+    title: 'خريطة ذهنية',
+    subtitle: 'تنظيم الأفكار الأساسية من المصدر في صفحة واحدة',
+    preview: '/samples/previews/chemistry-mindmap.webp',
+    file: '/samples/chemistry-mindmap.png',
+    fileLabel: 'فتح النموذج الكامل',
+    icon: BookOpen,
+    kind: 'image',
+  },
+  {
+    title: 'مخطط كيمياء — PDF',
+    subtitle: 'نموذج PDF محلي وجاهز للفتح أو التنزيل',
+    preview: '/samples/previews/chemistry-blueprint.webp',
+    file: '/samples/chemistry-blueprint.pdf',
+    fileLabel: 'فتح أو تنزيل PDF',
+    icon: FileText,
+    kind: 'file',
+  },
+  {
+    title: 'عرض تقديمي — كيمياء',
+    subtitle: 'شرائح من محتوى الدرس، مع معاينة محلية خفيفة',
+    preview: '/samples/previews/chemistry-slides.webp',
+    file: '/samples/chemistry-slides.pdf',
+    fileLabel: 'فتح العرض',
+    icon: Presentation,
+    kind: 'file',
+  },
+  {
+    title: 'إنفوجرافيك إنكليزي',
+    subtitle: 'محتوى بصري من درس اللغة الإنكليزية',
+    preview: '/samples/previews/english-infographic.webp',
+    file: '/samples/english-infographic.png',
+    fileLabel: 'فتح النموذج الكامل',
+    icon: Sparkles,
+    kind: 'image',
+  },
+  {
+    title: 'عرض The Language Code',
+    subtitle: 'ملف العرض الأصلي متاح للفتح عند الطلب',
+    preview: '/samples/previews/english-presentation.webp',
+    file: '/samples/english-presentation.pdf',
+    fileLabel: 'فتح العرض',
+    icon: FileOutput,
+    kind: 'file',
+  },
+  {
+    title: 'بودكاست تعليمي — إنكليزي',
+    subtitle: 'ملف صوتي مستخرج من محتوى الدرس',
+    file: '/samples/english-podcast.mp3',
+    fileLabel: 'تنزيل الملف الصوتي',
+    icon: Headphones,
+    kind: 'audio',
+  },
+]
+
+const videoSamples = [
+  { title: 'فيديو تعليمي — علوم', href: 'https://drive.google.com/file/d/1gVPnr4gh-Oh7Nm2Js5KddZTXxVhofZJs/view' },
+  { title: 'فيديو تعليمي — كيمياء', href: 'https://drive.google.com/file/d/1xIGeh3bGBgZvUdsKJCKwE21sYWe9-1Qo/view' },
+  { title: 'فيديو تعليمي — إنكليزي', href: 'https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/view' },
+]
 
 export default function ResultsPage() {
   return (
     <div dir="rtl" className="min-h-screen bg-white text-[#1E293B]" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
-
-      {/* ===== TOP NAVIGATION BAR ===== */}
-      <nav className="bg-white border-b border-[#E2E8F0] py-3 px-4 sticky top-0 z-50">
-        <div className="max-w-[1100px] mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[#64748B] hover:text-[#0D9488] transition-colors">
-            <ArrowRight className="w-5 h-5" />
-            <span className="font-bold text-sm">العودة للصفحة الرئيسية</span>
+      <nav className="sticky top-0 z-50 border-b border-[#E2E8F0] bg-white/95 px-4 py-3 backdrop-blur">
+        <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-3">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-[#64748B] hover:text-[#0D9488]">
+            <ArrowRight className="h-5 w-5" />
+            العودة للكورس
           </Link>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors"
-          >
-            سجّل الآن
-            <MessageCircle className="w-4 h-4" />
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
+            اطلب التفاصيل
+            <MessageCircle className="h-4 w-4" />
           </a>
         </div>
       </nav>
 
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative bg-[#F8FAFC] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #1B2A4A 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-        }} />
-        <div className="relative z-10 max-w-[1100px] mx-auto px-4 pt-14 pb-12 md:pt-20 md:pb-16 text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-8 border border-[#0D9488]/20">
-            <Sparkles className="w-4 h-4" />
-            عينات حقيقية من نتائج الشغل
+      <section className="bg-[#F8FAFC] px-4 py-14 text-center md:py-20">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#0D9488]/20 bg-[#0D9488]/10 px-5 py-2 text-sm font-bold text-[#0D9488]">
+            <Sparkles className="h-4 w-4" />
+            نماذج محلية من مخرجات الكورس
+          </div>
+          <h1 className="mb-5 text-3xl font-bold leading-[1.4] text-[#1B2A4A] md:text-5xl">شاهد مخرجات عملية قبل التسجيل</h1>
+          <p className="mx-auto max-w-2xl text-base leading-loose text-[#64748B] md:text-lg">
+            هذه عينات من الشروحات والملخصات والـPDF والعروض والصوتيات. نستخدم المصدر الذي يرفعه المعلم، ثم نراجع الناتج قبل مشاركته مع الطلاب.
+          </p>
+        </div>
+      </section>
+
+      <section className="px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-4xl">نماذج جاهزة للفتح</h2>
+            <p className="text-sm leading-loose text-[#64748B]">تظهر المعاينة بسرعة من الموقع، والملف الكامل يفتح فقط عندما تطلبه.</p>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold leading-[1.4] mb-6 text-[#1B2A4A]">
-            شوف شو رح تعمل بعد{' '}
-            <span className="text-[#0D9488]">الكورس</span>
-          </h1>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {localSamples.map((sample) => {
+              const Icon = sample.icon
+              return (
+                <article key={sample.title} className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white">
+                  {sample.preview ? (
+                    <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-52 w-full bg-[#F8FAFC] object-contain p-2" loading="lazy" />
+                  ) : (
+                    <div className="flex h-52 items-center justify-center bg-[#F8FAFC]">
+                      <Icon className="h-14 w-14 text-[#0D9488]" />
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <div className="mb-3 flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0D9488]/10"><Icon className="h-4 w-4 text-[#0D9488]" /></div>
+                      <h3 className="font-bold text-[#1B2A4A]">{sample.title}</h3>
+                    </div>
+                    <p className="mb-4 min-h-12 text-sm leading-loose text-[#64748B]">{sample.subtitle}</p>
+                    {sample.kind === 'audio' && (
+                      <audio controls preload="none" className="mb-4 w-full">
+                        <source src={sample.file} type="audio/mpeg" />
+                        متصفحك لا يدعم تشغيل الملف الصوتي.
+                      </audio>
+                    )}
+                    <a href={sample.file} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-4 py-2.5 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
+                      {sample.kind === 'image' ? <ExternalLink className="h-4 w-4" /> : <Download className="h-4 w-4" />}
+                      {sample.fileLabel}
+                    </a>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
 
-          <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            ملفات حقيقية من كتب مدرسية — إنفوجرافيك، عروض تقديمية، فيديوهات، وبودكاست — كل شي معمول بأدوات AI مجانية
-          </p>
-
-          {/* Summary icons */}
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            {[
-              { label: 'إنفوجرافيك', icon: Sparkles },
-              { label: 'خريطة ذهنية', icon: BookOpen },
-              { label: 'PDF', icon: FileText },
-              { label: 'عرض تقديمي', icon: Presentation },
-              { label: 'فيديو تعليمي', icon: Globe },
-              { label: 'بودكاست صوتي', icon: Headphones },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
-                <item.icon className="w-4 h-4 text-[#0D9488] shrink-0" />
-                <span>{item.label}</span>
-              </div>
+      <section className="bg-[#F8FAFC] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1000px]">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-4xl">فيديوهات تعليمية</h2>
+            <p className="text-sm leading-loose text-[#64748B]">الفيديوهات الكاملة تبقى مستضافة خارجيًا حتى لا تثقل الموقع، وتفتح عند الطلب فقط.</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {videoSamples.map((video) => (
+              <a key={video.title} href={video.href} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center hover:border-[#0D9488]">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0D9488]/10"><Video className="h-6 w-6 text-[#0D9488]" /></div>
+                <h3 className="mb-3 font-bold text-[#1B2A4A]">{video.title}</h3>
+                <span className="inline-flex items-center gap-2 text-sm font-bold text-[#0D9488]">فتح الفيديو <ExternalLink className="h-4 w-4" /></span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== CHEMISTRY & SCIENCE SAMPLES ===== */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="max-w-[1100px] mx-auto px-4">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 bg-[#0D9488]/10 rounded-xl flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-[#0D9488]" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">عينات كيمياء وعلوم</h2>
-              <p className="text-[#64748B] text-sm">ملفات حقيقية من كتب كيمياء وعلوم مدرسية</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Chemistry Infographic */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">إنفوجرافيك كيمياء</h4>
-                  <p className="text-[#64748B] text-xs">بثواني من كتابك المدرسي</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1GSoYmYvVRESBmufHbArniTMeSrhLZ4qI/preview" title="إنفوجرافيك كيمياء" />
-            </div>
-
-            {/* Mind Map */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">خريطة ذهنية</h4>
-                  <p className="text-[#64748B] text-xs">ارفع كتابك → خريطة ذهنية جاهزة</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1g3woKWaQwzBx26aKSAv-2bwyMcdQnjDk/preview" title="خريطة ذهنية" />
-            </div>
-
-            {/* Chemistry Blueprint PDF */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <FileText className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">مخطط كيمياء — PDF</h4>
-                  <p className="text-[#64748B] text-xs">ملف PDF احترافي جاهز للطباعة</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="مخطط كيمياء PDF" />
-            </div>
-
-            {/* Chemistry Presentation PPTX */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <FileOutput className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">عرض تقديمي — مخطط كيمياء</h4>
-                  <p className="text-[#64748B] text-xs">شرائح احترافية من محتواك</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/embed" title="عرض تقديمي مخطط كيمياء" />
-            </div>
-
-            {/* Science Video */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Globe className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">فيديو تعليمي — علوم</h4>
-                  <p className="text-[#64748B] text-xs">شاركو مع طلابك عبر واتساب</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1gVPnr4gh-Oh7Nm2Js5KddZTXxVhofZJs/preview" title="فيديو تعليمي علوم" />
-            </div>
-
-            {/* Chemistry Video */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Globe className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">فيديو تعليمي — كيمياء</h4>
-                  <p className="text-[#64748B] text-xs">من كتابك → فيديو شرح جاهز</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1xIGeh3bGBgZvUdsKJCKwE21sYWe9-1Qo/preview" title="فيديو تعليمي كيمياء" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== ENGLISH SAMPLES ===== */}
-      <section className="py-14 md:py-20 bg-[#F8FAFC]">
-        <div className="max-w-[1100px] mx-auto px-4">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 bg-[#0D9488]/10 rounded-xl flex items-center justify-center">
-              <Globe className="w-5 h-5 text-[#0D9488]" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">عينات انكليزي</h2>
-              <p className="text-[#64748B] text-sm">ملفات حقيقية من كتاب الانكليزي المدرسي</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {/* English Infographic */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">إنفوجرافيك انكليزي</h4>
-                  <p className="text-[#64748B] text-xs">أهم العبارات الأساسية — بثواني</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1N8abwytlmW7VMr0ZK_aBzJ9EOFbz1lXq/preview" title="إنفوجرافيك انكليزي" height={400} />
-            </div>
-
-            {/* English Presentation PPTX */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <FileOutput className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">عرض تقديمي — The Language Code</h4>
-                  <p className="text-[#64748B] text-xs">شرائح احترافية من كتاب الانكليزي</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1FvdVE4FBXI97g2LpTbarBTRRJQH7sWEd/preview" title="عرض تقديمي لغة إنكليزية" height={400} />
-            </div>
-
-            {/* English Video */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Globe className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">فيديو تعليمي — انكليزي</h4>
-                  <p className="text-[#64748B] text-xs">شاركو مع طلابك عبر واتساب</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/preview" title="فيديو تعليمي انكليزي" height={400} />
-            </div>
-
-            {/* English Audio / Podcast */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <Headphones className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">بودكاست تعليمي — انكليزي</h4>
-                  <p className="text-[#64748B] text-xs">ملف صوتي من محتوى المنهج</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1-D0YiQFieS9uYRKbnYJfDqNUd5gmQlNI/preview" title="بودكاست انكليزي" height={400} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== EXAM & TEST SAMPLES ===== */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="max-w-[1100px] mx-auto px-4">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 bg-[#0D9488]/10 rounded-xl flex items-center justify-center">
-              <FileText className="w-5 h-5 text-[#0D9488]" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">عينات أسئلة وامتحانات</h2>
-              <p className="text-[#64748B] text-sm">اختبارات بنسختين مع الإجابات النموذجية وأرقام الصفحات — بثواني من الكتاب المدرسي</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6 text-center hover:border-[#0D9488]/30 transition-colors">
-              <div className="w-14 h-14 bg-[#0D9488]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-7 h-7 text-[#0D9488]" />
-              </div>
-              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">اختبار بنسختين</h3>
-              <p className="text-[#64748B] text-sm leading-loose">نسخة A ونسخة B — الطلاب ما بيقدروا ينقلوا. كل نسخة بترتيب وأسئلة مختلفة</p>
-            </div>
-            <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6 text-center hover:border-[#0D9488]/30 transition-colors">
-              <div className="w-14 h-14 bg-[#0D9488]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-7 h-7 text-[#0D9488]" />
-              </div>
-              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">إجابات نموذجية</h3>
-              <p className="text-[#64748B] text-sm leading-loose">كل سؤال بيكون مكتوب جنبو رقم الصفحة من الكتاب المدرسي — دقة عالية وموثوقة</p>
-            </div>
-            <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6 text-center hover:border-[#0D9488]/30 transition-colors">
-              <div className="w-14 h-14 bg-[#0D9488]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-7 h-7 text-[#0D9488]" />
-              </div>
-              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">بـ 3 دقائق فقط</h3>
-              <p className="text-[#64748B] text-sm leading-loose">ارفع الكتاب → اطلب الاختبار → جاهز بتنسيق PDF احترافي للطباعة والتوزيع</p>
-            </div>
-          </div>
-
-          {/* Exam Preview Iframes */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Chemistry Exam */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <FileText className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">نموذج اختبار حقيقي — كيمياء</h4>
-                  <p className="text-[#64748B] text-xs">من الكتاب المدرسي مع الإجابات وأرقام الصفحات</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="ملف PDF إضافي" height={400} />
-            </div>
-
-            {/* Chemistry Blueprint PDF */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden hover:border-[#0D9488]/30 transition-colors">
-              <div className="p-4 border-b border-[#E2E8F0] flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#0D9488]/10 rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-4 h-4 text-[#0D9488]" />
-                </div>
-                <div>
-                  <h4 className="text-[#1B2A4A] font-bold text-sm">مخطط اختبار — كيمياء PDF</h4>
-                  <p className="text-[#64748B] text-xs">اختبار منسق جاهز للطباعة مع الإجابات</p>
-                </div>
-              </div>
-              <LazyEmbed src="https://drive.google.com/file/d/1ldVt1B0GcWTjav0TyGY3wBFsyYNYe1KC/preview" title="ملف PDF إضافي" height={400} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== BOTTOM CTA ===== */}
-      <section className="py-14 md:py-20 bg-[#F8FAFC]">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
-            كل هاد بتعملو من <span className="text-[#0D9488]">ملف واحد!</span>
-          </h2>
-          <p className="text-[#64748B] mb-8 text-base leading-loose">
-            ارفع كتابك المدرسي → إنفوجرافيك، عرض تقديمي، فيديو، بودكاست، PDF — كل شي بثواني
-          </p>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-10 py-4 rounded-xl text-lg transition-colors mb-4"
-          >
-            سجّل الآن بالكورس
-            <MessageCircle className="w-5 h-5" />
+      <section className="px-4 py-16 text-center md:py-20">
+        <div className="mx-auto max-w-2xl rounded-2xl border border-[#0D9488]/20 bg-[#0D9488]/5 p-8">
+          <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-3xl">هذه مجرد عينات — داخل الكورس تتعلم الطريقة</h2>
+          <p className="mb-6 leading-loose text-[#64748B]">لا نبيع ملفات جاهزة فقط؛ نتعلم كيف تبدأ من المصدر، تكتب Prompt واضحًا، تراجع النتيجة، ثم تخرجها بالشكل المناسب لطلابك.</p>
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
+            اطلب تفاصيل التسجيل
+            <MessageCircle className="h-5 w-5" />
           </a>
-          <div className="mt-4 flex items-center justify-center gap-2 text-[#64748B] text-sm">
-            <Shield className="w-4 h-4 text-[#0D9488]" />
-            <span>ضمان استرداد 7 أيام — بدون أسئلة</span>
-          </div>
         </div>
       </section>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="bg-[#1B2A4A] py-6">
-        <div className="max-w-[1100px] mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-6 mb-3">
-            <Link href="/" className="text-white/70 text-sm hover:text-white transition-colors">
-              الصفحة الرئيسية
-            </Link>
-            <Link href="/schools" className="text-white/70 text-sm hover:text-white transition-colors">
-              حلول المؤسسات التعليمية
-            </Link>
-          </div>
-          <p className="text-white/50 text-xs">
-            جميع الحقوق محفوظة {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين
-          </p>
-        </div>
-      </footer>
     </div>
   )
 }
