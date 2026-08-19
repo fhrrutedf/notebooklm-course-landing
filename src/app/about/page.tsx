@@ -54,12 +54,12 @@ export default function AboutTrainerPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-[1000px] mx-auto px-4 grid md:grid-cols-[220px_1fr] gap-8 items-center">
           <div className="mx-auto">
-            <img src="/images/trainer-nawaf.jpg" alt="المدرب نواف البوسطه" className="w-64 h-64 md:w-72 md:h-72 rounded-2xl object-cover border-4 border-[#0D9488]/15" />
+            <img src="/images/trainer-nawaf.jpg" alt="المدرب نواف البوسطة" className="w-64 h-64 md:w-72 md:h-72 rounded-2xl object-cover border-4 border-[#0D9488]/15" />
           </div>
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 text-[#0D9488] px-4 py-2 text-sm font-bold mb-5">عن المدرب</div>
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-5">نواف البوسطه</h1>
-            <p className="text-xl text-[#0D9488] font-bold mb-5">متخصص في تطبيقات الذكاء الاصطناعي في التعليم ومدرب أدوات الذكاء الاصطناعي — سوريا</p>
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-5">نواف البوسطة</h1>
+            <p className="text-xl text-[#0D9488] font-bold mb-5">مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية — سوريا</p>
             <p className="text-[#64748B] leading-loose max-w-3xl">مدرب وخبير متخصص في أدوات الذكاء الاصطناعي، يعمل على تحويل التقنيات الحديثة إلى حلول عملية قابلة للتطبيق للأفراد والشركات والمؤسسات التعليمية. يجمع بين التدريب، البحث، تصميم المحتوى، وتطوير حلول الأتمتة، مع تركيز على جعل الذكاء الاصطناعي مفهومًا وقابلًا للاستخدام.</p>
           </div>
         </div>
