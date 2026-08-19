@@ -73,58 +73,39 @@ export default function SchoolsLandingPage() {
 
   const courseModules = [
     {
-      title: 'الوحدة 1: الأساسيات والتحضير الذكي',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
+      lessons: 6,
+      time: '80 دقيقة',
       items: [
-        'ما هو الذكاء الاصطناعي بالتعليم ولماذا يحتاجه كل معلم؟',
-        'رفع المصادر وتنظيم الدفتر الذكي',
-        'المحادثة الذكية مع محتواك — أسئلة تفتح بوابات',
-        'تغيير اللغة للعربية والإعدادات المخصصة',
+        'تجهيز درس من الصف الأول إلى البكالوريا وتحديد الهدف التعليمي',
+        'كتابة Prompt مناسب لعمر الطالب ومستواه',
+        'إنشاء ملخص وأسئلة فهم ونشاط صفّي من المصدر',
+        'تحويل الفكرة إلى سيناريو فيديو يشرحه المعلم لطلابه',
+        'مراجعة الدقة واللغة قبل المشاركة',
       ],
     },
     {
-      title: 'الوحدة 2: البودكاست التعليمي',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 2: من الدرس إلى اختبار وPDF ومشروع',
+      lessons: 7,
+      time: '95 دقيقة',
       items: [
-        'إنشاء بودكاست تعليمي من أي محتوى',
-        'تخصيص البودكاست المتقدم — تحكّم كامل بالمحتوى',
-        'مشاركة البودكاست مع الطلاب — قنوات التوزيع',
-        'ربط البودكاست بالمنهج — استراتيجيات متقدمة',
+        'إعداد جدول مواصفات مبسط يناسب المادة والمرحلة',
+        'إنشاء نسختين من الاختبار مع نموذج إجابة',
+        'إخراج PDF عربي جاهز للطباعة',
+        'تصميم مشروع أو مهمة تطبيقية بمعايير تقييم واضحة',
+        'مراجعة بشرية قبل استخدام المخرج مع الطلاب',
       ],
     },
     {
-      title: 'الوحدة 3: العروض والوسائط المتقدمة',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 3: عرض وتفاعل وبودكاست ومتابعة',
+      lessons: 7,
+      time: '85 دقيقة',
       items: [
-        'إنشاء عرض تقديمي احترافي من محتواك',
-        'الخرائط الذهنية والإنفوجرافيك',
-        'ملخص الفيديو والنظرة العامة',
-        'دمج أدوات العرض والتصميم المتقدمة',
-      ],
-    },
-    {
-      title: 'الوحدة 4: التقييم والدراسة',
-      lessons: 4,
-      time: '48 دقيقة',
-      items: [
-        'توليد أسئلة وامتحانات بضغطة زر',
-        'البطاقات التعليمية للمراجعة السريعة',
-        'أدلة الدراسة المخصصة',
-        'تقييم الفهم والتعلّم التكيفي',
-      ],
-    },
-    {
-      title: 'الوحدة 5: الاستراتيجيات المتقدمة',
-      lessons: 4,
-      time: '48 دقيقة',
-      items: [
-        'التعليم الشامل — دمج طلاب الاحتياجات الخاصة',
-        'دمج مع منصات التعليم الإلكتروني',
-        'خطة الدرس الذكية — تحضير كامل بالذكاء الاصطناعي',
-        'بناء نظامك التعليمي الذكي المتكامل',
+        'تحويل الدرس إلى عرض تقديمي مناسب للحصة',
+        'إنشاء نشاط وبطاقة خروج للطلاب',
+        'إنتاج Podcast أو شرح صوتي مختصر من الدرس',
+        'مشاركة الفيديو أو الصوت أو المشروع مع الطلاب',
+        'مقارنة الأدوات المجانية واختيار البديل المناسب',
       ],
     },
   ]
@@ -136,11 +117,11 @@ export default function SchoolsLandingPage() {
     },
     {
       q: 'هل توفّرون فواتير ضريبية؟',
-      a: 'نعم، نوفر فواتير ضريبية رسمية لجميع الباقات. يمكن إصدار الفاتورة باسم المؤسسة التعليمية مع الرقم الضريبي. للباقات المؤسسية، نوفر أيضاً عقد استخدام مؤسسي.',
+      a: 'نرسل تفاصيل الدفع والتنسيق المناسب للمؤسسة عبر واتساب قبل الاتفاق. أي فاتورة أو عقد رسمي يخضع لإمكانية المؤسسة والمدرب، ولا نعد بخدمة غير متاحة.',
     },
     {
       q: 'هل يحصل كل معلم على شهادة؟',
-      a: 'نعم، كل معلم يكمل البرنامج التدريبي بنجاح يحصل على شهادة إتمام رقمية يمكن طباعتها وإضافتها لملف التطوير المهني. تتضمن الشهادة اسم المعلم واسم المؤسسة التعليمية وتاريخ الإتمام.',
+      a: 'حاليًا لا نعتمد الشهادات كجزء أساسي من العرض. القيمة الأساسية هي المخرجات العملية والقوالب التي يبنيها المعلم ويستخدمها في مادته.',
     },
     {
       q: 'كيف يتم تسجيل المعلمين؟',
@@ -148,11 +129,11 @@ export default function SchoolsLandingPage() {
     },
     {
       q: 'ماذا لو لم يكمل بعض المعلمين البرنامج التدريبي؟',
-      a: 'الوصول دائم مدى الحياة، فيستطيع المعلم البدء والإنهاء بالوقت المناسب له. ضمان 7 أيام ينطبق على المؤسسة ككل — إذا لم تكونوا راضين خلال الأسبوع الأول نعيد المبلغ كاملاً.',
+      a: 'الوصول إلى المواد المسجلة متاح وفق الاتفاق مع المؤسسة. نوضح قبل التسجيل طريقة الوصول والدعم والدفع، ويمكن تنسيق الدفع على دفعتين.',
     },
     {
       q: 'هل البرنامج التدريبي مناسب لجميع المواد والمراحل؟',
-      a: 'نعم، البرنامج التدريبي يعتمد على رفع الكتاب المدرسي مباشرة، فهو يعمل مع أي مادة (علوم، رياضيات، لغة عربية، إنجليزي...) وأي مرحلة دراسية. الأداة مجرّبة على مناهج حقيقية ومتوافقة مع العربية بالكامل.',
+      a: 'نعم، نبدأ من الصف الأول وحتى البكالوريا، ونكيّف الأمثلة مع الرياضيات والعلوم واللغات وباقي المواد. لا نترك الناتج دون مراجعة المعلم، لأن ملاءمة المنهج والدقة مسؤولية مشتركة.',
     },
   ]
 
@@ -200,7 +181,7 @@ export default function SchoolsLandingPage() {
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            Course عملي مدته 4 ساعات تقريباً، يعرّف فريقكم بسير عمل واضح لإنتاج الشروحات والملخصات والأسئلة والاختبارات وأوراق PDF والعروض باستخدام أدوات مجانية أو بخطط مجانية.
+            Course عملي مدته 4 ساعات تقريباً، يعرّف فريقكم بسير عمل لإنتاج الشروحات والفيديوهات التعليمية والاختبارات وملفات PDF والمشاريع والعروض والـPodcasts باستخدام أدوات مجانية أو بخطط مجانية.
           </p>
 
           {/* Two CTA buttons */}
@@ -213,11 +194,13 @@ export default function SchoolsLandingPage() {
               <ArrowLeft className="w-4 h-4" />
             </a>
             <a
-              href="#"
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-transparent border-2 border-[#1B2A4A]/20 hover:border-[#1B2A4A]/40 text-[#1B2A4A] font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
               <Download className="w-4 h-4" />
-              حمّل ملف التعريف المؤسسي
+              اطلب ملف التعريف المؤسسي عبر واتساب
             </a>
           </div>
 
@@ -273,9 +256,9 @@ export default function SchoolsLandingPage() {
               <div className="w-12 h-12 rounded-lg bg-[#0D9488]/10 flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-[#0D9488]" />
               </div>
-              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">توفير 200 ساعة تحضير سنوياً لكل معلم</h3>
+              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">سير عمل موحّد لفريقكم</h3>
               <p className="text-[#64748B] text-sm leading-loose">
-                وقت أقل في التحضير يعني طاقة أكبر في الصف وجودة أعلى في التعليم. معلم أقل إرهاق يؤدّي بشكل أفضل.
+                يتعلم الفريق خطوات مشتركة لتجهيز المصدر وكتابة Prompt ومراجعة الناتج، بدل الاعتماد على استخدام عشوائي للأدوات.
               </p>
             </div>
 
@@ -286,7 +269,7 @@ export default function SchoolsLandingPage() {
               </div>
               <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">اختبارات مطابقة للمنهج وموثّقة</h3>
               <p className="text-[#64748B] text-sm leading-loose">
-                اختبارات بنسختين خلال 3 دقائق، مع إجابات نموذجية موثّقة بأرقام الصفحات. محتوى عالي الجودة يرضي أولياء الأمور.
+                يتم تدريب الفريق على إعداد اختبارات ومشاريع وفيديوهات وملفات PDF، مع مراجعة بشرية قبل استخدامها مع الطلاب.
               </p>
             </div>
 
@@ -295,9 +278,9 @@ export default function SchoolsLandingPage() {
               <div className="w-12 h-12 rounded-lg bg-[#0D9488]/10 flex items-center justify-center mx-auto mb-4">
                 <Award className="w-6 h-6 text-[#0D9488]" />
               </div>
-              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">شهادات إتمام معتمدة لملفات التطوير المهني</h3>
+              <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">مخرجات قابلة للمشاركة مع الطلاب</h3>
               <p className="text-[#64748B] text-sm leading-loose">
-                يحصل كل معلم على شهادة إتمام معتمدة تُضاف لملف التطوير المهني. يعزّز مكانة المؤسسة في تطوير كادرها التعليمي.
+                يخرج كل معلم بقوالب عملية يمكنه استخدامها في مادته ومرحلته، من الصف الأول إلى البكالوريا.
               </p>
             </div>
           </div>
@@ -312,7 +295,7 @@ export default function SchoolsLandingPage() {
               مقارنة الأداء قبل وبعد الذكاء الاصطناعي
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              أرقام حقيقية من معلمين يستخدمون هذه الأدوات يومياً
+              مقارنة سير العمل قبل تعلم المنهج وبعده، دون وعود زمنية ثابتة
             </p>
           </div>
 
@@ -350,8 +333,7 @@ export default function SchoolsLandingPage() {
           {/* Impact calculator */}
           <div className="mt-8 bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-xl p-5 text-center">
             <p className="text-[#1B2A4A] font-bold text-base">
-              مؤسسة من 10 معلمين توفر{' '}
-              <span className="text-[#0D9488] font-bold text-xl">2,000 ساعة سنوياً</span>
+              مؤسسة من 10 معلمين يمكنها توحيد طريقة إعداد المواد ومراجعتها
             </p>
           </div>
         </div>
@@ -396,7 +378,7 @@ export default function SchoolsLandingPage() {
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
               محتوى البرنامج التدريبي
             </h2>
-            <p className="text-[#64748B] text-sm">5 وحدات — 20 درساً عملياً مباشراً</p>
+            <p className="text-[#64748B] text-sm">3 مسارات — 20 درساً عملياً مسجلاً</p>
           </div>
 
           <div className="space-y-3 max-w-3xl mx-auto">
@@ -450,7 +432,7 @@ export default function SchoolsLandingPage() {
               باقات مصمّمة للمؤسسات التعليمية
             </h2>
             <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">
-              اختر الباقة المناسبة لعدد معلمي مؤسستك — كلما زاد العدد، زادت القيمة
+              اختر الباقة المناسبة لعدد معلمي مؤسستك، وجميع الأسعار بالليرة السورية ويمكن تنسيق الدفع على دفعتين.
             </p>
           </div>
 
@@ -461,10 +443,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">5 معلمين</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">$375</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">1,600,000 ليرة سورية</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#0D9488] text-sm font-bold">$75 للمعلم</div>
+                <div className="text-[#0D9488] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -474,7 +456,7 @@ export default function SchoolsLandingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#0D9488] mt-0.5 shrink-0" />
-                    <span className="text-[#64748B] text-sm">شهادات إتمام</span>
+                    <span className="text-[#64748B] text-sm">قوالب ومخرجات عملية</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#0D9488] mt-0.5 shrink-0" />
@@ -500,10 +482,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">10 معلمين</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">$650</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">3,200,000 ليرة سورية</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#0D9488] text-sm font-bold">$65 للمعلم</div>
+                <div className="text-[#0D9488] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -538,10 +520,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">20+ معلم</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">$1,100+</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">ابتداءً من 6,400,000 ليرة سورية</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#D4A853] text-sm font-bold">$55 للمعلم</div>
+                <div className="text-[#D4A853] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -555,7 +537,7 @@ export default function SchoolsLandingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#D4A853] mt-0.5 shrink-0" />
-                    <span className="text-[#64748B] text-sm">فاتورة ضريبية رسمية</span>
+                    <span className="text-[#64748B] text-sm">تنسيق دفع مناسب للمؤسسة</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#D4A853] mt-0.5 shrink-0" />
@@ -623,7 +605,7 @@ export default function SchoolsLandingPage() {
               {[
                 { icon: BarChart3, text: 'لوحة متابعة تقدّم المعلمين', note: 'الباقة القياسية فما فوق', noteColor: '#0D9488' },
                 { icon: FileCheck, text: 'تقرير إتمام تفصيلي', note: 'الباقة القياسية فما فوق', noteColor: '#0D9488' },
-                { icon: FileText, text: 'فاتورة ضريبية رسمية', note: 'جميع الباقات', noteColor: '#1E3A5F' },
+                { icon: FileText, text: 'تنسيق دفع مناسب للمؤسسة', note: 'جميع الباقات', noteColor: '#1E3A5F' },
                 { icon: ClipboardList, text: 'عقد استخدام مؤسسي', note: 'الباقة المؤسسية', noteColor: '#D4A853' },
                 { icon: GraduationCap, text: 'جلسة تدريبية مباشرة مع المدرب نواف البوسطه', note: 'الباقة المؤسسية', noteColor: '#D4A853' },
               ].map((item, i) => (
@@ -838,10 +820,11 @@ export default function SchoolsLandingPage() {
                     onChange={(e) => handleFormChange('country', e.target.value)}
                     className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#1E293B] text-sm focus:outline-none focus:border-[#0D9488] focus:ring-1 focus:ring-[#0D9488] transition-colors appearance-none"
                   >
-                    <option value="">اختر الدولة</option>
+                    <option value="">اختر البلد أو المدينة</option>
+                    <option value="سوريا">سوريا</option>
                     <option value="الإمارات">الإمارات</option>
                     <option value="الكويت">الكويت</option>
-                    <option value="أخرى">أخرى</option>
+                    <option value="بلد آخر">بلد آخر</option>
                   </select>
                 </div>
 
