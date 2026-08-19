@@ -5,6 +5,39 @@ import { ArrowRight, BriefcaseBusiness, CheckCircle2, Mail, MessageCircle, Searc
 
 const WHATSAPP_LINK = 'https://wa.me/963985323170'
 
+const trainingSessions = [
+  {
+    title: 'أتمتة المهام الزراعية',
+    audience: 'المهندسون الزراعيون — جامعة حمص',
+    description: 'جلسة تطبيقية حول تحويل المهام الزراعية المتكررة إلى سير عمل أكثر تنظيمًا باستخدام أدوات الذكاء الاصطناعي والأتمتة.',
+    images: ['/images/training/agri-automation-01.png', '/images/training/agri-automation-02.png'],
+  },
+  {
+    title: 'إعداد معلم رقمي',
+    audience: 'المعلمون والعاملون في التعليم',
+    description: 'جلسة عملية لبناء معلم رقمي قادر على تنظيم المحتوى، إعداد الأنشطة، وتوظيف الأدوات الحديثة في التحضير والتواصل مع الطلاب.',
+    images: ['/images/training/digital-teacher-01.png', '/images/training/digital-teacher-02.png'],
+  },
+  {
+    title: 'إعداد المحتوى بالذكاء الاصطناعي',
+    audience: 'صنّاع المحتوى والمهتمون بالتسويق',
+    description: 'تدريب على التخطيط للمحتوى، توليد الأفكار، كتابة النصوص، وتجهيز مواد قابلة للنشر مع الحفاظ على هوية صاحب المحتوى.',
+    images: ['/images/training/ai-content-01.png', '/images/training/ai-content-02.png'],
+  },
+  {
+    title: 'Vibe Coding — البرمجة بالذكاء الاصطناعي',
+    audience: 'المبرمجون وصنّاع التطبيقات',
+    description: 'جلسة تطبيقية لتحويل الفكرة إلى نموذج أولي، وبناء الواجهات، وفهم الكود، واختبار الأخطاء بمساعدة الذكاء الاصطناعي.',
+    images: ['/images/training/vibe-coding-01.png'],
+  },
+  {
+    title: 'جلسة Online في الذكاء الاصطناعي',
+    audience: 'متدربون عن بُعد',
+    description: 'جلسة تفاعلية عبر الإنترنت تضمنت مشاركة الشاشة، شرح الوصول إلى أدوات الذكاء الاصطناعي، والإجابة عن أسئلة المشاركين خطوة بخطوة.',
+    images: ['/images/training/online-ai-01.png', '/images/training/online-ai-02.png'],
+  },
+]
+
 export default function AboutTrainerPage() {
   return (
     <main dir="rtl" className="min-h-screen bg-[#F8FAFC] text-[#1B2A4A]">
@@ -64,6 +97,29 @@ export default function AboutTrainerPage() {
             <h2 className="text-2xl md:text-4xl font-bold mb-5">البحث والرؤية</h2>
             <p className="text-[#64748B] leading-loose">يركز نواف في أبحاثه على تطبيقات الذكاء الاصطناعي التوليدي، نماذج اللغة الكبيرة، الأتمتة، وتحليل تأثير AI على سوق العمل والمهارات المستقبلية. الهدف هو ربط المعرفة النظرية بحلول عملية تعالج تحديات واقعية.</p>
             <blockquote className="mt-7 border-r-4 border-[#0D9488] pr-5 text-lg font-bold text-[#1B2A4A]">«الذكاء الاصطناعي ليس مستقبلًا ننتظره، بل حاضر نصنعه.»</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20 bg-[#F8FAFC]">
+        <div className="max-w-[1100px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold mb-3">من تجاربي التدريبية</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto leading-loose">جلسات وتدريبات قدّمتها لفئات مختلفة، من التعليم وصناعة المحتوى إلى الأتمتة والبرمجة بالذكاء الاصطناعي.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {trainingSessions.map((session) => (
+              <article key={session.title} className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden">
+                <div className="grid grid-cols-2 gap-1 bg-[#E2E8F0] p-1">
+                  {session.images.map((image) => <img key={image} src={image} alt={session.title} className="w-full h-44 md:h-56 object-cover" loading="lazy" />)}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{session.title}</h3>
+                  <div className="text-[#0D9488] text-sm font-bold mb-3">{session.audience}</div>
+                  <p className="text-[#64748B] text-sm leading-loose">{session.description}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
