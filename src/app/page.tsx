@@ -35,7 +35,6 @@ export default function LandingPage() {
   const currentPricing = {
     price: '3,200 ليرة سورية جديدة',
     originalPrice: '4,500 ليرة سورية جديدة',
-    offerEnd: '25 آب 2026',
     currency: 'شام كاش / تحويل بنكي / أقساط لمن لا يتوفر معه المبلغ كاملًا',
   }
   const WHATSAPP_NUMBER = '963985323170'
@@ -163,7 +162,6 @@ export default function LandingPage() {
             <span className="font-bold text-[#1B2A4A]">عرض التسجيل لمدة 7 أيام</span>
             <span className="text-[#64748B] line-through">{currentPricing.originalPrice}</span>
             <span className="font-bold text-[#0D9488]">{currentPricing.price}</span>
-            <span className="text-xs text-[#64748B]">ينتهي في {currentPricing.offerEnd}</span>
           </div>
 
           {/* H1 */}
@@ -823,7 +821,6 @@ export default function LandingPage() {
               <span className="text-[#64748B] line-through">{currentPricing.originalPrice}</span>
               <span className="text-3xl font-bold text-[#1B2A4A]">{currentPricing.price}</span>
             </div>
-            <div className="text-[#0D9488] text-sm font-bold mb-1">ينتهي العرض في {currentPricing.offerEnd}</div>
             <div className="text-[#64748B] text-sm font-medium mb-4">{currentPricing.currency}</div>
             <div className="bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-lg p-3 mb-4 text-sm leading-loose">
               <span className="text-[#0D9488] font-bold">خيار الأقساط متاح لمن لا يتوفر معه المبلغ كاملًا</span> — نتفق على التفاصيل عبر التواصل
