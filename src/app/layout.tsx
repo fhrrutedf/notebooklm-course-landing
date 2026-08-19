@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/next";
 
 const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-plex-sans-arabic",
@@ -15,9 +16,9 @@ export const metadata: Metadata = {
     default: "كورس الذكاء الاصطناعي للمعلمين السوريين | اختبارات وPDF ومحتوى تعليمي",
     template: "%s | منصة مناسة الرقمية",
   },
-  description: "كورس تدريبي عملي للمعلمين السوريين يوضح طريقة تحويل الدرس والمصدر إلى شرح واختبار وPDF وعرض وفيديو تعليمي، باستخدام أدوات مجانية أو بخطط مجانية.",
-  keywords: ["ذكاء اصطناعي", "تعليم", "سوريا", "معلمين", "كورس", "نواف البوسطه", "اختبارات", "PDF", "عروض تقديمية", "محتوى تعليمي"],
-  authors: [{ name: "نواف البوسطه" }],
+  description: "كورس تدريبي عملي للمعلمين السوريين يوضح طريقة تحويل الدرس والمصدر إلى شرح واختبار وPDF وعرض وفيديو تعليمي وبحث منظم، مع مراجعة المخرجات قبل استخدامها مع الطلاب.",
+  keywords: ["ذكاء اصطناعي", "تعليم", "سوريا", "معلمين", "كورس", "نواف البوسطة", "اختبارات", "PDF", "عروض تقديمية", "بحث وتقارير", "محتوى تعليمي"],
+  authors: [{ name: "نواف البوسطة" }],
   alternates: { canonical: "/" },
   icons: {
     icon: "/logo.svg",
@@ -64,6 +65,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
