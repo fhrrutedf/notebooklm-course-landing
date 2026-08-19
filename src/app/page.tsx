@@ -692,7 +692,7 @@ export default function LandingPage() {
             <div className="text-center md:text-right">
               <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطه</h3>
               <p className="text-[#0D9488] font-bold text-sm mb-3">
-                متخصص في تطبيقات الذكاء الاصطناعي في التعليم
+                باحث ومدرب في أدوات الذكاء الاصطناعي
               </p>
               <p className="text-[#64748B] text-sm leading-loose mb-4">
                 نواف البوسطه مدرب أدوات ذكاء اصطناعي وباحث، يدرّب الأفراد والشركات والمؤسسات التعليمية على تحويل التقنيات الحديثة إلى حلول عملية في التعليم والإنتاجية والأتمتة.
