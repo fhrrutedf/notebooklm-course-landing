@@ -129,7 +129,7 @@ export default function SchoolsLandingPage() {
     },
     {
       q: 'ماذا لو لم يكمل بعض المعلمين البرنامج التدريبي؟',
-      a: 'الوصول إلى المواد المسجلة متاح وفق الاتفاق مع المؤسسة. نوضح قبل التسجيل طريقة الوصول والدعم والدفع، ويمكن تنسيق الدفع على دفعتين.',
+      a: 'الوصول إلى المواد المسجلة متاح وفق الاتفاق مع المؤسسة. نوضح قبل التسجيل طريقة الوصول والدعم والدفع، ويوجد أقساط، ونتفق على تفاصيلها عبر التواصل.',
     },
     {
       q: 'هل البرنامج التدريبي مناسب لجميع المواد والمراحل؟',
@@ -227,12 +227,12 @@ export default function SchoolsLandingPage() {
               <div className="text-[#64748B] text-sm mt-1">مدة الـCourse</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">دفعتان</div>
-              <div className="text-[#64748B] text-sm mt-1">خيار دفع متاح</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">أقساط</div>
+              <div className="text-[#64748B] text-sm mt-1">نتفق على التفاصيل</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">320,000</div>
-              <div className="text-[#64748B] text-sm mt-1">ليرة سورية للـCourse</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">3,200</div>
+              <div className="text-[#64748B] text-sm mt-1">ليرة سورية جديدة للـCourse</div>
             </div>
           </div>
         </div>
@@ -432,7 +432,7 @@ export default function SchoolsLandingPage() {
               باقات مصمّمة للمؤسسات التعليمية
             </h2>
             <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">
-              اختر الباقة المناسبة لعدد معلمي مؤسستك، وجميع الأسعار بالليرة السورية ويمكن تنسيق الدفع على دفعتين.
+              اختر الباقة المناسبة لعدد معلمي مؤسستك، وجميع الأسعار بالليرة السورية ويوجد أقساط، ونتفق على تفاصيلها عبر التواصل.
             </p>
           </div>
 
@@ -443,10 +443,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">5 معلمين</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">1,600,000 ليرة سورية</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">16,000 ليرة سورية جديدة</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#0D9488] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
+                <div className="text-[#0D9488] text-sm font-bold">3,200 ليرة سورية جديدة للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -482,10 +482,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">10 معلمين</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">3,200,000 ليرة سورية</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">32,000 ليرة سورية جديدة</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#0D9488] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
+                <div className="text-[#0D9488] text-sm font-bold">3,200 ليرة سورية جديدة للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -520,10 +520,10 @@ export default function SchoolsLandingPage() {
               <div className="mb-5">
                 <div className="text-[#64748B] text-sm mb-1">20+ معلم</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-[#1B2A4A]">ابتداءً من 6,400,000 ليرة سورية</span>
+                  <span className="text-3xl font-bold text-[#1B2A4A]">ابتداءً من 64,000 ليرة سورية جديدة</span>
                   <span className="text-[#64748B] text-sm">الإجمالي</span>
                 </div>
-                <div className="text-[#D4A853] text-sm font-bold">320,000 ليرة سورية للمعلم</div>
+                <div className="text-[#D4A853] text-sm font-bold">3,200 ليرة سورية جديدة للمعلم</div>
               </div>
               <div className="border-t border-[#E2E8F0] pt-4 mb-6">
                 <ul className="space-y-3">
@@ -661,14 +661,14 @@ export default function SchoolsLandingPage() {
             <div className="shrink-0">
               <img
                 src="/images/trainer-nawaf.jpg"
-                alt="المدرب نواف البوسطه — متخصص في تطبيقات الذكاء الاصطناعي في التعليم"
+                alt="المدرب نواف البوسطه — متخصص في تطبيقات الذكاء الاصطناعي في التعليم ومدرب أدوات الذكاء الاصطناعي"
                 className="w-24 h-24 rounded-full object-cover border-3 border-[#0D9488]/20"
               />
             </div>
             <div className="text-center md:text-right">
               <h3 className="text-xl font-bold text-[#1B2A4A] mb-1">نواف البوسطه</h3>
               <p className="text-[#0D9488] font-bold text-sm mb-3">
-                متخصص في تطبيقات الذكاء الاصطناعي في التعليم
+                متخصص في تطبيقات الذكاء الاصطناعي في التعليم ومدرب أدوات الذكاء الاصطناعي
               </p>
               <p className="text-[#64748B] text-sm leading-loose mb-4">
                 معلم متمرس قضى سنوات في تحضير الدروس تقليدياً. بعد اكتشاف أدوات الذكاء الاصطناعي، تحوّل أسلوب عمله بالكامل — من إعداد الاختبارات بنسختين خلال 5 دقائق، إلى تصميم مذكرات PDF احترافية في دقائق. يؤمن بأن كل معلم قادر على الاستفادة من هذه الأدوات بغض النظر عن خلفيته التقنية.
