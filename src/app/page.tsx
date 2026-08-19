@@ -24,6 +24,8 @@ import {
   Award,
   Presentation,
   Headphones,
+  ExternalLink,
+  Play,
 } from 'lucide-react'
 
 export default function LandingPage() {
@@ -337,7 +339,58 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 5. BEFORE/AFTER SECTION ===== */}
+      {/* ===== 5. VIDEO SAMPLE SECTION ===== */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-[1000px] px-4">
+          <div className="grid items-center gap-8 rounded-2xl border border-[#0D9488]/20 bg-[#F8FAFC] p-5 md:grid-cols-[1.1fr_.9fr] md:p-8">
+            <div className="order-2 text-right md:order-1">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
+                <Play className="h-4 w-4" />
+                عينة شرح عملية
+              </div>
+              <h2 className="mb-4 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-3xl">شاهد كيف نبدأ من المصدر ونصل إلى اختبار منظم</h2>
+              <p className="mb-5 text-sm leading-loose text-[#64748B] md:text-base">في هذه العينة العملية، ترى خطوات العمل على محتوى دراسي: تحديد المشكلة، رفع المصدر، كتابة طلب واضح، ثم مراجعة المخرج قبل استخدامه مع الطلاب.</p>
+              <div className="mb-6 space-y-3">
+                {[
+                  'فيديو عملي مدته نحو 12 دقيقة — ليس إعلانًا قصيرًا.',
+                  'يركز على طريقة العمل، وليس على حفظ أسماء الأدوات فقط.',
+                  'المخرجات تحتاج دائمًا إلى مراجعة المعلم قبل اعتمادها.',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-sm text-[#1E3A5F]">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0D9488]" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href="https://www.youtube.com/watch?v=ceaunSbveVA" onClick={() => track('video_sample_open', { source: 'course_page' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-5 py-3 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
+                  شاهد الفيديو على YouTube
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-[#1B2A4A] hover:text-[#0D9488]">
+                  عندك سؤال عن الكورس؟ تواصل معنا
+                  <MessageCircle className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+            <div className="order-1 overflow-hidden rounded-xl border border-[#1B2A4A]/10 bg-[#1B2A4A] md:order-2">
+              <div className="aspect-video">
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?rel=0"
+                  title="عينة عملية من شرح استخدام الذكاء الاصطناعي في التعليم"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 6. BEFORE/AFTER SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
