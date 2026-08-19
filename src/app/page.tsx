@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import {
   BookOpen,
@@ -25,50 +25,6 @@ import {
   Headphones,
 } from 'lucide-react'
 
-// Animated Count-Up Component
-function CountUp({ target, duration = 2000, suffix = '', color = 'text-[#0D9488]' }: { target: number; duration?: number; suffix?: string; color?: string }) {
-  const [count, setCount] = useState(0)
-  const [started, setStarted] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          setStarted(true)
-        }
-      },
-      { threshold: 0.3 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [started])
-
-  useEffect(() => {
-    if (!started) return
-    const steps = 60
-    const increment = target / steps
-    const interval = duration / steps
-    let current = 0
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= target) {
-        setCount(target)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(current))
-      }
-    }, interval)
-    return () => clearInterval(timer)
-  }, [started, target, duration])
-
-  return (
-    <div ref={ref} className={`text-2xl md:text-3xl font-bold ${color}`}>
-      {count}{suffix}
-    </div>
-  )
-}
-
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
@@ -88,37 +44,28 @@ export default function LandingPage() {
     {
       title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
       lessons: 6,
-      time: '80 دقيقة',
       items: [
-        'تجهيز درس أو كتاب من الصف الأول إلى البكالوريا وتحديد الهدف التعليمي',
-        'كتابة Prompt يطلب شرحًا مناسبًا لعمر الطالب ومستواه',
-        'إنشاء ملخص وأسئلة فهم ونشاط صفّي من المصدر',
-        'تحويل الفكرة إلى سيناريو فيديو تعليمي يشرحه المعلم لطلابه',
-        'مراجعة الدقة واللغة وعدم إضافة معلومات خارج المصدر',
+        'كيف تبدأ من الكتاب أو الدرس وتحدد المطلوب من الذكاء الاصطناعي',
+        'كيف تكتب Prompt واضحًا لشرح مناسب لعمر الطالب ومستواه',
+        'كيف تراجع الناتج وتحوّله إلى شرح أو فيديو تعليمي قابل للمشاركة',
       ],
     },
     {
       title: 'المسار 2: من الدرس إلى اختبار وPDF ومشروع',
       lessons: 7,
-      time: '95 دقيقة',
       items: [
-        'بناء جدول مواصفات مبسط يناسب المادة والمرحلة',
-        'إعداد أسئلة متعددة ونسختين من الاختبار مع نموذج إجابة',
-        'إخراج ورقة PDF جاهزة للطباعة بتنسيق عربي من اليمين إلى اليسار',
-        'تصميم مشروع أو مهمة تطبيقية للطلاب مع خطوات ومعايير تقييم',
-        'استخدام قائمة مراجعة بشرية قبل توزيع أي مادة',
+        'تحويل الدرس إلى أسئلة واختبار منظم مع نموذج إجابة',
+        'إخراج ورقة PDF قابلة للطباعة بتنسيق عربي واضح',
+        'إنشاء مهمة أو مشروع بسيط يمكن للطلاب تطبيقه ومراجعته',
       ],
     },
     {
       title: 'المسار 3: عرض وتفاعل وبودكاست ومتابعة',
       lessons: 7,
-      time: '85 دقيقة',
       items: [
-        'تحويل الدرس إلى عرض تقديمي واضح ومناسب للحصة',
-        'إنشاء نشاط فردي وجماعي وبطاقة خروج للطلاب',
-        'إنتاج Podcast أو شرح صوتي مختصر من محتوى الدرس',
-        'اقتراح طريقة مشاركة الفيديو أو الصوت أو المشروع مع الطلاب',
-        'مقارنة الأدوات المجانية واختيار البديل عند تغيّر أي خدمة',
+        'إنشاء عرض تعليمي ونشاط يساعد على تفاعل الطلاب داخل الحصة',
+        'إنتاج Podcast أو شرح صوتي وفيديو من محتوى الدرس',
+        'تحديث طريقة عملك عند تغير الأدوات مع الحفاظ على قوالبك ومصادرك',
       ],
     },
   ]
@@ -126,8 +73,7 @@ export default function LandingPage() {
   const bonuses = [
     { title: 'حزمة Prompts للمعلمين', subtitle: 'Prompts', value: '1,500 ليرة سورية جديدة', desc: 'قوالب جاهزة للشرح والاختبارات والمشاريع والفيديوهات والـPodcasts، مع طريقة تعديل كل قالب حسب الصف والمادة.', icon: Zap },
     { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', value: '1,000 ليرة سورية جديدة', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
-    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Coaching', value: 'ضمن البرنامج التدريبي', desc: 'تحديثات عند تطور الأدوات، ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق أو تنفيذ المخرجات.', icon: Shield },
-    { title: 'شهادة اختيارية', subtitle: 'Optional Certificate', value: 'رسوم منفصلة', desc: 'يمكن طلب شهادة من وزارة التنمية مع إمكانية تصديقها عبر وزارة الخارجية السورية. الشهادة اختيارية وليست إلزامية، وتفاصيلها عند التواصل.', icon: Award },
+    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Coaching', value: 'ضمن الكورس', desc: 'تحديثات عند تطور الأدوات، ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق أو تنفيذ المخرجات.', icon: Shield },
   ]
 
   const faqs = [
@@ -165,7 +111,7 @@ export default function LandingPage() {
     },
     {
       q: 'هل الشهادة إلزامية مع التسجيل؟',
-      a: 'لا. الشهادة اختيارية ورسومها منفصلة عن الكورس. يمكن طلب تفاصيل شهادة وزارة التنمية وإمكانية تصديقها عبر وزارة الخارجية السورية عند التواصل.',
+      a: 'لا. الشهادة اختيارية ورسومها منفصلة عن الكورس. تتوفر شهادة من وزارة التنمية السورية قابلة للتصديق عبر وزارة الخارجية السورية. للاستفسار عن الإجراءات والاعتراف محليًا ودوليًا، تواصل معنا عبر الخاص.',
     },
   ]
 
@@ -206,12 +152,12 @@ export default function LandingPage() {
 
           {/* H1 */}
           <h1 className="text-3xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.4] mb-6 text-[#1B2A4A]">
-            من الدرس إلى مادة تعليمية جاهزة لطلابك
+حضّر لطلابك مادة تعليمية من مصدرك بدل أن تضيع ساعات في الكتابة والتنسيق
           </h1>
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            Course عملي للمعلم السوري من الصف الأول إلى البكالوريا: تتعلم فيه تحويل الدرس إلى شرح وفيديو تعليمي، اختبار وPDF، مشروع، عرض، Podcast ونشاط قابل للمشاركة مع الطلاب.
+كورس متكامل للمعلم السوري: تتعلم فيه طريقة عملية تبدأ من الكتاب أو الدرس، ثم تخرج منه شرحًا أو اختبارًا أو PDF أو عرضًا أو فيديوً تعليميًا بعد مراجعة النتيجة بنفسك.
           </p>
 
           {/* Two CTA buttons */}
@@ -230,7 +176,7 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 bg-transparent border-2 border-[#1B2A4A]/20 hover:border-[#1B2A4A]/40 text-[#1B2A4A] font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
               <Presentation className="w-4 h-4" />
-              شوف النماذج الحقيقية
+شاهد نماذج حقيقية
             </a>
           </div>
 
@@ -253,22 +199,9 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Intro Video */}
-          <div className="mt-10 max-w-3xl mx-auto">
-            <div className="relative rounded-xl overflow-hidden bg-white border border-[#E2E8F0]">
-              <iframe
-                src="https://www.youtube.com/embed/Ze-HjqkxIJM?rel=0&modestbranding=1"
-                className="w-full border-0"
-                style={{ aspectRatio: '16/9' }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                title="تعريف بالبرنامج التدريبي — المدرب نواف البوسطه"
-              />
-            </div>
-            <p className="text-center text-[#64748B] text-xs mt-2">
-              تعريف بالبرنامج التدريبي — فيديو قصير
-            </p>
+          <div className="mt-8 mx-auto max-w-2xl rounded-xl border border-[#0D9488]/20 bg-white p-4 text-right">
+            <p className="font-bold text-[#1B2A4A]">لا تتعامل مع الذكاء الاصطناعي بعشوائية.</p>
+            <p className="mt-1 text-sm leading-loose text-[#64748B]">داخل الكورس تتعلم كيف تحدد المطلوب، ترفق المصدر، تكتب Prompt واضحًا، ثم تراجع الناتج قبل استخدامه مع الطلاب.</p>
           </div>
 
           {/* Stats bar */}
@@ -532,17 +465,14 @@ export default function LandingPage() {
                   <th className="py-3.5 px-4 text-right text-white font-bold text-sm">المهمة</th>
                   <th className="py-3.5 px-4 text-center text-white/80 font-bold text-sm">الطريقة التقليدية</th>
                   <th className="py-3.5 px-4 text-center text-white font-bold text-sm">بالذكاء الاصطناعي</th>
-                  <th className="py-3.5 px-4 text-center text-white font-bold text-sm">التوفير</th>
+                  <th className="py-3.5 px-4 text-center text-white font-bold text-sm">الفائدة العملية</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { task: 'تلخيص فصل كامل', old: '2-3 ساعات', ai: '5 دقائق', save: '95%' },
-                  { task: 'إعداد 20 سؤال اختبار', old: 'ساعة ونص', ai: '3 دقائق', save: '97%' },
-                  { task: 'إعداد عرض تقديمي تعليمي', old: '3-4 ساعات', ai: '10 دقائق', save: '95%' },
-                  { task: 'تصميم مذكرة PDF', old: 'ساعتان', ai: '10 دقائق', save: '92%' },
-                  { task: 'إعداد ملف صوتي تعليمي', old: 'غير متاح', ai: '5 دقائق', save: '∞' },
-                  { task: 'البحث عن أحدث الدراسات', old: '2-3 ساعات', ai: 'ثوانٍ', save: '99%' },
+                  { task: 'تحويل الدرس إلى شرح', old: 'كتابة وتنسيق يدويان من الصفر', ai: 'خطوات تبدأ من المصدر ثم مراجعة الناتج', save: 'وقت أكبر للشرح والتفاعل مع الطلاب' },
+                  { task: 'إعداد اختبار', old: 'أسئلة ونسخة واحدة من الاختبار', ai: 'مسودة أسئلة ونسخ متعددة مع نموذج إجابة', save: 'تنويع أفضل بعد مراجعة المعلم' },
+                  { task: 'إخراج PDF أو عرض', old: 'تنسيق متكرر على أدوات مختلفة', ai: 'مخرج منظم قابل للطباعة أو العرض', save: 'شكل أوضح وإعادة استخدام أسهل' },
                 ].map((row, i) => (
                   <tr key={i} className={`border-b border-[#E2E8F0] last:border-b-0 ${i % 2 === 0 ? 'bg-white' : 'bg-[#F8FAFC]'}`}>
                     <td className="py-3 px-4 text-right font-medium text-[#1E293B] text-sm">{row.task}</td>
@@ -620,7 +550,7 @@ export default function LandingPage() {
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
               محتوى البرنامج التدريبي
             </h2>
-            <p className="text-[#64748B] text-sm">3 مسارات — 20 درساً عملياً مسجلاً</p>
+            <p className="text-[#64748B] text-sm">3 محاور عملية مرتبة من المصدر إلى المخرج الجاهز</p>
           </div>
 
           <div className="space-y-3 max-w-3xl mx-auto">
@@ -640,7 +570,6 @@ export default function LandingPage() {
                         <span className="text-xs text-[#0D9488] font-medium bg-[#0D9488]/10 px-2 py-0.5 rounded-md">
                           {mod.lessons} محاضرات
                         </span>
-                        <span className="text-xs text-[#64748B]">{mod.time}</span>
                       </div>
                     </div>
                   </div>
@@ -671,10 +600,10 @@ export default function LandingPage() {
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
-              هدايا مجانية بقيمة 450,000 ليرة سورية
+              مزايا عملية مع التسجيل
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              تحصل عليها مجاناً مع التسجيل
+              قوالب ودعم وتحديثات تساعدك على التطبيق بعد مشاهدة الكورس
             </p>
           </div>
 
@@ -688,10 +617,7 @@ export default function LandingPage() {
                 <h4 className="font-bold text-[#1B2A4A] text-lg mb-2">{bonus.title}</h4>
                 <p className="text-[#64748B] text-sm leading-loose mb-3">{bonus.desc}</p>
                 <div className="border-t border-[#E2E8F0] pt-3">
-                  <span className="text-[#64748B] text-sm">سعره </span>
-                  <span className="text-[#EF4444] font-bold line-through text-sm">{bonus.value}</span>
-                  <span className="text-[#64748B] text-sm">، </span>
-                  <span className="text-[#0D9488] font-bold text-sm">مجاناً!</span>
+                  <span className="text-[#0D9488] font-bold text-sm">{bonus.value}</span>
                 </div>
               </div>
             ))}
@@ -816,11 +742,11 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Shield className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>ضمان 7 أيام</span>
+              <span>تحديثات ودعم عند التطبيق</span>
             </div>
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Award className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>شهادة إتمام معتمدة</span>
+              <span>شهادة اختيارية برسوم منفصلة</span>
             </div>
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Globe className="w-4 h-4 text-[#0D9488] shrink-0" />
