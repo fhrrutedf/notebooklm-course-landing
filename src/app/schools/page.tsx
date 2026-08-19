@@ -740,7 +740,7 @@ export default function SchoolsLandingPage() {
               تقدّم بطلب استشارة مجانية
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              املأ النموذج وسنتواصل معكم خلال 24 ساعة بعرض مخصّص لمؤسستكم التعليمية
+              املأ النموذج وسنتواصل معكم خلال 24 ساعة بعرض مخصّص لمؤسستكم التعليمية. للتواصل مع الشركة: <a href="mailto:info@manasadigital.com" className="text-[#0D9488] font-bold hover:underline">info@manasadigital.com</a>
             </p>
           </div>
 
