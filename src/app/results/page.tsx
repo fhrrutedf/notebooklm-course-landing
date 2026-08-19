@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { track } from '@vercel/analytics'
 import {
   ArrowRight,
   BookOpen,
@@ -16,7 +17,7 @@ import {
 } from 'lucide-react'
 
 const WHATSAPP_NUMBER = '963985323170'
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، شاهدت نماذج المخرجات وأريد تفاصيل الكورس المتكامل لأدوات الذكاء الاصطناعي.')}`
+const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 
 type LocalSample = {
   title: string
@@ -108,7 +109,7 @@ export default function ResultsPage() {
             <ArrowRight className="h-5 w-5" />
             العودة للكورس
           </Link>
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
+          <a href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_nav' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
             اطلب التفاصيل
             <MessageCircle className="h-4 w-4" />
           </a>
@@ -159,7 +160,7 @@ export default function ResultsPage() {
                         متصفحك لا يدعم تشغيل الملف الصوتي.
                       </audio>
                     )}
-                    <a href={sample.file} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-4 py-2.5 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
+                    <a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-4 py-2.5 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
                       {sample.kind === 'image' ? <ExternalLink className="h-4 w-4" /> : <Download className="h-4 w-4" />}
                       {sample.fileLabel}
                     </a>
@@ -179,7 +180,7 @@ export default function ResultsPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {videoSamples.map((video) => (
-              <a key={video.title} href={video.href} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center hover:border-[#0D9488]">
+              <a key={video.title} href={video.href} onClick={() => track('video_open', { video: video.title })} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center hover:border-[#0D9488]">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0D9488]/10"><Video className="h-6 w-6 text-[#0D9488]" /></div>
                 <h3 className="mb-3 font-bold text-[#1B2A4A]">{video.title}</h3>
                 <span className="inline-flex items-center gap-2 text-sm font-bold text-[#0D9488]">فتح الفيديو <ExternalLink className="h-4 w-4" /></span>
@@ -193,7 +194,7 @@ export default function ResultsPage() {
         <div className="mx-auto max-w-2xl rounded-2xl border border-[#0D9488]/20 bg-[#0D9488]/5 p-8">
           <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-3xl">هذه مجرد عينات — داخل الكورس تتعلم الطريقة</h2>
           <p className="mb-6 leading-loose text-[#64748B]">لا نبيع ملفات جاهزة فقط؛ نتعلم كيف تبدأ من المصدر، تكتب Prompt واضحًا، تراجع النتيجة، ثم تخرجها بالشكل المناسب لطلابك.</p>
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
+          <a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد التسجيل في الكورس أو معرفة طريقة الدفع.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
             اطلب تفاصيل التسجيل
             <MessageCircle className="h-5 w-5" />
           </a>
