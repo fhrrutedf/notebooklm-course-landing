@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { track } from '@vercel/analytics'
 import {
   BookOpen,
   CheckCircle2,
@@ -34,10 +35,11 @@ export default function LandingPage() {
     originalPrice: '4,500 ليرة سورية جديدة',
     offerEnd: '25 آب 2026',
     currency: 'شام كاش / تحويل بنكي / أقساط لمن لا يتوفر معه المبلغ كاملًا',
-    whatsappText: 'مرحباً، أريد تفاصيل التسجيل في الكورس المتكامل لأدوات الذكاء الاصطناعي، وأريد معرفة طريقة الدفع والتسجيل.',
   }
   const WHATSAPP_NUMBER = '963985323170'
-  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(currentPricing.whatsappText)}`
+  const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+  const trackWhatsAppClick = (source: string) => track('whatsapp_click', { source })
+  const trackResultsOpen = (source: string) => track('results_open', { source })
   const COURSE_DURATION = '4 ساعات تقريباً'
 
   // ===== DATA =====
@@ -62,7 +64,7 @@ export default function LandingPage() {
       ],
     },
     {
-      title: 'المسار 3: عرض وتفاعل وبودكاست ومتابعة',
+      title: 'المسار 3: عرض وتفاعل وبحث وتقارير وبودكاست',
       lessons: 7,
       items: [
         'إنشاء عرض تعليمي ونشاط يساعد على تفاعل الطلاب داخل الحصة',
@@ -75,7 +77,7 @@ export default function LandingPage() {
   const bonuses = [
     { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة تساعد في الشرح والاختبارات والمشاريع والفيديوهات، مع طريقة تعديلها حسب الصف والمادة.', icon: Zap },
     { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', oldValue: '1,000 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
-    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Coaching', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات عند تطور الأدوات، ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق أو تنفيذ المخرجات.', icon: Shield },
+    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Support', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات عند تطور الأدوات، ودعم عبر واتساب عند التطبيق. ويمكن ترتيب مكالمة مساعدة عند الحاجة وبالتنسيق المسبق.', icon: Shield },
   ]
 
   const faqs = [
@@ -89,7 +91,7 @@ export default function LandingPage() {
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج؟',
-      a: 'هاد أكتر شي بيميزها عن غيرها! الأداة بترجع للكتاب المدرسي اللي رفعته وبتجاوب منه بس. كل إجادة بيكون مكتوب جنبها رقم الصفحة. ما بتطلع معلومات من بره المنهج.',
+      a: 'نتعلم كيف نرفق الكتاب المدرسي أو المصدر ونطلب من الأداة الاعتماد عليه، ثم نراجع الناتج قبل استخدامه. وعندما تدعم الأداة الإحالة للمصدر، نتحقق من الصفحات والمعلومات بدل الاعتماد على أي نتيجة دون مراجعة.',
     },
     {
       q: 'كيف بدفع؟',
@@ -97,7 +99,7 @@ export default function LandingPage() {
     },
     {
       q: 'هل الكورس فيديوهات مسجلة أم لقاءات مباشرة؟',
-      a: 'الكورس برنامج تدريبي مسجل ومنظم، وتتوفر مكالمات مجانية مع الكوتش عند مواجهة مشكلة أثناء التطبيق، بحسب آلية الدعم الموضحة عند التسجيل.',
+      a: 'الكورس برنامج تدريبي مسجل ومنظم. تحصل على رابط الوصول بعد تنسيق التسجيل، وتتوفر تحديثات ودعم عبر واتساب عند التطبيق، ويمكن ترتيب مكالمة مساعدة عند الحاجة وبالتنسيق المسبق.',
     },
     {
       q: 'هل تشرحون من مصادر محددة أم يجيب الذكاء الاصطناعي من عنده؟',
@@ -109,7 +111,7 @@ export default function LandingPage() {
     },
     {
       q: 'هل يوجد دعم أو تحديثات بعد انتهاء الكورس؟',
-      a: 'نعم، توجد تحديثات للكورس، ويمكن ترتيب مكالمات مجانية مع الكوتش عند ظهور مشكلة في تطبيق ما تعلمته أو عند الحاجة إلى توضيح عملي.',
+      a: 'نعم، توجد تحديثات للكورس ودعم عبر واتساب عند التطبيق. ويمكن ترتيب مكالمة مساعدة عند الحاجة إلى توضيح عملي وبالتنسيق المسبق.',
     },
     {
       q: 'هل أستطيع إعداد تقرير أو رسالة أو بحث منظم؟',
@@ -122,7 +124,7 @@ export default function LandingPage() {
   ]
 
   return (
-    <div dir="rtl" className="min-h-screen flex flex-col bg-white text-[#1E293B]" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }} suppressHydrationWarning>
+    <div dir="rtl" className="min-h-screen flex flex-col bg-white pb-20 text-[#1E293B] md:pb-0" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }} suppressHydrationWarning>
 
       {/* ===== 1. TOP NAVIGATION BAR ===== */}
       <nav className="bg-white border-b border-[#E2E8F0] py-3 px-4 sticky top-0 z-50">
@@ -176,13 +178,15 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href="/results"
+              onClick={() => trackResultsOpen('hero')}
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
               <Presentation className="w-5 h-5" />
               شاهد نماذج حقيقية
             </a>
             <a
-              href={WHATSAPP_LINK}
+              href={createWhatsAppLink('مرحباً، شاهدت صفحة الكورس وأريد تفاصيل التسجيل وطريقة الدفع.')}
+              onClick={() => trackWhatsAppClick('hero')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white border-2 border-[#1B2A4A]/20 hover:border-[#0D9488] text-[#1B2A4A] font-bold px-8 py-4 rounded-xl text-base transition-colors"
@@ -259,6 +263,28 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
+
+          <div className="mt-10 max-w-4xl mx-auto rounded-2xl border border-[#0D9488]/20 bg-white p-5 md:p-7 text-right">
+            <div className="mb-6 text-center">
+              <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">ماذا تستلم بعد التسجيل؟</h2>
+              <p className="mt-2 text-sm leading-loose text-[#64748B]">مسار واضح من التسجيل إلى البدء بالتطبيق، من دون جلسات مباشرة إلزامية.</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { number: '١', title: 'تأكيد التسجيل', text: 'تنسّق طريقة الدفع عبر واتساب بالطريقة المناسبة لك.' },
+                { number: '٢', title: 'رابط الوصول', text: 'تستلم تفاصيل الدخول إلى الكورس المسجل والمنظم.' },
+                { number: '٣', title: 'محاضرات مرتبة', text: 'تبدأ من المصدر وكتابة الطلب وصولًا إلى المخرج التعليمي.' },
+                { number: '٤', title: 'قوالب وتحديثات', text: 'تستفيد من المزايا المجانية والدعم عند التطبيق.' },
+              ].map((item) => (
+                <div key={item.number} className="rounded-xl bg-[#F8FAFC] p-4">
+                  <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#0D9488] text-sm font-bold text-white">{item.number}</span>
+                  <h3 className="mb-1 font-bold text-[#1B2A4A]">{item.title}</h3>
+                  <p className="text-xs leading-loose text-[#64748B]">{item.text}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-center text-xs leading-loose text-[#64748B]">الوصول إلى الكورس دائم، والدعم والتحديثات متاحان وفق آلية التسجيل والتطبيق.</p>
+          </div>
         </div>
       </section>
 
@@ -307,7 +333,7 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
-          <div className="mt-7 text-center text-sm text-[#64748B]">نتعلم أيضًا كيف نختبر أداة جديدة ونقارنها ببديل مجاني ونحافظ على قوالبنا عندما تتغير الخدمات.</div>
+          <div className="mt-7 text-center text-sm text-[#64748B]">نتعلم أيضًا كيف نختبر أداة جديدة، ونقارنها بالبديل الأنسب للمخرج، ونحافظ على قوالبنا عندما تتغير الخدمات.</div>
         </div>
       </section>
 
@@ -409,7 +435,7 @@ export default function LandingPage() {
               شو رح تنتج وتستخدم مع طلابك؟
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              من المصدر إلى شرح وفيديو ومشروع واختبار وPDF وعرض وPodcast — كل مسار عملي وقابل للتطبيق
+              من المصدر إلى شرح وفيديو ومشروع واختبار وPDF وعرض وبحث وتقارير وPodcast — كل مسار عملي وقابل للتطبيق
             </p>
           </div>
 
@@ -422,7 +448,7 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-[#1B2A4A] text-lg">من المصدر إلى شرح وفيديو تعليمي</h3>
-                  <span className="text-[#0D9488] text-sm font-bold">أدوات متعددة — مجانية أو بخطة مجانية</span>
+                  <span className="text-[#0D9488] text-sm font-bold">منهجية واضحة من المصدر إلى المخرج</span>
                 </div>
               </div>
               <ul className="space-y-2.5">
@@ -522,6 +548,7 @@ export default function LandingPage() {
             </p>
             <a
               href="/results"
+              onClick={() => trackResultsOpen('results_section')}
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-3.5 rounded-xl text-base transition-colors"
             >
               اطلع على النماذج
@@ -727,7 +754,7 @@ export default function LandingPage() {
             جاهز تبدأ رحلتك مع الذكاء الاصطناعي؟
           </h2>
           <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose mb-8">
-            اطلب تفاصيل التسجيل في برنامج تدريبي متكامل مدته 4 ساعات تقريباً، مع تحديثات للكورس ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق.
+            اطلب تفاصيل التسجيل في برنامج تدريبي متكامل مدته 4 ساعات تقريباً، مع تحديثات للكورس ودعم عبر واتساب عند التطبيق، وإمكانية ترتيب مكالمة مساعدة عند الحاجة وبالتنسيق المسبق.
           </p>
 
           {/* Price card */}
@@ -743,7 +770,8 @@ export default function LandingPage() {
               <span className="text-[#0D9488] font-bold">خيار الأقساط متاح لمن لا يتوفر معه المبلغ كاملًا</span> — نتفق على التفاصيل عبر التواصل
             </div>
             <a
-              href={WHATSAPP_LINK}
+              href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')}
+              onClick={() => trackWhatsAppClick('final_cta')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors w-full justify-center"
@@ -787,6 +815,17 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
+
+      <a
+        href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')}
+        onClick={() => trackWhatsAppClick('mobile_sticky_cta')}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D9488] px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#0D9488]/25 md:hidden"
+      >
+        اطلب التفاصيل عبر واتساب
+        <MessageCircle className="h-5 w-5" />
+      </a>
     </div>
   )
 }
