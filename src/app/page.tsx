@@ -24,13 +24,13 @@ import {
   Award,
   Presentation,
   Headphones,
-  ExternalLink,
   Play,
 } from 'lucide-react'
 
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
 
   const currentPricing = {
     price: '3,200 ليرة سورية جديدة',
@@ -341,51 +341,57 @@ export default function LandingPage() {
 
       {/* ===== 5. VIDEO SAMPLE SECTION ===== */}
       <section className="bg-white py-14 md:py-20">
-        <div className="mx-auto max-w-[1000px] px-4">
-          <div className="grid items-center gap-8 rounded-2xl border border-[#0D9488]/20 bg-[#F8FAFC] p-5 md:grid-cols-[1.1fr_.9fr] md:p-8">
-            <div className="order-2 text-right md:order-1">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
-                <Play className="h-4 w-4" />
-                عينة شرح عملية
-              </div>
-              <h2 className="mb-4 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-3xl">شاهد كيف نبدأ من المصدر ونصل إلى اختبار منظم</h2>
-              <p className="mb-5 text-sm leading-loose text-[#64748B] md:text-base">في هذه العينة العملية، ترى خطوات العمل على محتوى دراسي: تحديد المشكلة، رفع المصدر، كتابة طلب واضح، ثم مراجعة المخرج قبل استخدامه مع الطلاب.</p>
-              <div className="mb-6 space-y-3">
-                {[
-                  'فيديو عملي مدته نحو 12 دقيقة — ليس إعلانًا قصيرًا.',
-                  'يركز على طريقة العمل، وليس على حفظ أسماء الأدوات فقط.',
-                  'المخرجات تحتاج دائمًا إلى مراجعة المعلم قبل اعتمادها.',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-sm text-[#1E3A5F]">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0D9488]" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a href="https://www.youtube.com/watch?v=ceaunSbveVA" onClick={() => track('video_sample_open', { source: 'course_page' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-5 py-3 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
-                  شاهد الفيديو على YouTube
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-[#1B2A4A] hover:text-[#0D9488]">
-                  عندك سؤال عن الكورس؟ تواصل معنا
-                  <MessageCircle className="h-4 w-4" />
-                </a>
-              </div>
+        <div className="mx-auto max-w-[1080px] px-4">
+          <div className="mb-8 text-center md:mb-10">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
+              <Play className="h-4 w-4" />
+              عينة شرح عملية داخل الكورس
             </div>
-            <div className="order-1 overflow-hidden rounded-xl border border-[#1B2A4A]/10 bg-[#1B2A4A] md:order-2">
-              <div className="aspect-video">
+            <h2 className="mb-3 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-4xl">شاهد كيف نبدأ من المصدر ونصل إلى اختبار منظم</h2>
+            <p className="mx-auto max-w-3xl text-sm leading-loose text-[#64748B] md:text-base">فيديو عملي مدته نحو 12 دقيقة يوضح خطوات العمل على محتوى دراسي: تحديد المشكلة، رفع المصدر، كتابة طلب واضح، ثم مراجعة المخرج قبل استخدامه مع الطلاب.</p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-[#1B2A4A]/10 bg-[#1B2A4A] shadow-xl shadow-[#1B2A4A]/10">
+            <div className="aspect-video">
+              {isVideoOpen ? (
                 <iframe
                   className="h-full w-full"
-                  src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?rel=0"
+                  src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?autoplay=1&rel=0"
                   title="عينة عملية من شرح استخدام الذكاء الاصطناعي في التعليم"
-                  loading="lazy"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
-              </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsVideoOpen(true)
+                    track('video_sample_play', { source: 'course_page' })
+                  }}
+                  className="group relative h-full w-full overflow-hidden text-right"
+                  aria-label="تشغيل عينة الفيديو العملية داخل الصفحة"
+                >
+                  <img src="https://i.ytimg.com/vi/ceaunSbveVA/maxresdefault.jpg" alt="معاينة عينة الشرح العملية للكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B172A]/85 via-[#0B172A]/15 to-[#0B172A]/20" />
+                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-5 text-center text-white md:p-10">
+                    <span className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold backdrop-blur">عينة عملية — نحو 12 دقيقة</span>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D9488] shadow-lg shadow-black/30 transition group-hover:scale-105 md:h-20 md:w-20">
+                      <Play className="mr-[-2px] h-7 w-7 fill-current text-white md:h-9 md:w-9" />
+                    </div>
+                    <span className="text-base font-bold md:text-lg">شغّل العينة داخل الصفحة</span>
+                  </div>
+                </button>
+              )}
             </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-xl border border-[#0D9488]/15 bg-[#F8FAFC] px-5 py-4 text-center md:flex-row md:text-right">
+            <p className="text-sm leading-loose text-[#1E3A5F]">العينة تركز على طريقة العمل، وليس على حفظ أسماء الأدوات فقط. ومراجعة المعلم للمخرجات تبقى أساسية.</p>
+            <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-[#0D9488] ring-1 ring-[#0D9488]/25 hover:bg-[#0D9488] hover:text-white">
+              عندك سؤال عن الكورس؟ تواصل معنا
+              <MessageCircle className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
