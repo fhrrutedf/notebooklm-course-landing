@@ -345,10 +345,10 @@ export default function LandingPage() {
           <div className="mb-8 text-center md:mb-10">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
               <Play className="h-4 w-4" />
-              عينة شرح عملية داخل الكورس
+              عينة مبسطة من أداة واحدة
             </div>
-            <h2 className="mb-3 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-4xl">شاهد كيف نبدأ من المصدر ونصل إلى اختبار منظم</h2>
-            <p className="mx-auto max-w-3xl text-sm leading-loose text-[#64748B] md:text-base">فيديو عملي مدته نحو 12 دقيقة يوضح خطوات العمل على محتوى دراسي: تحديد المشكلة، رفع المصدر، كتابة طلب واضح، ثم مراجعة المخرج قبل استخدامه مع الطلاب.</p>
+            <h2 className="mb-3 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-4xl">مثال سريع: حوّل مصدر الدرس إلى اختبار منظم</h2>
+            <p className="mx-auto max-w-3xl text-sm leading-loose text-[#64748B] md:text-base">هذا شرح مبسط لأداة واحدة فقط من أدوات الكورس، نستخدمها لحل مشكلة واحدة: إعداد اختبار من مصدر المعلم مع نموذج إجابة، ثم مراجعته قبل استخدامه مع الطلاب.</p>
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-[#1B2A4A]/10 bg-[#1B2A4A] shadow-xl shadow-[#1B2A4A]/10">
@@ -379,7 +379,7 @@ export default function LandingPage() {
                     <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D9488] shadow-lg shadow-black/30 transition group-hover:scale-105 md:h-20 md:w-20">
                       <Play className="mr-[-2px] h-7 w-7 fill-current text-white md:h-9 md:w-9" />
                     </div>
-                    <span className="text-base font-bold md:text-lg">شغّل العينة داخل الصفحة</span>
+                    <span className="text-base font-bold md:text-lg">شغّل الشرح البسيط داخل الصفحة</span>
                   </div>
                 </button>
               )}
@@ -387,7 +387,7 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-xl border border-[#0D9488]/15 bg-[#F8FAFC] px-5 py-4 text-center md:flex-row md:text-right">
-            <p className="text-sm leading-loose text-[#1E3A5F]">العينة تركز على طريقة العمل، وليس على حفظ أسماء الأدوات فقط. ومراجعة المعلم للمخرجات تبقى أساسية.</p>
+            <p className="text-sm leading-loose text-[#1E3A5F]">هذه أداة واحدة ومخرج واحد فقط. داخل الكورس تتعلم أيضًا تحويل المصدر إلى PDF وعرض وفيديو وبودكاست وبحث وتقارير، مع بقاء مراجعة المعلم للمخرجات أساسية.</p>
             <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-[#0D9488] ring-1 ring-[#0D9488]/25 hover:bg-[#0D9488] hover:text-white">
               عندك سؤال عن الكورس؟ تواصل معنا
               <MessageCircle className="h-4 w-4" />
