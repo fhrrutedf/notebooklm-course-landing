@@ -86,66 +86,47 @@ export default function LandingPage() {
 
   const courseModules = [
     {
-      title: 'الوحدة 1: الأساسيات والتحضير الذكي',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
+      lessons: 6,
+      time: '80 دقيقة',
       items: [
-        'ما هو الذكاء الاصطناعي بالتعليم ولماذا يحتاجه كل معلم؟',
-        'رفع المصادر وتنظيم الدفتر الذكي',
-        'المحادثة الذكية مع محتواك — أسئلة تفتح بوابات',
-        'تغيير اللغة للعربية والإعدادات المخصصة',
+        'تجهيز درس أو كتاب من الصف الأول إلى البكالوريا وتحديد الهدف التعليمي',
+        'كتابة Prompt يطلب شرحًا مناسبًا لعمر الطالب ومستواه',
+        'إنشاء ملخص وأسئلة فهم ونشاط صفّي من المصدر',
+        'تحويل الفكرة إلى سيناريو فيديو تعليمي يشرحه المعلم لطلابه',
+        'مراجعة الدقة واللغة وعدم إضافة معلومات خارج المصدر',
       ],
     },
     {
-      title: 'الوحدة 2: البودكاست التعليمي',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 2: من الدرس إلى اختبار وPDF ومشروع',
+      lessons: 7,
+      time: '95 دقيقة',
       items: [
-        'إنشاء بودكاست تعليمي من أي محتوى',
-        'تخصيص البودكاست المتقدم — تحكّم كامل بالمحتوى',
-        'مشاركة البودكاست مع الطلاب — قنوات التوزيع',
-        'ربط البودكاست بالمنهج — استراتيجيات متقدمة',
+        'بناء جدول مواصفات مبسط يناسب المادة والمرحلة',
+        'إعداد أسئلة متعددة ونسختين من الاختبار مع نموذج إجابة',
+        'إخراج ورقة PDF جاهزة للطباعة بتنسيق عربي من اليمين إلى اليسار',
+        'تصميم مشروع أو مهمة تطبيقية للطلاب مع خطوات ومعايير تقييم',
+        'استخدام قائمة مراجعة بشرية قبل توزيع أي مادة',
       ],
     },
     {
-      title: 'الوحدة 3: العروض والوسائط المتقدمة',
-      lessons: 4,
-      time: '48 دقيقة',
+      title: 'المسار 3: عرض وتفاعل وبودكاست ومتابعة',
+      lessons: 7,
+      time: '85 دقيقة',
       items: [
-        'إنشاء عرض تقديمي احترافي من محتواك',
-        'الخرائط الذهنية والإنفوجرافيك',
-        'ملخص الفيديو والنظرة العامة',
-        'دمج أدوات العرض والتصميم المتقدمة',
-      ],
-    },
-    {
-      title: 'الوحدة 4: التقييم والدراسة',
-      lessons: 4,
-      time: '48 دقيقة',
-      items: [
-        'توليد أسئلة وامتحانات بضغطة زر',
-        'البطاقات التعليمية للمراجعة السريعة',
-        'أدلة الدراسة المخصصة',
-        'تقييم الفهم والتعلّم التكيفي',
-      ],
-    },
-    {
-      title: 'الوحدة 5: الاستراتيجيات المتقدمة',
-      lessons: 4,
-      time: '48 دقيقة',
-      items: [
-        'التعليم الشامل — دمج طلاب الاحتياجات الخاصة',
-        'دمج مع منصات التعليم الإلكتروني',
-        'خطة الدرس الذكية — تحضير كامل بالذكاء الاصطناعي',
-        'بناء نظامك التعليمي الذكي المتكامل',
+        'تحويل الدرس إلى عرض تقديمي واضح ومناسب للحصة',
+        'إنشاء نشاط فردي وجماعي وبطاقة خروج للطلاب',
+        'إنتاج Podcast أو شرح صوتي مختصر من محتوى الدرس',
+        'اقتراح طريقة مشاركة الفيديو أو الصوت أو المشروع مع الطلاب',
+        'مقارنة الأدوات المجانية واختيار البديل عند تغيّر أي خدمة',
       ],
     },
   ]
 
   const bonuses = [
-    { title: '15 أمراً جاهزاً للنسخ واللصق', subtitle: 'Prompts', value: '$15', desc: '15 برومبت جاهز للنسخ واللصق مباشرة. مصممة خصيصاً للمعلمين والدكاترة والمدربين. كل برومبت مجرّب وبيدي نتائج ممتازة.', icon: Zap },
-    { title: 'ورقة مرجعية سريعة', subtitle: 'Cheat Sheet', value: '$10', desc: 'ورقة مرجعية سريعة بتلخص أهم الأوامر والخطوات. طباعها وحطها جنبك.', icon: FileText },
-    { title: 'وصول دائم + تحديثات مجانية', subtitle: 'Lifetime', value: '$20', desc: 'ادفع مرة واحتفظ بالكورس للأبد. مفيش اشتراك شهري ولا تجديد.', icon: Shield },
+    { title: 'حزمة Prompts للمعلمين', subtitle: 'Prompts', value: '150,000 ليرة سورية', desc: 'قوالب جاهزة للشرح والاختبارات والمشاريع والفيديوهات والـPodcasts، مع طريقة تعديل كل قالب حسب الصف والمادة.', icon: Zap },
+    { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', value: '100,000 ليرة سورية', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
+    { title: 'دليل مواكبة الأدوات', subtitle: 'Updates', value: '200,000 ليرة سورية', desc: 'دليل يعلّمك كيف تجرّب أداة جديدة وتقارنها ببديل مجاني وتحافظ على سير العمل والـPrompts الخاصة بك.', icon: Shield },
   ]
 
   const faqs = [
@@ -204,12 +185,12 @@ export default function LandingPage() {
 
           {/* H1 */}
           <h1 className="text-3xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.4] mb-6 text-[#1B2A4A]">
-            من الدرس إلى مادة تعليمية جاهزة بوقت أقل
+            من الدرس إلى مادة تعليمية جاهزة لطلابك
           </h1>
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-[#64748B] max-w-3xl mx-auto mb-10 leading-loose">
-            Course عملي يعلّم المعلمين والمدربين وأعضاء الهيئة التدريسية إنتاج الشروحات والملخصات والأسئلة والاختبارات وأوراق PDF والعروض والأنشطة باستخدام أدوات الذكاء الاصطناعي التعليمية.
+            Course عملي للمعلم السوري من الصف الأول إلى البكالوريا: تتعلم فيه تحويل الدرس إلى شرح وفيديو تعليمي، اختبار وPDF، مشروع، عرض، Podcast ونشاط قابل للمشاركة مع الطلاب.
           </p>
 
           {/* Two CTA buttons */}
@@ -315,7 +296,56 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 3. BEFORE/AFTER SECTION ===== */}
+      {/* ===== 3. AUDIENCE AND SOLUTION ===== */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-[1000px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">لمين صُمّم هذا الـCourse؟</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">التركيز الأساسي على المعلم السوري، مع مسارات مفيدة لكل من يعمل في التعليم والتدريب.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="bg-[#0D9488]/5 border-2 border-[#0D9488] rounded-xl p-6">
+              <div className="text-[#0D9488] font-bold text-sm mb-2">الجمهور الأساسي</div>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">المعلمون السوريون</h3>
+              <p className="text-[#64748B] text-sm leading-loose">من معلم الصف الأول وحتى مدرس البكالوريا، في الرياضيات والعلوم واللغات وباقي المواد. نبدأ من المشكلة اليومية ونصل إلى مادة جاهزة للطلاب.</p>
+            </div>
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-6">
+              <div className="text-[#64748B] font-bold text-sm mb-2">جمهور ثانوي</div>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">طلاب التربية والمدربون والدكاترة</h3>
+              <p className="text-[#64748B] text-sm leading-loose">يفيد طلاب كليات التربية، الهيئة الطلابية، المدربين، وأعضاء الهيئة التدريسية في بناء محتوى وتقييمات ومشاريع تعليمية قابلة للتطبيق.</p>
+            </div>
+          </div>
+          <div className="mt-8 max-w-3xl mx-auto text-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6">
+            <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">المشكلة ليست قلة الأدوات</h3>
+            <p className="text-[#64748B] text-sm leading-loose">المشكلة أن المعلم قد يكتب طلبًا عامًا، فيحصل على نتيجة طويلة أو غير مناسبة للمنهج. لذلك نعلّمه سير عمل ثابتًا: يحدد الهدف، يجهز المصدر، يكتب Prompt واضحًا، يراجع الناتج، ثم يحوله إلى مخرج قابل للاستخدام.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 4. PROMPT WORKFLOW SECTION ===== */}
+      <section className="py-14 md:py-20 bg-[#F8FAFC]">
+        <div className="max-w-[1000px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">كيف تتعامل مع الذكاء الاصطناعي؟</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">لا نحفظ أسماء مواقع. نتعلم كيف نكتب الطلب، نراجع الناتج، ونختار الأداة المناسبة للمخرج.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              { title: 'شرح درس', text: 'استخدم المصدر المرفق فقط، واشرح مفهوم [المفهوم] لطلاب الصف [الصف] بلغة واضحة، ثم أضف مثالين وثلاثة أسئلة فهم.' },
+              { title: 'اختبار ومشروع', text: 'أنشئ اختبارًا من الموضوعات المحددة مع نسختين ونموذج إجابة، ثم اقترح مشروعًا قصيرًا بمعايير تقييم قابلة للملاحظة.' },
+              { title: 'فيديو وPodcast', text: 'حوّل هذا الدرس إلى سيناريو فيديو مدته [المدة] وملخص صوتي قصير، مع لغة مناسبة للطلاب وتنبيه لما يحتاج مراجعة بشرية.' },
+            ].map((item) => (
+              <div key={item.title} className="bg-white border border-[#E2E8F0] rounded-xl p-5">
+                <h3 className="font-bold text-[#1B2A4A] mb-3">{item.title}</h3>
+                <p className="text-[#64748B] text-sm leading-loose">{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-7 text-center text-sm text-[#64748B]">نتعلم أيضًا كيف نختبر أداة جديدة ونقارنها ببديل مجاني ونحافظ على قوالبنا عندما تتغير الخدمات.</div>
+        </div>
+      </section>
+
+      {/* ===== 5. BEFORE/AFTER SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
@@ -405,15 +435,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 4. TOOLS SECTION ===== */}
+      {/* ===== 6. TOOLS SECTION ===== */}
       <section className="py-14 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
-              شو رح تتعلم تعمل؟
+              شو رح تنتج وتستخدم مع طلابك؟
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              من رفع المصدر لحد إخراج اختبار وملف PDF جاهز للطباعة — كل شي عملي
+              من المصدر إلى شرح وفيديو ومشروع واختبار وPDF وعرض وPodcast — كل مسار عملي وقابل للتطبيق
             </p>
           </div>
 
@@ -425,8 +455,8 @@ export default function LandingPage() {
                   <BookOpen className="w-6 h-6 text-[#0D9488]" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#1B2A4A] text-lg">أداة رفع المصادر والأسئلة</h3>
-                  <span className="text-[#0D9488] text-sm font-bold">مجانية تماماً — من Google</span>
+                  <h3 className="font-bold text-[#1B2A4A] text-lg">من المصدر إلى شرح وفيديو تعليمي</h3>
+                  <span className="text-[#0D9488] text-sm font-bold">أدوات متعددة — مجانية أو بخطة مجانية</span>
                 </div>
               </div>
               <ul className="space-y-2.5">
@@ -434,8 +464,8 @@ export default function LandingPage() {
                   'ارفع كتابك المدرسي واسألو أي سؤال عنه',
                   'بيعمللك اختبارات وأسئلة بنسختين مختلفة',
                   'كل إجابة موثقة بأرقام الصفحات من الكتاب',
-                  'بيعمل شرح صوتي (بودكاست) للطلاب ترسله واتساب',
-                  'يعمل شروحات وملخصات من الكتاب فقط',
+                  'تحويل الدرس إلى سيناريو فيديو أو Podcast قابل للمشاركة مع الطلاب',
+                  'اقتراح مشروع ونشاط وبطاقة خروج حسب المرحلة الدراسية',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#0D9488] mt-0.5 shrink-0" />
@@ -452,8 +482,8 @@ export default function LandingPage() {
                   <FileOutput className="w-6 h-6 text-[#0D9488]" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#1B2A4A] text-lg">أداة التصميم والتنسيق الذكي</h3>
-                  <span className="text-[#0D9488] text-sm font-bold">لإنشاء ملفات PDF احترافية</span>
+                  <h3 className="font-bold text-[#1B2A4A] text-lg">من الدرس إلى اختبار وPDF ومشروع</h3>
+                  <span className="text-[#0D9488] text-sm font-bold">مخرجات جاهزة للطلاب والصف</span>
                 </div>
               </div>
               <ul className="space-y-2.5">
@@ -462,7 +492,7 @@ export default function LandingPage() {
                   'بيعمل عروض تقديمية تعليمية بأسلوب الورقة والقلم',
                   'يدعم العربية مع تنسيق من اليمين لليسار',
                   'بيعمل اختبارات منسقة + إجابات نموذجية',
-                  'كل شي جاهز للطباعة والتوزيع على الطلاب',
+                  'مخرجات قابلة للطباعة أو العرض أو المشاركة مع الطلاب',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#0D9488] mt-0.5 shrink-0" />
@@ -506,7 +536,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 5. RESULTS CTA ===== */}
+      {/* ===== 7. RESULTS CTA ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4 text-center">
           <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-8 md:p-10">
@@ -538,14 +568,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 6. COURSE CONTENT SECTION ===== */}
+      {/* ===== 8. COURSE CONTENT SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
               محتوى البرنامج التدريبي
             </h2>
-            <p className="text-[#64748B] text-sm">5 وحدات — 20 درساً عملياً مباشراً</p>
+            <p className="text-[#64748B] text-sm">3 مسارات — 20 درساً عملياً مسجلاً</p>
           </div>
 
           <div className="space-y-3 max-w-3xl mx-auto">
@@ -591,12 +621,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 7. BONUSES SECTION ===== */}
+      {/* ===== 9. BONUSES SECTION ===== */}
       <section className="py-14 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
-              هدايا مجانية بقيمة $45
+              هدايا مجانية بقيمة 450,000 ليرة سورية
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
               تحصل عليها مجاناً مع التسجيل
@@ -624,7 +654,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 8. TRAINER SECTION ===== */}
+      {/* ===== 10. TRAINER SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto">
@@ -667,7 +697,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 9. FAQ SECTION ===== */}
+      {/* ===== 11. FAQ SECTION ===== */}
       <section className="py-14 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
@@ -702,7 +732,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 10. FINAL CTA SECTION ===== */}
+      {/* ===== 12. FINAL CTA SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
