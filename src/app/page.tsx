@@ -166,7 +166,7 @@ export default function LandingPage() {
 
           {/* H1 */}
           <h1 className="text-3xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.4] mb-6 text-[#1B2A4A]">
-حضّر لطلابك مادة تعليمية من مصدرك بدل أن تضيع ساعات في الكتابة والتنسيق
+من كتابك إلى اختبار وشرح وPDF جاهز لطلابك — وفّر وقت التحضير وركّز على التدريس
           </h1>
 
           {/* Subtitle */}
