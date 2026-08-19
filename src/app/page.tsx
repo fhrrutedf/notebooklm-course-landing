@@ -671,8 +671,12 @@ export default function LandingPage() {
                 متخصص في تطبيقات الذكاء الاصطناعي في التعليم
               </p>
               <p className="text-[#64748B] text-sm leading-loose mb-4">
-                معلم متمرس قضى سنوات في تحضير الدروس تقليدياً. بعد اكتشاف أدوات الذكاء الاصطناعي، تحوّل أسلوب عمله بالكامل — من إعداد الاختبارات بنسختين خلال 5 دقائق، إلى تصميم مذكرات PDF احترافية في دقائق. يؤمن بأن كل معلم قادر على الاستفادة من هذه الأدوات بغض النظر عن خلفيته التقنية.
+                نواف البوسطه مدرب أدوات ذكاء اصطناعي وباحث، يدرّب الأفراد والشركات والمؤسسات التعليمية على تحويل التقنيات الحديثة إلى حلول عملية في التعليم والإنتاجية والأتمتة.
               </p>
+              <Link href="/about" className="inline-flex items-center gap-2 text-[#0D9488] font-bold text-sm hover:text-[#0B7C72]">
+                عرض المزيد عن المدرب
+                <ArrowLeft className="w-4 h-4" />
+              </Link>
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <a
                   href="https://www.facebook.com/share/18UPsSwfwQ/"
