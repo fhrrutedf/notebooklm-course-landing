@@ -68,7 +68,7 @@ export default function AboutTrainerPage() {
       <section className="py-14 md:py-20">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-5 mb-12">
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 text-center"><div className="text-3xl font-bold text-[#0D9488]">1000+</div><p className="text-[#64748B] text-sm mt-2">طالب بحسب السيرة الذاتية</p></div>
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 text-center"><div className="text-3xl font-bold text-[#0D9488]">640</div><p className="text-[#64748B] text-sm mt-2">طالبًا تلقّوا تدريبًا</p></div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 text-center"><div className="text-3xl font-bold text-[#0D9488]">50+</div><p className="text-[#64748B] text-sm mt-2">شركة تم تدريب موظفيها</p></div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 text-center"><div className="text-3xl font-bold text-[#0D9488]">10+</div><p className="text-[#64748B] text-sm mt-2">مشاريع وأدوات أتمتة</p></div>
           </div>
