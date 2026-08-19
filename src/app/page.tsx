@@ -31,7 +31,9 @@ export default function LandingPage() {
 
   const currentPricing = {
     price: '3,200 ليرة سورية جديدة',
-    currency: 'شام كاش / تحويل بنكي / نتفق على الأقساط عبر التواصل',
+    originalPrice: '4,500 ليرة سورية جديدة',
+    offerEnd: '25 آب 2026',
+    currency: 'شام كاش / تحويل بنكي / أقساط لمن لا يتوفر معه المبلغ كاملًا',
     whatsappText: 'مرحباً، أريد تفاصيل التسجيل في الكورس المتكامل لأدوات الذكاء الاصطناعي، وأريد معرفة طريقة الدفع والتسجيل.',
   }
   const WHATSAPP_NUMBER = '963985323170'
@@ -65,15 +67,15 @@ export default function LandingPage() {
       items: [
         'إنشاء عرض تعليمي ونشاط يساعد على تفاعل الطلاب داخل الحصة',
         'إنتاج Podcast أو شرح صوتي وفيديو من محتوى الدرس',
-        'تحديث طريقة عملك عند تغير الأدوات مع الحفاظ على قوالبك ومصادرك',
+        'البحث على الإنترنت وبناء تقرير أو رسالة أو بحث منظم مع مراجعة المصادر',
       ],
     },
   ]
 
   const bonuses = [
-    { title: 'حزمة Prompts للمعلمين', subtitle: 'Prompts', value: '1,500 ليرة سورية جديدة', desc: 'قوالب جاهزة للشرح والاختبارات والمشاريع والفيديوهات والـPodcasts، مع طريقة تعديل كل قالب حسب الصف والمادة.', icon: Zap },
-    { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', value: '1,000 ليرة سورية جديدة', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
-    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Coaching', value: 'ضمن الكورس', desc: 'تحديثات عند تطور الأدوات، ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق أو تنفيذ المخرجات.', icon: Shield },
+    { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة تساعد في الشرح والاختبارات والمشاريع والفيديوهات، مع طريقة تعديلها حسب الصف والمادة.', icon: Zap },
+    { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', oldValue: '1,000 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
+    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Coaching', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات عند تطور الأدوات، ومكالمات مجانية مع الكوتش عند مواجهة مشكلة في التطبيق أو تنفيذ المخرجات.', icon: Shield },
   ]
 
   const faqs = [
@@ -82,8 +84,8 @@ export default function LandingPage() {
       a: 'أكيد! الكورس مصمم خصيصاً للمعلمين والدكاترة والمدربين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر.',
     },
     {
-      q: 'الأدوات مجانية ولا لازم ادفع اشتراك؟',
-      a: 'الأداة الأولى مجانية تماماً. الأداة التانية فيها نسخة مجانية كافية لتطبيق كل اللي رح تتعلمه بالكورس. مش محتاج تدفع شي إضافي عشان تبدأ.',
+      q: 'هل سأحتاج إلى دفع اشتراكات إضافية للأدوات؟',
+      a: 'لا. الكورس مصمم بحيث تستطيع تطبيق ما تتعلمه من دون رسوم اشتراك شهرية إلزامية للأدوات. نشرح لك الخيارات المتاحة وطريقة اختيار ما يناسبك.',
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج؟',
@@ -108,6 +110,10 @@ export default function LandingPage() {
     {
       q: 'هل يوجد دعم أو تحديثات بعد انتهاء الكورس؟',
       a: 'نعم، توجد تحديثات للكورس، ويمكن ترتيب مكالمات مجانية مع الكوتش عند ظهور مشكلة في تطبيق ما تعلمته أو عند الحاجة إلى توضيح عملي.',
+    },
+    {
+      q: 'هل أستطيع إعداد تقرير أو رسالة أو بحث منظم؟',
+      a: 'نعم. تتعلم طريقة البحث على الإنترنت، تحديد المصادر، إعداد مسودة تقرير أو رسالة أو بحث، ثم مراجعة المعلومات والمراجع قبل اعتماد النتيجة.',
     },
     {
       q: 'هل الشهادة إلزامية مع التسجيل؟',
@@ -145,9 +151,15 @@ export default function LandingPage() {
 
         <div className="relative z-10 max-w-[1000px] mx-auto px-4 pt-14 pb-12 md:pt-20 md:pb-16 text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-8 border border-[#0D9488]/20">
+          <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-4 border border-[#0D9488]/20">
             <Sparkles className="w-4 h-4" />
             كورس متكامل عملي — المدرب نواف البوسطة
+          </div>
+          <div className="mx-auto mb-7 flex max-w-2xl flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-xl border border-[#D4A853]/35 bg-[#FFF9ED] px-4 py-3 text-sm">
+            <span className="font-bold text-[#1B2A4A]">عرض التسجيل لمدة 7 أيام</span>
+            <span className="text-[#64748B] line-through">{currentPricing.originalPrice}</span>
+            <span className="font-bold text-[#0D9488]">{currentPricing.price}</span>
+            <span className="text-xs text-[#64748B]">ينتهي في {currentPricing.offerEnd}</span>
           </div>
 
           {/* H1 */}
@@ -185,7 +197,7 @@ export default function LandingPage() {
             {/* Syria Price */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <span className="text-base">🇸🇾</span>
-              <span>سعر الكورس: <span className="text-[#0D9488] font-bold">3,200 ليرة سورية جديدة</span></span>
+              <span>سعر العرض: <span className="text-[#0D9488] font-bold">{currentPricing.price}</span></span>
             </div>
             {/* Guarantee */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
@@ -195,7 +207,7 @@ export default function LandingPage() {
             {/* Google tool */}
             <div className="flex items-center gap-2 text-[#1E3A5F] text-sm font-medium bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5">
               <Globe className="w-4 h-4 text-[#0D9488] shrink-0" />
-              <span>أدوات تعليمية مجانية أو بخطط مجانية</span>
+              <span>كورس مسجل بالكامل ومنظم</span>
             </div>
           </div>
 
@@ -207,8 +219,12 @@ export default function LandingPage() {
           {/* Stats bar */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">172 معلّمًا</div>
+              <div className="text-[#64748B] text-xs mt-1">انضموا خلال 48 ساعة</div>
+            </div>
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
-              <div className="text-[#64748B] text-xs mt-1">مدة الـCourse</div>
+              <div className="text-[#64748B] text-xs mt-1">كورس مسجل بالكامل ومنظم</div>
             </div>
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">مخرجات تعليمية</div>
@@ -217,10 +233,6 @@ export default function LandingPage() {
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">أقساط</div>
               <div className="text-[#64748B] text-xs mt-1">لمن لا يتوفر معه المبلغ كاملًا</div>
-            </div>
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">نماذج حقيقية</div>
-              <div className="text-[#64748B] text-xs mt-1">شاهدها قبل التسجيل</div>
             </div>
           </div>
 
@@ -616,7 +628,8 @@ export default function LandingPage() {
                 <span className="text-xs font-bold text-[#0D9488] tracking-wider mb-1 block">{bonus.subtitle}</span>
                 <h4 className="font-bold text-[#1B2A4A] text-lg mb-2">{bonus.title}</h4>
                 <p className="text-[#64748B] text-sm leading-loose mb-3">{bonus.desc}</p>
-                <div className="border-t border-[#E2E8F0] pt-3">
+                <div className="border-t border-[#E2E8F0] pt-3 flex items-center justify-center gap-2">
+                  {bonus.oldValue && <span className="text-xs text-[#94A3B8] line-through">{bonus.oldValue}</span>}
                   <span className="text-[#0D9488] font-bold text-sm">{bonus.value}</span>
                 </div>
               </div>
@@ -719,13 +732,15 @@ export default function LandingPage() {
 
           {/* Price card */}
           <div className="max-w-md mx-auto bg-white border-2 border-[#0D9488] rounded-xl p-6 mb-6">
-            <div className="text-[#64748B] text-sm mb-1">السعر</div>
-            <div className="flex items-baseline justify-center gap-3 mb-2">
+            <div className="text-[#64748B] text-sm mb-1">سعر العرض لمدة 7 أيام</div>
+            <div className="flex flex-wrap items-baseline justify-center gap-3 mb-2">
+              <span className="text-[#64748B] line-through">{currentPricing.originalPrice}</span>
               <span className="text-3xl font-bold text-[#1B2A4A]">{currentPricing.price}</span>
             </div>
-            <div className="text-[#0D9488] text-sm font-bold mb-4">{currentPricing.currency}</div>
-            <div className="bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-lg p-3 mb-4 text-sm">
-              <span className="text-[#0D9488] font-bold">يوجد أقساط</span> — نتفق على التفاصيل عبر التواصل
+            <div className="text-[#0D9488] text-sm font-bold mb-1">ينتهي العرض في {currentPricing.offerEnd}</div>
+            <div className="text-[#64748B] text-sm font-medium mb-4">{currentPricing.currency}</div>
+            <div className="bg-[#0D9488]/5 border border-[#0D9488]/20 rounded-lg p-3 mb-4 text-sm leading-loose">
+              <span className="text-[#0D9488] font-bold">خيار الأقساط متاح لمن لا يتوفر معه المبلغ كاملًا</span> — نتفق على التفاصيل عبر التواصل
             </div>
             <a
               href={WHATSAPP_LINK}
