@@ -568,7 +568,31 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 8. COURSE CONTENT SECTION ===== */}
+      {/* ===== 8. STUDENT FEEDBACK SECTION ===== */}
+      <section className="py-14 md:py-20 bg-[#F8FAFC]">
+        <div className="max-w-[1100px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 text-[#0D9488] px-4 py-2 text-sm font-bold mb-4">تجارب حقيقية من المتدربين</div>
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">آراء طلابنا بعد التدريب</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 items-start">
+            {[
+              '/images/training/student-feedback-01.png',
+              '/images/training/student-feedback-02.png',
+              '/images/training/student-feedback-03.png',
+              '/images/training/student-feedback-04.png',
+              '/images/training/student-feedback-05.png',
+            ].map((image, index) => (
+              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className={`block bg-white border border-[#E2E8F0] rounded-xl overflow-hidden ${index === 0 ? 'col-span-2 md:col-span-1' : ''}`}>
+                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[360px] object-contain" loading="lazy" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 9. COURSE CONTENT SECTION ===== */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
