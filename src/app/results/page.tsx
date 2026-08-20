@@ -1,7 +1,9 @@
 'use client'
 
+import { useEffect, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { track } from '@vercel/analytics'
+import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import {
   ArrowRight,
   BookOpen,
@@ -17,7 +19,7 @@ import {
 } from 'lucide-react'
 
 const WHATSAPP_NUMBER = '963985323170'
-const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+const subscribeAffiliate = () => () => {}
 
 type LocalSample = {
   title: string
@@ -101,15 +103,29 @@ const videoSamples = [
 ]
 
 export default function ResultsPage() {
+  const affiliateRef = useSyncExternalStore(
+    subscribeAffiliate,
+    () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
+    () => '',
+  )
+
+  useEffect(() => {
+    const directRef = resolveAffiliateRef(window.location.search)
+    if (directRef) window.localStorage.setItem('course_affiliate_ref', directRef)
+  }, [])
+
+  const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
+  const homeHref = referralHref('/', affiliateRef)
+
   return (
     <div dir="rtl" className="min-h-screen bg-white text-[#1E293B]" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
       <nav className="sticky top-0 z-50 border-b border-[#E2E8F0] bg-white/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-3">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-[#64748B] hover:text-[#0D9488]">
+          <Link href={homeHref} className="inline-flex items-center gap-2 text-sm font-bold text-[#64748B] hover:text-[#0D9488]">
             <ArrowRight className="h-5 w-5" />
             العودة للكورس
           </Link>
-          <a href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_nav' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
+          <a href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_nav', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
             اطلب التفاصيل
             <MessageCircle className="h-4 w-4" />
           </a>
@@ -194,7 +210,7 @@ export default function ResultsPage() {
         <div className="mx-auto max-w-2xl rounded-2xl border border-[#0D9488]/20 bg-[#0D9488]/5 p-8">
           <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-3xl">هذه مجرد عينات — داخل الكورس تتعلم الطريقة</h2>
           <p className="mb-6 leading-loose text-[#64748B]">لا نبيع ملفات جاهزة فقط؛ نتعلم كيف تبدأ من المصدر، تكتب Prompt واضحًا، تراجع النتيجة، ثم تخرجها بالشكل المناسب لطلابك.</p>
-          <a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد التسجيل في الكورس أو معرفة طريقة الدفع.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
+          <a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد التسجيل في الكورس أو معرفة طريقة الدفع.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
             اطلب تفاصيل التسجيل
             <MessageCircle className="h-5 w-5" />
           </a>
