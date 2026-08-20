@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { track } from '@vercel/analytics'
+import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import {
   BookOpen,
   CheckCircle2,
@@ -27,10 +28,22 @@ import {
   Play,
 } from 'lucide-react'
 
+const subscribeAffiliate = () => () => {}
+
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const affiliateRef = useSyncExternalStore(
+    subscribeAffiliate,
+    () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
+    () => '',
+  )
+
+  useEffect(() => {
+    const directRef = resolveAffiliateRef(window.location.search)
+    if (directRef) window.localStorage.setItem('course_affiliate_ref', directRef)
+  }, [])
 
   const currentPricing = {
     price: '3,200 ليرة سورية جديدة',
@@ -38,9 +51,10 @@ export default function LandingPage() {
     currency: 'شام كاش / تحويل بنكي / أقساط لمن لا يتوفر معه المبلغ كاملًا',
   }
   const WHATSAPP_NUMBER = '963985323170'
-  const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
-  const trackWhatsAppClick = (source: string) => track('whatsapp_click', { source })
-  const trackResultsOpen = (source: string) => track('results_open', { source })
+  const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
+  const resultsHref = referralHref('/results', affiliateRef)
+  const trackWhatsAppClick = (source: string) => track('whatsapp_click', { source, affiliate_ref: affiliateRef || 'direct' })
+  const trackResultsOpen = (source: string) => track('results_open', { source, affiliate_ref: affiliateRef || 'direct' })
   const COURSE_DURATION = '4 ساعات تقريباً'
 
   // ===== DATA =====
@@ -177,7 +191,7 @@ export default function LandingPage() {
           {/* Two CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
-              href="/results"
+              href={resultsHref}
               onClick={() => trackResultsOpen('hero')}
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
             >
@@ -604,7 +618,7 @@ export default function LandingPage() {
               إنفوجرافيك، عروض تقديمية، ملفات صوتية، وبودكاست — نماذج حقيقية من كتب الكيمياء والعلوم والإنجليزية
             </p>
             <a
-              href="/results"
+              href={resultsHref}
               onClick={() => trackResultsOpen('results_section')}
               className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0B7C72] text-white font-bold px-8 py-3.5 rounded-xl text-base transition-colors"
             >
@@ -862,7 +876,7 @@ export default function LandingPage() {
             <Link href="/schools" className="text-white/70 text-sm hover:text-white transition-colors">
               حلول المؤسسات التعليمية
             </Link>
-            <Link href="/results" className="text-white/70 text-sm hover:text-white transition-colors">
+            <Link href={resultsHref} className="text-white/70 text-sm hover:text-white transition-colors">
               نماذج المخرجات
             </Link>
           </div>
