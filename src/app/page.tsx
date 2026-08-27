@@ -170,7 +170,7 @@ export default function LandingPage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-[#0D9488]/10 text-[#0D9488] px-5 py-2 rounded-full text-sm font-bold mb-4 border border-[#0D9488]/20">
             <Sparkles className="w-4 h-4" />
-            كورس متكامل عملي — المدرب نواف البوسطة
+            كورس عملي للمعلمين السوريين — المدرب نواف البوسطة
           </div>
           <div className="mx-auto mb-7 flex max-w-2xl flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-xl border border-[#D4A853]/35 bg-[#FFF9ED] px-4 py-3 text-sm">
             <span className="font-bold text-[#1B2A4A]">عرض التسجيل لمدة 7 أيام</span>
@@ -237,10 +237,6 @@ export default function LandingPage() {
           {/* Stats bar */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">172 معلّمًا</div>
-              <div className="text-[#64748B] text-xs mt-1">انضموا خلال 48 ساعة</div>
-            </div>
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
               <div className="text-[#64748B] text-xs mt-1">كورس مسجل بالكامل ومنظم</div>
             </div>
@@ -298,112 +294,6 @@ export default function LandingPage() {
               ))}
             </div>
             <p className="mt-5 text-center text-xs leading-loose text-[#64748B]">الوصول إلى الكورس دائم، والدعم والتحديثات متاحان وفق آلية التسجيل والتطبيق.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 3. AUDIENCE AND SOLUTION ===== */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="max-w-[1000px] mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">لمين صُمّم هذا البرنامج التدريبي؟</h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">برنامج تدريبي متكامل للمعلم السوري، ومفيد أيضًا لكل من يعمل في التعليم والتدريب وصناعة المحتوى.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-[#0D9488]/5 border-2 border-[#0D9488] rounded-xl p-6">
-              <div className="text-[#0D9488] font-bold text-sm mb-2">مناسب بشكل خاص لـ</div>
-              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">المعلمين السوريين</h3>
-              <p className="text-[#64748B] text-sm leading-loose">من معلم الصف الأول وحتى مدرس البكالوريا، في الرياضيات والعلوم واللغات وباقي المواد. نبدأ من المشكلة اليومية ونصل إلى مادة جاهزة للطلاب.</p>
-            </div>
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-6">
-              <div className="text-[#64748B] font-bold text-sm mb-2">ويناسب أيضًا</div>
-              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">طلاب التربية والمدربون والدكاترة</h3>
-              <p className="text-[#64748B] text-sm leading-loose">يفيد طلاب كليات التربية، الهيئة الطلابية، المدربين، وأعضاء الهيئة التدريسية في بناء محتوى وتقييمات ومشاريع تعليمية قابلة للتطبيق.</p>
-            </div>
-          </div>
-          <div className="mt-8 max-w-3xl mx-auto text-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6">
-            <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">المشكلة ليست قلة الأدوات</h3>
-            <p className="text-[#64748B] text-sm leading-loose">المشكلة أن المعلم قد يكتب طلبًا عامًا، فيحصل على نتيجة طويلة أو غير مناسبة للمنهج. لذلك نعلّمه سير عمل ثابتًا: يحدد الهدف، يجهز المصدر، يكتب Prompt واضحًا، يراجع الناتج، ثم يحوله إلى مخرج قابل للاستخدام.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 4. PROMPT WORKFLOW SECTION ===== */}
-      <section className="py-14 md:py-20 bg-[#F8FAFC]">
-        <div className="max-w-[1000px] mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">كيف تتعامل مع الذكاء الاصطناعي؟</h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">لا نحفظ أسماء مواقع. نتعلم كيف نكتب الطلب، نراجع الناتج، ونختار الأداة المناسبة للمخرج.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { title: 'شرح درس', text: 'استخدم المصدر المرفق فقط، واشرح مفهوم [المفهوم] لطلاب الصف [الصف] بلغة واضحة، ثم أضف مثالين وثلاثة أسئلة فهم.' },
-              { title: 'اختبار ومشروع', text: 'أنشئ اختبارًا من الموضوعات المحددة مع نسختين ونموذج إجابة، ثم اقترح مشروعًا قصيرًا بمعايير تقييم قابلة للملاحظة.' },
-              { title: 'فيديو وPodcast', text: 'حوّل هذا الدرس إلى سيناريو فيديو مدته [المدة] وملخص صوتي قصير، مع لغة مناسبة للطلاب وتنبيه لما يحتاج مراجعة بشرية.' },
-            ].map((item) => (
-              <div key={item.title} className="bg-white border border-[#E2E8F0] rounded-xl p-5">
-                <h3 className="font-bold text-[#1B2A4A] mb-3">{item.title}</h3>
-                <p className="text-[#64748B] text-sm leading-loose">{item.text}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-7 text-center text-sm text-[#64748B]">نتعلم أيضًا كيف نختبر أداة جديدة، ونقارنها بالبديل الأنسب للمخرج، ونحافظ على قوالبنا عندما تتغير الخدمات.</div>
-        </div>
-      </section>
-
-      {/* ===== 5. VIDEO SAMPLE SECTION ===== */}
-      <section className="bg-white py-14 md:py-20">
-        <div className="mx-auto max-w-[1080px] px-4">
-          <div className="mb-8 text-center md:mb-10">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
-              <Play className="h-4 w-4" />
-              عينة مبسطة من أداة واحدة
-            </div>
-            <h2 className="mb-3 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-4xl">مثال سريع: حوّل مصدر الدرس إلى اختبار منظم</h2>
-            <p className="mx-auto max-w-3xl text-sm leading-loose text-[#64748B] md:text-base">هذا شرح مبسط لأداة واحدة فقط من أدوات الكورس، نستخدمها لحل مشكلة واحدة: إعداد اختبار من مصدر المعلم مع نموذج إجابة، ثم مراجعته قبل استخدامه مع الطلاب.</p>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border border-[#1B2A4A]/10 bg-[#1B2A4A] shadow-xl shadow-[#1B2A4A]/10">
-            <div className="aspect-video">
-              {isVideoOpen ? (
-                <iframe
-                  className="h-full w-full"
-                  src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?autoplay=1&rel=0"
-                  title="عينة عملية من شرح استخدام الذكاء الاصطناعي في التعليم"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsVideoOpen(true)
-                    track('video_sample_play', { source: 'course_page' })
-                  }}
-                  className="group relative h-full w-full overflow-hidden text-right"
-                  aria-label="تشغيل عينة الفيديو العملية داخل الصفحة"
-                >
-                  <img src="https://i.ytimg.com/vi/ceaunSbveVA/maxresdefault.jpg" alt="معاينة عينة الشرح العملية للكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B172A]/85 via-[#0B172A]/15 to-[#0B172A]/20" />
-                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-5 text-center text-white md:p-10">
-                    <span className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold backdrop-blur">عينة عملية — نحو 12 دقيقة</span>
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D9488] shadow-lg shadow-black/30 transition group-hover:scale-105 md:h-20 md:w-20">
-                      <Play className="mr-[-2px] h-7 w-7 fill-current text-white md:h-9 md:w-9" />
-                    </div>
-                    <span className="text-base font-bold md:text-lg">شغّل الشرح البسيط داخل الصفحة</span>
-                  </div>
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-xl border border-[#0D9488]/15 bg-[#F8FAFC] px-5 py-4 text-center md:flex-row md:text-right">
-            <p className="text-sm leading-loose text-[#1E3A5F]">هذه أداة واحدة ومخرج واحد فقط. داخل الكورس تتعلم أيضًا تحويل المصدر إلى PDF وعرض وفيديو وبودكاست وبحث وتقارير، مع بقاء مراجعة المعلم للمخرجات أساسية.</p>
-            <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-[#0D9488] ring-1 ring-[#0D9488]/25 hover:bg-[#0D9488] hover:text-white">
-              عندك سؤال عن الكورس؟ تواصل معنا
-              <MessageCircle className="h-4 w-4" />
-            </a>
           </div>
         </div>
       </section>
@@ -498,15 +388,98 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ===== 3. AUDIENCE AND SOLUTION ===== */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-[1000px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">لمين صُمّم هذا البرنامج التدريبي؟</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">برنامج تدريبي متكامل للمعلم السوري، ومفيد أيضًا لكل من يعمل في التعليم والتدريب وصناعة المحتوى.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="bg-[#0D9488]/5 border-2 border-[#0D9488] rounded-xl p-6">
+              <div className="text-[#0D9488] font-bold text-sm mb-2">مناسب بشكل خاص لـ</div>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">المعلمين السوريين</h3>
+              <p className="text-[#64748B] text-sm leading-loose">من معلم الصف الأول وحتى مدرس البكالوريا، في الرياضيات والعلوم واللغات وباقي المواد. نبدأ من المشكلة اليومية ونصل إلى مادة جاهزة للطلاب.</p>
+            </div>
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-6">
+              <div className="text-[#64748B] font-bold text-sm mb-2">ويناسب أيضًا</div>
+              <h3 className="text-xl font-bold text-[#1B2A4A] mb-3">طلاب التربية والمدربون والدكاترة</h3>
+              <p className="text-[#64748B] text-sm leading-loose">يفيد طلاب كليات التربية، الهيئة الطلابية، المدربين، وأعضاء الهيئة التدريسية في بناء محتوى وتقييمات ومشاريع تعليمية قابلة للتطبيق.</p>
+            </div>
+          </div>
+          <div className="mt-8 max-w-3xl mx-auto text-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6">
+            <h3 className="font-bold text-[#1B2A4A] text-lg mb-2">المشكلة ليست قلة الأدوات</h3>
+            <p className="text-[#64748B] text-sm leading-loose">المشكلة أن المعلم قد يكتب طلبًا عامًا، فيحصل على نتيجة طويلة أو غير مناسبة للمنهج. لذلك نعلّمه سير عمل ثابتًا: يحدد الهدف، يجهز المصدر، يكتب Prompt واضحًا، يراجع الناتج، ثم يحوله إلى مخرج قابل للاستخدام.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5. VIDEO SAMPLE SECTION ===== */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-[1080px] px-4">
+          <div className="mb-8 text-center md:mb-10">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 px-4 py-2 text-sm font-bold text-[#0D9488]">
+              <Play className="h-4 w-4" />
+              عينة مبسطة من أداة واحدة
+            </div>
+            <h2 className="mb-3 text-2xl font-bold leading-relaxed text-[#1B2A4A] md:text-4xl">مثال سريع: حوّل مصدر الدرس إلى اختبار منظم</h2>
+            <p className="mx-auto max-w-3xl text-sm leading-loose text-[#64748B] md:text-base">هذا شرح مبسط لأداة واحدة فقط من أدوات الكورس، نستخدمها لحل مشكلة واحدة: إعداد اختبار من مصدر المعلم مع نموذج إجابة، ثم مراجعته قبل استخدامه مع الطلاب.</p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-[#1B2A4A]/10 bg-[#1B2A4A] shadow-xl shadow-[#1B2A4A]/10">
+            <div className="aspect-video">
+              {isVideoOpen ? (
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?autoplay=1&rel=0"
+                  title="عينة عملية من شرح استخدام الذكاء الاصطناعي في التعليم"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsVideoOpen(true)
+                    track('video_sample_play', { source: 'course_page' })
+                  }}
+                  className="group relative h-full w-full overflow-hidden text-right"
+                  aria-label="تشغيل عينة الفيديو العملية داخل الصفحة"
+                >
+                  <img src="https://i.ytimg.com/vi/ceaunSbveVA/maxresdefault.jpg" alt="معاينة عينة الشرح العملية للكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B172A]/85 via-[#0B172A]/15 to-[#0B172A]/20" />
+                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-5 text-center text-white md:p-10">
+                    <span className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold backdrop-blur">عينة عملية — نحو 12 دقيقة</span>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D9488] shadow-lg shadow-black/30 transition group-hover:scale-105 md:h-20 md:w-20">
+                      <Play className="mr-[-2px] h-7 w-7 fill-current text-white md:h-9 md:w-9" />
+                    </div>
+                    <span className="text-base font-bold md:text-lg">شغّل الشرح البسيط داخل الصفحة</span>
+                  </div>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-xl border border-[#0D9488]/15 bg-[#F8FAFC] px-5 py-4 text-center md:flex-row md:text-right">
+            <p className="text-sm leading-loose text-[#1E3A5F]">هذه أداة واحدة ومخرج واحد فقط. داخل الكورس تتعلم أيضًا تحويل المصدر إلى PDF وعرض وفيديو وبودكاست وبحث وتقارير، مع بقاء مراجعة المعلم للمخرجات أساسية.</p>
+            <a href={createWhatsAppLink('مرحباً، شاهدت عينة الفيديو وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('video_sample')} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-[#0D9488] ring-1 ring-[#0D9488]/25 hover:bg-[#0D9488] hover:text-white">
+              عندك سؤال عن الكورس؟ تواصل معنا
+              <MessageCircle className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ===== 6. TOOLS SECTION ===== */}
       <section className="py-14 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-[1000px] mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
-              شو رح تنتج وتستخدم مع طلابك؟
+              مخرجات تراها وتستخدمها مع طلابك
             </h2>
             <p className="text-[#64748B] max-w-xl mx-auto text-sm leading-loose">
-              من المصدر إلى شرح وفيديو ومشروع واختبار وPDF وعرض وبحث وتقارير وPodcast — كل مسار عملي وقابل للتطبيق
+              تتعلم سير عمل واحدًا يحوّل مصدر الدرس إلى مخرجات تعليمية قابلة للاستخدام بعد المراجعة
             </p>
           </div>
 
@@ -612,10 +585,10 @@ export default function LandingPage() {
               </div>
             </div>
             <h3 className="text-xl md:text-2xl font-bold text-[#1B2A4A] mb-3">
-              اطلع على نماذج من المخرجات التعليمية
+              شاهد النتيجة قبل اتخاذ القرار
             </h3>
             <p className="text-[#64748B] text-sm mb-6 max-w-lg mx-auto leading-loose">
-              إنفوجرافيك، عروض تقديمية، ملفات صوتية، وبودكاست — نماذج حقيقية من كتب الكيمياء والعلوم والإنجليزية
+              نماذج حقيقية من اختبارات وخرائط وعروض وملفات تعليمية مبنية على مصادر دراسية
             </p>
             <a
               href={resultsHref}
@@ -625,30 +598,6 @@ export default function LandingPage() {
               اطلع على النماذج
               <ArrowLeft className="w-4 h-4" />
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 8. STUDENT FEEDBACK SECTION ===== */}
-      <section className="py-14 md:py-20 bg-[#F8FAFC]">
-        <div className="max-w-[1100px] mx-auto px-4">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 text-[#0D9488] px-4 py-2 text-sm font-bold mb-4">تجارب حقيقية من المتدربين</div>
-            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">آراء طلابنا بعد التدريب</h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
-          </div>
-          <div className="mx-auto flex max-w-md flex-col gap-3 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
-            {[
-              '/images/training/student-feedback-01.png',
-              '/images/training/student-feedback-02.png',
-              '/images/training/student-feedback-03.png',
-              '/images/training/student-feedback-04.png',
-              '/images/training/student-feedback-05.png',
-            ].map((image, index) => (
-              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-[#E2E8F0] bg-white">
-                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
-              </a>
-            ))}
           </div>
         </div>
       </section>
@@ -731,6 +680,30 @@ export default function LandingPage() {
                   <span className="text-[#0D9488] font-bold text-sm">{bonus.value}</span>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 8. STUDENT FEEDBACK SECTION ===== */}
+      <section className="py-14 md:py-20 bg-[#F8FAFC]">
+        <div className="max-w-[1100px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#0D9488]/10 text-[#0D9488] px-4 py-2 text-sm font-bold mb-4">تجارب حقيقية من المتدربين</div>
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">آراء طلابنا بعد التدريب</h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
+          </div>
+          <div className="mx-auto flex max-w-md flex-col gap-3 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
+            {[
+              '/images/training/student-feedback-01.png',
+              '/images/training/student-feedback-02.png',
+              '/images/training/student-feedback-03.png',
+              '/images/training/student-feedback-04.png',
+              '/images/training/student-feedback-05.png',
+            ].map((image, index) => (
+              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-[#E2E8F0] bg-white">
+                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
+              </a>
             ))}
           </div>
         </div>
