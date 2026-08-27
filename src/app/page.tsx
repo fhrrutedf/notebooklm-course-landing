@@ -235,16 +235,16 @@ export default function LandingPage() {
           </div>
 
           {/* Stats bar */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 max-w-3xl mx-auto">
+            <div className="px-4 py-2 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
               <div className="text-[#64748B] text-xs mt-1">كورس مسجل بالكامل ومنظم</div>
             </div>
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
+            <div className="px-4 py-2 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">مخرجات تعليمية</div>
               <div className="text-[#64748B] text-xs mt-1">اختبار، خريطة ذهنية، عرض وشرح</div>
             </div>
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 text-center">
+            <div className="px-4 py-2 text-center">
               <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">أقساط</div>
               <div className="text-[#64748B] text-xs mt-1">لمن لا يتوفر معه المبلغ كاملًا</div>
             </div>
@@ -274,7 +274,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="mt-10 max-w-4xl mx-auto rounded-2xl border border-[#0D9488]/20 bg-white p-5 md:p-7 text-right">
+          <div className="mt-10 max-w-4xl mx-auto pt-6 text-right">
             <div className="mb-6 text-center">
               <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">ماذا تستلم بعد التسجيل؟</h2>
               <p className="mt-2 text-sm leading-loose text-[#64748B]">مسار واضح من التسجيل إلى البدء بالتطبيق، من دون جلسات مباشرة إلزامية.</p>
@@ -286,7 +286,7 @@ export default function LandingPage() {
                 { number: '٣', title: 'محاضرات مرتبة', text: 'تبدأ من المصدر وكتابة الطلب وصولًا إلى المخرج التعليمي.' },
                 { number: '٤', title: 'قوالب وتحديثات', text: 'تستفيد من المزايا المجانية والدعم عند التطبيق.' },
               ].map((item) => (
-                <div key={item.number} className="rounded-xl bg-[#F8FAFC] p-4">
+                <div key={item.number} className="border-t border-[#E2E8F0] pt-4">
                   <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#0D9488] text-sm font-bold text-white">{item.number}</span>
                   <h3 className="mb-1 font-bold text-[#1B2A4A]">{item.title}</h3>
                   <p className="text-xs leading-loose text-[#64748B]">{item.text}</p>
