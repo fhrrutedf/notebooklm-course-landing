@@ -234,24 +234,8 @@ export default function LandingPage() {
             <p className="mt-1 text-sm leading-loose text-[#64748B]">داخل الكورس تتعلم كيف تحدد المطلوب، ترفق المصدر، تكتب Prompt واضحًا، ثم تراجع الناتج قبل استخدامه مع الطلاب.</p>
           </div>
 
-          {/* Stats bar */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 max-w-3xl mx-auto">
-            <div className="px-4 py-2 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">4 ساعات</div>
-              <div className="text-[#64748B] text-xs mt-1">كورس مسجل بالكامل ومنظم</div>
-            </div>
-            <div className="px-4 py-2 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">مخرجات تعليمية</div>
-              <div className="text-[#64748B] text-xs mt-1">اختبار، خريطة ذهنية، عرض وشرح</div>
-            </div>
-            <div className="px-4 py-2 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-[#0D9488]">أقساط</div>
-              <div className="text-[#64748B] text-xs mt-1">لمن لا يتوفر معه المبلغ كاملًا</div>
-            </div>
-          </div>
-
           {/* Purchase Steps */}
-          <div className="mt-8 max-w-2xl mx-auto">
+          <div className="mt-8 max-w-2xl mx-auto border-t border-[#E2E8F0] pt-5">
             <div className="flex items-center justify-center gap-4 md:gap-8">
               {[
                 { icon: MessageCircle, step: '١', text: 'تواصل واتساب' },
@@ -274,7 +258,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="mt-10 max-w-4xl mx-auto pt-6 text-right">
+          <div className="mt-10 max-w-4xl mx-auto pt-8 text-right">
             <div className="mb-6 text-center">
               <h2 className="text-xl md:text-2xl font-bold text-[#1B2A4A]">ماذا تستلم بعد التسجيل؟</h2>
               <p className="mt-2 text-sm leading-loose text-[#64748B]">مسار واضح من التسجيل إلى البدء بالتطبيق، من دون جلسات مباشرة إلزامية.</p>
