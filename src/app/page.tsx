@@ -248,7 +248,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 5. WHAT YOU GET ===== */
+      {/* ===== 5. WHAT YOU GET ===== */}
       <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
