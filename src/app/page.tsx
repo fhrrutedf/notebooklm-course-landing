@@ -285,10 +285,10 @@ export default function LandingPage() {
             <div className="overflow-hidden border border-[#B9D2CD] bg-[#152238] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
               <div className="aspect-video">
                 {isVideoOpen ? (
-                  <iframe className="h-full w-full" src="https://www.youtube-nocookie.com/embed/ceaunSbveVA?autoplay=1&rel=0" title="عينة عملية من شرح استخدام الذكاء الاصطناعي في التعليم" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                  <iframe className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 ) : (
                   <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
-                    <img src="https://i.ytimg.com/vi/ceaunSbveVA/maxresdefault.jpg" alt="معاينة عينة الشرح العملية للكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
+                    <img src="https://i.ytimg.com/vi/rbblFAZJbjI/maxresdefault.jpg" alt="معاينة عينة من درس متقدم في الكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-[#0B172A]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
                       <span className="text-sm font-bold">عينة من درس متقدم — نحو 12 دقيقة</span>
