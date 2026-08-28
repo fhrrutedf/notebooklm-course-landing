@@ -102,6 +102,40 @@ const videoSamples = [
   { title: 'فيديو تعليمي — إنكليزي', href: 'https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/view' },
 ]
 
+
+const featuredSamples = [
+  {
+    title: 'دليل دراسة اطراد المتتاليات',
+    subtitle: 'تحويل درس رياضيات إلى دليل بصري يشرح الحالات وطرق الدراسة.',
+    image: '/samples/user/sequence-guide.webp',
+    tag: 'دليل دراسة بصري',
+  },
+  {
+    title: 'خريطة ذهنية لبنية الدرس',
+    subtitle: 'تنظيم الأفكار من البنية العامة إلى الفصول والأجزاء الداخلية.',
+    image: '/samples/user/mindmap-brain.png',
+    tag: 'خريطة ذهنية',
+  },
+  {
+    title: 'خريطة ذهنية تفصيلية',
+    subtitle: 'تفريع المفاهيم والعناصر الرئيسية في موضوع واحد قابل للمراجعة.',
+    image: '/samples/user/mindmap-brain-detailed.png',
+    tag: 'تنظيم المفاهيم',
+  },
+  {
+    title: 'اختبار تدريبي من كتاب رياضيات البكالوريا',
+    subtitle: 'نموذج ورقة امتحان تدريبية مستخرجة من كتاب رياضيات البكالوريا.',
+    image: '/samples/user/math-baccalaureate-exam.webp',
+    tag: 'اختبار وورقة امتحان',
+  },
+  {
+    title: 'اختبار المتتاليات المؤتمت',
+    subtitle: 'نموذج تعليمي يوضح كيف تتحول أسئلة الدرس إلى اختبار منظم.',
+    image: '/samples/user/sequences-test-01.png',
+    tag: 'اختبار تعليمي',
+  },
+]
+
 export default function ResultsPage() {
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
@@ -118,104 +152,51 @@ export default function ResultsPage() {
   const homeHref = referralHref('/', affiliateRef)
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white text-[#1E293B]" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
-      <nav className="sticky top-0 z-50 border-b border-[#E2E8F0] bg-white/95 px-4 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-3">
-          <Link href={homeHref} className="inline-flex items-center gap-2 text-sm font-bold text-[#64748B] hover:text-[#0D9488]">
-            <ArrowRight className="h-5 w-5" />
-            العودة للكورس
-          </Link>
-          <a href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_nav', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0B7C72]">
-            اطلب التفاصيل
-            <MessageCircle className="h-4 w-4" />
-          </a>
+    <div dir="rtl" className="min-h-screen bg-[#FBFAF7] text-[#152238]" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
+      <nav className="sticky top-0 z-50 border-b border-[#DCE3E1] bg-[#FBFAF7]/95 px-4 py-4 backdrop-blur">
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-3">
+          <Link href={homeHref} className="inline-flex items-center gap-2 text-sm font-bold text-[#5E6B78] hover:text-[#0F766E]"><ArrowRight className="h-5 w-5" /> العودة للكورس</Link>
+          <a href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_nav', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#0F766E] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#115E59]">اطلب التفاصيل <MessageCircle className="h-4 w-4" /></a>
         </div>
       </nav>
 
-      <section className="bg-[#F8FAFC] px-4 py-14 text-center md:py-20">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#0D9488]/20 bg-[#0D9488]/10 px-5 py-2 text-sm font-bold text-[#0D9488]">
-            <Sparkles className="h-4 w-4" />
-            نماذج محلية من مخرجات الكورس
-          </div>
-          <h1 className="mb-5 text-3xl font-bold leading-[1.4] text-[#1B2A4A] md:text-5xl">شاهد مخرجات عملية قبل التسجيل</h1>
-          <p className="mx-auto max-w-2xl text-base leading-loose text-[#64748B] md:text-lg">
-            هذه عينات من الشروحات والملخصات والـPDF والعروض والصوتيات. نستخدم المصدر الذي يرفعه المعلم، ثم نراجع الناتج قبل مشاركته مع الطلاب.
-          </p>
+      <header className="border-b border-[#DCE3E1] bg-[#EAF4F1]">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
+          <p className="mb-5 text-sm font-bold text-[#0F766E]">نماذج حقيقية من مخرجات الكورس</p>
+          <h1 className="max-w-4xl text-4xl font-bold leading-[1.4] tracking-tight text-[#152238] md:text-6xl">شوف كيف يتحوّل كتاب واحد إلى منظومة تعليمية كاملة</h1>
+          <p className="mt-6 max-w-3xl text-base leading-[2] text-[#5E6B78] md:text-xl">من دليل الدراسة والخريطة الذهنية، إلى استخراج الأسئلة والاختبار وورقة الامتحان. هذه نماذج عملية مبنية على مصادر دراسية، وتبقى مراجعة المعلم هي الخطوة الأخيرة قبل الاستخدام.</p>
         </div>
-      </section>
+      </header>
 
-      <section className="px-4 py-14 md:py-20">
-        <div className="mx-auto max-w-[1100px]">
-          <div className="mb-10 text-center">
-            <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-4xl">نماذج جاهزة للفتح</h2>
-            <p className="text-sm leading-loose text-[#64748B]">تظهر المعاينة بسرعة من الموقع، والملف الكامل يفتح فقط عندما تطلبه.</p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {localSamples.map((sample) => {
-              const Icon = sample.icon
-              return (
-                <article key={sample.title} className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white">
-                  {sample.preview ? (
-                    <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-52 w-full bg-[#F8FAFC] object-contain p-2" loading="lazy" />
-                  ) : (
-                    <div className="flex h-52 items-center justify-center bg-[#F8FAFC]">
-                      <Icon className="h-14 w-14 text-[#0D9488]" />
-                    </div>
-                  )}
-                  <div className="p-5">
-                    <div className="mb-3 flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0D9488]/10"><Icon className="h-4 w-4 text-[#0D9488]" /></div>
-                      <h3 className="font-bold text-[#1B2A4A]">{sample.title}</h3>
-                    </div>
-                    <p className="mb-4 min-h-12 text-sm leading-loose text-[#64748B]">{sample.subtitle}</p>
-                    {sample.kind === 'audio' && (
-                      <audio controls preload="none" className="mb-4 w-full">
-                        <source src={sample.file} type="audio/mpeg" />
-                        متصفحك لا يدعم تشغيل الملف الصوتي.
-                      </audio>
-                    )}
-                    <a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0D9488] px-4 py-2.5 text-sm font-bold text-[#0D9488] hover:bg-[#0D9488] hover:text-white">
-                      {sample.kind === 'image' ? <ExternalLink className="h-4 w-4" /> : <Download className="h-4 w-4" />}
-                      {sample.fileLabel}
-                    </a>
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#F8FAFC] px-4 py-14 md:py-20">
-        <div className="mx-auto max-w-[1000px]">
-          <div className="mb-10 text-center">
-            <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-4xl">فيديوهات تعليمية</h2>
-            <p className="text-sm leading-loose text-[#64748B]">الفيديوهات الكاملة تبقى مستضافة خارجيًا حتى لا تثقل الموقع، وتفتح عند الطلب فقط.</p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {videoSamples.map((video) => (
-              <a key={video.title} href={video.href} onClick={() => track('video_open', { video: video.title })} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center hover:border-[#0D9488]">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0D9488]/10"><Video className="h-6 w-6 text-[#0D9488]" /></div>
-                <h3 className="mb-3 font-bold text-[#1B2A4A]">{video.title}</h3>
-                <span className="inline-flex items-center gap-2 text-sm font-bold text-[#0D9488]">فتح الفيديو <ExternalLink className="h-4 w-4" /></span>
-              </a>
+      <section className="bg-[#FBFAF7]">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-4 text-sm font-bold text-[#C89B3C]">رحلة مخرج واحدة</p><h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">من الفهم إلى التقييم</h2></div><p className="max-w-sm text-sm leading-[1.9] text-[#5E6B78]">اختر أي صورة لتشاهدها بحجمها الكامل. الهدف أن ترى الطريقة والنتيجة معًا.</p></div>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            {featuredSamples.map((sample, i) => (
+              <article key={sample.title} className={`group ${i === 3 ? 'md:col-span-2 md:grid md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-8' : ''}`}>
+                <a href={sample.image} target="_blank" rel="noopener noreferrer" onClick={() => track('featured_sample_open', { sample: sample.title })} className="block overflow-hidden border border-[#C9D8D5] bg-white">
+                  <img src={sample.image} alt={sample.title} className="h-64 w-full object-contain bg-[#F3F7F5] p-3 transition duration-500 group-hover:scale-[1.02] md:h-80" loading={i < 2 ? 'eager' : 'lazy'} />
+                </a>
+                <div className="mt-5 border-t-2 border-[#0F766E] pt-4"><p className="text-xs font-bold tracking-wide text-[#0F766E]">{sample.tag}</p><h3 className="mt-2 text-xl font-bold text-[#152238]">{sample.title}</h3><p className="mt-2 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.image} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">فتح الصورة كاملة <ExternalLink className="h-4 w-4" /></a></div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-16 text-center md:py-20">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-[#0D9488]/20 bg-[#0D9488]/5 p-8">
-          <h2 className="mb-3 text-2xl font-bold text-[#1B2A4A] md:text-3xl">هذه مجرد عينات — داخل الكورس تتعلم الطريقة</h2>
-          <p className="mb-6 leading-loose text-[#64748B]">لا نبيع ملفات جاهزة فقط؛ نتعلم كيف تبدأ من المصدر، تكتب Prompt واضحًا، تراجع النتيجة، ثم تخرجها بالشكل المناسب لطلابك.</p>
-          <a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد التسجيل في الكورس أو معرفة طريقة الدفع.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#0D9488] px-8 py-4 font-bold text-white hover:bg-[#0B7C72]">
-            اطلب تفاصيل التسجيل
-            <MessageCircle className="h-5 w-5" />
-          </a>
-        </div>
+      <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-20"><div className="max-w-3xl"><p className="mb-4 text-sm font-bold text-[#D9B96C]">ما الذي تثبته هذه النماذج؟</p><h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">ليست ملفات منفصلة؛ إنها خطوات لحل مشكلة التحضير.</h2></div><div className="mt-10 grid gap-8 md:grid-cols-4">{['تنظيم الدرس بصريًا','استخراج الأفكار والأسئلة','بناء اختبار متنوع','إخراج ورقة امتحان واضحة'].map((text, i) => <div key={text} className="border-t border-white/25 pt-4"><span className="text-sm font-bold text-[#D9B96C]">0{i + 1}</span><p className="mt-3 font-bold text-white">{text}</p></div>)}</div></div>
       </section>
+
+      <section className="bg-[#F3F7F5]">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-2xl"><p className="mb-4 text-sm font-bold text-[#0F766E]">مخرجات أخرى</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شرح، PDF، عروض وصوتيات</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إلى جانب رحلة الاختبار والامتحان، تتعلم بناء مخرجات متعددة من المصدر نفسه.</p></div><div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{localSamples.map((sample) => { const Icon = sample.icon; return (<article key={sample.title} className="overflow-hidden border border-[#C9D8D5] bg-[#FBFAF7]"><div className="flex h-48 items-center justify-center bg-white">{sample.preview ? <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-full w-full object-contain p-3" loading="lazy" /> : <Icon className="h-14 w-14 text-[#0F766E]" />}</div><div className="p-5"><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-[#0F766E]" /><h3 className="font-bold text-[#152238]">{sample.title}</h3></div><p className="mt-3 min-h-12 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div></article>) })}</div></div>
+      </section>
+
+      <section className="bg-[#FBFAF7]">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 text-center md:px-8 md:py-24"><p className="mb-4 text-sm font-bold text-[#C89B3C]">فيديوهات من التطبيق</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شاهد الطريقة أثناء التنفيذ</h2><p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-[#5E6B78]">الفيديوهات الكاملة تفتح عند الطلب، حتى ترى كيف ينتقل العمل من المصدر إلى مادة تعليمية.</p><div className="mt-10 grid gap-6 md:grid-cols-3">{videoSamples.map((video) => <a key={video.title} href={video.href} onClick={() => track('video_open', { video: video.title })} target="_blank" rel="noopener noreferrer" className="border-t-2 border-[#0F766E] bg-[#F3F7F5] p-6 text-right transition hover:bg-[#EAF4F1]"><Video className="h-7 w-7 text-[#0F766E]" /><h3 className="mt-5 font-bold text-[#152238]">{video.title}</h3><span className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح الفيديو <ExternalLink className="h-4 w-4" /></span></a>)}</div></div>
+      </section>
+
+      <section className="border-t border-[#DCE3E1] bg-[#EAF4F1] px-5 py-16 text-center md:py-20"><div className="mx-auto max-w-2xl"><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">هذه النماذج هي النتيجة — والكورس يعلّمك الطريقة.</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إذا أردت بناء مخرجات مشابهة من كتبك ودروسك، اطلب تفاصيل التسجيل وطريقة الدفع عبر واتساب.</p><a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#0F766E] px-8 py-4 font-bold text-white hover:bg-[#115E59]">اطلب تفاصيل التسجيل <MessageCircle className="h-5 w-5" /></a></div></section>
     </div>
   )
 }
