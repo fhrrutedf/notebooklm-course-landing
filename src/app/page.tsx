@@ -139,7 +139,7 @@ export default function LandingPage() {
   ]
 
   return (
-    <div dir="rtl" className="min-h-screen bg-[#FBFAF7] pb-20 text-[#152238] md:pb-0" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }} suppressHydrationWarning>
+    <div dir="rtl" className="min-h-screen overflow-x-hidden bg-[#FBFAF7] pb-20 text-[#152238] md:pb-0" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }} suppressHydrationWarning>
       {/* ===== 1. EDITORIAL NAVIGATION ===== */}
       <nav className="sticky top-0 z-50 border-b border-[#DCE3E1] bg-[#FBFAF7]/95 px-4 py-4 backdrop-blur">
         <div className="mx-auto flex max-w-[1180px] items-center justify-between">
@@ -285,10 +285,10 @@ export default function LandingPage() {
             <div className="overflow-hidden border border-[#B9D2CD] bg-[#152238] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
               <div className="aspect-video">
                 {isVideoOpen ? (
-                  <iframe className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                  <iframe loading="lazy" className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 ) : (
                   <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
-                    <img src="https://i.ytimg.com/vi/rbblFAZJbjI/maxresdefault.jpg" alt="معاينة عينة من درس متقدم في الكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
+                    <img src="/images/advanced-lesson-poster.webp" alt="معاينة عينة من درس متقدم في الكورس" width="1280" height="720" decoding="async" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-[#0B172A]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
                       <span className="text-sm font-bold">عينة من درس متقدم — نحو 12 دقيقة</span>
@@ -442,7 +442,7 @@ export default function LandingPage() {
       {/* ===== 11. TRAINER ===== */}
       <section className="bg-[#FBFAF7]">
         <div className="mx-auto grid max-w-[1180px] gap-10 px-5 py-16 md:grid-cols-[0.65fr_1.35fr] md:items-center md:px-8 md:py-24">
-          <div className="flex justify-center md:justify-start"><img src="/images/trainer-nawaf.jpg" alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية" className="h-56 w-56 rounded-full object-cover grayscale-[15%] ring-8 ring-[#EAF4F1]" /></div>
+          <div className="flex justify-center md:justify-start"><img src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية" width="224" height="224" decoding="async" loading="lazy" className="h-56 w-56 rounded-full object-cover grayscale-[15%] ring-8 ring-[#EAF4F1]" /></div>
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#C89B3C]">من يقودك؟</p>
             <h2 className="text-3xl font-bold text-[#152238] md:text-5xl">نواف البوسطة</h2>
