@@ -33,7 +33,7 @@ type LocalSample = {
 
 const localSamples: LocalSample[] = [
   {
-    title: 'إنفوجرافيك كيمياء',
+    title: 'إنفوجرافيك علوم',
     subtitle: 'تحويل محتوى الدرس إلى ملخص بصري منظم',
     preview: '/samples/previews/chemistry-infographic.webp',
     file: '/samples/previews/chemistry-infographic.webp',
@@ -63,7 +63,7 @@ const localSamples: LocalSample[] = [
     title: 'عرض تقديمي — كيمياء',
     subtitle: 'شرائح من محتوى الدرس، مع معاينة محلية خفيفة',
     preview: '/samples/previews/chemistry-slides.webp',
-    file: '/samples/chemistry-slides.pdf',
+    file: 'https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/edit?usp=sharing&ouid=108751952460291673147&rtpof=true&sd=true',
     fileLabel: 'فتح العرض',
     icon: Presentation,
     kind: 'file',
@@ -103,7 +103,8 @@ const videoSamples = [
 ]
 
 
-const featuredSamples = [
+type FeaturedSample = { title: string; subtitle: string; image: string; tag: string; href?: string }
+const featuredSamples: FeaturedSample[] = [
   {
     title: 'دليل دراسة اطراد المتتاليات',
     subtitle: 'تحويل درس رياضيات إلى دليل بصري يشرح الحالات وطرق الدراسة.',
@@ -129,15 +130,16 @@ const featuredSamples = [
     tag: 'اختبار وورقة امتحان',
   },
   {
-    title: 'إنفوجرافيك كيمياء',
+    title: 'إنفوجرافيك علوم',
     subtitle: 'تحويل محتوى درس العلوم إلى ملخص بصري منظم.',
     image: '/samples/previews/chemistry-infographic.webp',
-    tag: 'إنفوجرافيك كيمياء',
+    tag: 'إنفوجرافيك علوم',
   },
   {
     title: 'عرض تقديمي — كيمياء',
-    subtitle: 'عرض تعليمي من محتوى الدرس، ظاهر داخل الصفحة للمعاينة.',
+    subtitle: 'عرض تعليمي من محتوى الدرس، افتحه من الرابط لمشاهدة الشرائح.',
     image: '/samples/previews/chemistry-slides.webp',
+    href: 'https://docs.google.com/presentation/d/1tCPwC6a5DkkuzOyJyCdQzl-h-msNu_oo/edit?usp=sharing&ouid=108751952460291673147&rtpof=true&sd=true',
     tag: 'عرض تقديمي — كيمياء',
   },
 ]
@@ -180,10 +182,10 @@ export default function ResultsPage() {
           <div className="mt-12 grid gap-10 md:grid-cols-2">
             {featuredSamples.map((sample, i) => (
               <article key={sample.title} className={`group ${i === 3 ? 'md:col-span-2 md:grid md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-8' : ''}`}>
-                <a href={sample.image} target="_blank" rel="noopener noreferrer" onClick={() => track('featured_sample_open', { sample: sample.title })} className="block overflow-hidden border border-[#C9D8D5] bg-white">
+                <a href={sample.href || sample.image} target="_blank" rel="noopener noreferrer" onClick={() => track('featured_sample_open', { sample: sample.title })} className="block overflow-hidden border border-[#C9D8D5] bg-white">
                   <img src={sample.image} alt={sample.title} className="h-64 w-full object-contain bg-[#F3F7F5] p-3 transition duration-500 group-hover:scale-[1.02] md:h-80" loading={i < 2 ? 'eager' : 'lazy'} />
                 </a>
-                <div className="mt-5 border-t-2 border-[#0F766E] pt-4"><p className="text-xs font-bold tracking-wide text-[#0F766E]">{sample.tag}</p><h3 className="mt-2 text-xl font-bold text-[#152238]">{sample.title}</h3><p className="mt-2 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.image} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">فتح الصورة كاملة <ExternalLink className="h-4 w-4" /></a></div>
+                <div className="mt-5 border-t-2 border-[#0F766E] pt-4"><p className="text-xs font-bold tracking-wide text-[#0F766E]">{sample.tag}</p><h3 className="mt-2 text-xl font-bold text-[#152238]">{sample.title}</h3><p className="mt-2 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.href || sample.image} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div>
               </article>
             ))}
           </div>
