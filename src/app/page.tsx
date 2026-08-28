@@ -23,8 +23,6 @@ import {
   Building2,
   Clock,
   Award,
-  Presentation,
-  Headphones,
   Play,
 } from 'lucide-react'
 
@@ -331,33 +329,6 @@ export default function LandingPage() {
                     </ul>
                   </div>
                 )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 9. RESULTS / PROOF ===== */}
-      <section className="bg-[#FBFAF7]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <p className="mb-4 text-sm font-bold text-[#C89B3C]">دليل بصري</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شاهد المخرج الحقيقي، لا تسمع الوعد فقط.</h2>
-              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">نماذج حقيقية من اختبارات وخرائط ذهنية وعروض وملفات صوتية وفيديوهات مبنية على مصادر دراسية.</p>
-            </div>
-            <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_results')} className="inline-flex items-center gap-2 font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">افتح معرض النماذج <ArrowLeft className="h-4 w-4" /></a>
-          </div>
-          <div className="mt-12 grid gap-8 border-t border-[#DCE3E1] pt-8 md:grid-cols-3">
-            {[
-              { icon: FileText, title: 'اختبار وورقة امتحان', text: 'منظم، واضح، ومبني على المصدر قبل الطباعة.' },
-              { icon: Presentation, title: 'خريطة أو عرض', text: 'مادة بصرية تساعدك على الشرح داخل الحصة.' },
-              { icon: Headphones, title: 'صوت وفيديو', text: 'سيناريو قابل للتحويل إلى مادة تعليمية.' },
-            ].map((item) => (
-              <div key={item.title} className="border-t-2 border-[#0F766E] pt-5">
-                <item.icon className="h-6 w-6 text-[#0F766E]" />
-                <h3 className="mt-5 text-lg font-bold text-[#152238]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-[1.9] text-[#5E6B78]">{item.text}</p>
               </div>
             ))}
           </div>
