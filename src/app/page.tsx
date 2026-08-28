@@ -177,7 +177,7 @@ export default function LandingPage() {
                 <MessageCircle className="h-5 w-5" />
               </a>
               <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_hero')} className="inline-flex items-center gap-2 px-2 py-2 text-base font-bold text-[#152238] underline decoration-[#C89B3C] decoration-2 underline-offset-8 transition-colors hover:text-[#0F766E]">
-                شاهد النماذج أولًا
+                شاهد نماذج حقيقية أولًا
                 <ArrowLeft className="h-4 w-4" />
               </a>
             </div>
