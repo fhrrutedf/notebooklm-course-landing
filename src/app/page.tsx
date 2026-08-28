@@ -278,8 +278,8 @@ export default function LandingPage() {
           <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center">
             <div>
               <p className="mb-4 text-sm font-bold text-[#0F766E]">شاهد قبل أن تقرر</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شاهد النتيجة قبل ما تقرر</h2>
-              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">شاهد كيف ينتقل العمل من مصدر المعلم إلى أسئلة واختبار ومخرج منظم، ثم تعرّف على بقية النماذج الحقيقية داخل الكورس.</p>
+              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">عينة من درس متقدم</h2>
+              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">هذا المقطع عينة من درس متقدم داخل الكورس. شاهد كيف ينتقل العمل من مصدر المعلم إلى أسئلة واختبار وورقة امتحان منظمة، بينما يبدأ الكورس معك خطوة بخطوة من الأساسيات.</p>
               <a href={createWhatsAppLink('مرحباً، شاهدت العينة وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('redesigned_sample')} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">أريد تفاصيل التسجيل <ArrowLeft className="h-4 w-4" /></a>
             </div>
             <div className="overflow-hidden border border-[#B9D2CD] bg-[#152238] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
@@ -291,7 +291,7 @@ export default function LandingPage() {
                     <img src="https://i.ytimg.com/vi/ceaunSbveVA/maxresdefault.jpg" alt="معاينة عينة الشرح العملية للكورس" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-[#0B172A]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
-                      <span className="text-sm font-bold">عينة عملية — نحو 12 دقيقة</span>
+                      <span className="text-sm font-bold">عينة من درس متقدم — نحو 12 دقيقة</span>
                       <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0F766E] shadow-xl transition group-hover:scale-105"><Play className="mr-[-2px] h-7 w-7 fill-current" /></span>
                       <span className="text-base font-bold">شغّل العينة</span>
                     </div>
@@ -341,7 +341,7 @@ export default function LandingPage() {
               <p className="mb-4 text-sm font-bold text-[#0F766E]">خريطة الدورة</p>
               <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">ثلاثة مسارات عملية، وكل مسار ينتهي بنتيجة تراها وتستخدمها.</h2>
             </div>
-            <span className="text-sm font-bold text-[#5E6B78]">20 محاضرة · {COURSE_DURATION}</span>
+            <span className="text-sm font-bold text-[#5E6B78]">نحو 12 وحدة تدريبية · {COURSE_DURATION}</span>
           </div>
           <div className="mt-12 border-t border-[#B9D2CD]">
             {courseModules.map((mod, i) => (
