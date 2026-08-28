@@ -482,7 +482,23 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== 14. FOOTER ===== */}
+      {/* ===== 14. OPTIONAL CERTIFICATE ===== */}
+      <section className="border-t border-[#DCE3E1] bg-[#FBFAF7]">
+        <div className="mx-auto grid max-w-[980px] gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:items-center md:px-8 md:py-24">
+          <div className="flex justify-center">
+            <Image src="/images/optional-certificate.jpg" alt="نموذج من الشهادة والتصديقات" width={863} height={1080} sizes="(max-width: 768px) 100vw, 360px" loading="lazy" className="max-h-[420px] w-auto max-w-full object-contain shadow-[0_18px_45px_rgba(21,34,56,0.12)]" />
+          </div>
+          <div>
+            <p className="mb-4 text-sm font-bold text-[#C89B3C]">خيار إضافي بعد إتمام الكورس</p>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شهادة اختيارية لمن يرغب بها</h2>
+            <p className="mt-5 text-base leading-[2] text-[#5E6B78]">بعد إتمام اختبار أو مشروع نهاية الكورس، يستطيع المتدرب طلب الشهادة برسوم منفصلة. الشهادة من وزارة التنمية السورية، ومعترف بها محليًا ودوليًا وخارجيًا، ويمكن تصديقها عبر وزارة الخارجية السورية إذا رغب المتدرب باستخدامها خارج سوريا.</p>
+            <p className="mt-4 text-base leading-[2] text-[#5E6B78]">نقوم بتسليم الشهادة وإرسالها إلى المتدرب أينما كان، وفق إجراءات الإصدار والتسليم. الشهادة اختيارية وليست شرطًا للتسجيل في الكورس.</p>
+            <div className="mt-6 border-r-2 border-[#C89B3C] pr-4 text-sm font-bold leading-[2] text-[#152238]">الاختبار أو المشروع النهائي هو متطلب الحصول على الشهادة، والرسوم منفصلة عن رسوم الكورس.</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 15. FOOTER ===== */}
       <footer className="bg-[#0E1727] py-8 text-white">
         <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-4 px-5 text-center sm:flex-row sm:text-right md:px-8">
           <p className="text-xs text-white/50">جميع الحقوق محفوظة {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين</p>
