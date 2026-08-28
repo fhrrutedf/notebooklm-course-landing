@@ -12,7 +12,6 @@ import {
   FileText,
   MessageCircle,
   Shield,
-  Sparkles,
   Star,
   Zap,
   FileOutput,
@@ -159,8 +158,8 @@ export default function LandingPage() {
 
       {/* ===== 2. SALES HERO ===== */}
       <section className="overflow-hidden border-b border-[#DCE3E1] bg-[#FBFAF7]">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-12 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:gap-16 md:px-8 md:py-24">
-          <div className="order-2 md:order-1">
+        <div className="mx-auto max-w-[900px] px-5 py-16 md:px-8 md:py-24">
+          <div>
             <div className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">
               <span className="h-2 w-2 rounded-full bg-[#C89B3C]" />
               برنامج عملي للمعلمين السوريين
@@ -189,38 +188,6 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="order-1 md:order-2">
-            <div className="relative overflow-hidden border border-[#C9D8D5] bg-[#EAF4F1] p-5 md:p-8">
-              <div className="absolute -left-20 -top-20 h-52 w-52 rounded-full border-[28px] border-[#C89B3C]/25" />
-              <div className="relative border border-[#B9D2CD] bg-[#FBFAF7] p-6 md:p-8">
-                <div className="flex items-center justify-between border-b border-[#DCE3E1] pb-4">
-                  <span className="text-xs font-bold tracking-[0.18em] text-[#0F766E]">OUTCOME MAP</span>
-                  <Sparkles className="h-5 w-5 text-[#C89B3C]" />
-                </div>
-                <p className="mt-7 text-sm font-bold text-[#5E6B78]">مصدر المعلم</p>
-                <div className="my-5 h-px bg-[#C89B3C]" />
-                <div className="space-y-4">
-                  {[
-                    { icon: FileText, title: 'اختبار وورقة PDF', text: 'منظمة وقابلة للمراجعة' },
-                    { icon: Presentation, title: 'شرح وعرض تعليمي', text: 'مناسب للصف والمادة' },
-                    { icon: Headphones, title: 'فيديو أو صوت', text: 'سيناريو واضح قابل للمشاركة' },
-                  ].map((item) => (
-                    <div key={item.title} className="flex items-center gap-4 border-b border-[#E7ECEA] pb-4 last:border-b-0 last:pb-0">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0F766E]/10 text-[#0F766E]"><item.icon className="h-5 w-5" /></span>
-                      <div>
-                        <p className="font-bold text-[#152238]">{item.title}</p>
-                        <p className="mt-1 text-xs text-[#5E6B78]">{item.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-7 flex items-center gap-2 border-t border-[#DCE3E1] pt-4 text-xs font-bold text-[#0F766E]">
-                  <CheckCircle2 className="h-4 w-4" />
-                  القرار والمراجعة بيد المعلم
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
