@@ -160,14 +160,15 @@ export default function LandingPage() {
           <div>
             <div className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">
               <span className="h-2 w-2 rounded-full bg-[#C89B3C]" />
-              برنامج عملي للمعلمين السوريين
+              المشكلة اليومية
             </div>
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#152238] md:text-6xl">
-              كل أسبوع تعيد التحضير من الصفر؟ ابدأ من كتابك وأنجز مادة تعليمية بوقت أقل.
+              كل أسبوع تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-[2] text-[#5E6B78] md:text-xl">
-              تعلّم طريقة عملية تحوّل مصدرك إلى اختبار، شرح، PDF، خريطة ذهنية، عرض أو سيناريو فيديو — مع بقاء المراجعة والقرار بيدك كمعلم.
+              قد تملك الكتاب والخبرة، لكن تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر يستهلك وقتك. داخل الدورة تتعلم مسارًا ثابتًا: تحدد المطلوب، ترفق مصدرك، تستخرج الأفكار والأسئلة، تراجع الناتج، ثم تخرجه بالشكل المناسب لطلابك.
             </p>
+            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">لا نلغي دور المعلم — نزيل العمل المتكرر من طريقه.</p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white shadow-[0_12px_30px_rgba(15,118,110,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
                 اطلب تفاصيل التسجيل
@@ -197,20 +198,6 @@ export default function LandingPage() {
           <span>مناسب للمبتدئ</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
           <span>مخرجات قابلة للاستخدام بعد المراجعة</span>
-        </div>
-      </section>
-
-      {/* ===== 4. THE PROBLEM ===== */}
-      <section className="bg-[#FBFAF7]">
-        <div className="mx-auto grid max-w-[1180px] gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:items-center md:px-8 md:py-24">
-          <div>
-            <p className="mb-4 text-sm font-bold text-[#C89B3C]">المشكلة اليومية</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل أسبوع تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟</h2>
-          </div>
-          <div className="border-r-2 border-[#0F766E] pr-6 md:pr-10">
-            <p className="text-lg leading-[2] text-[#5E6B78] md:text-xl">قد تملك الكتاب والخبرة، لكن تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر يستهلك وقتك. داخل الدورة تتعلم مسارًا ثابتًا: تحدد المطلوب، ترفق مصدرك، تستخرج الأفكار والأسئلة، تراجع الناتج، ثم تخرجه بالشكل المناسب لطلابك.</p>
-            <p className="mt-6 font-bold text-[#0F766E]">لا نلغي دور المعلم — نزيل العمل المتكرر من طريقه.</p>
-          </div>
         </div>
       </section>
 
@@ -423,15 +410,16 @@ export default function LandingPage() {
       {/* ===== 14. OPTIONAL CERTIFICATE ===== */}
       <section className="border-t border-[#DCE3E1] bg-[#FBFAF7]">
         <div className="mx-auto grid max-w-[980px] gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:items-center md:px-8 md:py-24">
-          <div className="flex justify-center">
+          <div className="order-2 flex justify-center md:order-1">
             <Image src="/images/optional-certificate.jpg" alt="نموذج من الشهادة والتصديقات" width={863} height={1080} sizes="(max-width: 768px) 100vw, 360px" loading="lazy" className="max-h-[420px] w-auto max-w-full object-contain shadow-[0_18px_45px_rgba(21,34,56,0.12)]" />
           </div>
-          <div>
-            <p className="mb-4 text-sm font-bold text-[#C89B3C]">خيار إضافي بعد إتمام الكورس</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شهادة اختيارية لمن يرغب بها</h2>
-            <p className="mt-5 text-base leading-[2] text-[#5E6B78]">بعد إتمام اختبار أو مشروع نهاية الكورس، يستطيع المتدرب طلب الشهادة برسوم منفصلة. الشهادة من وزارة التنمية السورية، ومعترف بها محليًا ودوليًا وخارجيًا، ويمكن تصديقها عبر وزارة الخارجية السورية إذا رغب المتدرب باستخدامها خارج سوريا.</p>
-            <p className="mt-4 text-base leading-[2] text-[#5E6B78]">نقوم بتسليم الشهادة وإرسالها إلى المتدرب أينما كان، وفق إجراءات الإصدار والتسليم. الشهادة اختيارية وليست شرطًا للتسجيل في الكورس.</p>
-            <div className="mt-6 border-r-2 border-[#C89B3C] pr-4 text-sm font-bold leading-[2] text-[#152238]">الاختبار أو المشروع النهائي هو متطلب الحصول على الشهادة، والرسوم منفصلة عن رسوم الكورس.</div>
+          <div className="order-1 md:order-2">
+            <p className="mb-3 text-sm font-bold text-[#C89B3C]">خيار إضافي بعد إتمام الكورس</p>
+            <h2 className="text-3xl font-bold leading-[1.4] text-[#152238] md:text-5xl">شهادة اختيارية من وزارة التنمية السورية</h2>
+            <p className="mt-4 inline-flex rounded-full bg-[#EAF4F1] px-3 py-1.5 text-sm font-bold text-[#0F766E]">اختيارية — والرسوم منفصلة عن رسوم الكورس</p>
+            <p className="mt-5 text-base leading-[2] text-[#5E6B78]">بعد اجتياز اختبار أو تنفيذ مشروع نهاية الكورس، يمكنك طلب شهادة من وزارة التنمية السورية. الشهادة معترف بها محليًا ودوليًا وخارجيًا، ويمكن تصديقها عبر وزارة الخارجية السورية إذا رغبت باستخدامها خارج سوريا.</p>
+            <p className="mt-4 text-base leading-[2] text-[#5E6B78]">نصدر الشهادة ونرسلها إليك أينما كنت، وهي ليست شرطًا للتسجيل في الكورس.</p>
+            <div className="mt-6 border-r-2 border-[#C89B3C] pr-4 text-sm font-bold leading-[2] text-[#152238]">متطلب الحصول على الشهادة: اختبار أو مشروع نهائي.</div>
           </div>
         </div>
       </section>
