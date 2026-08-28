@@ -165,10 +165,10 @@ export default function LandingPage() {
               برنامج عملي للمعلمين السوريين
             </div>
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#152238] md:text-6xl">
-              من كتابك إلى مادة تعليمية جاهزة — بوقت أقل وتحكم أكبر
+              كل أسبوع تعيد التحضير من الصفر؟ ابدأ من كتابك وأنجز مادة تعليمية بوقت أقل.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-[2] text-[#5E6B78] md:text-xl">
-              تعلّم سير عمل عملي يحوّل مصدرك إلى اختبار، شرح، PDF، خريطة، عرض أو سيناريو فيديو، مع مراجعة المعلم قبل استخدام الناتج مع الطلاب.
+              تعلّم طريقة عملية تحوّل مصدرك إلى اختبار، شرح، PDF، خريطة ذهنية، عرض أو سيناريو فيديو — مع بقاء المراجعة والقرار بيدك كمعلم.
             </p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white shadow-[0_12px_30px_rgba(15,118,110,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
@@ -226,7 +226,7 @@ export default function LandingPage() {
       {/* ===== 3. PROOF STRIP ===== */}
       <section className="border-b border-[#DCE3E1] bg-[#F3F7F5]">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 py-5 text-center text-sm font-bold text-[#3E5361] md:px-8">
-          <span>منهج عملي من المصدر إلى المخرج</span>
+          <span>تبدأ من مصدرك، لا من صفحة فارغة</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
           <span>مناسب للمبتدئ</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
@@ -239,10 +239,10 @@ export default function LandingPage() {
         <div className="mx-auto grid max-w-[1180px] gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:items-center md:px-8 md:py-24">
           <div>
             <p className="mb-4 text-sm font-bold text-[#C89B3C]">المشكلة اليومية</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">المشكلة ليست نقص الأدوات؛ المشكلة هي الفوضى.</h2>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل أسبوع تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟</h2>
           </div>
           <div className="border-r-2 border-[#0F766E] pr-6 md:pr-10">
-            <p className="text-lg leading-[2] text-[#5E6B78] md:text-xl">قد تملك الكتاب، وتملك أفكارًا كثيرة، لكن تحضير اختبار أو شرح أو ملف منظم من الصفر يستهلك وقتك. في هذه الدورة تتعلم طريقة ثابتة: تحدد هدفك، ترفق مصدرك، تكتب طلبًا واضحًا، تراجع الناتج، ثم تحوّله إلى مادة تستخدمها مع طلابك.</p>
+            <p className="text-lg leading-[2] text-[#5E6B78] md:text-xl">قد تملك الكتاب والخبرة، لكن تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر يستهلك وقتك. داخل الدورة تتعلم مسارًا ثابتًا: تحدد المطلوب، ترفق مصدرك، تستخرج الأفكار والأسئلة، تراجع الناتج، ثم تخرجه بالشكل المناسب لطلابك.</p>
             <p className="mt-6 font-bold text-[#0F766E]">لا نلغي دور المعلم — نزيل العمل المتكرر من طريقه.</p>
           </div>
         </div>
@@ -253,8 +253,8 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
-            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل أن تبدأ من صفحة فارغة، ابدأ من منهجك.</h2>
-            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت لا تشتري قائمة أدوات؛ تتعلم كيف تبني مخرجات تعليمية متعددة من المصدر نفسه، وتحتفظ بقرار الدقة والملاءمة.</p>
+            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تبدأ من صفحة فاضية، ابدأ من مسودة قوية.</h2>
+            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت لا تشتري قائمة أدوات؛ تتعلم كيف تحوّل المصدر نفسه إلى مخرجات متعددة، وتحتفظ بقرار الدقة والملاءمة قبل أن يصل أي شيء إلى طلابك.</p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {[
@@ -278,8 +278,8 @@ export default function LandingPage() {
           <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center">
             <div>
               <p className="mb-4 text-sm font-bold text-[#0F766E]">شاهد قبل أن تقرر</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">عينة عملية من طريقة الشرح</h2>
-              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">شاهد كيف يبدأ العمل من مصدر المعلم وينتهي بمسودة اختبار منظمة، ثم تعرف على بقية المخرجات داخل الكورس.</p>
+              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شاهد النتيجة قبل ما تقرر</h2>
+              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">شاهد كيف ينتقل العمل من مصدر المعلم إلى أسئلة واختبار ومخرج منظم، ثم تعرّف على بقية النماذج الحقيقية داخل الكورس.</p>
               <a href={createWhatsAppLink('مرحباً، شاهدت العينة وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('redesigned_sample')} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">أريد تفاصيل التسجيل <ArrowLeft className="h-4 w-4" /></a>
             </div>
             <div className="overflow-hidden border border-[#B9D2CD] bg-[#152238] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
@@ -308,7 +308,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#C89B3C]">التغيير العملي</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">من التحضير المتكرر إلى سير عمل يمكنك تكراره.</h2>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">من تحضير يتكرر كل أسبوع إلى طريقة يمكنك تكرارها مع أي درس.</h2>
           </div>
           <div className="mt-12 grid gap-0 border-y border-[#DCE3E1] md:grid-cols-2">
             <div className="border-b border-[#DCE3E1] py-8 md:border-b-0 md:border-l md:pl-10 md:py-10">
@@ -339,7 +339,7 @@ export default function LandingPage() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold text-[#0F766E]">خريطة الدورة</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">ثلاثة مسارات، وكل مسار ينتهي بمخرج واضح.</h2>
+              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">ثلاثة مسارات عملية، وكل مسار ينتهي بنتيجة تراها وتستخدمها.</h2>
             </div>
             <span className="text-sm font-bold text-[#5E6B78]">20 محاضرة · {COURSE_DURATION}</span>
           </div>
@@ -375,8 +375,8 @@ export default function LandingPage() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold text-[#C89B3C]">دليل بصري</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شاهد المخرج، لا تسمع الوعد فقط.</h2>
-              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">نماذج حقيقية من اختبارات وخرائط وعروض وملفات صوتية مبنية على مصادر دراسية.</p>
+              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">شاهد المخرج الحقيقي، لا تسمع الوعد فقط.</h2>
+              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">نماذج حقيقية من اختبارات وخرائط ذهنية وعروض وملفات صوتية وفيديوهات مبنية على مصادر دراسية.</p>
             </div>
             <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_results')} className="inline-flex items-center gap-2 font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">افتح معرض النماذج <ArrowLeft className="h-4 w-4" /></a>
           </div>
@@ -425,7 +425,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#0F766E]">مع التسجيل</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل ما يساعدك على التطبيق، في مكان واحد.</h2>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل ما تحتاجه لتطبّق الطريقة بعد انتهاء الدروس.</h2>
           </div>
           <div className="mt-10 border-t border-[#B9D2CD]">
             {bonuses.map((bonus, i) => (
@@ -469,10 +469,10 @@ export default function LandingPage() {
       <section className="bg-[#152238] text-white">
         <div className="mx-auto max-w-[980px] px-5 py-16 text-center md:px-8 md:py-24">
           <p className="mb-4 text-sm font-bold text-[#D9B96C]">ابدأ من مصدرك</p>
-          <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">حوّل وقت التحضير إلى وقت للتدريس.</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-white/70 md:text-lg">اطلب تفاصيل التسجيل، واعرف طريقة الدفع والوصول إلى الكورس قبل أن تتخذ قرارك.</p>
+          <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">خفف وقت التحضير، وخلّي وقتك للشرح والطلاب.</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-white/70 md:text-lg">اطلب تفاصيل التسجيل وطريقة الدفع والوصول إلى الكورس، وخذ قرارك بعد ما تشوف القيمة بوضوح.</p>
           <div className="mx-auto mt-10 max-w-md border border-white/20 bg-white/5 p-7">
-            <div className="text-sm text-white/60">عرض التسجيل لمدة 7 أيام</div>
+            <div className="text-sm text-white/60">سعر التسجيل الحالي</div>
             <div className="mt-3 flex items-baseline justify-center gap-3"><span className="text-sm text-white/45 line-through">{currentPricing.originalPrice}</span><span className="text-3xl font-bold text-[#D9B96C]">{currentPricing.price}</span></div>
             <div className="mt-2 text-sm text-white/60">{currentPricing.currency}</div>
             <a href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')} onClick={() => trackWhatsAppClick('redesigned_final_cta')} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white transition-all hover:bg-[#14A39A]">سجّل الآن عبر واتساب <MessageCircle className="h-5 w-5" /></a>
