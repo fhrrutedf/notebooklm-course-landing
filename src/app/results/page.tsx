@@ -129,10 +129,16 @@ const featuredSamples = [
     tag: 'اختبار وورقة امتحان',
   },
   {
-    title: 'اختبار المتتاليات المؤتمت',
-    subtitle: 'نموذج تعليمي يوضح كيف تتحول أسئلة الدرس إلى اختبار منظم.',
-    image: '/samples/user/sequences-test-01.png',
-    tag: 'اختبار تعليمي',
+    title: 'إنفوجرافيك كيمياء',
+    subtitle: 'تحويل محتوى درس العلوم إلى ملخص بصري منظم.',
+    image: '/samples/previews/chemistry-infographic.webp',
+    tag: 'إنفوجرافيك كيمياء',
+  },
+  {
+    title: 'عرض تقديمي — كيمياء',
+    subtitle: 'عرض تعليمي من محتوى الدرس، ظاهر داخل الصفحة للمعاينة.',
+    image: '/samples/previews/chemistry-slides.webp',
+    tag: 'عرض تقديمي — كيمياء',
   },
 ]
 
@@ -189,7 +195,7 @@ export default function ResultsPage() {
       </section>
 
       <section className="bg-[#F3F7F5]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-2xl"><p className="mb-4 text-sm font-bold text-[#0F766E]">مخرجات أخرى</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شرح، PDF، عروض وصوتيات</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إلى جانب رحلة الاختبار والامتحان، تتعلم بناء مخرجات متعددة من المصدر نفسه.</p></div><div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{localSamples.map((sample) => { const Icon = sample.icon; return (<article key={sample.title} className="overflow-hidden border border-[#C9D8D5] bg-[#FBFAF7]"><div className="flex h-48 items-center justify-center bg-white">{sample.preview ? <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-full w-full object-contain p-3" loading="lazy" /> : <Icon className="h-14 w-14 text-[#0F766E]" />}</div><div className="p-5"><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-[#0F766E]" /><h3 className="font-bold text-[#152238]">{sample.title}</h3></div><p className="mt-3 min-h-12 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div></article>) })}</div></div>
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-2xl"><p className="mb-4 text-sm font-bold text-[#0F766E]">مخرجات أخرى</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شرح، PDF، عروض وصوتيات</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إلى جانب رحلة الاختبار والامتحان، تتعلم بناء مخرجات متعددة من المصدر نفسه.</p></div><div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{localSamples.filter((sample) => !['مخطط كيمياء — PDF', 'عرض تقديمي — كيمياء'].includes(sample.title)).map((sample) => { const Icon = sample.icon; return (<article key={sample.title} className="overflow-hidden border border-[#C9D8D5] bg-[#FBFAF7]"><div className="flex h-48 items-center justify-center bg-white">{sample.preview ? <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-full w-full object-contain p-3" loading="lazy" /> : <Icon className="h-14 w-14 text-[#0F766E]" />}</div><div className="p-5"><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-[#0F766E]" /><h3 className="font-bold text-[#152238]">{sample.title}</h3></div><p className="mt-3 min-h-12 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div></article>) })}</div></div>
       </section>
 
       <section className="bg-[#FBFAF7]">
