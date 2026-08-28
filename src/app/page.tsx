@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { track } from '@vercel/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import {
@@ -288,7 +289,7 @@ export default function LandingPage() {
                   <iframe loading="lazy" className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 ) : (
                   <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
-                    <img src="/images/advanced-lesson-poster.webp" alt="معاينة عينة من درس متقدم في الكورس" width="1280" height="720" decoding="async" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
+                    <Image src="/images/advanced-lesson-poster.webp" alt="معاينة عينة من درس متقدم في الكورس" width={1280} height={720} sizes="(max-width: 768px) 100vw, 760px" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-[#0B172A]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
                       <span className="text-sm font-bold">عينة من درس متقدم — نحو 12 دقيقة</span>
@@ -442,7 +443,7 @@ export default function LandingPage() {
       {/* ===== 11. TRAINER ===== */}
       <section className="bg-[#FBFAF7]">
         <div className="mx-auto grid max-w-[1180px] gap-10 px-5 py-16 md:grid-cols-[0.65fr_1.35fr] md:items-center md:px-8 md:py-24">
-          <div className="flex justify-center md:justify-start"><img src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية" width="224" height="224" decoding="async" loading="lazy" className="h-56 w-56 rounded-full object-cover grayscale-[15%] ring-8 ring-[#EAF4F1]" /></div>
+          <div className="flex justify-center md:justify-start"><Image src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية" width={224} height={224} sizes="224px" loading="lazy" className="h-56 w-56 rounded-full object-cover grayscale-[15%] ring-8 ring-[#EAF4F1]" /></div>
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#C89B3C]">من يقودك؟</p>
             <h2 className="text-3xl font-bold text-[#152238] md:text-5xl">نواف البوسطة</h2>
