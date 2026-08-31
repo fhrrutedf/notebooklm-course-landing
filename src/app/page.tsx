@@ -32,6 +32,7 @@ export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const [offerTimeLeft, setOfferTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
     () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
@@ -41,6 +42,23 @@ export default function LandingPage() {
   useEffect(() => {
     const directRef = resolveAffiliateRef(window.location.search)
     if (directRef) window.localStorage.setItem('course_affiliate_ref', directRef)
+  }, [])
+
+  useEffect(() => {
+    const offerEndsAt = new Date('2026-09-07T23:59:59-07:00').getTime()
+    const updateOfferClock = () => {
+      const remaining = Math.max(0, offerEndsAt - Date.now())
+      const totalSeconds = Math.floor(remaining / 1000)
+      setOfferTimeLeft({
+        days: Math.floor(totalSeconds / 86400),
+        hours: Math.floor((totalSeconds % 86400) / 3600),
+        minutes: Math.floor((totalSeconds % 3600) / 60),
+        seconds: totalSeconds % 60,
+      })
+    }
+    updateOfferClock()
+    const timer = window.setInterval(updateOfferClock, 1000)
+    return () => window.clearInterval(timer)
   }, [])
 
   const currentPricing = {
@@ -165,27 +183,34 @@ export default function LandingPage() {
               المشكلة اليومية
             </div>
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#152238] md:text-6xl">
-              كل أسبوع عم تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟
+              من معلّم تقليدي إلى معلّم ذكي يستخدم الذكاء الاصطناعي بذكاء.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-[2] text-[#5E6B78] md:text-xl">
-              يمكن يكون معك الكتاب والخبرة، بس تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر بياخد وقتك. بالكورس بتتعلّم مسار ثابت: بتحدد المطلوب، بترفق مصدرك، بتستخرج الأفكار والأسئلة، بتراجع النتيجة، وبعدين بتطلعها بالشكل المناسب لطلابك.
+              بالكورس بتتعلّم كيف تستخدم الذكاء الاصطناعي لتحوّل كتبك ومصادرك إلى شرح واضح، Podcast تعليمي، اختبارات وورق امتحان جاهز، عروض تقديمية، مقاطع فيديو تعليمية ومواد بصرية — وبوقت أقل.
             </p>
-            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">ما منلغي دور المعلم — منخفف عنه الشغل المتكرر حتى يركّز على الشرح والطلاب.</p>
-            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white shadow-[0_12px_30px_rgba(15,118,110,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
-                اطلب تفاصيل التسجيل
+            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">بتنتقل من شغل يدوي متكرر إلى شغل أذكى: بتصنع محتوى مفيد لطلابك، وبتوفر وقت التحضير، وبتبقى أنت صاحب القرار والمراجعة.</p>
+            <div className="mt-8 flex flex-col items-start gap-3">
+              <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-8 py-4 text-lg font-bold text-white shadow-[0_14px_34px_rgba(15,118,110,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
+                اطلب تفاصيل التسجيل عبر واتساب
                 <MessageCircle className="h-5 w-5" />
               </a>
-              <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_hero')} className="inline-flex items-center gap-2 px-2 py-2 text-base font-bold text-[#152238] underline decoration-[#C89B3C] decoration-2 underline-offset-8 transition-colors hover:text-[#0F766E]">
-                شاهد نماذج حقيقية أولًا
+              <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_hero')} className="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold text-[#152238] underline decoration-[#C89B3C] decoration-2 underline-offset-8 transition-colors hover:text-[#0F766E]">
+                شاهد النماذج الحقيقية أولًا
                 <ArrowLeft className="h-4 w-4" />
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#DCE3E1] pt-5 text-sm text-[#5E6B78]">
-              <span className="font-bold text-[#152238]">30 دولارًا — خصم لمدة 7 أيام</span>
-              <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
-              <span>أقساط متاحة</span>
-              <span>وصول دائم</span>
+            <p className="mt-5 text-sm font-bold text-[#5E6B78]">الشهادة اختيارية برسوم منفصلة، والتسجيل يعطيك وصولًا دائمًا إلى فيديوهات الكورس عبر مجموعة Telegram خاصة.</p>
+            <div className="mt-8 grid gap-4 border-t border-[#DCE3E1] pt-5 sm:grid-cols-[1fr_auto] sm:items-center">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#5E6B78]">
+                <span className="font-bold text-[#152238]">30 دولارًا — سعر العرض</span>
+                <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
+                <span>أقساط متاحة</span>
+                <span>وصول دائم</span>
+              </div>
+              <div className="rounded-xl border border-[#D9B96C] bg-[#FFF9E8] px-4 py-3 text-center text-sm font-bold text-[#152238]">
+                <span className="block text-[#A34F4F]">49 دولارًا <span className="line-through">(السعر الأصلي)</span></span>
+                <span className="mt-1 block text-[#0F766E]">ينتهي العرض خلال {offerTimeLeft.days} يوم · {String(offerTimeLeft.hours).padStart(2, '0')}:{String(offerTimeLeft.minutes).padStart(2, '0')}:{String(offerTimeLeft.seconds).padStart(2, '0')}</span>
+              </div>
             </div>
           </div>
 
@@ -202,30 +227,6 @@ export default function LandingPage() {
           <span>90 معلّمًا ومعلّمة اشتروا الكورس</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
           <span>مخرجات بتستخدمها بعد المراجعة</span>
-        </div>
-      </section>
-
-      {/* ===== 5. WHAT YOU GET ===== */}
-      <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
-            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
-            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
-          </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {[
-              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
-              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
-              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
-            ].map((item) => (
-              <div key={item.n} className="border-t border-white/25 pt-5">
-                <span className="text-sm font-bold text-[#D9B96C]">{item.n}</span>
-                <h3 className="mt-4 text-xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-[1.9] text-white/65">{item.text}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -256,6 +257,30 @@ export default function LandingPage() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5. WHAT YOU GET ===== */}
+      <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
+          <div className="max-w-2xl">
+            <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
+            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
+            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {[
+              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
+              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
+              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
+            ].map((item) => (
+              <div key={item.n} className="border-t border-white/25 pt-5">
+                <span className="text-sm font-bold text-[#D9B96C]">{item.n}</span>
+                <h3 className="mt-4 text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-[1.9] text-white/65">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
