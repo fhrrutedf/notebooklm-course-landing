@@ -44,16 +44,16 @@ export default function LandingPage() {
   }, [])
 
   const currentPricing = {
-    price: '3,200 ليرة سورية جديدة',
-    originalPrice: '4,500 ليرة سورية جديدة',
-    currency: 'شام كاش / تحويل بنكي / أقساط لمن لا يتوفر معه المبلغ كاملًا',
+    price: '30 دولارًا',
+    originalPrice: '49 دولارًا',
+    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو أقساط',
   }
   const WHATSAPP_NUMBER = '963985323170'
   const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
   const resultsHref = referralHref('/results', affiliateRef)
   const trackWhatsAppClick = (source: string) => track('whatsapp_click', { source, affiliate_ref: affiliateRef || 'direct' })
   const trackResultsOpen = (source: string) => track('results_open', { source, affiliate_ref: affiliateRef || 'direct' })
-  const COURSE_DURATION = '4 ساعات تقريباً'
+  const COURSE_DURATION = '5 ساعات ونصف'
 
   // ===== DATA =====
 
@@ -88,37 +88,33 @@ export default function LandingPage() {
   ]
 
   const bonuses = [
-    { title: 'ساعة مجانية: كيف تكتب Prompt واضحًا', subtitle: 'Bonus Training', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'تدريب إضافي في نهاية الكورس يعلّمك كيف تكتب Prompt واضحًا.', icon: Zap },
-    { title: '4 جلسات مباشرة للأسئلة والأجوبة', subtitle: 'Live Support', oldValue: '', value: 'ضمن تجربة الكورس', desc: 'جلسات مباشرة للأسئلة والأجوبة: إذا كان لديك سؤال، نناقشه ونطبّق عليه مباشرة، مع متابعة شخصية من المدرب أثناء التطبيق.', icon: Users },
-    { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة تساعد في الشرح والاختبارات والمشاريع والفيديوهات، مع طريقة تعديلها حسب الصف والمادة.', icon: Zap },
+    { title: 'ساعة مجانية: كيف تكتب Prompt واضحًا', subtitle: 'Bonus Training', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'تدريب إضافي بنهاية الكورس بيعلّمك كيف تكتب Prompt واضح ومفيد.', icon: Zap },
+    { title: '4 جلسات مباشرة للأسئلة والأجوبة', subtitle: 'Live Support', oldValue: '', value: 'ضمن تجربة الكورس', desc: 'جلسات مباشرة للأسئلة والأجوبة: إذا عندك سؤال، منناقشه ومنطبّق عليه سوا، مع متابعة شخصية من المدرب أثناء التطبيق.', icon: Users },
+    { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة بتساعدك بالشرح والاختبارات والمشاريع والفيديوهات، وتختصر عليك وقت التحضير.', icon: Zap },
     { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', oldValue: '1,000 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
-    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Support', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات عند تطور الأدوات، ودعم عبر واتساب عند التطبيق، مع إمكانية ترتيب مكالمة مساعدة عند الحاجة وبالتنسيق المسبق.', icon: Shield },
+    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Support', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات مستمرة ودعم عبر واتساب وقت التطبيق، مع متابعة شخصية من المدرب عند الحاجة.', icon: Shield },
   ]
 
   const faqs = [
     {
-      q: 'أنا معلم أو دكتور جامعي ما بعرف شي بالتكنولوجيا، فيي أستفيد؟',
-      a: 'أكيد! الكورس مصمم خصيصاً للمعلمين والدكاترة والمدربين اللي ما عندهن أي خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر. رح نمشي معك خطوة بخطوة من الصفر.',
+      q: 'أنا معلم وما بعرف شي بالتكنولوجيا، فيني استفيد؟',
+      a: 'أكيد فيك! الكورس معمول للمعلمين اللي ما عندهن خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر، ومنمشي معك خطوة خطوة من الصفر.',
     },
     {
       q: 'هل سأحتاج إلى دفع اشتراكات إضافية للأدوات؟',
-      a: 'لا. الكورس مصمم بحيث تستطيع تطبيق ما تتعلمه من دون رسوم اشتراك شهرية إلزامية للأدوات. نشرح لك الخيارات المتاحة وطريقة اختيار ما يناسبك.',
+      a: 'لا، مو ضروري. منشرح لك الخيارات المتاحة، وبتعرف شو اللي بناسبك قبل ما تدفع أي اشتراك إضافي.',
     },
     {
       q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج؟',
       a: 'نتعلم كيف نرفق الكتاب المدرسي أو المصدر ونطلب من الأداة الاعتماد عليه، ثم نراجع الناتج قبل استخدامه. وعندما تدعم الأداة الإحالة للمصدر، نتحقق من الصفحات والمعلومات بدل الاعتماد على أي نتيجة دون مراجعة.',
     },
     {
-      q: 'كيف بدفع؟',
-      a: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو مكتب صرافة. يوجد أقساط، ونتفق على التفاصيل عبر التواصل. بعد الاتفاق، نرسل لك تفاصيل الوصول إلى الكورس.',
+      q: 'كيف فيني ادفع؟',
+      a: 'الدفع داخل سوريا بيكون عبر شام كاش أو تحويل بنكي، وفي أقساط إذا ما كان المبلغ كامل معك. بعد الاتفاق، منرسل لك تفاصيل الوصول.',
     },
     {
-      q: 'هل الكورس فيديوهات مسجلة أم لقاءات مباشرة؟',
+      q: 'الكورس فيديوهات مسجلة ولا لقاءات مباشرة؟',
       a: 'الكورس مدته 5 ساعات ونصف، وهو برنامج مسجل ومنظم، وترافقه 4 جلسات مباشرة للأسئلة والأجوبة والتطبيق على الأسئلة التي يطرحها المتدرّبون، مع متابعة شخصية من المدرب أثناء التطبيق.',
-    },
-    {
-      q: 'كم مدة الكورس؟ وهل توجد جلسات مباشرة؟',
-      a: 'مدة المحتوى المسجل 5 ساعات ونصف. نعم، توجد 4 جلسات مباشرة للأسئلة والأجوبة، نناقش فيها أسئلة المتدرّبين ونطبّق عليها، إضافة إلى متابعة شخصية من المدرب.',
     },
     {
       q: 'هل تشرحون من مصادر محددة أم يجيب الذكاء الاصطناعي من عنده؟',
@@ -129,7 +125,7 @@ export default function LandingPage() {
       a: 'نعم، نتناول طريقة تحويل المادة إلى عرض تقديمي، واختبار أو ورقة عمل PDF جاهزة للطباعة، مع تنظيم عربي واضح ومراجعة قبل التوزيع.',
     },
     {
-      q: 'هل يوجد دعم أو تحديثات بعد انتهاء الكورس؟',
+      q: 'في دعم أو تحديثات بعد الكورس؟',
       a: 'نعم، توجد تحديثات للكورس ودعم عبر واتساب عند التطبيق. ويمكن ترتيب مكالمة مساعدة عند الحاجة إلى توضيح عملي وبالتنسيق المسبق.',
     },
     {
@@ -137,7 +133,7 @@ export default function LandingPage() {
       a: 'نعم. تتعلم طريقة البحث على الإنترنت، تحديد المصادر، إعداد مسودة تقرير أو رسالة أو بحث، ثم مراجعة المعلومات والمراجع قبل اعتماد النتيجة.',
     },
     {
-      q: 'هل الشهادة إلزامية مع التسجيل؟',
+      q: 'الشهادة إلزامية مع التسجيل؟',
       a: 'لا. الشهادة اختيارية ورسومها منفصلة عن الكورس. تتوفر شهادة من وزارة التنمية السورية قابلة للتصديق عبر وزارة الخارجية السورية. للاستفسار عن الإجراءات والاعتراف محليًا ودوليًا، تواصل معنا عبر الخاص.',
     },
   ]
@@ -169,12 +165,12 @@ export default function LandingPage() {
               المشكلة اليومية
             </div>
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#152238] md:text-6xl">
-              كل أسبوع تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟
+              كل أسبوع عم تعيد كتابة الأسئلة وتنسيق الدرس من الصفر؟
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-[2] text-[#5E6B78] md:text-xl">
-              قد تملك الكتاب والخبرة، لكن تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر يستهلك وقتك. داخل الدورة تتعلم مسارًا ثابتًا: تحدد المطلوب، ترفق مصدرك، تستخرج الأفكار والأسئلة، تراجع الناتج، ثم تخرجه بالشكل المناسب لطلابك.
+              يمكن يكون معك الكتاب والخبرة، بس تحضير اختبار أو شرح أو ورقة امتحان أو مادة بصرية من الصفر بياخد وقتك. بالكورس بتتعلّم مسار ثابت: بتحدد المطلوب، بترفق مصدرك، بتستخرج الأفكار والأسئلة، بتراجع النتيجة، وبعدين بتطلعها بالشكل المناسب لطلابك.
             </p>
-            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">لا نلغي دور المعلم — نزيل العمل المتكرر من طريقه.</p>
+            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">ما منلغي دور المعلم — منخفف عنه الشغل المتكرر حتى يركّز على الشرح والطلاب.</p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white shadow-[0_12px_30px_rgba(15,118,110,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
                 اطلب تفاصيل التسجيل
@@ -186,7 +182,7 @@ export default function LandingPage() {
               </a>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#DCE3E1] pt-5 text-sm text-[#5E6B78]">
-              <span className="font-bold text-[#152238]">3,200 ليرة سورية جديدة</span>
+              <span className="font-bold text-[#152238]">30 دولارًا — خصم لمدة 7 أيام</span>
               <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
               <span>أقساط متاحة</span>
               <span>وصول دائم</span>
@@ -199,11 +195,13 @@ export default function LandingPage() {
       {/* ===== 3. PROOF STRIP ===== */}
       <section className="border-b border-[#DCE3E1] bg-[#F3F7F5]">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 py-5 text-center text-sm font-bold text-[#3E5361] md:px-8">
-          <span>تبدأ من مصدرك، لا من صفحة فارغة</span>
+          <span>بتبدأ من مصدرك، مو من صفحة فاضية</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
-          <span>مناسب للمبتدئ</span>
+          <span>مناسب حتى لو كنت مبتدئ</span>
           <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
-          <span>مخرجات قابلة للاستخدام بعد المراجعة</span>
+          <span>90 معلّمًا ومعلّمة اشتروا الكورس</span>
+          <span className="hidden h-1 w-1 rounded-full bg-[#C89B3C] sm:block" />
+          <span>مخرجات بتستخدمها بعد المراجعة</span>
         </div>
       </section>
 
@@ -212,14 +210,14 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
-            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تبدأ من صفحة فاضية، ابدأ من مسودة قوية.</h2>
-            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت لا تشتري قائمة أدوات؛ تتعلم كيف تحوّل المصدر نفسه إلى مخرجات متعددة، وتحتفظ بقرار الدقة والملاءمة قبل أن يصل أي شيء إلى طلابك.</p>
+            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
+            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {[
-              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس إلى شرح واضح أو سيناريو فيديو مناسب لعمر الطالب ومستواه.' },
-              { n: '02', title: 'اختبار وPDF', text: 'أنشئ أسئلة ونسخًا متعددة ونموذج إجابة، ثم أخرج ورقة منظمة بعد المراجعة.' },
-              { n: '03', title: 'عرض وبحث وتفاعل', text: 'ابنِ عرضًا أو نشاطًا أو تقريرًا أو مادة صوتية انطلاقًا من مصدرك.' },
+              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
+              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
+              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
             ].map((item) => (
               <div key={item.n} className="border-t border-white/25 pt-5">
                 <span className="text-sm font-bold text-[#D9B96C]">{item.n}</span>
@@ -238,7 +236,7 @@ export default function LandingPage() {
             <div>
               <p className="mb-4 text-sm font-bold text-[#0F766E]">شاهد قبل أن تقرر</p>
               <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">عينة من درس متقدم</h2>
-              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">هذا المقطع عينة من درس متقدم داخل الكورس. شاهد كيف ينتقل العمل من مصدر المعلم إلى أسئلة واختبار وورقة امتحان منظمة، بينما يبدأ الكورس معك خطوة بخطوة من الأساسيات.</p>
+              <p className="mt-5 text-base leading-[2] text-[#5E6B78]">هالمقطع عينة من درس متقدم بالكورس. شوف كيف مننتقل من مصدر المعلم لأسئلة واختبار وورقة امتحان مرتبة، بينما الكورس نفسه بيمشي معك خطوة خطوة من الأساسيات.</p>
               <a href={createWhatsAppLink('مرحباً، شاهدت العينة وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('redesigned_sample')} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 font-bold text-[#0F766E] underline decoration-[#C89B3C] decoration-2 underline-offset-8">أريد تفاصيل التسجيل <ArrowLeft className="h-4 w-4" /></a>
             </div>
             <div className="overflow-hidden border border-[#B9D2CD] bg-[#152238] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
@@ -267,25 +265,25 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#C89B3C]">التغيير العملي</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">من تحضير يتكرر كل أسبوع إلى طريقة يمكنك تكرارها مع أي درس.</h2>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">من تحضير بيتكرر كل أسبوع لطريقة فيك تكررها مع أي درس.</h2>
           </div>
           <div className="mt-12 grid gap-0 border-y border-[#DCE3E1] md:grid-cols-2">
             <div className="border-b border-[#DCE3E1] py-8 md:border-b-0 md:border-l md:pl-10 md:py-10">
               <p className="text-sm font-bold text-[#A34F4F]">قبل</p>
-              <h3 className="mt-3 text-2xl font-bold text-[#152238]">كل درس يبدأ من الصفر</h3>
+              <h3 className="mt-3 text-2xl font-bold text-[#152238]">كل درس بيبلّش من الصفر</h3>
               <div className="mt-7 space-y-4 text-[#5E6B78]">
-                <p className="flex gap-3"><Clock className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> وقت طويل في الكتابة والتنسيق.</p>
-                <p className="flex gap-3"><FileText className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> نسخة واحدة من الاختبار ومراجعة متأخرة.</p>
-                <p className="flex gap-3"><Zap className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> تشتت بين أفكار وأدوات كثيرة.</p>
+                <p className="flex gap-3"><Clock className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> وقت طويل بالكتابة والتنسيق.</p>
+                <p className="flex gap-3"><FileText className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> نسخة وحدة من الاختبار ومراجعة متأخرة.</p>
+                <p className="flex gap-3"><Zap className="mt-1 h-5 w-5 shrink-0 text-[#A34F4F]" /> تشتّت بين أفكار وأدوات كثيرة.</p>
               </div>
             </div>
             <div className="py-8 md:pr-10 md:py-10">
               <p className="text-sm font-bold text-[#0F766E]">بعد التعلّم</p>
-              <h3 className="mt-3 text-2xl font-bold text-[#152238]">تبدأ من المصدر وتعرف الخطوة التالية</h3>
+              <h3 className="mt-3 text-2xl font-bold text-[#152238]">بتبدأ من المصدر وبتعرف شو الخطوة الجاية</h3>
               <div className="mt-7 space-y-4 text-[#5E6B78]">
                 <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" /> طلب واضح ومخرج محدد لكل درس.</p>
-                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" /> نسخ متعددة ومخرجات منظمة بعد المراجعة.</p>
-                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" /> وقت أكبر للشرح والتفاعل مع الطلاب.</p>
+                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" /> نسخ متعددة ومخرجات مرتبة بعد المراجعة.</p>
+                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" /> وقت أكبر للشرح والتفاعل مع طلابك.</p>
               </div>
             </div>
           </div>
@@ -298,7 +296,7 @@ export default function LandingPage() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold text-[#0F766E]">خريطة الدورة</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">ثلاثة مسارات عملية، وكل مسار ينتهي بنتيجة تراها وتستخدمها.</h2>
+              <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">ثلاثة مسارات عملية، وكل مسار بينتهي بنتيجة بتشوفها وبتستخدمها.</h2>
             </div>
             <span className="text-sm font-bold text-[#5E6B78]">نحو 12 وحدة تدريبية · {COURSE_DURATION}</span>
           </div>
@@ -357,7 +355,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-bold text-[#0F766E]">مع التسجيل</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل ما تحتاجه لتطبّق الطريقة بعد انتهاء الدروس.</h2>
+            <h2 className="text-3xl font-bold leading-[1.45] text-[#152238] md:text-5xl">كل شي بتحتاجه حتى تطبّق الطريقة بعد الدروس.</h2>
           </div>
           <div className="mt-10 border-t border-[#B9D2CD]">
             {bonuses.map((bonus, i) => (
@@ -401,14 +399,14 @@ export default function LandingPage() {
       <section className="bg-[#152238] text-white">
         <div className="mx-auto max-w-[980px] px-5 py-16 text-center md:px-8 md:py-24">
           <p className="mb-4 text-sm font-bold text-[#D9B96C]">ابدأ من مصدرك</p>
-          <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">خفف وقت التحضير، وخلّي وقتك للشرح والطلاب.</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-white/70 md:text-lg">اطلب تفاصيل التسجيل وطريقة الدفع والوصول إلى الكورس، وخذ قرارك بعد ما تشوف القيمة بوضوح.</p>
+          <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">خفّف وقت التحضير، وخلي وقتك للشرح والطلاب.</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-white/70 md:text-lg">اسأل عن التسجيل وطريقة الدفع والوصول للكورس، وخد قرارك بعد ما تشوف القيمة بوضوح.</p>
           <div className="mx-auto mt-10 max-w-md border border-white/20 bg-white/5 p-7">
             <div className="text-sm text-white/60">سعر التسجيل الحالي</div>
             <div className="mt-3 flex items-baseline justify-center gap-3"><span className="text-sm text-white/45 line-through">{currentPricing.originalPrice}</span><span className="text-3xl font-bold text-[#D9B96C]">{currentPricing.price}</span></div>
             <div className="mt-2 text-sm text-white/60">{currentPricing.currency}</div>
             <a href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')} onClick={() => trackWhatsAppClick('redesigned_final_cta')} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white transition-all hover:bg-[#14A39A]">سجّل الآن عبر واتساب <MessageCircle className="h-5 w-5" /></a>
-            <p className="mt-4 text-xs leading-[1.8] text-white/50">الشهادة اختيارية برسوم منفصلة · الوصول إلى الكورس دائم</p>
+            <p className="mt-4 text-xs leading-[1.8] text-white/50">الشهادة اختيارية برسوم منفصلة · فيديوهات الكورس عبر مجموعة Telegram خاصة · وصول دائم</p>
           </div>
         </div>
       </section>

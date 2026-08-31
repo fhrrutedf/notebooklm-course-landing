@@ -107,19 +107,19 @@ type FeaturedSample = { title: string; subtitle: string; image: string; tag: str
 const featuredSamples: FeaturedSample[] = [
   {
     title: 'دليل دراسة اطراد المتتاليات',
-    subtitle: 'تحويل درس رياضيات إلى دليل بصري يشرح الحالات وطرق الدراسة.',
+    subtitle: 'تحويل درس رياضيات لدليل بصري بيساعدك تشرح الفكرة بوضوح.',
     image: '/samples/user/sequence-guide.webp',
     tag: 'دليل دراسة بصري',
   },
   {
     title: 'خريطة ذهنية لبنية الدرس',
-    subtitle: 'تنظيم الأفكار من البنية العامة إلى الفصول والأجزاء الداخلية.',
+    subtitle: 'ترتيب أفكار الدرس من الصورة الكبيرة للتفاصيل.',
     image: '/samples/user/mindmap-brain.png',
     tag: 'خريطة ذهنية',
   },
   {
     title: 'خريطة ذهنية تفصيلية',
-    subtitle: 'تفريع المفاهيم والعناصر الرئيسية في موضوع واحد قابل للمراجعة.',
+    subtitle: 'تفريع المفاهيم الرئيسية بصفحة وحدة سهلة للمراجعة.',
     image: '/samples/user/mindmap-brain-detailed.png',
     tag: 'تنظيم المفاهيم',
   },
@@ -171,8 +171,8 @@ export default function ResultsPage() {
       <header className="border-b border-[#DCE3E1] bg-[#EAF4F1]">
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
           <p className="mb-5 text-sm font-bold text-[#0F766E]">نماذج حقيقية من مخرجات الكورس</p>
-          <h1 className="max-w-4xl text-4xl font-bold leading-[1.4] tracking-tight text-[#152238] md:text-6xl">شوف كيف يتحوّل كتاب واحد إلى منظومة تعليمية كاملة</h1>
-          <p className="mt-6 max-w-3xl text-base leading-[2] text-[#5E6B78] md:text-xl">من دليل الدراسة والخريطة الذهنية، إلى استخراج الأسئلة والاختبار وورقة الامتحان. هذه نماذج عملية مبنية على مصادر دراسية، وتبقى مراجعة المعلم هي الخطوة الأخيرة قبل الاستخدام.</p>
+          <h1 className="max-w-4xl text-4xl font-bold leading-[1.4] tracking-tight text-[#152238] md:text-6xl">شوف كيف بيتحوّل مصدرك إلى محتوى تعليمي بيحل مشكلة التحضير</h1>
+          <p className="mt-6 max-w-3xl text-base leading-[2] text-[#5E6B78] md:text-xl">من مصدرك بتطلع شرح، اختبار، عرض تقديمي، خريطة ذهنية ومحتوى مرتب. هاي نماذج عملية بتفرجيك كيف بينتقل المعلم من الشغل المتكرر لشغل أذكى وأسرع، مع بقاء مراجعته هي الخطوة الأخيرة.</p>
         </div>
       </header>
 
@@ -197,14 +197,14 @@ export default function ResultsPage() {
       </section>
 
       <section className="bg-[#F3F7F5]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-2xl"><p className="mb-4 text-sm font-bold text-[#0F766E]">مخرجات أخرى</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شرح، PDF، عروض وصوتيات</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إلى جانب رحلة الاختبار والامتحان، تتعلم بناء مخرجات متعددة من المصدر نفسه.</p></div><div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{localSamples.filter((sample) => !['مخطط كيمياء — PDF', 'عرض تقديمي — كيمياء'].includes(sample.title)).map((sample) => { const Icon = sample.icon; return (<article key={sample.title} className="overflow-hidden border border-[#C9D8D5] bg-[#FBFAF7]"><div className="flex h-48 items-center justify-center bg-white">{sample.preview ? <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-full w-full object-contain p-3" loading="lazy" /> : <Icon className="h-14 w-14 text-[#0F766E]" />}</div><div className="p-5"><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-[#0F766E]" /><h3 className="font-bold text-[#152238]">{sample.title}</h3></div><p className="mt-3 min-h-12 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div></article>) })}</div></div>
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-2xl"><p className="mb-4 text-sm font-bold text-[#0F766E]">مخرجات أخرى</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شرح، PDF، عروض وصوتيات</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">غير الاختبار والامتحان، فيك تبني مخرجات متعددة من نفس المصدر.</p></div><div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{localSamples.filter((sample) => !['مخطط كيمياء — PDF', 'عرض تقديمي — كيمياء'].includes(sample.title)).map((sample) => { const Icon = sample.icon; return (<article key={sample.title} className="overflow-hidden border border-[#C9D8D5] bg-[#FBFAF7]"><div className="flex h-48 items-center justify-center bg-white">{sample.preview ? <img src={sample.preview} alt={`معاينة ${sample.title}`} className="h-full w-full object-contain p-3" loading="lazy" /> : <Icon className="h-14 w-14 text-[#0F766E]" />}</div><div className="p-5"><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-[#0F766E]" /><h3 className="font-bold text-[#152238]">{sample.title}</h3></div><p className="mt-3 min-h-12 text-sm leading-[1.9] text-[#5E6B78]">{sample.subtitle}</p><a href={sample.file} onClick={() => track('sample_open', { sample: sample.title, kind: sample.kind })} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح النموذج <ExternalLink className="h-4 w-4" /></a></div></article>) })}</div></div>
       </section>
 
       <section className="bg-[#FBFAF7]">
         <div className="mx-auto max-w-[1180px] px-5 py-16 text-center md:px-8 md:py-24"><p className="mb-4 text-sm font-bold text-[#C89B3C]">فيديوهات من التطبيق</p><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">شاهد الطريقة أثناء التنفيذ</h2><p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-[#5E6B78]">الفيديوهات الكاملة تفتح عند الطلب، حتى ترى كيف ينتقل العمل من المصدر إلى مادة تعليمية.</p><div className="mt-10 grid gap-6 md:grid-cols-3">{videoSamples.map((video) => <a key={video.title} href={video.href} onClick={() => track('video_open', { video: video.title })} target="_blank" rel="noopener noreferrer" className="border-t-2 border-[#0F766E] bg-[#F3F7F5] p-6 text-right transition hover:bg-[#EAF4F1]"><Video className="h-7 w-7 text-[#0F766E]" /><h3 className="mt-5 font-bold text-[#152238]">{video.title}</h3><span className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#0F766E]">فتح الفيديو <ExternalLink className="h-4 w-4" /></span></a>)}</div></div>
       </section>
 
-      <section className="border-t border-[#DCE3E1] bg-[#EAF4F1] px-5 py-16 text-center md:py-20"><div className="mx-auto max-w-2xl"><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">هذه النماذج هي النتيجة — والكورس يعلّمك الطريقة.</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إذا أردت بناء مخرجات مشابهة من كتبك ودروسك، اطلب تفاصيل التسجيل وطريقة الدفع عبر واتساب.</p><a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#0F766E] px-8 py-4 font-bold text-white hover:bg-[#115E59]">اطلب تفاصيل التسجيل <MessageCircle className="h-5 w-5" /></a></div></section>
+      <section className="border-t border-[#DCE3E1] bg-[#EAF4F1] px-5 py-16 text-center md:py-20"><div className="mx-auto max-w-2xl"><h2 className="text-3xl font-bold text-[#152238] md:text-5xl">هاي النماذج هي النتيجة — والكورس بيعلّمك الطريقة.</h2><p className="mt-5 text-base leading-[2] text-[#5E6B78]">إذا بدك تبني مخرجات مشابهة من كتبك ودروسك، اسأل عن تفاصيل التسجيل وطريقة الدفع عبر واتساب.</p><a href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد تفاصيل التسجيل في الكورس.')} onClick={() => track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#0F766E] px-8 py-4 font-bold text-white hover:bg-[#115E59]">اطلب تفاصيل التسجيل <MessageCircle className="h-5 w-5" /></a></div></section>
     </div>
   )
 }
