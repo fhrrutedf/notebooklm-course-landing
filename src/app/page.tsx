@@ -64,7 +64,7 @@ export default function LandingPage() {
   const currentPricing = {
     price: '30 دولارًا',
     originalPrice: '49 دولارًا',
-    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو أقساط',
+    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو على قسطين 15$ + 15$',
   }
   const WHATSAPP_NUMBER = '963985323170'
   const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
@@ -199,12 +199,13 @@ export default function LandingPage() {
                 <ArrowLeft className="h-4 w-4" />
               </a>
             </div>
-            <p className="mt-5 text-sm font-bold text-[#5E6B78]">الشهادة اختيارية برسوم منفصلة، والتسجيل يعطيك وصولًا دائمًا إلى فيديوهات الكورس عبر مجموعة Telegram خاصة.</p>
+            <p className="mt-5 flex items-center justify-center gap-2 text-sm font-bold text-[#0F766E]"><Shield className="h-4 w-4 shrink-0" /> ضمان استرجاع كامل خلال 7 أيام</p>
+            <p className="mt-3 text-sm font-bold text-[#5E6B78]">الشهادة اختيارية برسوم منفصلة، والتسجيل يعطيك وصولًا دائمًا إلى فيديوهات الكورس عبر مجموعة Telegram خاصة.</p>
             <div className="mt-8 grid gap-4 border-t border-[#DCE3E1] pt-5 sm:grid-cols-[1fr_auto] sm:items-center">
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#5E6B78]">
                 <span className="font-bold text-[#152238]">30 دولارًا — سعر العرض</span>
                 <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
-                <span>أقساط متاحة</span>
+                <span>أقساط متاحة — قسطين 15$ + 15$</span>
                 <span>وصول دائم</span>
               </div>
               <div className="rounded-xl border border-[#D9B96C] bg-[#FFF9E8] px-4 py-3 text-center text-sm font-bold text-[#152238]">
@@ -433,7 +434,8 @@ export default function LandingPage() {
             <div className="text-sm text-white/60">سعر التسجيل الحالي</div>
             <div className="mt-3 flex items-baseline justify-center gap-3"><span className="text-sm text-white/45 line-through">{currentPricing.originalPrice}</span><span className="text-3xl font-bold text-[#D9B96C]">{currentPricing.price}</span></div>
             <div className="mt-2 text-sm text-white/60">{currentPricing.currency}</div>
-            <a href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')} onClick={() => trackWhatsAppClick('redesigned_final_cta')} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white transition-all hover:bg-[#14A39A]">سجّل الآن عبر واتساب <MessageCircle className="h-5 w-5" /></a>
+            <p className="mt-4 flex items-center justify-center gap-2 text-sm font-bold text-[#D9B96C]"><Shield className="h-4 w-4" /> مخاطرة صفر: ضمان استرجاع كامل خلال 7 أيام دون أي سؤال</p>
+            <a href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')} onClick={() => trackWhatsAppClick('redesigned_final_cta')} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-7 py-4 text-base font-bold text-white transition-all hover:bg-[#14A39A]">سجّل الآن عبر واتساب <MessageCircle className="h-5 w-5" /></a>
             <p className="mt-4 text-xs leading-[1.8] text-white/50">الشهادة اختيارية برسوم منفصلة · فيديوهات الكورس عبر مجموعة Telegram خاصة · وصول دائم</p>
           </div>
         </div>
