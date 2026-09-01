@@ -183,12 +183,12 @@ export default function LandingPage() {
               المشكلة اليومية
             </div>
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#152238] md:text-6xl">
-              من معلّم تقليدي إلى معلّم ذكي يستخدم الذكاء الاصطناعي بذكاء.
+              بتضل تعيد كتابة نفس الاختبار كل أسبوع؟ صير معلّم يبني بدل ما يعيد.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-[2] text-[#5E6B78] md:text-xl">
-              بالكورس بتتعلّم كيف تستخدم الذكاء الاصطناعي لتحوّل كتبك ومصادرك إلى شرح واضح، Podcast تعليمي، اختبارات وورق امتحان جاهز، عروض تقديمية، مقاطع فيديو تعليمية ومواد بصرية — وبوقت أقل.
+              إذا كل مرة بدك تحضّر درس أو اختبار أو عرض تقديمي أو مادة تعليمية من الصفر، الكورس بيعلمك كيف تستخدم الذكاء الاصطناعي لتحوّل كتبك ومصادرك إلى محتوى واضح ومفيد، وتوفّر وقتك للشرح والطلاب.
             </p>
-            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">بتنتقل من شغل يدوي متكرر إلى شغل أذكى: بتصنع محتوى مفيد لطلابك، وبتوفر وقت التحضير، وبتبقى أنت صاحب القرار والمراجعة.</p>
+            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#0F766E]">حلّ مشكلات التحضير، وصير تشتغل بطريقة أذكى: اصنع محتوى مفيد لطلابك، وفّر وقتك، وخلي قرار المراجعة والدقة بإيدك.</p>
             <div className="mt-8 flex flex-col items-start gap-3">
               <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#0F766E] px-8 py-4 text-lg font-bold text-white shadow-[0_14px_34px_rgba(15,118,110,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#115E59] sm:w-auto">
                 اطلب تفاصيل التسجيل عبر واتساب
@@ -230,6 +230,30 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ===== 5. WHAT YOU GET ===== */}
+      <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
+        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
+          <div className="max-w-2xl">
+            <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
+            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
+            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {[
+              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
+              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
+              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
+            ].map((item) => (
+              <div key={item.n} className="border-t border-white/25 pt-5">
+                <span className="text-sm font-bold text-[#D9B96C]">{item.n}</span>
+                <h3 className="mt-4 text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-[1.9] text-white/65">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== 6. SAMPLE VIDEO ===== */}
       <section className="bg-[#F3F7F5]">
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
@@ -257,30 +281,6 @@ export default function LandingPage() {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 5. WHAT YOU GET ===== */}
-      <section className="border-y border-[#DCE3E1] bg-[#152238] text-white">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#D9B96C]">النتيجة التي تهمك</p>
-            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
-            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
-          </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {[
-              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
-              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
-              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
-            ].map((item) => (
-              <div key={item.n} className="border-t border-white/25 pt-5">
-                <span className="text-sm font-bold text-[#D9B96C]">{item.n}</span>
-                <h3 className="mt-4 text-xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-[1.9] text-white/65">{item.text}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -359,17 +359,20 @@ export default function LandingPage() {
             <h2 className="text-2xl md:text-4xl font-bold text-[#1B2A4A] mb-3">آراء طلابنا بعد التدريب</h2>
             <p className="text-[#64748B] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
           </div>
-          <div className="mx-auto flex max-w-md flex-col gap-3 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
+          <div className="mx-auto flex max-w-md flex-col gap-4 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
             {[
-              '/images/training/student-feedback-01.png',
-              '/images/training/student-feedback-02.png',
-              '/images/training/student-feedback-03.png',
-              '/images/training/student-feedback-04.png',
-              '/images/training/student-feedback-05.png',
-            ].map((image, index) => (
-              <a key={image} href={image} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-[#E2E8F0] bg-white">
-                <img src={image} alt={`رأي متدرب ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
-              </a>
+              { image: '/images/training/student-feedback-01.png', quote: 'الكورس الرائع حسيت حالي منجذبة للمعلومة كأني أول مرة بعرفها، بتمنى باقي الكورس يكمل هيك.', label: 'متدرّبة' },
+              { image: '/images/training/student-feedback-02.png', quote: 'شكرًا إلك أستاذ، فعلاً الجلسة كانت أكتر من ممتعة، وأسلوبك بالشرح رائع.', label: 'متدرّب' },
+              { image: '/images/training/student-feedback-03.png', quote: 'كورس مميز من نوعه، والأجواء التفاعلية الموجودة بتشجّع الذكاء الاصطناعي المطلوب بالوقت الحالي.', label: 'متدرّب' },
+              { image: '/images/training/student-feedback-04.png', quote: '', label: 'رسالة من متدرّب' },
+              { image: '/images/training/student-feedback-05.png', quote: '', label: 'رسالة من متدرّب' },
+            ].map(({ image, quote, label }, index) => (
+              <div key={image} className="overflow-hidden rounded-xl border border-[#E2E8F0] bg-white">
+                <a href={image} target="_blank" rel="noopener noreferrer" className="block">
+                  <img src={image} alt={`رأي ${label} ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
+                </a>
+                {quote && <blockquote className="border-t border-[#E2E8F0] px-4 py-4 text-right text-sm leading-[1.9] text-[#475569]">«{quote}»<footer className="mt-2 text-xs font-bold text-[#0D9488]">— {label}</footer></blockquote>}
+              </div>
             ))}
           </div>
         </div>
