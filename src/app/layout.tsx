@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-plex-sans-arabic",
@@ -64,6 +65,18 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-ibm-plex-sans-arabic), sans-serif" }}
       >
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2PNZKWC48D"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2PNZKWC48D');
+          `}
+        </Script>
         <Toaster />
         <Analytics />
       </body>

@@ -28,6 +28,18 @@ import {
 
 const subscribeAffiliate = () => () => {}
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
+
+const trackGoogleEvent = (eventName: string, parameters: Record<string, string>) => {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', eventName, parameters)
+  }
+}
+
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [openModule, setOpenModule] = useState<number | null>(0)
@@ -69,8 +81,14 @@ export default function LandingPage() {
   const WHATSAPP_NUMBER = '963985323170'
   const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
   const resultsHref = referralHref('/results', affiliateRef)
-  const trackWhatsAppClick = (source: string) => track('whatsapp_click', { source, affiliate_ref: affiliateRef || 'direct' })
-  const trackResultsOpen = (source: string) => track('results_open', { source, affiliate_ref: affiliateRef || 'direct' })
+  const trackWhatsAppClick = (source: string) => {
+    track('whatsapp_click', { source, affiliate_ref: affiliateRef || 'direct' })
+    trackGoogleEvent('click_whatsapp', { button_location: source })
+  }
+  const trackResultsOpen = (source: string) => {
+    track('results_open', { source, affiliate_ref: affiliateRef || 'direct' })
+    trackGoogleEvent('view_samples', { button_location: source })
+  }
   const COURSE_DURATION = '5 ساعات ونصف'
 
   // ===== DATA =====
@@ -270,7 +288,7 @@ export default function LandingPage() {
                 {isVideoOpen ? (
                   <iframe loading="lazy" className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 ) : (
-                  <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
+                  <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }); trackGoogleEvent('play_advanced_lesson', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
                     <Image src="/images/advanced-lesson-poster.webp" alt="معاينة عينة من درس متقدم في الكورس" width={1280} height={720} sizes="(max-width: 768px) 100vw, 760px" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-[#0B172A]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
