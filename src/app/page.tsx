@@ -6,24 +6,19 @@ import Image from 'next/image'
 import { track } from '@vercel/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import {
+  ArrowLeft,
   BookOpen,
+  Building2,
   CheckCircle2,
   ChevronDown,
+  Clock,
+  FileOutput,
   FileText,
   MessageCircle,
-  Shield,
-  Star,
-  Zap,
-  FileOutput,
-  Users,
-  CreditCard,
-  Send,
-  ArrowLeft,
-  Globe,
-  Building2,
-  Clock,
-  Award,
   Play,
+  Shield,
+  Users,
+  Zap,
 } from 'lucide-react'
 
 const subscribeAffiliate = () => () => {}
@@ -35,10 +30,16 @@ declare global {
 }
 
 const trackGoogleEvent = (eventName: string, parameters: Record<string, string>) => {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', eventName, parameters)
-  }
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') window.gtag('event', eventName, parameters)
 }
+
+const red = '#E3342F'
+const redDark = '#B92723'
+const ink = '#242424'
+const muted = '#666666'
+const paper = '#F8F8F6'
+const soft = '#F0F0EE'
+const line = '#E2E2DF'
 
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -57,29 +58,18 @@ export default function LandingPage() {
   }, [])
 
   useEffect(() => {
-    const offerEndsAt = new Date('2026-09-07T23:59:59-07:00').getTime()
-    const updateOfferClock = () => {
-      const remaining = Math.max(0, offerEndsAt - Date.now())
-      const totalSeconds = Math.floor(remaining / 1000)
-      setOfferTimeLeft({
-        days: Math.floor(totalSeconds / 86400),
-        hours: Math.floor((totalSeconds % 86400) / 3600),
-        minutes: Math.floor((totalSeconds % 3600) / 60),
-        seconds: totalSeconds % 60,
-      })
+    const offerEndsAt = new Date('2026-09-14T23:59:59-07:00').getTime()
+    const update = () => {
+      const total = Math.max(0, Math.floor((offerEndsAt - Date.now()) / 1000))
+      setOfferTimeLeft({ days: Math.floor(total / 86400), hours: Math.floor((total % 86400) / 3600), minutes: Math.floor((total % 3600) / 60), seconds: total % 60 })
     }
-    updateOfferClock()
-    const timer = window.setInterval(updateOfferClock, 1000)
+    update()
+    const timer = window.setInterval(update, 1000)
     return () => window.clearInterval(timer)
   }, [])
 
-  const currentPricing = {
-    price: '35 دولارًا',
-    originalPrice: '79 دولارًا',
-    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو على قسطين 17.5$ + 17.5$',
-  }
-  const WHATSAPP_NUMBER = '963985323170'
-  const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
+  const whatsappNumber = '963985323170'
+  const createWhatsAppLink = (message: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
   const resultsHref = referralHref('/results', affiliateRef)
   const trackWhatsAppClick = (source: string) => {
     track('whatsapp_click', { source, affiliate_ref: affiliateRef || 'direct' })
@@ -89,405 +79,62 @@ export default function LandingPage() {
     track('results_open', { source, affiliate_ref: affiliateRef || 'direct' })
     trackGoogleEvent('view_samples', { button_location: source })
   }
-  const COURSE_DURATION = '5 ساعات ونصف'
 
-  // ===== DATA =====
-
-  const courseModules = [
-    { title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
-      lessons: 6,
-      items: [
-        'كيف تبدأ من الكتاب أو الدرس وتحدد المطلوب من الذكاء الاصطناعي',
-        'كيف تكتب Prompt واضحًا لشرح مناسب لعمر الطالب ومستواه',
-        'كيف تراجع الناتج وتحوّله إلى شرح أو فيديو تعليمي قابل للمشاركة',
-        'ملف PDF مرافق لكل درس لتثبيت الخطوات والرجوع إليها لاحقًا',
-      ],
-    },
-    {
-      title: 'المسار 2: من الدرس إلى اختبار وPDF ومشروع',
-      lessons: 7,
-      items: [
-        'تحويل الدرس إلى أسئلة واختبار منظم مع نموذج إجابة',
-        'إخراج ورقة PDF قابلة للطباعة بتنسيق عربي واضح',
-        'إنشاء مهمة أو مشروع بسيط يمكن للطلاب تطبيقه ومراجعته',
-        'ملف PDF جاهز يختصر خطوات التطبيق مع كل درس',
-      ],
-    },
-    {
-      title: 'المسار 3: عرض وتفاعل وبحث وتقارير وبودكاست',
-      lessons: 7,
-      items: [
-        'إنشاء عرض تعليمي ونشاط يساعد على تفاعل الطلاب داخل الحصة',
-        'إنتاج Podcast أو شرح صوتي وفيديو من محتوى الدرس',
-        'البحث على الإنترنت وبناء تقرير أو رسالة أو بحث منظم مع مراجعة المصادر',
-        'ملفات PDF وقوالب مرجعية تساعدك على تطبيق كل مخرج',
-      ],
-    },
+  const modules = [
+    { title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي', lessons: 6, desc: 'حوّل الكتاب أو الدرس إلى شرح واضح ومحتوى فيديو مفهوم.', items: ['تحديد المطلوب من المصدر', 'كتابة Prompt واضح ومناسب للطلاب', 'مراجعة الناتج وتحويله إلى شرح أو فيديو', 'ملف PDF مختصر مع كل درس'] },
+    { title: 'المسار 2: من الدرس إلى اختبار وPDF ومشروع', lessons: 7, desc: 'استخراج الأسئلة وإخراج ورقة امتحان جاهزة بعد المراجعة.', items: ['إنشاء أسئلة متنوعة ونموذج إجابة', 'إخراج ورقة PDF عربية قابلة للطباعة', 'بناء مشروع أو مهمة صفية', 'قوالب PDF للتطبيق والرجوع السريع'] },
+    { title: 'المسار 3: عرض وتفاعل وبحث وتقارير وبودكاست', lessons: 7, desc: 'إنتاج عرض ومادة صوتية وتقرير تعليمي انطلاقًا من مصدرك.', items: ['عرض تقديمي ونشاط تفاعلي', 'Podcast أو شرح صوتي وفيديو', 'بحث وتقرير مع مراجعة المصادر', 'ملفات PDF وقوالب للمخرجات'] },
   ]
-
-  const bonuses = [
-    { title: 'ساعة مجانية: كيف تكتب Prompt واضحًا', subtitle: 'Bonus Training', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'تدريب إضافي بنهاية الكورس بيعلّمك كيف تكتب Prompt واضح ومفيد.', icon: Zap },
-    { title: '4 جلسات مباشرة للأسئلة والأجوبة', subtitle: 'Live Support', oldValue: '', value: 'ضمن تجربة الكورس', desc: 'جلسات مباشرة للأسئلة والأجوبة: إذا عندك سؤال، منناقشه ومنطبّق عليه سوا، مع متابعة شخصية من المدرب أثناء التطبيق.', icon: Users },
-    { title: 'ملف PDF عملي مع كل درس', subtitle: 'Lesson PDFs', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'كل درس مرفق بملف PDF مرتب يلخص الخطوات والأمثلة والقوالب حتى تقدر ترجع له وقت التطبيق.', icon: FileOutput },
-    { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة بتساعدك بالشرح والاختبارات والمشاريع والفيديوهات، وتختصر عليك وقت التحضير.', icon: Zap },
-    { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', oldValue: '1,000 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
-    { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Support', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات مستمرة ودعم عبر واتساب وقت التطبيق، مع متابعة شخصية من المدرب عند الحاجة.', icon: Shield },
+  const gifts = [
+    { title: 'ساعة مجانية لكتابة Prompt واضح', value: 'مجانًا', desc: 'تدريب إضافي يساعدك تطلب النتيجة المناسبة بدل التجربة العشوائية.', icon: Zap },
+    { title: '4 جلسات مباشرة للأسئلة والأجوبة', value: 'مجانًا', desc: 'تطرح سؤالك ونطبّق عليه سوا مع متابعة شخصية من المدرب.', icon: Users },
+    { title: 'ملخصات PDF لكل درس', value: 'مجانًا', desc: 'ملف مكتوب لكل درس حتى تراجع الخطوات دون إعادة مشاهدة الفيديو.', icon: FileOutput },
   ]
-
   const faqs = [
-    {
-      q: 'أنا معلم وما بعرف شي بالتكنولوجيا، فيني استفيد؟',
-      a: 'أكيد فيك! الكورس معمول للمعلمين اللي ما عندهن خبرة تقنية. كل اللي بتحتاجه تعرف تفتح موقع وتضغط زر، ومنمشي معك خطوة خطوة من الصفر.',
-    },
-    {
-      q: 'هل سأحتاج إلى دفع اشتراكات إضافية للأدوات؟',
-      a: 'لا، مو ضروري. منشرح لك الخيارات المتاحة، وبتعرف شو اللي بناسبك قبل ما تدفع أي اشتراك إضافي.',
-    },
-    {
-      q: 'الإجابات اللي بتطلع دقيقة ومطابقة للمنهج؟',
-      a: 'نتعلم كيف نرفق الكتاب المدرسي أو المصدر ونطلب من الأداة الاعتماد عليه، ثم نراجع الناتج قبل استخدامه. وعندما تدعم الأداة الإحالة للمصدر، نتحقق من الصفحات والمعلومات بدل الاعتماد على أي نتيجة دون مراجعة.',
-    },
-    {
-      q: 'كيف فيني ادفع؟',
-      a: 'الدفع داخل سوريا بيكون عبر شام كاش أو تحويل بنكي، وفي أقساط إذا ما كان المبلغ كامل معك. بعد الاتفاق، منرسل لك تفاصيل الوصول.',
-    },
-    {
-      q: 'الكورس فيديوهات مسجلة ولا لقاءات مباشرة؟',
-      a: 'الكورس مدته 5 ساعات ونصف، وهو برنامج مسجل ومنظم، وترافقه 4 جلسات مباشرة للأسئلة والأجوبة والتطبيق على الأسئلة التي يطرحها المتدرّبون، مع متابعة شخصية من المدرب أثناء التطبيق.',
-    },
-    {
-      q: 'هل تشرحون من مصادر محددة أم يجيب الذكاء الاصطناعي من عنده؟',
-      a: 'نتعلم كيف نرفق المصدر ونطلب من الأداة الاعتماد عليه فقط، ثم نراجع الناتج بشريًا قبل استخدامه مع الطلاب. لا نترك الأداة تضيف معلومات خارج المصدر دون تنبيه أو مراجعة.',
-    },
-    {
-      q: 'هل أتعلم إعداد عروض تقديمية وملفات PDF جاهزة للطباعة؟',
-      a: 'نعم، نتناول طريقة تحويل المادة إلى عرض تقديمي، واختبار أو ورقة عمل PDF جاهزة للطباعة، مع تنظيم عربي واضح ومراجعة قبل التوزيع.',
-    },
-    {
-      q: 'في دعم أو تحديثات بعد الكورس؟',
-      a: 'نعم، توجد تحديثات للكورس ودعم عبر واتساب عند التطبيق. ويمكن ترتيب مكالمة مساعدة عند الحاجة إلى توضيح عملي وبالتنسيق المسبق.',
-    },
-    {
-      q: 'هل أستطيع إعداد تقرير أو رسالة أو بحث منظم؟',
-      a: 'نعم. تتعلم طريقة البحث على الإنترنت، تحديد المصادر، إعداد مسودة تقرير أو رسالة أو بحث، ثم مراجعة المعلومات والمراجع قبل اعتماد النتيجة.',
-    },
-    {
-      q: 'الشهادة إلزامية مع التسجيل؟',
-      a: 'لا. الشهادة اختيارية ورسومها منفصلة عن الكورس. تتوفر شهادة من وزارة التنمية السورية قابلة للتصديق عبر وزارة الخارجية السورية. للاستفسار عن الإجراءات والاعتراف محليًا ودوليًا، تواصل معنا عبر الخاص.',
-    },
+    ['هل الكورس مناسب إذا ما بعرف شي بالتكنولوجيا؟', 'نعم. نبدأ من الصفر وبخطوات عملية، ولا تحتاج خبرة تقنية كبيرة حتى تطبق المسار.'],
+    ['هل الدروس مسجلة أم مباشرة؟', 'الدروس الأساسية مسجلة ومدتها نحو 5 ساعات ونصف، ومعها 4 جلسات مباشرة للأسئلة والأجوبة والتطبيق.'],
+    ['هل أحصل على ملفات PDF مع الدروس؟', 'نعم. كل درس معه ملخص PDF أو قالب عملي يساعدك ترجع للخطوات وقت التطبيق.'],
+    ['هل الإجابات تطلع مطابقة للمنهج؟', 'نتعلم الاعتماد على المصدر الذي ترفقه، ثم مراجعة الناتج بشريًا قبل استخدامه مع الطلاب.'],
+    ['كيف يتم الدفع والوصول؟', 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي، وبعد التسجيل تحصل على وصول دائم إلى فيديوهات الكورس عبر Telegram.'],
+    ['هل الشهادة إلزامية؟', 'لا. الشهادة من وزارة التنمية السورية اختيارية ورسومها منفصلة، وتتطلب اختبارًا أو مشروعًا نهائيًا.'],
   ]
 
   return (
-    <div dir="rtl" className="min-h-screen overflow-x-hidden bg-[#F7F7F5] pb-20 text-[#252525] md:pb-0" style={{ fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }} suppressHydrationWarning>
-      {/* ===== 1. EDITORIAL NAVIGATION ===== */}
-      <nav className="sticky top-0 z-50 border-b border-[#E4E4E1] bg-[#F7F7F5]/95 px-4 py-4 backdrop-blur">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E33830] text-white">
-              <BookOpen className="h-4 w-4" />
-            </span>
-            <span className="text-sm font-bold tracking-tight text-[#252525] md:text-base">كورس الذكاء الاصطناعي للمعلمين</span>
-          </div>
-          <Link href="/schools" className="hidden items-center gap-2 text-sm font-bold text-[#E33830] transition-colors hover:text-[#B92A25] sm:flex">
-            للمؤسسات التعليمية
-            <Building2 className="h-4 w-4" />
-          </Link>
-        </div>
+    <main dir="rtl" className="min-h-screen overflow-x-hidden text-[#242424]" style={{ backgroundColor: paper, fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif' }}>
+      <div className="bg-[#242424] px-4 py-2.5 text-center text-sm font-bold text-white"><span className="text-[#F5F5F2]">سعر الإطلاق: </span><span style={{ color: red }}>35$</span><span className="mx-2 text-white/60">•</span><span>ينتهي خلال: </span><span className="tabular-nums">{offerTimeLeft.days}d : {String(offerTimeLeft.hours).padStart(2, '0')}h : {String(offerTimeLeft.minutes).padStart(2, '0')}m : {String(offerTimeLeft.seconds).padStart(2, '0')}s</span></div>
+
+      <nav className="border-b px-4 py-4" style={{ borderColor: line, backgroundColor: paper }}>
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4"><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full text-white" style={{ backgroundColor: red }}><BookOpen className="h-4 w-4" /></span><span className="text-sm font-bold md:text-base">كورس الذكاء الاصطناعي للمعلمين</span></div><Link href="/schools" className="hidden items-center gap-2 text-sm font-bold sm:flex" style={{ color: red }}>للمؤسسات التعليمية <Building2 className="h-4 w-4" /></Link></div>
       </nav>
 
-      {/* ===== 2. SALES HERO ===== */}
-      <section className="overflow-hidden border-b border-[#E4E4E1] bg-[#F7F7F5]">
-        <div className="mx-auto max-w-[900px] px-5 py-16 md:px-8 md:py-24">
-          <div>
-            <div className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[#E33830]">
-              <span className="h-2 w-2 rounded-full bg-[#E33830]" />
-              المشكلة اليومية
-            </div>
-            <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-[#252525] md:text-6xl">
-              بتضل تعيد كتابة نفس الاختبار كل أسبوع؟ صير معلّم يبني بدل ما يعيد.
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-[2] text-[#686868] md:text-xl">
-              إذا كل مرة بدك تحضّر درس أو اختبار أو عرض تقديمي أو مادة تعليمية من الصفر، الكورس بيعلمك كيف تستخدم الذكاء الاصطناعي لتحوّل كتبك ومصادرك إلى محتوى واضح ومفيد، وتوفّر وقتك للشرح والطلاب.
-            </p>
-            <p className="mt-4 max-w-2xl font-bold leading-[2] text-[#E33830]">حلّ مشكلات التحضير، وصير تشتغل بطريقة أذكى: اصنع محتوى مفيد لطلابك، وفّر وقتك، وخلي قرار المراجعة والدقة بإيدك.</p>
-            <div className="mt-8 flex flex-col items-start gap-3">
-              <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#E33830] px-8 py-4 text-lg font-bold text-white shadow-[0_14px_34px_rgba(15,118,110,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#B92A25] sm:w-auto">
-                اطلب تفاصيل التسجيل عبر واتساب
-                <MessageCircle className="h-5 w-5" />
-              </a>
-              <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_hero')} className="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold text-[#252525] underline decoration-[#E33830] decoration-2 underline-offset-8 transition-colors hover:text-[#E33830]">
-                شاهد النماذج الحقيقية أولًا
-                <ArrowLeft className="h-4 w-4" />
-              </a>
-            </div>
-            <p className="mt-5 flex items-center justify-center gap-2 text-sm font-bold text-[#E33830]"><Shield className="h-4 w-4 shrink-0" /> ضمان استرجاع كامل خلال 7 أيام</p>
-            <p className="mt-3 text-sm font-bold text-[#686868]">الشهادة اختيارية برسوم منفصلة، والتسجيل يعطيك وصولًا دائمًا إلى فيديوهات الكورس عبر مجموعة Telegram خاصة.</p>
-            <div className="mt-8 grid gap-4 border-t border-[#E4E4E1] pt-5 sm:grid-cols-[1fr_auto] sm:items-center">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#686868]">
-                <span className="font-bold text-[#252525]">35 دولارًا — سعر العرض</span>
-                <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
-                <span>أقساط متاحة — قسطين 17.5$ + 17.5$</span>
-                <span>وصول دائم</span>
-              </div>
-              <div className="rounded-xl border border-[#E33830] bg-[#FDECEA] px-4 py-3 text-center text-sm font-bold text-[#252525]">
-                <span className="block text-[#B62D28]"><span className="line-through decoration-2">79 دولارًا</span> <span>(السعر الأصلي)</span></span>
-                <span className="mt-1 block text-[#E33830]">ينتهي العرض خلال {offerTimeLeft.days} يوم · {String(offerTimeLeft.hours).padStart(2, '0')}:{String(offerTimeLeft.minutes).padStart(2, '0')}:{String(offerTimeLeft.seconds).padStart(2, '0')}</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <section className="px-5 py-14 text-center md:px-8 md:py-20">
+        <div className="mx-auto max-w-[1000px]"><p className="mb-5 text-base font-bold" style={{ color: red }}>لكل معلم يريد بناء طريقة أذكى للتحضير وصناعة المحتوى</p><h1 className="mx-auto max-w-5xl text-4xl font-black leading-[1.35] tracking-tight md:text-6xl">تعلّم النظام الذي يساعدك على تحويل كتبك ودروسك إلى محتوى تعليمي جاهز بدل إعادة التحضير كل أسبوع</h1><p className="mx-auto mt-6 max-w-3xl text-base leading-[2] md:text-lg" style={{ color: muted }}>كورس عملي يأخذك من المصدر إلى الشرح والاختبار وملف PDF والعرض والفيديو والبودكاست، بخطوات واضحة تترك قرار المراجعة والدقة بإيدك.</p><p className="mx-auto mt-3 max-w-2xl font-bold leading-[2]" style={{ color: red }}>وفّر وقت التحضير، واصنع محتوى مفيد لطلابك، وانتقل من معلم يعيد إلى معلم يبني.</p><div className="mx-auto mt-9 aspect-video max-w-[900px] overflow-hidden bg-[#242424] shadow-[0_20px_45px_rgba(0,0,0,0.14)]">{isVideoOpen ? <iframe className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'reference_style_hero' }); trackGoogleEvent('play_advanced_lesson', { source: 'reference_style_hero' }) }} className="group relative h-full w-full"><Image src="/images/advanced-lesson-poster.webp" alt="عينة من درس متقدم" width={1280} height={720} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" priority /><div className="absolute inset-0 bg-black/40" /><div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white"><span className="text-sm font-bold">عينة من درس متقدم</span><span className="flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: red }}><Play className="h-7 w-7 fill-current" /></span><span className="font-bold">شغّل العينة</span></div></button>}</div><div className="mt-8 flex flex-col items-center gap-3"><a href={createWhatsAppLink('مرحباً، أريد حجز مقعدي في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('reference_style_hero')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full px-9 py-4 text-lg font-bold text-white shadow-[0_14px_30px_rgba(227,52,47,0.22)] transition hover:-translate-y-0.5" style={{ backgroundColor: red }}>احجز مقعدك الآن <MessageCircle className="h-5 w-5" /></a><a href={resultsHref} onClick={() => trackResultsOpen('reference_style_hero')} className="text-sm font-bold underline decoration-2 underline-offset-8" style={{ textDecorationColor: red }}>شاهد النماذج الحقيقية أولًا</a></div><p className="mt-5 text-sm font-bold" style={{ color: muted }}>وصول دائم إلى الكورس · ملخصات PDF لكل درس · ضمان استرجاع كامل خلال 7 أيام</p></div>
       </section>
 
-      {/* ===== 3. PROOF STRIP ===== */}
-      <section className="border-b border-[#E4E4E1] bg-[#EEEEEC]">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 py-5 text-center text-sm font-bold text-[#4E4E4E] md:px-8">
-          <span>بتبدأ من مصدرك، مو من صفحة فاضية</span>
-          <span className="hidden h-1 w-1 rounded-full bg-[#E33830] sm:block" />
-          <span>مناسب حتى لو كنت مبتدئ</span>
-          <span className="hidden h-1 w-1 rounded-full bg-[#E33830] sm:block" />
-          <span>90 معلّمًا ومعلّمة اشتروا الكورس</span>
-          <span className="hidden h-1 w-1 rounded-full bg-[#E33830] sm:block" />
-          <span>مخرجات بتستخدمها بعد المراجعة</span>
-        </div>
-      </section>
+      <section className="border-y px-5 py-14 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><h2 className="text-center text-3xl font-black md:text-5xl">آراء المعلمين بعد التدريب</h2><div className="mt-10 grid gap-5 md:grid-cols-3">{['الكورس ساعدني أفهم كيف أطلع أسئلة وملفات من الدرس بدل ما ضل أبدأ من الصفر.', 'الشرح واضح وعملي، والأحلى إنو كل درس إلو ملف PDF برجعله وقت التطبيق.', 'كنت مفكر الموضوع معقد، بس بعد المسار صار عندي طريقة ثابتة للتحضير والمراجعة.'].map((quote, i) => <article key={quote} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><p className="text-base font-bold leading-[2]">“{quote}”</p><p className="mt-5 text-sm font-bold" style={{ color: red }}>— متدرّب/ة من جلسات المعلمين {i + 1}</p></article>)}</div></div></section>
 
-      {/* ===== 5. WHAT YOU GET ===== */}
-      <section className="border-y border-[#E4E4E1] bg-[#252525] text-white">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#E33830]">النتيجة التي تهمك</p>
-            <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">بدل ما تضل تبلّش من صفحة فاضية، ابدأ من مسودة قوية.</h2>
-            <p className="mt-5 text-base leading-[2] text-white/70 md:text-lg">أنت مو عم تشتري قائمة أدوات؛ عم تتعلّم كيف تحوّل مصدرك لمخرجات متعددة، وتضل أنت صاحب قرار الدقة والملاءمة قبل ما يوصل أي شي لطلابك.</p>
-          </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {[
-              { n: '01', title: 'شرح وفيديو', text: 'حوّل الدرس لشرح واضح أو سيناريو فيديو بيفهمه طلابك.' },
-              { n: '02', title: 'اختبار وPDF', text: 'طلّع أسئلة ونسخ متعددة ونموذج إجابة، وبعدين أخرج ورقة مرتبة بعد المراجعة.' },
-              { n: '03', title: 'عرض وبحث وتفاعل', text: 'اعمل عرض أو نشاط أو تقرير أو مادة صوتية انطلاقًا من مصدرك.' },
-            ].map((item) => (
-              <div key={item.n} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-transform hover:-translate-y-1">
-                <span className="text-sm font-bold text-[#E33830]">{item.n}</span>
-                <h3 className="mt-4 text-xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-[1.9] text-white/65">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1180px]"><div className="max-w-3xl"><p className="mb-4 text-sm font-bold" style={{ color: red }}>المشكلة ليست في خبرتك</p><h2 className="text-3xl font-black leading-[1.4] md:text-5xl">المشكلة أن التحضير المتكرر يستهلك وقتك قبل أن تبدأ التدريس.</h2><p className="mt-5 text-base leading-[2]" style={{ color: muted }}>عندك الكتاب والخبرة، لكن كل اختبار أو شرح أو ورقة امتحان أو مادة بصرية تحتاج أن تعيد تنسيقها من جديد. ومع الوقت يصير التشتت بين الملفات والأدوات أكبر من وقتك مع الطلاب.</p></div><div className="mt-12 grid gap-5 md:grid-cols-4">{[['01','تحضير عشوائي','كل درس يبدأ من صفحة فارغة.'],['02','وقت ضائع','الكتابة والتنسيق يأخذان وقت الشرح.'],['03','نسخة واحدة','تراجع متأخرًا وتعيد العمل عند كل تعديل.'],['04','تشتت','تبحث عن الأداة بدل التركيز على المخرج.']].map(([n,t,d]) => <article key={n} className="rounded-2xl border bg-white p-6" style={{ borderColor: line }}><span className="text-sm font-black" style={{ color: red }}>{n}</span><h3 className="mt-5 text-xl font-black">{t}</h3><p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{d}</p></article>)}</div></div></section>
 
-      {/* ===== 6. SAMPLE VIDEO ===== */}
-      <section className="bg-[#EEEEEC]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center">
-            <div>
-              <p className="mb-4 text-sm font-bold text-[#E33830]">شاهد قبل أن تقرر</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#252525] md:text-5xl">عينة من درس متقدم</h2>
-              <p className="mt-5 text-base leading-[2] text-[#686868]">هالمقطع عينة من درس متقدم بالكورس. شوف كيف مننتقل من مصدر المعلم لأسئلة واختبار وورقة امتحان مرتبة، بينما الكورس نفسه بيمشي معك خطوة خطوة من الأساسيات.</p>
-              <a href={createWhatsAppLink('مرحباً، شاهدت العينة وأريد تفاصيل التسجيل في الكورس.')} onClick={() => trackWhatsAppClick('redesigned_sample')} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 font-bold text-[#E33830] underline decoration-[#E33830] decoration-2 underline-offset-8">أريد تفاصيل التسجيل <ArrowLeft className="h-4 w-4" /></a>
-            </div>
-            <div className="overflow-hidden border border-[#D8D8D5] bg-[#252525] shadow-[0_20px_50px_rgba(21,34,56,0.12)]">
-              <div className="aspect-video">
-                {isVideoOpen ? (
-                  <iframe loading="lazy" className="h-full w-full" src="https://www.youtube-nocookie.com/embed/rbblFAZJbjI?autoplay=1&rel=0" title="عينة من درس متقدم في إعداد ورقة امتحان للمعلمين" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-                ) : (
-                  <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'redesigned_course_page' }); trackGoogleEvent('play_advanced_lesson', { source: 'redesigned_course_page' }) }} className="group relative h-full w-full overflow-hidden text-right" aria-label="تشغيل عينة الفيديو العملية داخل الصفحة">
-                    <Image src="/images/advanced-lesson-poster.webp" alt="معاينة عينة من درس متقدم في الكورس" width={1280} height={720} sizes="(max-width: 768px) 100vw, 760px" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
-                    <div className="absolute inset-0 bg-[#222222]/45" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
-                      <span className="text-sm font-bold">عينة من درس متقدم — نحو 12 دقيقة</span>
-                      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#E33830] shadow-xl transition group-hover:scale-105"><Play className="mr-[-2px] h-7 w-7 fill-current" /></span>
-                      <span className="text-base font-bold">شغّل العينة</span>
-                    </div>
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>الحل</p><h2 className="max-w-3xl text-3xl font-black leading-[1.4] md:text-5xl">مسار واحد يربط كل مراحل صناعة المحتوى التعليمي</h2><p className="mt-5 max-w-2xl text-base leading-[2] text-white/70">بدل نصائح متفرقة، تتعلم إطارًا يبدأ من المصدر، يمر بالاستخراج والمراجعة، وينتهي بمخرج تستطيع استخدامه مع طلابك.</p><div className="mt-12 grid gap-5 md:grid-cols-3">{[['01','من المصدر إلى الشرح','حوّل الكتاب أو الدرس إلى شرح وفيديو واضح.'],['02','من الدرس إلى الاختبار','استخرج الأسئلة وأخرج ورقة PDF ونموذج إجابة.'],['03','من المحتوى إلى التأثير','ابنِ عرضًا أو بودكاست أو بحثًا ومادة تعليمية.']].map(([n,t,d]) => <article key={n} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"><span className="text-sm font-bold" style={{ color: red }}>{n}</span><h3 className="mt-5 text-xl font-black">{t}</h3><p className="mt-3 text-sm leading-[1.9] text-white/65">{d}</p></article>)}</div></div></section>
 
-      {/* ===== 7. BEFORE / AFTER ===== */}
-      <section className="bg-[#F7F7F5]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#E33830]">التغيير العملي</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#252525] md:text-5xl">من تحضير بيتكرر كل أسبوع لطريقة فيك تكررها مع أي درس.</h2>
-          </div>
-          <div className="mt-12 grid gap-0 border-y border-[#E4E4E1] md:grid-cols-2">
-            <div className="border-b border-[#E4E4E1] py-8 md:border-b-0 md:border-l md:pl-10 md:py-10">
-              <p className="text-sm font-bold text-[#B62D28]">قبل</p>
-              <h3 className="mt-3 text-2xl font-bold text-[#252525]">كل درس بيبلّش من الصفر</h3>
-              <div className="mt-7 space-y-4 text-[#686868]">
-                <p className="flex gap-3"><Clock className="mt-1 h-5 w-5 shrink-0 text-[#B62D28]" /> وقت طويل بالكتابة والتنسيق.</p>
-                <p className="flex gap-3"><FileText className="mt-1 h-5 w-5 shrink-0 text-[#B62D28]" /> نسخة وحدة من الاختبار ومراجعة متأخرة.</p>
-                <p className="flex gap-3"><Zap className="mt-1 h-5 w-5 shrink-0 text-[#B62D28]" /> تشتّت بين أفكار وأدوات كثيرة.</p>
-              </div>
-            </div>
-            <div className="py-8 md:pr-10 md:py-10">
-              <p className="text-sm font-bold text-[#E33830]">بعد التعلّم</p>
-              <h3 className="mt-3 text-2xl font-bold text-[#252525]">بتبدأ من المصدر وبتعرف شو الخطوة الجاية</h3>
-              <div className="mt-7 space-y-4 text-[#686868]">
-                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#E33830]" /> طلب واضح ومخرج محدد لكل درس.</p>
-                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#E33830]" /> نسخ متعددة ومخرجات مرتبة بعد المراجعة.</p>
-                <p className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#E33830]" /> وقت أكبر للشرح والتفاعل مع طلابك.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-4 text-sm font-bold" style={{ color: red }}>أثر الكورس على أرض الواقع</p><h2 className="text-3xl font-black md:text-5xl">بنهاية المسار، ستكون قادرًا على إنتاج مخرجات تستخدمها فعلًا.</h2></div><span className="text-sm font-bold" style={{ color: muted }}>12 وحدة تقريبًا · 5 ساعات ونصف</span></div><div className="mt-10 grid gap-4 md:grid-cols-3">{['شرح وفيديو تعليمي من مصدرك','اختبارات وPDF جاهزة بعد المراجعة','عروض وخرائط ذهنية وإنفوجرافيك','بودكاست ومحتوى صوتي تعليمي','تقارير وأبحاث مع تنظيم المصادر','قوالب PDF للرجوع والتطبيق'].map((item) => <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0" style={{ color: red }} /><span className="font-bold">{item}</span></div>)}</div></div></section>
 
-      {/* ===== 8. COURSE PATH ===== */}
-      <section className="border-y border-[#E4E4E1] bg-[#F2F2F0]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <p className="mb-4 text-sm font-bold text-[#E33830]">خريطة الدورة</p>
-              <h2 className="text-3xl font-bold leading-[1.45] text-[#252525] md:text-5xl">ثلاثة مسارات عملية، وكل مسار بينتهي بنتيجة بتشوفها وبتستخدمها.</h2>
-            </div>
-            <span className="text-sm font-bold text-[#686868]">نحو 12 وحدة تدريبية · {COURSE_DURATION}</span>
-          </div>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {courseModules.map((mod, i) => (
-              <div key={i} className="rounded-2xl border border-[#E1E1E1] bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-                <button onClick={() => setOpenModule(openModule === i ? null : i)} className="flex w-full items-center justify-between gap-5 py-6 text-right">
-                  <div className="flex items-start gap-5">
-                    <span className="pt-1 text-sm font-bold text-[#E33830]">0{i + 1}</span>
-                    <div>
-                      <span className="text-lg font-bold text-[#252525] md:text-xl">{mod.title}</span>
-                      <span className="mt-2 block text-sm text-[#686868]">{mod.lessons} محاضرات · مخرج عملي قابل للتطبيق</span>
-                    </div>
-                  </div>
-                  <ChevronDown className={`h-5 w-5 shrink-0 text-[#E33830] transition-transform ${openModule === i ? 'rotate-180' : ''}`} />
-                </button>
-                {openModule === i && (
-                  <div className="pb-6 pr-12">
-                    <ul className="space-y-3">
-                      {mod.items.map((item, j) => <li key={j} className="flex items-start gap-3 text-sm leading-[1.9] text-[#686868]"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#E33830]" />{item}</li>)}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>محتوى الكورس</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">ثلاثة مسارات عملية من المصدر إلى المخرج التعليمي</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{modules.map((mod, i) => <article key={mod.title} className="rounded-2xl border bg-white p-2 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}><button onClick={() => setOpenModule(openModule === i ? null : i)} className="flex w-full items-start justify-between gap-4 p-5 text-right"><span><span className="block text-sm font-black" style={{ color: red }}>المسار 0{i + 1}</span><span className="mt-3 block text-lg font-black">{mod.title}</span><span className="mt-2 block text-sm" style={{ color: muted }}>{mod.lessons} محاضرات · {mod.desc}</span></span><ChevronDown className={`mt-1 h-5 w-5 shrink-0 transition-transform ${openModule === i ? 'rotate-180' : ''}`} style={{ color: red }} /></button>{openModule === i && <ul className="space-y-3 px-5 pb-6">{mod.items.map((item) => <li key={item} className="flex items-start gap-3 text-sm leading-[1.9]" style={{ color: muted }}><CheckCircle2 className="mt-1 h-4 w-4 shrink-0" style={{ color: red }} />{item}</li>)}</ul>}</article>)}</div></div></section>
 
-      {/* ===== 8. STUDENT FEEDBACK SECTION ===== */}
-      <section className="py-14 md:py-20 bg-[#F6F6F4]">
-        <div className="max-w-[1100px] mx-auto px-4">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E33830]/10 text-[#E33830] px-4 py-2 text-sm font-bold mb-4">تجارب حقيقية من المتدربين</div>
-            <h2 className="text-2xl md:text-4xl font-bold text-[#252525] mb-3">آراء طلابنا بعد التدريب</h2>
-            <p className="text-[#666666] max-w-2xl mx-auto text-sm leading-loose">رسائل وصلتنا من متدربين شاركوا في جلسات الذكاء الاصطناعي. اضغط على أي صورة لقراءتها بحجم أكبر.</p>
-          </div>
-          <div className="mx-auto flex max-w-md flex-col gap-4 md:max-w-none md:grid md:grid-cols-5 md:gap-4">
-            {[
-              { image: '/images/training/student-feedback-01.png', quote: 'الكورس الرائع حسيت حالي منجذبة للمعلومة كأني أول مرة بعرفها، بتمنى باقي الكورس يكمل هيك.', label: 'متدرّبة' },
-              { image: '/images/training/student-feedback-02.png', quote: 'شكرًا إلك أستاذ، فعلاً الجلسة كانت أكتر من ممتعة، وأسلوبك بالشرح رائع.', label: 'متدرّب' },
-              { image: '/images/training/student-feedback-03.png', quote: 'كورس مميز من نوعه، والأجواء التفاعلية الموجودة بتشجّع الذكاء الاصطناعي المطلوب بالوقت الحالي.', label: 'متدرّب' },
-              { image: '/images/training/student-feedback-04.png', quote: '', label: 'رسالة من متدرّب' },
-              { image: '/images/training/student-feedback-05.png', quote: '', label: 'رسالة من متدرّب' },
-            ].map(({ image, quote, label }, index) => (
-              <div key={image} className="overflow-hidden rounded-xl border border-[#E1E1E1] bg-white">
-                <a href={image} target="_blank" rel="noopener noreferrer" className="block">
-                  <img src={image} alt={`رأي ${label} ${index + 1}`} className="w-full h-auto max-h-[420px] object-contain" loading="lazy" />
-                </a>
-                {quote && <blockquote className="border-t border-[#E1E1E1] px-4 py-4 text-right text-sm leading-[1.9] text-[#565656]">«{quote}»<footer className="mt-2 text-xs font-bold text-[#E33830]">— {label}</footer></blockquote>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>مع التسجيل</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2><div className="mt-10 grid gap-5 md:grid-cols-3">{gifts.map((gift) => <article key={gift.title} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><gift.icon className="h-7 w-7" style={{ color: red }} /><p className="mt-5 text-xs font-black uppercase" style={{ color: red }}>{gift.value}</p><h3 className="mt-2 text-xl font-black">{gift.title}</h3><p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p></article>)}</div></div></section>
 
-      {/* ===== 10. BONUSES ===== */}
-      <section className="border-y border-[#E4E4E1] bg-[#EEEEEC]">
-        <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#E33830]">مع التسجيل</p>
-            <h2 className="text-3xl font-bold leading-[1.45] text-[#252525] md:text-5xl">كل شي بتحتاجه حتى تطبّق الطريقة بعد الدروس.</h2>
-          </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {bonuses.map((bonus, i) => (
-              <div key={i} className="grid gap-4 rounded-2xl border border-[#E1E1E1] bg-white p-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:grid-cols-[0.35fr_1fr_1.5fr] md:items-center md:gap-8">
-                <div className="flex items-center gap-3 text-sm font-bold text-[#E33830]"><bonus.icon className="h-5 w-5" /> 0{i + 1}</div>
-                <div><span className="text-xs font-bold tracking-wider text-[#7C7C7C]">{bonus.subtitle}</span><h3 className="mt-1 text-lg font-bold text-[#252525]">{bonus.title}</h3></div>
-                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between"><p className="text-sm leading-[1.9] text-[#686868]">{bonus.desc}</p><span className="shrink-0 text-sm font-bold text-[#E33830]">{bonus.value}</span></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center"><div className="flex justify-center"><Image src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة" width={280} height={280} className="h-64 w-64 rounded-full object-cover ring-8 ring-[#F0F0EE]" /></div><div><p className="mb-4 text-sm font-bold" style={{ color: red }}>من يقودك؟</p><h2 className="text-3xl font-black md:text-5xl">نواف البوسطة</h2><p className="mt-3 font-bold" style={{ color: red }}>مدرب في الذكاء الاصطناعي وزيادة الإنتاجية</p><p className="mt-5 max-w-2xl text-base leading-[2]" style={{ color: muted }}>صممت هذا الكورس للمعلم الذي يريد أن يخفف العمل المتكرر دون أن يتنازل عن خبرته أو قراره. الهدف ليس استعراض الأدوات، بل تحويلها إلى طريقة عمل واضحة ومخرجات تعليمية مفيدة.</p><Link href="/about" className="mt-6 inline-flex items-center gap-2 font-bold underline decoration-2 underline-offset-8" style={{ color: red }}>اعرف المزيد عن المدرب <ArrowLeft className="h-4 w-4" /></Link></div></div></section>
 
-      {/* ===== 11. TRAINER ===== */}
-      <section className="bg-[#F7F7F5]">
-        <div className="mx-auto grid max-w-[1180px] gap-10 px-5 py-16 md:grid-cols-[0.65fr_1.35fr] md:items-center md:px-8 md:py-24">
-          <div className="flex justify-center md:justify-start"><Image src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة — مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية" width={224} height={224} sizes="224px" loading="lazy" className="h-56 w-56 rounded-full object-cover grayscale-[15%] ring-8 ring-[#F2F2F0]" /></div>
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold text-[#E33830]">من يقودك؟</p>
-            <h2 className="text-3xl font-bold text-[#252525] md:text-5xl">نواف البوسطة</h2>
-            <p className="mt-2 font-bold text-[#E33830]">مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية</p>
-            <p className="mt-5 text-base leading-[2] text-[#686868]">مدرب أدوات ذكاء اصطناعي وباحث، يدرّب الأفراد والشركات والمؤسسات التعليمية على تحويل التقنيات الحديثة إلى حلول عملية في التعليم والإنتاجية والأتمتة.</p>
-            <div className="mt-6 flex flex-wrap items-center gap-5"><Link href="/about" className="inline-flex items-center gap-2 font-bold text-[#E33830] underline decoration-[#E33830] decoration-2 underline-offset-8">اعرف المزيد عن المدرب <ArrowLeft className="h-4 w-4" /></Link><a href="https://www.facebook.com/share/18UPsSwfwQ/" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#686868] hover:text-[#E33830]">Facebook</a><a href="https://instagram.com/noaf.ai" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#686868] hover:text-[#E33830]">@noaf.ai</a></div>
-          </div>
-        </div>
-      </section>
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>لمن يناسب الكورس؟</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">هذا الكورس لك إذا كنت تريد تحضيرًا أسرع ومحتوى أوضح.</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{['تبدأ كل درس من الصفر وتريد طريقة ثابتة.', 'تريد إعداد اختبار أو عرض أو PDF خلال وقت أقل.', 'تريد صناعة محتوى تعليمي يعرّف الطلاب بخبرتك.', 'تحتاج مراجعة وتنظيمًا قبل مشاركة أي مخرج.', 'لا تملك خبرة تقنية كبيرة وتريد شرحًا خطوة بخطوة.', 'تريد العودة إلى ملخصات PDF بدل إعادة كل درس.'].map((text) => <div key={text} className="rounded-2xl bg-white p-5 font-bold leading-[1.9] shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><CheckCircle2 className="mb-3 h-5 w-5" style={{ color: red }} />{text}</div>)}</div></div></section>
 
-      {/* ===== 12. FAQ ===== */}
-      <section className="border-y border-[#E4E4E1] bg-[#F2F2F0]">
-        <div className="mx-auto max-w-[900px] px-5 py-16 md:px-8 md:py-24">
-          <div className="text-center"><p className="mb-4 text-sm font-bold text-[#E33830]">قبل التسجيل</p><h2 className="text-3xl font-bold text-[#252525] md:text-5xl">أسئلة طبيعية قبل اتخاذ القرار</h2></div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {faqs.map((faq, i) => (
-              <div key={i} className="rounded-2xl border border-[#E1E1E1] bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.04)]"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="flex w-full items-center justify-between gap-5 py-5 text-right"><span className="font-bold text-[#252525]">{faq.q}</span><ChevronDown className={`h-5 w-5 shrink-0 text-[#E33830] transition-transform ${openFaq === i ? 'rotate-180' : ''}`} /></button>{openFaq === i && <div className="pb-5 pl-10 text-sm leading-[2] text-[#686868]">{faq.a}</div>}</div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1000px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>مقارنة واضحة</p><h2 className="text-3xl font-black md:text-5xl">ما الذي يجعله مختلفًا؟</h2><div className="mt-10 overflow-hidden rounded-2xl border bg-white" style={{ borderColor: line }}><div className="grid grid-cols-3 bg-[#242424] p-4 text-sm font-black text-white"><span>المعيار</span><span>التحضير المعتاد</span><span style={{ color: red }}>هذا الكورس</span></div>{[['البداية','صفحة فارغة كل مرة','تبدأ من مصدرك'],['المخرج','ملف واحد أو شرح واحد','شرح واختبار وPDF وعرض ومحتوى'],['المراجعة','متأخرة ومجهدة','مراجعة بشرية قبل الاستخدام'],['الدعم','تجربة فردية','ملخصات PDF و4 جلسات أسئلة']].map(([a,b,c]) => <div key={a} className="grid grid-cols-3 gap-3 border-t p-4 text-sm leading-[1.8]" style={{ borderColor: line }}><span className="font-black">{a}</span><span style={{ color: muted }}>{b}</span><span className="font-bold" style={{ color: red }}>{c}</span></div>)}</div></div></section>
 
-      {/* ===== 13. FINAL CTA ===== */}
-      <section className="bg-[#252525] text-white">
-        <div className="mx-auto max-w-[980px] px-5 py-16 text-center md:px-8 md:py-24">
-          <p className="mb-4 text-sm font-bold text-[#E33830]">ابدأ من مصدرك</p>
-          <h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">خفّف وقت التحضير، وخلي وقتك للشرح والطلاب.</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-[2] text-white/70 md:text-lg">اسأل عن التسجيل وطريقة الدفع والوصول للكورس، وخد قرارك بعد ما تشوف القيمة بوضوح.</p>
-          <div className="mx-auto mt-10 max-w-md rounded-2xl border border-white/15 bg-white/[0.06] p-7 shadow-[0_18px_45px_rgba(0,0,0,0.16)]">
-            <div className="text-sm text-white/60">سعر التسجيل الحالي</div>
-            <div className="mt-3 flex items-baseline justify-center gap-3"><span className="text-sm text-white/45 line-through">{currentPricing.originalPrice}</span><span className="text-3xl font-bold text-[#E33830]">{currentPricing.price}</span></div>
-            <div className="mt-2 text-sm text-white/60">{currentPricing.currency}</div>
-            <p className="mt-4 flex items-center justify-center gap-2 text-sm font-bold text-[#E33830]"><Shield className="h-4 w-4" /> مخاطرة صفر: ضمان استرجاع كامل خلال 7 أيام دون أي سؤال</p>
-            <a href={createWhatsAppLink('مرحباً، أريد التسجيل في كورس الذكاء الاصطناعي للمعلمين. أريد تفاصيل طريقة الدفع والوصول إلى الكورس.')} onClick={() => trackWhatsAppClick('redesigned_final_cta')} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#E33830] px-7 py-4 text-base font-bold text-white transition-all hover:bg-[#F1544B]">سجّل الآن عبر واتساب <MessageCircle className="h-5 w-5" /></a>
-            <p className="mt-4 text-xs leading-[1.8] text-white/50">الشهادة اختيارية برسوم منفصلة · فيديوهات الكورس عبر مجموعة Telegram خاصة · وصول دائم</p>
-          </div>
-        </div>
-      </section>
+      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}><div className="mx-auto max-w-[900px] text-center"><p className="mb-4 text-sm font-bold" style={{ color: red }}>ضمان استرجاع كامل لمدة 7 أيام</p><h2 className="text-3xl font-black leading-[1.4] md:text-5xl">ابدأ من مصدرك، وخلي وقتك للشرح والطلاب.</h2><p className="mx-auto mt-5 max-w-2xl leading-[2] text-white/70">تحصل على الكورس الكامل، ملفات PDF لكل درس، 4 جلسات مباشرة للأسئلة، وتحديثات مستقبلية.</p><div className="mx-auto mt-10 max-w-md rounded-2xl border border-white/10 bg-white/[0.05] p-7 text-right shadow-[0_18px_45px_rgba(0,0,0,0.16)]"><p className="text-sm text-white/60">كل ما ستحصل عليه عند التسجيل</p><div className="mt-5 space-y-3 text-sm text-white/80"><p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />الكورس الكامل — 5 ساعات ونصف</p><p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />ملخصات PDF لجميع الدروس</p><p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />4 جلسات مباشرة للأسئلة والأجوبة</p><p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />وصول دائم وتحديثات</p></div><div className="my-6 border-t border-white/10 pt-5 text-center"><span className="text-sm text-white/50 line-through decoration-2">79$</span><span className="mr-3 text-4xl font-black" style={{ color: red }}>35$</span><p className="mt-2 text-xs text-white/50">قسطان متاحان: 17.5$ + 17.5$</p></div><a href={createWhatsAppLink('مرحباً، أريد الاشتراك في كورس الذكاء الاصطناعي للمعلمين بسعر العرض.')} onClick={() => trackWhatsAppClick('reference_style_final')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full px-7 py-4 font-bold text-white transition hover:opacity-90" style={{ backgroundColor: red }}>اشترك الآن في عرض التسجيل <MessageCircle className="h-5 w-5" /></a><p className="mt-4 text-center text-xs text-white/50">وصول فوري للمحتوى · ضمان استرجاع كامل لمدة 7 أيام</p></div></div></section>
 
-      {/* ===== 14. OPTIONAL CERTIFICATE ===== */}
-      <section className="border-t border-[#E4E4E1] bg-[#F7F7F5]">
-        <div className="mx-auto grid max-w-[980px] gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:items-center md:px-8 md:py-24">
-          <div className="order-2 flex justify-center md:order-1">
-            <Image src="/images/optional-certificate.jpg" alt="نموذج من الشهادة والتصديقات" width={863} height={1080} sizes="(max-width: 768px) 100vw, 360px" loading="lazy" className="max-h-[420px] w-auto max-w-full object-contain shadow-[0_18px_45px_rgba(21,34,56,0.12)]" />
-          </div>
-          <div className="order-1 md:order-2">
-            <p className="mb-3 text-sm font-bold text-[#E33830]">خيار إضافي بعد إتمام الكورس</p>
-            <h2 className="text-3xl font-bold leading-[1.4] text-[#252525] md:text-5xl">شهادة اختيارية من وزارة التنمية السورية</h2>
-            <p className="mt-4 inline-flex rounded-full bg-[#F2F2F0] px-3 py-1.5 text-sm font-bold text-[#E33830]">اختيارية — والرسوم منفصلة عن رسوم الكورس</p>
-            <p className="mt-5 text-base leading-[2] text-[#686868]">بعد اجتياز اختبار أو تنفيذ مشروع نهاية الكورس، يمكنك طلب شهادة من وزارة التنمية السورية. الشهادة معترف بها محليًا ودوليًا وخارجيًا، ويمكن تصديقها عبر وزارة الخارجية السورية إذا رغبت باستخدامها خارج سوريا.</p>
-            <p className="mt-4 text-base leading-[2] text-[#686868]">نصدر الشهادة ونرسلها إليك أينما كنت، وهي ليست شرطًا للتسجيل في الكورس.</p>
-            <div className="mt-6 border-r-2 border-[#E33830] pr-4 text-sm font-bold leading-[2] text-[#252525]">متطلب الحصول على الشهادة: اختبار أو مشروع نهائي.</div>
-          </div>
-        </div>
-      </section>
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[900px]"><div className="text-center"><p className="mb-4 text-sm font-bold" style={{ color: red }}>الأسئلة الشائعة</p><h2 className="text-3xl font-black md:text-5xl">أسئلة طبيعية قبل اتخاذ القرار</h2></div><div className="mt-10 grid gap-3">{faqs.map(([q,a], i) => <article key={q} className="rounded-2xl bg-white px-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="flex w-full items-center justify-between gap-5 py-5 text-right font-black"><span>{q}</span><ChevronDown className={`h-5 w-5 shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} style={{ color: red }} /></button>{openFaq === i && <p className="pb-5 text-sm leading-[2]" style={{ color: muted }}>{a}</p>}</article>)}</div></div></section>
 
-      {/* ===== 15. FOOTER ===== */}
-      <footer className="bg-[#222222] py-8 text-white">
-        <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-4 px-5 text-center sm:flex-row sm:text-right md:px-8">
-          <p className="text-xs text-white/50">جميع الحقوق محفوظة {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين</p>
-          <div className="flex items-center gap-5 text-sm text-white/60"><Link href="/schools" className="hover:text-white">حلول المؤسسات التعليمية</Link><Link href={resultsHref} className="hover:text-white">نماذج المخرجات</Link></div>
-        </div>
-      </footer>
-
-      <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('redesigned_mobile_sticky')} target="_blank" rel="noopener noreferrer" className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-[#E33830] px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#E33830]/25 md:hidden">اطلب التفاصيل عبر واتساب <MessageCircle className="h-5 w-5" /></a>
-    </div>
+      <footer className="px-5 py-8 text-center text-sm text-white" style={{ backgroundColor: ink }}>© {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين <span className="mx-2 text-white/40">·</span> <Link href={resultsHref} className="underline">نماذج المخرجات</Link></footer>
+      <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('reference_style_mobile_sticky')} target="_blank" rel="noopener noreferrer" className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-lg md:hidden" style={{ backgroundColor: red }}>احجز مكانك الآن <MessageCircle className="h-5 w-5" /></a>
+    </main>
   )
 }
