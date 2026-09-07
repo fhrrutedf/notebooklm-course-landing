@@ -74,9 +74,9 @@ export default function LandingPage() {
   }, [])
 
   const currentPricing = {
-    price: '30 دولارًا',
-    originalPrice: '49 دولارًا',
-    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو على قسطين 15$ + 15$',
+    price: '35 دولارًا',
+    originalPrice: '79 دولارًا',
+    currency: 'الدفع داخل سوريا عبر شام كاش أو تحويل بنكي أو على قسطين 17.5$ + 17.5$',
   }
   const WHATSAPP_NUMBER = '963985323170'
   const createWhatsAppLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
@@ -94,13 +94,13 @@ export default function LandingPage() {
   // ===== DATA =====
 
   const courseModules = [
-    {
-      title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
+    { title: 'المسار 1: من المصدر إلى شرح وفيديو تعليمي',
       lessons: 6,
       items: [
         'كيف تبدأ من الكتاب أو الدرس وتحدد المطلوب من الذكاء الاصطناعي',
         'كيف تكتب Prompt واضحًا لشرح مناسب لعمر الطالب ومستواه',
         'كيف تراجع الناتج وتحوّله إلى شرح أو فيديو تعليمي قابل للمشاركة',
+        'ملف PDF مرافق لكل درس لتثبيت الخطوات والرجوع إليها لاحقًا',
       ],
     },
     {
@@ -110,6 +110,7 @@ export default function LandingPage() {
         'تحويل الدرس إلى أسئلة واختبار منظم مع نموذج إجابة',
         'إخراج ورقة PDF قابلة للطباعة بتنسيق عربي واضح',
         'إنشاء مهمة أو مشروع بسيط يمكن للطلاب تطبيقه ومراجعته',
+        'ملف PDF جاهز يختصر خطوات التطبيق مع كل درس',
       ],
     },
     {
@@ -119,6 +120,7 @@ export default function LandingPage() {
         'إنشاء عرض تعليمي ونشاط يساعد على تفاعل الطلاب داخل الحصة',
         'إنتاج Podcast أو شرح صوتي وفيديو من محتوى الدرس',
         'البحث على الإنترنت وبناء تقرير أو رسالة أو بحث منظم مع مراجعة المصادر',
+        'ملفات PDF وقوالب مرجعية تساعدك على تطبيق كل مخرج',
       ],
     },
   ]
@@ -126,6 +128,7 @@ export default function LandingPage() {
   const bonuses = [
     { title: 'ساعة مجانية: كيف تكتب Prompt واضحًا', subtitle: 'Bonus Training', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'تدريب إضافي بنهاية الكورس بيعلّمك كيف تكتب Prompt واضح ومفيد.', icon: Zap },
     { title: '4 جلسات مباشرة للأسئلة والأجوبة', subtitle: 'Live Support', oldValue: '', value: 'ضمن تجربة الكورس', desc: 'جلسات مباشرة للأسئلة والأجوبة: إذا عندك سؤال، منناقشه ومنطبّق عليه سوا، مع متابعة شخصية من المدرب أثناء التطبيق.', icon: Users },
+    { title: 'ملف PDF عملي مع كل درس', subtitle: 'Lesson PDFs', oldValue: 'قيمة إضافية', value: 'مجانًا مع التسجيل', desc: 'كل درس مرفق بملف PDF مرتب يلخص الخطوات والأمثلة والقوالب حتى تقدر ترجع له وقت التطبيق.', icon: FileOutput },
     { title: 'حزمة Prompts وأتمتة للمعلمين', subtitle: 'Prompts & Automation', oldValue: '1,500 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب جاهزة وخطوات أتمتة بتساعدك بالشرح والاختبارات والمشاريع والفيديوهات، وتختصر عليك وقت التحضير.', icon: Zap },
     { title: 'قوالب مشاريع ومخرجات', subtitle: 'Templates', oldValue: '1,000 ليرة سورية جديدة', value: 'مجانًا مع التسجيل', desc: 'قوالب عملية لخطة المشروع، ورقة الاختبار، سيناريو الفيديو، بطاقة الخروج، ونموذج التقييم.', icon: FileText },
     { title: 'تحديثات ودعم بعد الكورس', subtitle: 'Updates & Support', oldValue: '', value: 'مجانًا دائمًا', desc: 'تحديثات مستمرة ودعم عبر واتساب وقت التطبيق، مع متابعة شخصية من المدرب عند الحاجة.', icon: Shield },
@@ -185,10 +188,10 @@ export default function LandingPage() {
             </span>
             <span className="text-sm font-bold tracking-tight text-[#152238] md:text-base">كورس الذكاء الاصطناعي للمعلمين</span>
           </div>
-          <Link href="/schools" className="hidden items-center gap-2 text-sm font-bold text-[#0F766E] transition-colors hover:text-[#115E59] sm:flex">
+          <div className="hidden items-center gap-5 sm:flex"><Link href="/workshop" className="text-sm font-bold text-[#C17E22] transition-colors hover:text-[#A36317]">سجّل بالورشة المجانية</Link><Link href="/schools" className="flex items-center gap-2 text-sm font-bold text-[#0F766E] transition-colors hover:text-[#115E59]">
             للمؤسسات التعليمية
             <Building2 className="h-4 w-4" />
-          </Link>
+          </Link></div>
         </div>
       </nav>
 
@@ -212,6 +215,7 @@ export default function LandingPage() {
                 اطلب تفاصيل التسجيل عبر واتساب
                 <MessageCircle className="h-5 w-5" />
               </a>
+              <Link href="/workshop" className="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold text-[#C17E22] underline decoration-[#C89B3C] decoration-2 underline-offset-8 transition-colors hover:text-[#A36317]">سجّل بالورشة المجانية أولًا <ArrowLeft className="h-4 w-4" /></Link>
               <a href={resultsHref} onClick={() => trackResultsOpen('redesigned_hero')} className="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold text-[#152238] underline decoration-[#C89B3C] decoration-2 underline-offset-8 transition-colors hover:text-[#0F766E]">
                 شاهد النماذج الحقيقية أولًا
                 <ArrowLeft className="h-4 w-4" />
@@ -221,13 +225,13 @@ export default function LandingPage() {
             <p className="mt-3 text-sm font-bold text-[#5E6B78]">الشهادة اختيارية برسوم منفصلة، والتسجيل يعطيك وصولًا دائمًا إلى فيديوهات الكورس عبر مجموعة Telegram خاصة.</p>
             <div className="mt-8 grid gap-4 border-t border-[#DCE3E1] pt-5 sm:grid-cols-[1fr_auto] sm:items-center">
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#5E6B78]">
-                <span className="font-bold text-[#152238]">30 دولارًا — سعر العرض</span>
+                <span className="font-bold text-[#152238]">35 دولارًا — سعر العرض</span>
                 <span>كورس مسجل بالكامل — 5 ساعات ونصف</span>
-                <span>أقساط متاحة — قسطين 15$ + 15$</span>
+                <span>أقساط متاحة — قسطين 17.5$ + 17.5$</span>
                 <span>وصول دائم</span>
               </div>
               <div className="rounded-xl border border-[#D9B96C] bg-[#FFF9E8] px-4 py-3 text-center text-sm font-bold text-[#152238]">
-                <span className="block text-[#A34F4F]">49 دولارًا <span className="line-through">(السعر الأصلي)</span></span>
+                <span className="block text-[#A34F4F]">79 دولارًا <span className="line-through">(السعر الأصلي)</span></span>
                 <span className="mt-1 block text-[#0F766E]">ينتهي العرض خلال {offerTimeLeft.days} يوم · {String(offerTimeLeft.hours).padStart(2, '0')}:{String(offerTimeLeft.minutes).padStart(2, '0')}:{String(offerTimeLeft.seconds).padStart(2, '0')}</span>
               </div>
             </div>
