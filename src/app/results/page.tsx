@@ -139,6 +139,27 @@ const featuredSamples: FeaturedSample[] = [
   },
 ]
 
+const additionalSamples = [
+  {
+    title: 'تحويل خط اليد إلى ملخص منسّق بالذكاء الاصطناعي',
+    subtitle: 'تحويل ملاحظات درس النعت المكتوبة بخط اليد إلى ملخص واضح ومنظم، يتضمن التعريف والأنواع والإعراب وجدول المطابقة والأمثلة التطبيقية.',
+    image: '/samples/user/handwriting-to-ai-summary.png',
+    tag: 'من خط اليد إلى درس جاهز',
+  },
+  {
+    title: 'قصة مع تمرين شفهي للطلاب',
+    subtitle: 'ورقة تعليمية لطلاب الصف الأول بعنوان «عائلتي»، تجمع بين قصة قصيرة وأسئلة فهم شفهية وتدريبات لغوية ونشاط ترتيب الكلمات.',
+    image: '/samples/user/story-oral-exercise.png',
+    tag: 'قصة وتطبيق شفهي',
+  },
+  {
+    title: 'شرح درس على شكل خريطة تعليمية',
+    subtitle: 'تحويل درس «كيفية التطرق إليها» إلى شرح بصري منظم يوزع الأفكار والخطوات والأنشطة بطريقة مريحة للطالب والمعلم.',
+    image: '/samples/user/lesson-explanation.png',
+    tag: 'شرح درس بصري',
+  },
+]
+
 export default function ResultsPage() {
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
@@ -186,6 +207,8 @@ export default function ResultsPage() {
           </div>
         </div>
       </section>
+
+      <section className="border-y border-[#E2E2DF] bg-[#F0F0EE]"><div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-24"><div className="max-w-3xl"><p className="mb-4 text-sm font-bold text-[#E3342F]">نماذج إضافية من التطبيق</p><h2 className="text-3xl font-bold leading-[1.45] text-[#242424] md:text-5xl">من ملاحظة بسيطة إلى مادة تعليمية جاهزة</h2><p className="mt-5 text-base leading-[2] text-[#666666]">كل نموذج هون منفصل حتى تشوف كيف ممكن يتحول المصدر الذي عندك إلى مخرج واضح وقابل للاستخدام.</p></div><div className="mt-10 space-y-8">{additionalSamples.map((sample) => <article key={sample.title} className="overflow-hidden rounded-2xl border border-[#E2E2DF] bg-white shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><div className="grid items-center gap-6 p-4 md:grid-cols-[1.15fr_0.85fr] md:p-6"><div className="overflow-hidden rounded-xl bg-[#F8F8F6]"><img src={sample.image} alt={sample.title} className="max-h-[720px] w-full object-contain" loading="lazy" /></div><div className="text-right"><p className="text-xs font-bold tracking-wide text-[#E3342F]">{sample.tag}</p><h3 className="mt-3 text-2xl font-bold text-[#242424]">{sample.title}</h3><p className="mt-4 text-sm leading-[2] text-[#666666]">{sample.subtitle}</p><span className="mt-5 inline-flex rounded-full bg-[#F7EDEC] px-3 py-1.5 text-xs font-bold text-[#B92723]">مخرج تعليمي جاهز للمراجعة والتطبيق</span></div></div></article>)}</div></div></section>
 
       <section className="border-y border-[#E2E2DF] bg-[#242424] text-white">
         <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-8 md:py-20"><div className="max-w-3xl"><p className="mb-4 text-sm font-bold text-[#E3342F]">ما الذي تثبته هذه النماذج؟</p><h2 className="text-3xl font-bold leading-[1.45] md:text-5xl">ليست ملفات منفصلة؛ إنها خطوات لحل مشكلة التحضير.</h2></div><div className="mt-10 grid gap-4 md:grid-cols-4">{['تنظيم الدرس بصريًا','استخراج الأفكار والأسئلة','بناء اختبار متنوع','إخراج ورقة امتحان واضحة'].map((text, i) => <div key={text} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"><span className="text-sm font-bold text-[#E3342F]">0{i + 1}</span><p className="mt-3 font-bold text-white">{text}</p></div>)}</div></div>
