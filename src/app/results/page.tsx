@@ -97,14 +97,6 @@ const featuredSamples: FeaturedSample[] = [
     action: 'تصفّح الدليل الدراسي البصري للمتتاليات',
   },
   {
-    title: 'خريطة ذهنية لبنية الدرس',
-    subtitle: 'ترتيب أفكار الدرس من الصورة الكبيرة للتفاصيل.',
-    image: '/samples/user/mindmap-brain.png',
-    tag: 'خريطة ذهنية',
-    time: 'دقيقة واحدة فقط',
-    action: 'افتح خريطة بنية الدرس التفاعلية',
-  },
-  {
     title: 'خريطة ذهنية تفصيلية',
     subtitle: 'تفريع المفاهيم الرئيسية بصفحة وحدة سهلة للمراجعة.',
     image: '/samples/user/mindmap-brain-detailed.png',
