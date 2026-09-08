@@ -34,24 +34,6 @@ type LocalSample = {
 
 const localSamples: LocalSample[] = [
   {
-    title: 'إنفوجرافيك علوم',
-    subtitle: 'تحويل محتوى الدرس إلى ملخص بصري منظم',
-    preview: '/samples/previews/chemistry-infographic.webp',
-    file: '/samples/previews/chemistry-infographic.webp',
-    fileLabel: 'تصفّح النموذج وشاهد النتيجة',
-    icon: Sparkles,
-    kind: 'image',
-  },
-  {
-    title: 'خريطة ذهنية',
-    subtitle: 'تنظيم الأفكار الأساسية من المصدر في صفحة واحدة',
-    preview: '/samples/previews/chemistry-mindmap.webp',
-    file: '/samples/previews/chemistry-mindmap.webp',
-    fileLabel: 'تصفّح النموذج وشاهد النتيجة',
-    icon: BookOpen,
-    kind: 'image',
-  },
-  {
     title: 'مخطط كيمياء — PDF',
     subtitle: 'نموذج PDF محلي وجاهز للفتح أو التنزيل',
     preview: '/samples/previews/chemistry-blueprint.webp',
@@ -98,9 +80,9 @@ const localSamples: LocalSample[] = [
 ]
 
 const videoSamples = [
-  { title: 'فيديو تعليمي — علوم', href: 'https://drive.google.com/file/d/1gVPnr4gh-Oh7Nm2Js5KddZTXxVhofZJs/view' },
-  { title: 'فيديو تعليمي — كيمياء', href: 'https://drive.google.com/file/d/1xIGeh3bGBgZvUdsKJCKwE21sYWe9-1Qo/view' },
-  { title: 'فيديو تعليمي — إنكليزي', href: 'https://drive.google.com/file/d/12ZmG8cG2xTvXmHQYgebK3iSGYdZibJru/view' },
+  { title: 'فيديو تعليمي — علوم', href: 'https://youtu.be/u-fb-Skw0kU' },
+  { title: 'فيديو تعليمي — كيمياء', href: 'https://youtu.be/XQNR8vzC7BQ' },
+  { title: 'فيديو تعليمي — إنكليزي', href: 'https://youtu.be/ednZg7GZt2Q' },
 ]
 
 
