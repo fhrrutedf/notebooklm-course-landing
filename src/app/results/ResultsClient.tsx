@@ -225,21 +225,46 @@ export default function ResultsClient() {
             </span>
           </div>
 
-          {/* شريط الفهرس والانتقال السريع */}
-          <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-[#E2E2DF] pt-6">
-            <span className="text-xs font-black text-[#666666]">تصفح بحسب المرحلة:</span>
-            <a href="#phase-1" className="rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-[#242424] transition hover:bg-[#E3342F] hover:text-white shadow-sm">
-              المرحلة 1: الشرح والخرائط (4)
-            </a>
-            <a href="#phase-2" className="rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-[#242424] transition hover:bg-[#E3342F] hover:text-white shadow-sm">
-              المرحلة 2: الامتحانات الرسمية (2)
-            </a>
-            <a href="#phase-3" className="rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-[#242424] transition hover:bg-[#E3342F] hover:text-white shadow-sm">
-              المرحلة 3: الوسائط والبودكاست (4)
-            </a>
-            <a href="#videos" className="rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-[#242424] transition hover:bg-[#E3342F] hover:text-white shadow-sm">
-              مخرجات الفيديو (3)
-            </a>
+          {/* شريط المسار المتكامل للكورس (3 مراحل متتالية) */}
+          <div className="mt-10 border-t border-[#E2E2DF] pt-6">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-black text-[#E3342F]">المسار الكامل للكورس:</span>
+              <span className="text-xs font-bold text-[#666666]">3 مراحل متكاملة تأخذك من صفحة الكتاب إلى المخرج الجاهز</span>
+            </div>
+            <div className="grid gap-2.5 sm:grid-cols-3">
+              <a
+                href="#phase-1"
+                className="group flex items-center justify-between gap-2 rounded-2xl border border-[#E2E2DF] bg-white p-3.5 text-right shadow-sm transition hover:border-[#E3342F] hover:shadow-md"
+              >
+                <div>
+                  <span className="block text-[11px] font-black text-[#E3342F]">المرحلة 01</span>
+                  <span className="text-xs font-bold text-[#242424] group-hover:text-[#E3342F]">فهم المصدر وبناء الشرح والخرائط</span>
+                </div>
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F7EDEC] text-xs font-black text-[#B92723]">1</span>
+              </a>
+
+              <a
+                href="#phase-2"
+                className="group flex items-center justify-between gap-2 rounded-2xl border border-[#E2E2DF] bg-white p-3.5 text-right shadow-sm transition hover:border-[#E3342F] hover:shadow-md"
+              >
+                <div>
+                  <span className="block text-[11px] font-black text-[#E3342F]">المرحلة 02</span>
+                  <span className="text-xs font-bold text-[#242424] group-hover:text-[#E3342F]">بناء الأسئلة وأوراق الامتحانات</span>
+                </div>
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F7EDEC] text-xs font-black text-[#B92723]">2</span>
+              </a>
+
+              <a
+                href="#phase-3"
+                className="group flex items-center justify-between gap-2 rounded-2xl border border-[#E2E2DF] bg-white p-3.5 text-right shadow-sm transition hover:border-[#E3342F] hover:shadow-md"
+              >
+                <div>
+                  <span className="block text-[11px] font-black text-[#E3342F]">المرحلة 03</span>
+                  <span className="text-xs font-bold text-[#242424] group-hover:text-[#E3342F]">PDF، عروض، بودكاست وفيديو</span>
+                </div>
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F7EDEC] text-xs font-black text-[#B92723]">3</span>
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -366,49 +391,7 @@ export default function ResultsClient() {
         </div>
       </section>
 
-      {/* زر الحجز الأوسط (Mid-Page Conversion CTA) */}
-      <section className="px-5 py-8">
-        <div className="mx-auto max-w-[1000px] rounded-3xl border-2 border-[#E3342F]/30 bg-[#F7EDEC] p-6 text-center shadow-[0_14px_40px_rgba(227,52,47,0.08)] md:p-10">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1 text-xs font-black text-[#B92723] shadow-sm">
-              <Zap className="h-3.5 w-3.5 text-[#E3342F]" />
-              تطبيق عملي من أول يوم
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 border border-red-300 px-3 py-1 text-xs font-black text-[#B92723]">
-              🔥 متبقي 6 مقاعد فقط بسعر الإطلاق
-            </span>
-          </div>
-          <h3 className="mt-3 text-2xl font-black leading-[1.4] text-[#242424] md:text-3xl">
-            أعجبتك هذه النتائج وتريد تطبيقها على كتبك ودروسك؟
-          </h3>
-          <p className="mx-auto mt-2 max-w-2xl text-sm leading-[2] text-[#555555] md:text-base">
-            في الكورس بتتعلم الطريقة كاملة خطوة بخطوة: من فتح صفحة الكتاب، إلى استخراج الأفكار وبناء الشرح، وحتى إخراج ورقة امتحان أو عرض جاهز دون أي تشتت، مع متابعة شخصية من المدرب.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد حجز مقعدي في الكورس وتفعيله فوراً.')}
-              onClick={() => {
-                track('whatsapp_click', { source: 'results_mid_cta', affiliate_ref: affiliateRef || 'direct' })
-                trackWhatsApp('results_mid_cta', { affiliate_ref: affiliateRef || 'direct' })
-              }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#E3342F] px-8 py-3.5 text-base font-bold text-white shadow-lg transition hover:bg-[#B92723] hover:scale-[1.02]"
-            >
-              <span>احجز مقعدك الآن عبر واتساب</span>
-              <MessageCircle className="h-5 w-5" />
-            </a>
-          </div>
-          <p className="mt-2 text-xs text-[#666666]">
-            💡 <strong className="text-[#242424]">ماذا يحدث بعد الضغط؟</strong> يفتح شات واتساب مباشرة مع المدرب للإجابة على استفساراتك، اختيار طريقة الدفع الأسهل لك، واستلام رابط الكورس فوراً.
-          </p>
-          <p className="mt-3 text-xs font-bold text-[#666666]">
-            سعر الإطلاق 35$ فقط (أو قسطان 17.5$) · وصول دائم عبر Telegram · ضمان استرجاع كامل 7 أيام
-          </p>
-        </div>
-      </section>
-
-      {/* القسم الثالث: نماذج المرحلة الثالثة (الوسائط والبودكاست) */}
+      {/* القسم الثالث: نماذج المرحلة الثالثة (الوسائط والبودكاست والفيديو) */}
       <section id="phase-3" className="px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto max-w-[1180px]">
           <div className="max-w-3xl">
@@ -419,7 +402,7 @@ export default function ResultsClient() {
               إخراج المحتوى بصيغ تفاعلية، صوتية، ومرئية
             </h2>
             <p className="mt-3 text-base leading-[2] text-[#666666]">
-              خاطب الطالب البصري والسمعي بملفات تفاعلية مبهرة: بودكاست بصوتين، عروض شرائح جاهزة، ومذكرات PDF مركزة.
+              خاطب الطالب البصري والسمعي بملفات تفاعلية مبهرة: مذكرات PDF، عروض شرائح جاهزة، بودكاست بصوتين، وفيديوهات تعليمية بالرسوم والصوت.
             </p>
           </div>
 
@@ -478,48 +461,46 @@ export default function ResultsClient() {
               )
             })}
           </div>
-        </div>
-      </section>
 
-      {/* نماذج مخرجات الفيديو التعليمي */}
-      <section id="videos" className="border-t border-[#E2E2DF] bg-[#F8F8F6] px-5 py-14 md:px-8 md:py-20">
-        <div className="mx-auto max-w-[1180px]">
-          <div className="text-center">
-            <span className="rounded-full bg-[#F7EDEC] px-3.5 py-1 text-xs font-black text-[#B92723]">
-              المرحلة 03: نماذج مخرجات مرئية
-            </span>
-            <h2 className="mt-3 text-2xl font-black text-[#242424] md:text-4xl">
-              مقاطع مخرجات تعليمية: من نص الدرس إلى فيديو تفاعلي للطلاب
-            </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-sm leading-[1.9] text-[#666666] md:text-base">
-              هذه المقاطع هي نماذج مخرجات حقيقية يتعلم المعلم إنتاجها في الكورس؛ حيث يتحول الدرس إلى فيديو شارح بالرسوم والصوت دون الحاجة لكاميرات أو مونتاج معقد، لتقدمه لطلابك كمخرج تعليمي جاهز.
-            </p>
-          </div>
+          {/* مخرجات مرئية وفيديوهات تعليمية ضمن المرحلة الثالثة */}
+          <div className="mt-14 border-t border-[#E2E2DF] pt-10">
+            <div className="max-w-3xl">
+              <span className="rounded-full bg-[#F7EDEC] px-3.5 py-1 text-xs font-black text-[#B92723]">
+                مخرجات مرئية وسمعية ضمن المرحلة الثالثة
+              </span>
+              <h3 className="mt-3 text-xl font-black text-[#242424] md:text-3xl">
+                من نص الدرس إلى فيديو تعليمي تفاعلي للطلاب
+              </h3>
+              <p className="mt-2 text-sm leading-[1.9] text-[#666666]">
+                يتعلم المعلم في هذه المرحلة أيضاً كيفية تحويل الدروس إلى فيديوهات شارحة بالصوت والصورة، دون الحاجة لأي معدات تصوير أو برامج مونتاج معقدة.
+              </p>
+            </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {videoSamples.map((video) => (
-              <article key={video.title} className="overflow-hidden rounded-3xl border border-[#E2E2DF] bg-white shadow-[0_12px_35px_rgba(0,0,0,0.05)]">
-                <div className="aspect-video bg-[#242424]">
-                  <iframe
-                    loading="lazy"
-                    className="h-full w-full"
-                    src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1`}
-                    title={video.title}
-                    onLoad={() => track('video_open', { video: video.title })}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="p-5 text-right">
-                  <div className="flex items-center gap-2 text-[#E3342F]">
-                    <Video className="h-5 w-5" />
-                    <span className="text-xs font-bold">مخرج فيديو تعليمي جاهز للطلاب</span>
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {videoSamples.map((video) => (
+                <article key={video.title} className="overflow-hidden rounded-3xl border border-[#E2E2DF] bg-white shadow-[0_12px_35px_rgba(0,0,0,0.05)]">
+                  <div className="aspect-video bg-[#242424]">
+                    <iframe
+                      loading="lazy"
+                      className="h-full w-full"
+                      src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1`}
+                      title={video.title}
+                      onLoad={() => track('video_open', { video: video.title })}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
                   </div>
-                  <h3 className="mt-2 font-bold text-[#242424]">{video.title}</h3>
-                  <p className="mt-1.5 text-xs leading-[1.8] text-[#666666]">{video.desc}</p>
-                </div>
-              </article>
-            ))}
+                  <div className="p-5 text-right">
+                    <div className="flex items-center gap-2 text-[#E3342F]">
+                      <Video className="h-5 w-5" />
+                      <span className="text-xs font-bold">فيديو تعليمي جاهز للطلاب</span>
+                    </div>
+                    <h4 className="mt-2 font-bold text-[#242424]">{video.title}</h4>
+                    <p className="mt-1.5 text-xs leading-[1.8] text-[#666666]">{video.desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -571,8 +552,8 @@ export default function ResultsClient() {
                 <span className="rounded-full bg-[#F7EDEC] px-3 py-1 text-xs font-bold text-[#B92723]">
                   عرض التسجيل الحالي
                 </span>
-                <span className="rounded-full bg-red-100 border border-red-300 px-3 py-1 text-xs font-bold text-[#B92723]">
-                  🔥 متبقي 6 مقاعد فقط بسعر الإطلاق
+                <span className="rounded-full bg-red-100 border border-red-300 px-3.5 py-1 text-xs font-black text-[#B92723]">
+                  🔥 مقاعد الدفعة محدودة لضمان المتابعة المباشرة مع المدرب
                 </span>
               </div>
               <div className="mt-4 flex items-center justify-center gap-3">
