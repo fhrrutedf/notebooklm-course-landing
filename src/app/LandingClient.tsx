@@ -7,6 +7,7 @@ import { track } from '@vercel/analytics'
 import { trackWhatsApp } from '@/lib/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import {
+  ArrowDown,
   ArrowLeft,
   BookOpen,
   Building2,
@@ -46,7 +47,6 @@ const line = '#E2E2DF'
 
 export default function LandingClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [openModule, setOpenModule] = useState<number | null>(0)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
   const [offerTimeLeft, setOfferTimeLeft] = useState<CountdownTime | null>(null)
   const affiliateRef = useSyncExternalStore(
@@ -86,10 +86,64 @@ export default function LandingClient() {
     trackGoogleEvent('view_samples', { button_location: source })
   }
 
-  const modules = [
-    { title: 'المسار الأول: من كتاب المنهج الجاف إلى شرح تفاعلي مخصص', lessons: 6, desc: 'تخلّص من الورقة البيضاء، وحوّل الدرس إلى شرح يناسب عمر طلابك ومستوياتهم المختلفة.', items: ['خطة تحضير أسبوعية متكاملة خلال دقائق، تحفظها كقالب وتستخدمها مع كل درس بدل البدء من الصفر.', 'تبسيط المفاهيم الصعبة والمجردة بصياغة تناسب طلابك من الابتدائي وحتى البكالوريا.', 'تحويل المادة الجافة إلى فيديوهات تعليمية صامتة أو متحركة بتعليق صوتي، دون الحاجة لمعدات تصوير أو مونتاج.', 'ملخص PDF مكتوب لكل درس من كتب المنهج، تقدمه لطلابك كمذكرة مرجعية جاهزة.'] },
-    { title: 'المسار الثاني: أتمتة الاختبارات وصناعة أوراق الامتحانات الرسمية', lessons: 7, desc: 'وفّر الساعات التي تضيع في كتابة الأسئلة والتنسيق، واطلع بورقة امتحان مرتبة وجاهزة للطباعة.', items: ['بنك أسئلة متنوع: صح وخطأ، خيارات متعددة، وأسئلة تفكير نقدي مع سلالم تصحيح نموذجية.', 'تصدير الاختبار إلى Word قابل للتعديل أو عرض PowerPoint تفاعلي تظهر إجاباته بنقرة واحدة أمام الطلاب.', 'إخراج ورقة امتحان رسمية خلال نحو 18 دقيقة، مع الترويسة وبيانات الطالب وهوامش مريحة للعين.', 'بطاقات مراجعة رقمية Flashcards تساعد الطلاب يثبتوا المفاهيم بطريقة تفاعلية وممتعة.'] },
-    { title: 'المسار الثالث: الوسائط البصرية والسمعية والبحث الاحترافي', lessons: 7, desc: 'خاطب الطالب البصري والسمعي، واختصر وقت البحث والتفريغ والتنسيق في مخرجات تعليمية مبهرة.', items: ['تحويل فصل كامل إلى Podcast تعليمي بصوتين يتناقشان بطريقة طبيعية تساعد الطالب يسمع ويراجع أثناء التنقل.', 'تفكيك الفصول الطويلة إلى خرائط ذهنية وإنفوجرافيك منظم يختصر الوحدة المعقدة في صفحة واحدة.', 'إعداد تقارير علمية موثقة والبحث عن استراتيجيات تدريس حديثة من مصادر موثوقة بدل البحث العشوائي.', 'تحويل أي فيديو تعليمي من YouTube إلى مصدر مكتوب وملخص داخل دفترك دون تفريغ يدوي.'] },
+  const phases = [
+    {
+      number: '1',
+      phaseLabel: 'المرحلة الأولى',
+      title: 'المرحلة الأولى: فهم المصدر وبناء الشرح',
+      subtitle: 'من كتاب المنهج الجاف إلى شرح تفاعلي مخصص',
+      lessons: '6 محاضرات',
+      overview:
+        'في هذه المرحلة، تتعلم التعامل مع كتاب المنهج أو PDF أو صورة أو مادة تعليمية، واستخراج الأفكار والمفاهيم، وتبسيط الدرس، وتجهيز شرح منظم وملف PDF لكل درس. تخلّص من الورقة البيضاء، وحوّل الدرس إلى شرح يناسب عمر طلابك ومستوياتهم المختلفة.',
+      items: [
+        'خطة تحضير أسبوعية متكاملة خلال دقائق، تحفظها كقالب وتستخدمها مع كل درس بدل البدء من الصفر.',
+        'تبسيط المفاهيم الصعبة والمجردة بصياغة تناسب طلابك من الابتدائي وحتى البكالوريا.',
+        'تحويل المادة الجافة إلى فيديوهات تعليمية صامتة أو متحركة بتعليق صوتي، دون الحاجة لمعدات تصوير أو مونتاج.',
+        'ملخص PDF مكتوب لكل درس من كتب المنهج، تقدمه لطلابك كمذكرة مرجعية جاهزة.',
+      ],
+    },
+    {
+      number: '2',
+      phaseLabel: 'المرحلة الثانية',
+      title: 'المرحلة الثانية: بناء الأسئلة والأنشطة والاختبارات',
+      subtitle: 'أتمتة الاختبارات وصناعة أوراق الامتحانات الرسمية',
+      lessons: '7 محاضرات',
+      overview:
+        'في هذه المرحلة، تتعلم إعداد الأسئلة، والأنشطة الصفية، والأسئلة الشفهية، والاختبارات، وأوراق الامتحان، مع مراجعة المعلم وتعديل الناتج قبل استخدامه. وفّر الساعات التي تضيع في كتابة الأسئلة والتنسيق، واطلع بورقة امتحان مرتبة وجاهزة للطباعة.',
+      items: [
+        'بنك أسئلة متنوع: صح وخطأ، خيارات متعددة، وأسئلة تفكير نقدي مع سلالم تصحيح نموذجية.',
+        'تصدير الاختبار إلى Word قابل للتعديل أو عرض PowerPoint تفاعلي تظهر إجاباته بنقرة واحدة أمام الطلاب.',
+        'إخراج ورقة امتحان رسمية خلال نحو 18 دقيقة، مع الترويسة وبيانات الطالب وهوامش مريحة للعين.',
+        'بطاقات مراجعة رقمية Flashcards تساعد الطلاب يثبتوا المفاهيم بطريقة تفاعلية وممتعة.',
+      ],
+    },
+    {
+      number: '3',
+      phaseLabel: 'المرحلة الثالثة',
+      title: 'المرحلة الثالثة: إخراج المحتوى بصيغ تعليمية متعددة',
+      subtitle: 'الوسائط البصرية والسمعية والبحث الاحترافي',
+      lessons: '7 محاضرات',
+      overview:
+        'في هذه المرحلة، تتعلم إخراج المحتوى على شكل PDF، وعرض تقديمي، وخريطة ذهنية، وإنفوجرافيك، وفيديو تعليمي، وPodcast، وملخصات وأنشطة تفاعلية، بحسب المحتوى الموجود أصلًا في الكورس. خاطب الطالب البصري والسمعي، واختصر وقت البحث والتفريغ والتنسيق في مخرجات تعليمية مبهرة.',
+      items: [
+        'تحويل فصل كامل إلى Podcast تعليمي بصوتين يتناقشان بطريقة طبيعية تساعد الطالب يسمع ويراجع أثناء التنقل.',
+        'تفكيك الفصول الطويلة إلى خرائط ذهنية وإنفوجرافيك منظم يختصر الوحدة المعقدة في صفحة واحدة.',
+        'إعداد تقارير علمية موثقة والبحث عن استراتيجيات تدريس حديثة من مصادر موثوقة بدل البحث العشوائي.',
+        'تحويل أي فيديو تعليمي من YouTube إلى مصدر مكتوب وملخص داخل دفترك دون تفريغ يدوي.',
+      ],
+    },
+  ]
+
+  const workflowSteps = [
+    'مصدر الدرس',
+    'تحديد هدف التعلم',
+    'استخراج الأفكار والمفاهيم',
+    'بناء شرح مبسط',
+    'إضافة نشاط وأسئلة',
+    'إعداد اختبار أو ورقة امتحان',
+    'إخراج المحتوى بصيغة PDF أو عرض أو خريطة أو فيديو',
+    'مراجعة المعلم وتعديل الناتج',
+    'استخدام المحتوى مع الطلاب',
   ]
   const gifts = [
     { title: 'مكتبة البرومبتات وحزمة الأوامر الذهبية', value: '40 أمرًا + 40 مثالًا مجانًا', desc: 'أوامر عربية تفصيلية تغطي احتياجات المعلم والمدرب حتى تبدأ التطبيق بسرعة وبطريقة آمنة.', icon: Zap },
@@ -135,7 +189,116 @@ export default function LandingClient() {
 
       <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-4 text-sm font-bold" style={{ color: red }}>أثر الكورس على أرض الواقع</p><h2 className="text-3xl font-black md:text-5xl">بنهاية المسار، ستكون قادرًا على إنتاج مخرجات تستخدمها فعلًا.</h2></div><span className="text-sm font-bold" style={{ color: muted }}>12 وحدة تقريبًا · 5 ساعات ونصف</span></div><div className="mt-10 grid gap-4 md:grid-cols-3">{['شرح وفيديو تعليمي من مصدرك','اختبارات وPDF جاهزة بعد المراجعة','عروض وخرائط ذهنية وإنفوجرافيك','بودكاست ومحتوى صوتي تعليمي','تقارير وأبحاث مع تنظيم المصادر','قوالب PDF للرجوع والتطبيق'].map((item) => <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0" style={{ color: red }} /><span className="font-bold">{item}</span></div>)}</div></div></section>
 
-      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>محتوى الكورس</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">ثلاثة مسارات عملية من المصدر إلى المخرج التعليمي</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{modules.map((mod, i) => <article key={mod.title} className="rounded-2xl border bg-white p-2 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}><button onClick={() => setOpenModule(openModule === i ? null : i)} className="flex w-full items-start justify-between gap-4 p-5 text-right"><span><span className="block text-sm font-black" style={{ color: red }}>المسار 0{i + 1}</span><span className="mt-3 block text-lg font-black">{mod.title}</span><span className="mt-2 block text-sm" style={{ color: muted }}>{mod.lessons} محاضرات · {mod.desc}</span></span><ChevronDown className={`mt-1 h-5 w-5 shrink-0 transition-transform ${openModule === i ? 'rotate-180' : ''}`} style={{ color: red }} /></button>{openModule === i && <ul className="space-y-3 px-5 pb-6">{mod.items.map((item) => <li key={item} className="flex items-start gap-3 text-sm leading-[1.9]" style={{ color: muted }}><CheckCircle2 className="mt-1 h-4 w-4 shrink-0" style={{ color: red }} />{item}</li>)}</ul>}</article>)}</div></div></section>
+      <section className="px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="text-center md:text-right">
+            <p className="mb-3 text-sm font-black" style={{ color: red }}>محتوى الكورس</p>
+            <h2 className="text-3xl font-black md:text-5xl">المسار الكامل للكورس</h2>
+            <p className="mt-2 text-xl font-bold md:text-2xl" style={{ color: red }}>من مصدر الدرس إلى محتوى تعليمي جاهز</p>
+            <p className="mt-4 max-w-4xl text-base leading-[2] md:text-lg" style={{ color: muted }}>
+              رحلة عملية واحدة بتبدأ من كتاب أو ملف أو درس عندك، وبتنتهي بمخرجات تعليمية جاهزة تقدر تراجعها وتستخدمها مع طلابك. بتتعلم المسار كاملًا خطوة بخطوة، من فهم المصدر وبناء الشرح، إلى إعداد الأسئلة والاختبارات، ثم إخراج المحتوى بالشكل المناسب.
+            </p>
+          </div>
+
+          <div className="mt-12 space-y-8">
+            {phases.map((phase, idx) => (
+              <div key={phase.number} className="relative">
+                <article className="overflow-hidden rounded-3xl border bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)] md:p-8" style={{ borderColor: line }}>
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: line }}>
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-lg font-black text-white shadow-sm" style={{ backgroundColor: red }}>
+                        {phase.number}
+                      </span>
+                      <div>
+                        <span className="block text-xs font-black tracking-wide uppercase" style={{ color: redDark }}>
+                          {phase.phaseLabel}
+                        </span>
+                        <h3 className="text-xl font-black md:text-2xl" style={{ color: ink }}>
+                          {phase.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-full px-3.5 py-1 text-xs font-bold" style={{ backgroundColor: soft, color: muted }}>
+                        ⏱ {phase.lessons}
+                      </span>
+                      <span className="rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold text-emerald-700">
+                        مشمولة بالكامل ضمن الكورس
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    <p className="text-sm font-bold" style={{ color: red }}>
+                      {phase.subtitle}
+                    </p>
+                    <p className="mt-3 text-base leading-[2] md:text-lg" style={{ color: ink }}>
+                      {phase.overview}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 rounded-2xl p-5 md:p-6" style={{ backgroundColor: paper, border: `1px solid ${line}` }}>
+                    <p className="mb-4 text-sm font-black" style={{ color: ink }}>
+                      ماذا تتقن وتنجز عمليًا في هذه المرحلة؟
+                    </p>
+                    <div className="grid gap-3.5 md:grid-cols-2">
+                      {phase.items.map((item) => (
+                        <div key={item} className="flex items-start gap-3 text-sm leading-[1.9]" style={{ color: '#333333' }}>
+                          <CheckCircle2 className="mt-1 h-5 w-5 shrink-0" style={{ color: red }} />
+                          <span className="font-medium">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                {idx < phases.length - 1 && (
+                  <div className="flex justify-center py-4">
+                    <div className="flex flex-col items-center text-[#E3342F]">
+                      <div className="h-4 w-0.5 bg-[#E3342F]/30" />
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F7EDEC] text-xs font-bold text-[#B92723]">
+                        <ArrowDown className="h-4 w-4" />
+                      </span>
+                      <div className="h-4 w-0.5 bg-[#E3342F]/30" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 rounded-3xl border bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)] md:p-10" style={{ borderColor: line }}>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="rounded-full bg-[#F7EDEC] px-3.5 py-1 text-xs font-black" style={{ color: redDark }}>مخطط المسار المتكامل</span>
+              <h3 className="mt-3 text-2xl font-black md:text-3xl">التسلسل العملي لكل درس من البداية وحتى الصف</h3>
+              <p className="mt-2 text-sm leading-[1.8]" style={{ color: muted }}>تسلسل منطقي ثابت تطبقه على أي درس أو مادة تعليمية</p>
+            </div>
+
+            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center">
+              {workflowSteps.map((step, idx) => (
+                <div key={step} className="flex w-full flex-col items-center">
+                  <div className={`flex w-full items-center gap-3 rounded-2xl border p-4 text-center transition ${idx === workflowSteps.length - 1 ? 'border-[#E3342F] bg-[#F7EDEC] text-[#B92723]' : idx === 0 ? 'border-[#242424] bg-[#242424] text-white' : 'border-[#E2E2DF] bg-[#F8F8F6] text-[#242424]'}`}>
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black ${idx === workflowSteps.length - 1 ? 'bg-[#E3342F] text-white' : idx === 0 ? 'bg-white text-[#242424]' : 'bg-white text-[#E3342F] border border-[#E2E2DF]'}`}>{idx + 1}</span>
+                    <span className="flex-1 text-base font-bold md:text-lg">{step}</span>
+                  </div>
+                  {idx < workflowSteps.length - 1 && (
+                    <div className="flex flex-col items-center py-2 text-[#E3342F]">
+                      <div className="h-3 w-0.5 bg-[#E3342F]/30" />
+                      <ArrowDown className="h-4 w-4" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 rounded-2xl border-2 p-6 text-center shadow-[0_8px_25px_rgba(0,0,0,0.03)] md:p-8" style={{ borderColor: 'rgba(227, 52, 47, 0.25)', backgroundColor: '#F7EDEC' }}>
+            <p className="text-lg font-black leading-[1.9] md:text-2xl" style={{ color: ink }}>
+              «لا تتعلم أدوات متفرقة؛ تتعلم نظامًا واحدًا يساعدك على الانتقال من مصدر الدرس إلى محتوى تعليمي جاهز.»
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>مع التسجيل</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2><div className="mt-10 grid gap-5 md:grid-cols-3">{gifts.map((gift) => <article key={gift.title} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><gift.icon className="h-7 w-7" style={{ color: red }} /><p className="mt-5 text-xs font-black uppercase" style={{ color: red }}>{gift.value}</p><h3 className="mt-2 text-xl font-black">{gift.title}</h3><p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p></article>)}</div></div></section>
 
