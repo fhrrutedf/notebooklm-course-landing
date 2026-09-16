@@ -235,7 +235,7 @@ export default function ResultsClient() {
               المرحلة 3: الوسائط والبودكاست (4)
             </a>
             <a href="#videos" className="rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-[#242424] transition hover:bg-[#E3342F] hover:text-white shadow-sm">
-              فيديوهات التطبيق (3)
+              مخرجات الفيديو (3)
             </a>
           </div>
         </div>
@@ -470,18 +470,18 @@ export default function ResultsClient() {
         </div>
       </section>
 
-      {/* القسم الرابع: فيديوهات من التطبيق */}
+      {/* نماذج مخرجات الفيديو التعليمي */}
       <section id="videos" className="border-t border-[#E2E2DF] bg-[#F8F8F6] px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center">
             <span className="rounded-full bg-[#F7EDEC] px-3.5 py-1 text-xs font-black text-[#B92723]">
-              فيديوهات أُنتجت بالذكاء الاصطناعي
+              المرحلة 03: نماذج مخرجات مرئية
             </span>
             <h2 className="mt-3 text-2xl font-black text-[#242424] md:text-4xl">
-              شاهد كيف ينتقل الشرح من فكرة إلى فيديو تعليمي
+              مقاطع مخرجات تعليمية: من نص الدرس إلى فيديو تفاعلي للطلاب
             </h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm leading-[1.9] text-[#666666] md:text-base">
-              هذه المقاطع أُنتجت بالكامل بالذكاء الاصطناعي دون الحاجة لكاميرات أو استوديو، لتبسيط المعلومات المجردة للطلاب.
+              هذه المقاطع هي نماذج مخرجات حقيقية يتعلم المعلم إنتاجها في الكورس؛ حيث يتحول الدرس إلى فيديو شارح بالرسوم والصوت دون الحاجة لكاميرات أو مونتاج معقد، لتقدمه لطلابك كمخرج تعليمي جاهز.
             </p>
           </div>
 
@@ -502,7 +502,7 @@ export default function ResultsClient() {
                 <div className="p-5 text-right">
                   <div className="flex items-center gap-2 text-[#E3342F]">
                     <Video className="h-5 w-5" />
-                    <span className="text-xs font-bold">فيديو تعليمي جاهز</span>
+                    <span className="text-xs font-bold">مخرج فيديو تعليمي جاهز للطلاب</span>
                   </div>
                   <h3 className="mt-2 font-bold text-[#242424]">{video.title}</h3>
                   <p className="mt-1.5 text-xs leading-[1.8] text-[#666666]">{video.desc}</p>
