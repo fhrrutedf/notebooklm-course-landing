@@ -4,7 +4,9 @@ export type CtaSource =
   | 'reference_style_final'
   | 'reference_style_mobile_sticky'
   | 'results_nav'
+  | 'results_mid_cta'
   | 'results_final_cta'
+  | 'results_mobile_sticky'
 
 export function trackWhatsApp(source: CtaSource, extra: Record<string, unknown> = {}) {
   if (typeof window === 'undefined') return
