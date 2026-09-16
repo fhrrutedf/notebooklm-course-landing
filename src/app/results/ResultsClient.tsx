@@ -212,6 +212,10 @@ export default function ResultsClient() {
               <Headphones className="h-4 w-4 text-[#E3342F]" />
               بودكاست وعروض وفيديوهات تفاعلية
             </span>
+            <span className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-[#B92723] shadow-sm">
+              <span>📱</span>
+              لا يحتاج لابتوب — طبّق من هاتفك
+            </span>
             <span className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-emerald-800 shadow-sm">
               <ShieldCheck className="h-4 w-4 text-emerald-600" />
               قرار المراجعة والدقة بيدك أنت
@@ -568,7 +572,7 @@ export default function ResultsClient() {
               <div className="rounded-2xl bg-[#F7EDEC] p-5">
                 <p className="font-bold text-[#E3342F]">داخل سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  الهرم، الفؤاد، سيريتل كاش، بنك بيمو، وغيرها بتفعيل فوري ومباشر.
+                  سيريتل كاش، شام كاش، الهرم، الفؤاد، بنك بيمو، وغيرها بتفعيل فوري ومباشر.
                 </p>
               </div>
               <div className="rounded-2xl bg-[#F0F0EE] p-5">
