@@ -164,9 +164,27 @@ export default function LandingClient() {
     'استخدام المحتوى مع الطلاب',
   ]
   const gifts = [
-    { title: 'مكتبة البرومبتات وحزمة الأوامر الذهبية', value: '40 أمرًا + 40 مثالًا مجانًا', desc: 'أوامر عربية تفصيلية تغطي احتياجات المعلم والمدرب حتى تبدأ التطبيق بسرعة وبطريقة آمنة.', icon: Zap },
-    { title: '4 جلسات متابعة مباشرة للأسئلة والأجوبة', value: 'مجانًا', desc: 'تطرح سؤالك ومادتك، ونطبق عليها معًا حتى تتأكد أنك أتقنت المسار ولم تبقَ وحدك أمام أي مشكلة.', icon: Users },
-    { title: 'ملخصات PDF مكتوبة لكل درس', value: 'مجانًا', desc: 'مرجع سريع تراجع منه خطوات التطبيق العملي دون الحاجة لإعادة مشاهدة الفيديوهات من البداية.', icon: FileOutput },
+    {
+      title: 'مكتبة البرومبتات وحزمة الأوامر الذهبية',
+      originalPrice: '25$',
+      value: '40 أمرًا + 40 مثالًا مجانًا',
+      desc: 'أوامر عربية تفصيلية تغطي احتياجات المعلم والمدرب حتى تبدأ التطبيق بسرعة وبطريقة آمنة.',
+      icon: Zap,
+    },
+    {
+      title: '4 جلسات متابعة مباشرة للأسئلة والأجوبة',
+      originalPrice: '30$',
+      value: 'متابعة مباشرة مجانًا',
+      desc: 'تطرح سؤالك ومادتك، ونطبق عليها معًا حتى تتأكد أنك أتقنت المسار ولم تبقَ وحدك أمام أي مشكلة.',
+      icon: Users,
+    },
+    {
+      title: 'ملخصات PDF وقوالب العمل لكل درس',
+      originalPrice: '15$',
+      value: 'قوالب وملخصات مجانًا',
+      desc: 'مرجع سريع تراجع منه خطوات التطبيق العملي دون الحاجة لإعادة مشاهدة الفيديوهات من البداية.',
+      icon: FileOutput,
+    },
   ]
   const faqs = [
     ['هل الكورس مناسب لمن لا يملك خبرة تقنية كبيرة؟', 'نعم. الشرح تدريجي ومبسط، ونبدأ من الصفر، ومع كل درس ملخص PDF يرجعلك وقت التطبيق حتى ما تضطر تعيد الفيديو كاملًا.'],
@@ -180,7 +198,6 @@ export default function LandingClient() {
     ['هل الدورة مناسبة لمعلم المدرسة أو المدرّس الخصوصي؟', 'نعم. الأمثلة قابلة للتخصيص حسب المادة والمرحلة، من الابتدائي وحتى البكالوريا، مع بقاء المعلم صاحب القرار في المراجعة والاستخدام.'],
     ['هل أستطيع استخدام المخرجات في صفي مباشرة؟', 'نعم، بعد مراجعة المحتوى وتعديله بما يناسب طلابك. تتعلم إخراج شرح واختبار وورقة عمل وعرض ومواد بصرية قابلة للاستخدام والتطوير.'],
     ['هل أحصل على وصول دائم وتحديثات؟', 'نعم. تحصل على وصول دائم إلى محتوى الكورس، مع تحديثات مستقبلية بحسب تطور المسارات والمخرجات.'],
-    ['هل يمكنني الدفع بالتقسيط؟', 'نعم. يمكنك التسجيل على قسطين بقيمة 17.5$ لكل قسط، وتعرف تفاصيل التفعيل والطريقة المناسبة عبر WhatsApp.'],
   ]
 
   return (
@@ -188,7 +205,7 @@ export default function LandingClient() {
       {offerTimeLeft && (
         <div className="bg-[#242424] px-4 py-2.5 text-center text-xs md:text-sm font-bold text-white">
           <span className="text-[#F5F5F2]">عرض إطلاق محدود: </span>
-          <span style={{ color: red }} className="font-black">35$ (متبقي 6 مقاعد فقط)</span>
+          <span style={{ color: red }} className="font-black">22$ (متبقي 6 مقاعد فقط)</span>
           <span className="mx-2 text-white/60">•</span>
           <span>ينتهي العرض خلال: </span>
           <span className="tabular-nums font-black text-amber-400">
@@ -210,10 +227,9 @@ export default function LandingClient() {
   <p className="mt-4 text-sm font-black" style={{ color: red }}>وفر تعب العام الدراسي بأكمله الآن!</p>
   <p className="mt-3 text-sm font-bold" style={{ color: muted }}>سعر الإطلاق الحالي</p>
   <div className="mt-1">
-    <span className="text-lg font-bold line-through decoration-2" style={{ color: muted }}>79$</span>
-    <span className="mr-3 text-5xl font-black" style={{ color: red }}>35$</span>
+    <span className="text-lg font-bold line-through decoration-2" style={{ color: muted }}>39$</span>
+    <span className="mr-3 text-5xl font-black" style={{ color: red }}>22$</span>
   </div>
-  <p className="mt-2 text-sm font-bold" style={{ color: muted }}>قسطان مريحان بقيمة 17.5$ فقط لكل قسط</p>
 
   <div className="mt-4 rounded-xl bg-[#F8F8F6] p-3 text-xs leading-[1.8] font-bold text-[#444444] border border-[#E2E2DF] text-right">
     <p className="flex items-center gap-1.5 text-emerald-800">
@@ -501,15 +517,51 @@ export default function LandingClient() {
       {/* 7. هدايا التسجيل */}
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1180px]">
-          <p className="mb-4 text-sm font-bold" style={{ color: red }}>مع التسجيل</p>
-          <h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <p className="mb-2 text-sm font-bold" style={{ color: red }}>مع التسجيل اليوم</p>
+              <h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2>
+              <p className="mt-3 text-base font-medium" style={{ color: muted }}>
+                احصل على حزمة الهدايا التدريبية كاملة مشمولة مجاناً عند التسجيل بسعر العرض.
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-right">
+              <span className="text-2xl">🎁</span>
+              <div>
+                <p className="text-xs font-bold text-emerald-800">إجمالي قيمة الهدايا الإضافية:</p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm font-bold line-through text-slate-400">70$</span>
+                  <span className="text-base font-black text-emerald-700">تأخذها مجانًا 100% مع الكورس</span>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {gifts.map((gift) => (
-              <article key={gift.title} className="rounded-2xl bg-white border p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
-                <gift.icon className="h-7 w-7" style={{ color: red }} />
-                <p className="mt-5 text-xs font-black uppercase" style={{ color: red }}>{gift.value}</p>
-                <h3 className="mt-2 text-xl font-black">{gift.title}</h3>
-                <p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p>
+              <article key={gift.title} className="flex flex-col justify-between rounded-2xl bg-white border p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)] transition hover:shadow-lg" style={{ borderColor: line }}>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <gift.icon className="h-7 w-7" style={{ color: red }} />
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                      {gift.value}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex items-center gap-2">
+                    <span className="text-xs font-bold text-slate-400">السعر:</span>
+                    <span className="text-lg font-black text-slate-400 line-through decoration-2 decoration-red-500/70">
+                      {gift.originalPrice}
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-black text-emerald-800">
+                      مجانًا مع الكورس
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-xl font-black">{gift.title}</h3>
+                  <p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-dashed border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-700">
+                  <span>تأخذها مجانًا مع تسجيلك</span>
+                  <span className="text-sm font-black">✓</span>
+                </div>
               </article>
             ))}
           </div>
@@ -648,14 +700,14 @@ export default function LandingClient() {
               <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />الكورس الكامل — 5 ساعات ونصف</p>
               <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />وصول فوري ودائم عبر Telegram مع متابعة خطوة بخطوة مع المدرب</p>
               <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />إمكانية المتابعة والتطبيق مباشرة من هاتفك المحمول</p>
-              <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />ملخصات PDF مكتوبة لجميع الدروس</p>
-              <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />4 جلسات مباشرة للأسئلة والأجوبة والتطبيق العملي</p>
+              <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />ملخصات PDF وقوالب العمل لجميع الدروس (هدية مجانية)</p>
+              <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />مكتبة البرومبتات وحزمة الأوامر الذهبية (هدية مجانية)</p>
+              <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />4 جلسات مباشرة للأسئلة والأجوبة والتطبيق العملي (هدية مجانية)</p>
               <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />وصول دائم وتحديثات مستقبلية مجانية</p>
             </div>
             <div className="my-6 border-t border-white/10 pt-5 text-center">
-              <span className="text-sm text-white/50 line-through decoration-2">79$</span>
-              <span className="mr-3 text-4xl font-black" style={{ color: red }}>35$</span>
-              <p className="mt-2 text-xs text-white/50">قسطان متاحان: 17.5$ + 17.5$</p>
+              <span className="text-sm text-white/50 line-through decoration-2">39$</span>
+              <span className="mr-3 text-4xl font-black" style={{ color: red }}>22$</span>
             </div>
             <a href={createWhatsAppLink('مرحباً، أريد الاشتراك في كورس الذكاء الاصطناعي للمعلمين بسعر العرض.')} onClick={() => trackWhatsAppClick('reference_style_final')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full px-7 py-4 font-bold text-white transition hover:opacity-90 shadow-lg" style={{ backgroundColor: red }}>
               اشترك الآن في عرض التسجيل <MessageCircle className="h-5 w-5" />

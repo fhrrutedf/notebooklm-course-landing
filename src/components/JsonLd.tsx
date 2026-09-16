@@ -11,7 +11,7 @@ export function CourseJsonLd() {
     provider: { '@type': 'Organization', name: 'Manasa Digital' },
     offers: {
       '@type': 'Offer',
-      price: '35',
+      price: '22',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       url: 'https://course.manasadigital.com/',

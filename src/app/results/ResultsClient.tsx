@@ -557,12 +557,9 @@ export default function ResultsClient() {
                 </span>
               </div>
               <div className="mt-4 flex items-center justify-center gap-3">
-                <span className="text-xl font-bold text-[#888888] line-through decoration-2">79$</span>
-                <span className="text-5xl font-black text-[#E3342F]">35$</span>
+                <span className="text-xl font-bold text-[#888888] line-through decoration-2">39$</span>
+                <span className="text-5xl font-black text-[#E3342F]">22$</span>
               </div>
-              <p className="mt-2 text-sm font-bold text-[#666666]">
-                أو قسطان مريحان: 17.5$ + 17.5$ فقط
-              </p>
             </div>
 
             {/* صندوق أين وكيف تستلم الكورس */}
