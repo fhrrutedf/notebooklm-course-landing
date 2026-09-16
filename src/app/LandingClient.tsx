@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { track } from '@vercel/analytics'
@@ -14,12 +14,14 @@ import {
   CheckCircle2,
   ChevronDown,
   Clock,
+  Eye,
   FileOutput,
   FileText,
   MessageCircle,
   Play,
   Shield,
   Users,
+  X,
   Zap,
 } from 'lucide-react'
 
@@ -48,6 +50,8 @@ const line = '#E2E2DF'
 export default function LandingClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [offerTimeLeft, setOfferTimeLeft] = useState<CountdownTime | null>(null)
+  const [showExitPopup, setShowExitPopup] = useState(false)
+  const exitPopupShownRef = useRef(false)
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
     () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
@@ -90,6 +94,32 @@ export default function LandingClient() {
     const timer = window.setInterval(update, 1000)
     return () => window.clearInterval(timer)
   }, [])
+
+  const triggerExitPopup = useCallback(() => {
+    if (exitPopupShownRef.current) return
+    if (typeof window !== 'undefined' && window.sessionStorage.getItem('exit_popup_shown')) return
+    exitPopupShownRef.current = true
+    window.sessionStorage.setItem('exit_popup_shown', '1')
+    setShowExitPopup(true)
+  }, [])
+
+  useEffect(() => {
+    // Exit intent: mouse leaves the viewport from the top
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) triggerExitPopup()
+    }
+    document.addEventListener('mouseleave', handleMouseLeave)
+
+    // Idle timer: show after ~70 seconds on the page
+    const idleTimer = window.setTimeout(() => {
+      triggerExitPopup()
+    }, 70_000)
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      window.clearTimeout(idleTimer)
+    }
+  }, [triggerExitPopup])
 
   const whatsappNumber = '963985323170'
   const createWhatsAppLink = (message: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`${message}${affiliateMessageSuffix(affiliateRef)}`)}`
@@ -728,6 +758,62 @@ export default function LandingClient() {
 
       <footer className="px-5 py-8 text-center text-sm text-white" style={{ backgroundColor: ink }}>© {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين <span className="mx-2 text-white/40">·</span> <Link href={resultsHref} className="underline">نماذج المخرجات</Link></footer>
       <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('reference_style_mobile_sticky')} target="_blank" rel="noopener noreferrer" className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-lg md:hidden" style={{ backgroundColor: red }}>احجز مكانك الآن <MessageCircle className="h-5 w-5" /></a>
+
+      {/* Exit-intent / idle popup */}
+      {showExitPopup && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowExitPopup(false)}>
+          <div
+            className="relative w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl"
+            style={{ animation: 'exitPopupIn 0.35s cubic-bezier(0.16,1,0.3,1)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowExitPopup(false)}
+              className="absolute left-4 top-4 rounded-full p-1.5 text-[#999] transition hover:bg-slate-100 hover:text-[#333]"
+              aria-label="إغلاق"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl" style={{ backgroundColor: '#F7EDEC' }}>
+              <Eye className="h-8 w-8" style={{ color: red }} />
+            </div>
+
+            <h3 className="text-2xl font-black" style={{ color: ink }}>قبل ما تمشي...</h3>
+            <p className="mt-3 text-base leading-[1.9]" style={{ color: muted }}>
+              شاهد نماذج حقيقية من مخرجات الكورس: اختبارات، خرائط ذهنية، عروض، ملفات PDF، وبودكاست تعليمي — كلها جاهزة للاستخدام.
+            </p>
+
+            <Link
+              href={resultsHref}
+              onClick={() => {
+                trackResultsOpen('exit_intent_popup')
+                setShowExitPopup(false)
+              }}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-4 text-base font-black text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl active:scale-95"
+              style={{ backgroundColor: red }}
+            >
+              <Eye className="h-5 w-5" />
+              شاهد النماذج الآن
+            </Link>
+
+            <button
+              onClick={() => setShowExitPopup(false)}
+              className="mt-3 text-sm font-bold transition hover:underline"
+              style={{ color: muted }}
+            >
+              لا شكرًا، سأتابع التصفح
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes exitPopupIn {
+          from { opacity: 0; transform: scale(0.9) translateY(20px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+      `}</style>
     </main>
   )
 }
