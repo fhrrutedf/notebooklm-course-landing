@@ -47,7 +47,6 @@ const line = '#E2E2DF'
 
 export default function LandingClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [isVideoOpen, setIsVideoOpen] = useState(false)
   const [offerTimeLeft, setOfferTimeLeft] = useState<CountdownTime | null>(null)
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
@@ -243,21 +242,54 @@ export default function LandingClient() {
   <p className="mt-3 text-xs leading-[1.8]" style={{ color: muted }}>
     متاح التسجيل الفوري والدفع الآمن لجميع المعلمين والمدربين من داخل وخارج سوريا.
   </p>
-</aside></div><div className="mx-auto mt-10 aspect-video max-w-[1000px] overflow-hidden bg-[#242424] shadow-[0_20px_45px_rgba(0,0,0,0.14)]">{isVideoOpen ? <iframe className="h-full w-full" src="https://www.youtube-nocookie.com/embed/9VwwdCr72bc?autoplay=1&rel=0" title="محاضرة مجانية: صناعة وكيل ذكاء اصطناعي للمعلم" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" onClick={() => { setIsVideoOpen(true); track('video_sample_play', { source: 'reference_style_hero' }); trackGoogleEvent('play_advanced_lesson', { source: 'reference_style_hero' }) }} className="group relative h-full w-full"><Image src="/images/advanced-lesson-poster.webp" alt="محاضرة مجانية" width={1280} height={720} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" priority /><div className="absolute inset-0 bg-black/40" /><div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white"><span className="text-sm font-bold">محاضرة مجانية</span><span className="flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: red }}><Play className="h-7 w-7 fill-current" /></span><span className="font-bold">شاهد العينة الآن</span></div></button>}</div><div className="mt-10 flex flex-col items-center gap-3 text-center">
-  <Link
-    href={resultsHref}
-    onClick={() => trackResultsOpen('reference_style_hero')}
-    className="group inline-flex items-center justify-center gap-3 rounded-2xl border-2 px-8 py-4 text-lg font-black text-white shadow-[0_14px_35px_rgba(227,52,47,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_18px_45px_rgba(227,52,47,0.45)] active:scale-95 md:px-10 md:py-5 md:text-xl"
-    style={{ backgroundColor: red, borderColor: redDark }}
-  >
-    <span>شاهد نماذج عملناها من خلال الكورس</span>
-    <ArrowLeft className="h-6 w-6 transition-transform duration-300 group-hover:-translate-x-1.5" />
-  </Link>
-  <p className="text-sm font-bold" style={{ color: muted }}>
-    امتحانات وزارية، خرائط ذهنية، إنفوجرافيك، عروض وبودكاست أُنتجت عمليًا
-  </p>
-</div></div>
-      </section>
+</aside>
+</div>
+
+        {/* قسم الفيديو العملي */}
+        <div className="mt-14 text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7EDEC] px-3.5 py-1 text-xs font-black text-[#B92723]">
+            <Play className="h-3.5 w-3.5 fill-current" />
+            فيديو عملي مجاني
+          </span>
+          <h2 className="mt-3 text-2xl font-black text-[#242424] md:text-3xl">
+            شاهد كيف تُصنع ورقة امتحان جاهزة من كتاب المنهج
+          </h2>
+          <p className="mx-auto mt-2 max-w-3xl text-sm leading-[1.9] text-[#666666] md:text-base">
+            تطبيق عملي باللهجة السورية يوضح كيف يتحول كتاب المنهج ونماذج الأسئلة إلى ورقة امتحان منظمة مع سلم تصحيح، جاهزة للمراجعة والطباعة.
+          </p>
+
+          <div className="mx-auto mt-6 aspect-video max-w-[1000px] overflow-hidden rounded-3xl bg-[#242424] shadow-[0_20px_45px_rgba(0,0,0,0.14)] border border-[#E2E2DF]">
+            <iframe
+              className="h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/nuXcfg0Bhbw?rel=0"
+              title="شاهد كيف تُصنع ورقة امتحان جاهزة من كتاب المنهج"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="mt-3.5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#555555] border border-[#E2E2DF] shadow-sm">
+            <span>💡</span>
+            <span>هذه عينة عملية من المهارات التي تتعلمها داخل الكورس.</span>
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <Link
+            href={resultsHref}
+            onClick={() => trackResultsOpen('reference_style_hero')}
+            className="group inline-flex items-center justify-center gap-3 rounded-2xl border-2 px-8 py-4 text-lg font-black text-white shadow-[0_14px_35px_rgba(227,52,47,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_18px_45px_rgba(227,52,47,0.45)] active:scale-95 md:px-10 md:py-5 md:text-xl"
+            style={{ backgroundColor: red, borderColor: redDark }}
+          >
+            <span>شاهد نماذج عملناها من خلال الكورس</span>
+            <ArrowLeft className="h-6 w-6 transition-transform duration-300 group-hover:-translate-x-1.5" />
+          </Link>
+          <p className="text-sm font-bold" style={{ color: muted }}>
+            امتحانات وزارية، خرائط ذهنية، إنفوجرافيك، عروض وبودكاست أُنتجت عمليًا
+          </p>
+        </div>
+      </div>
+    </section>
 
       {/* 2. المشكلة */}
       <section className="px-5 py-16 md:px-8 md:py-24">
