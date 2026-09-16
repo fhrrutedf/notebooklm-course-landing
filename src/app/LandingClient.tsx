@@ -259,19 +259,82 @@ export default function LandingClient() {
 </div></div>
       </section>
 
-      <section className="border-y px-5 py-14 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>آراء معلمين ومدربين من المنطقة</p><h2 className="text-center text-3xl font-black md:text-5xl">شوف كيف تغيّر وقت التحضير والمخرجات</h2><div className="mt-10 grid gap-5 md:grid-cols-2">{[
-        ['أ. ماهر العلي', 'مدرس رياضيات للبكالوريا — حلب', 'يا جماعة، نحنا كمدرسين بكالوريا منعرف قديش تحضير درس الرياضيات وتأليف الأسئلة بياخد وقت ويهدّ الحيل. مسكت درس صعب ومن كتاب المنهج نفسه، وبوقت قصير طلعت دليل دراسة بصري وورقة امتحان مرتبة للطباعة. صار عندي بنك أسئلة وتصدير لملفات Word بدون تشتّت.'],
-        ['أ. نورة الحربي', 'معلمة صفوف أولية ومصممة أنشطة — جدة', 'كمعلمة صفوف أولية كان أكبر همي شد انتباه الصغار. صرت أعمل إنفوجرافيك ملون وبطاقات مراجعة تفاعلية، وصار الشرح يناسب عمر الطلاب بدل ما يكون جاف. الأهم أني وفّرت وقت وجهد كبير بالتحضير.'],
-        ['أ. عمر الحديثي', 'مدرس لغة إنكليزية — بغداد', 'كنت أعاني كيف أعمل محتوى استماع ممتع للطلاب. هلق بحوّل الدرس لبودكاست بصوتين يتناقشوا بالإنكليزي، وبجهّز الفيديوهات التوضيحية بدقائق. الكورس عملي وجاء بوقته.'],
-        ['د. رغد العبد الله', 'مدربة ومستشارة تطوير تربوي — دمشق', 'صياغة الحقائب التدريبية وتصميم الورش كان يستهلك أسابيع. تعلمت أبني خطة الورشة والتمارين وأنشطة كسر الجمود بجودة أكاديمية وبوقت أقصر. هذا ليس مجرد تعليم أدوات، بل طريقة عمل تختصر الجهد التقليدي.'],
-      ].map(([name, role, quote]) => <article key={name} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><p className="text-base font-bold leading-[2]">“{quote}”</p><p className="mt-5 font-black" style={{ color: red }}>{name}</p><p className="mt-1 text-sm" style={{ color: muted }}>{role}</p></article>)}</div></div></section>
+      {/* 2. المشكلة */}
+      <section className="px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-sm font-bold" style={{ color: red }}>المشكلة ليست في خبرتك</p>
+            <h2 className="text-3xl font-black leading-[1.4] md:text-5xl">المشكلة أن التحضير المتكرر يستهلك وقتك قبل أن تبدأ التدريس.</h2>
+            <p className="mt-5 text-base leading-[2]" style={{ color: muted }}>عندك الكتاب والخبرة، لكن كل اختبار أو شرح أو ورقة امتحان أو مادة بصرية تحتاج أن تعيد تنسيقها من جديد. ومع الوقت يصير التشتت بين الملفات والأدوات أكبر من وقتك مع الطلاب.</p>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-4">
+            {[
+              ['01','تحضير عشوائي','كل درس يبدأ من صفحة فارغة.'],
+              ['02','وقت ضائع','الكتابة والتنسيق يأخذان وقت الشرح.'],
+              ['03','نسخة واحدة','تراجع متأخرًا وتعيد العمل عند كل تعديل.'],
+              ['04','تشتت','تبحث عن الأداة بدل التركيز على المخرج.']
+            ].map(([n,t,d]) => (
+              <article key={n} className="rounded-2xl border bg-white p-6" style={{ borderColor: line }}>
+                <span className="text-sm font-black" style={{ color: red }}>{n}</span>
+                <h3 className="mt-5 text-xl font-black">{t}</h3>
+                <p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{d}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1180px]"><div className="max-w-3xl"><p className="mb-4 text-sm font-bold" style={{ color: red }}>المشكلة ليست في خبرتك</p><h2 className="text-3xl font-black leading-[1.4] md:text-5xl">المشكلة أن التحضير المتكرر يستهلك وقتك قبل أن تبدأ التدريس.</h2><p className="mt-5 text-base leading-[2]" style={{ color: muted }}>عندك الكتاب والخبرة، لكن كل اختبار أو شرح أو ورقة امتحان أو مادة بصرية تحتاج أن تعيد تنسيقها من جديد. ومع الوقت يصير التشتت بين الملفات والأدوات أكبر من وقتك مع الطلاب.</p></div><div className="mt-12 grid gap-5 md:grid-cols-4">{[['01','تحضير عشوائي','كل درس يبدأ من صفحة فارغة.'],['02','وقت ضائع','الكتابة والتنسيق يأخذان وقت الشرح.'],['03','نسخة واحدة','تراجع متأخرًا وتعيد العمل عند كل تعديل.'],['04','تشتت','تبحث عن الأداة بدل التركيز على المخرج.']].map(([n,t,d]) => <article key={n} className="rounded-2xl border bg-white p-6" style={{ borderColor: line }}><span className="text-sm font-black" style={{ color: red }}>{n}</span><h3 className="mt-5 text-xl font-black">{t}</h3><p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{d}</p></article>)}</div></div></section>
+      {/* 3. الحل: مسار واحد */}
+      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}>
+        <div className="mx-auto max-w-[1180px]">
+          <p className="mb-4 text-sm font-bold" style={{ color: red }}>الحل</p>
+          <h2 className="max-w-3xl text-3xl font-black leading-[1.4] md:text-5xl">مسار واحد يربط كل مراحل صناعة المحتوى التعليمي</h2>
+          <p className="mt-5 max-w-2xl text-base leading-[2] text-white/70">بدل نصائح متفرقة، تتعلم إطارًا يبدأ من المصدر، يمر بالاستخراج والمراجعة، وينتهي بمخرج تستطيع استخدامه مع طلابك.</p>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              ['01','من المصدر إلى الشرح','حوّل الكتاب أو الدرس إلى شرح وفيديو واضح.'],
+              ['02','من الدرس إلى الاختبار','استخرج الأسئلة وأخرج ورقة PDF ونموذج إجابة.'],
+              ['03','من المحتوى إلى التأثير','ابنِ عرضًا أو بودكاست أو بحثًا ومادة تعليمية.']
+            ].map(([n,t,d]) => (
+              <article key={n} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <span className="text-sm font-bold" style={{ color: red }}>{n}</span>
+                <h3 className="mt-5 text-xl font-black">{t}</h3>
+                <p className="mt-3 text-sm leading-[1.9] text-white/65">{d}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>الحل</p><h2 className="max-w-3xl text-3xl font-black leading-[1.4] md:text-5xl">مسار واحد يربط كل مراحل صناعة المحتوى التعليمي</h2><p className="mt-5 max-w-2xl text-base leading-[2] text-white/70">بدل نصائح متفرقة، تتعلم إطارًا يبدأ من المصدر، يمر بالاستخراج والمراجعة، وينتهي بمخرج تستطيع استخدامه مع طلابك.</p><div className="mt-12 grid gap-5 md:grid-cols-3">{[['01','من المصدر إلى الشرح','حوّل الكتاب أو الدرس إلى شرح وفيديو واضح.'],['02','من الدرس إلى الاختبار','استخرج الأسئلة وأخرج ورقة PDF ونموذج إجابة.'],['03','من المحتوى إلى التأثير','ابنِ عرضًا أو بودكاست أو بحثًا ومادة تعليمية.']].map(([n,t,d]) => <article key={n} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"><span className="text-sm font-bold" style={{ color: red }}>{n}</span><h3 className="mt-5 text-xl font-black">{t}</h3><p className="mt-3 text-sm leading-[1.9] text-white/65">{d}</p></article>)}</div></div></section>
+      {/* 4. أثر الكورس على أرض الواقع */}
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
+        <div className="mx-auto max-w-[1180px]">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <p className="mb-4 text-sm font-bold" style={{ color: red }}>أثر الكورس على أرض الواقع</p>
+              <h2 className="text-3xl font-black md:text-5xl">بنهاية المسار، ستكون قادرًا على إنتاج مخرجات تستخدمها فعلًا.</h2>
+            </div>
+            <span className="text-sm font-bold" style={{ color: muted }}>12 وحدة تقريبًا · 5 ساعات ونصف</span>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              'شرح وفيديو تعليمي من مصدرك',
+              'اختبارات وPDF جاهزة بعد المراجعة',
+              'عروض وخرائط ذهنية وإنفوجرافيك',
+              'بودكاست ومحتوى صوتي تعليمي',
+              'تقارير وأبحاث مع تنظيم المصادر',
+              'قوالب PDF للرجوع والتطبيق'
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]">
+                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0" style={{ color: red }} />
+                <span className="font-bold">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-4 text-sm font-bold" style={{ color: red }}>أثر الكورس على أرض الواقع</p><h2 className="text-3xl font-black md:text-5xl">بنهاية المسار، ستكون قادرًا على إنتاج مخرجات تستخدمها فعلًا.</h2></div><span className="text-sm font-bold" style={{ color: muted }}>12 وحدة تقريبًا · 5 ساعات ونصف</span></div><div className="mt-10 grid gap-4 md:grid-cols-3">{['شرح وفيديو تعليمي من مصدرك','اختبارات وPDF جاهزة بعد المراجعة','عروض وخرائط ذهنية وإنفوجرافيك','بودكاست ومحتوى صوتي تعليمي','تقارير وأبحاث مع تنظيم المصادر','قوالب PDF للرجوع والتطبيق'].map((item) => <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0" style={{ color: red }} /><span className="font-bold">{item}</span></div>)}</div></div></section>
-
+      {/* 5. محتوى الكورس: المسار الكامل */}
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center md:text-right">
@@ -383,15 +446,161 @@ export default function LandingClient() {
         </div>
       </section>
 
-      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>مع التسجيل</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2><div className="mt-10 grid gap-5 md:grid-cols-3">{gifts.map((gift) => <article key={gift.title} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><gift.icon className="h-7 w-7" style={{ color: red }} /><p className="mt-5 text-xs font-black uppercase" style={{ color: red }}>{gift.value}</p><h3 className="mt-2 text-xl font-black">{gift.title}</h3><p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p></article>)}</div></div></section>
+      {/* 6. المدرب */}
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
+        <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center">
+          <div className="flex justify-center">
+            <Image src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة" width={280} height={280} className="h-64 w-64 rounded-full object-cover ring-8 ring-white shadow-lg" />
+          </div>
+          <div>
+            <p className="mb-4 text-sm font-bold" style={{ color: red }}>من يقودك؟</p>
+            <h2 className="text-3xl font-black md:text-5xl">نواف البوسطة</h2>
+            <p className="mt-3 font-bold" style={{ color: red }}>مدرب في الذكاء الاصطناعي وزيادة الإنتاجية</p>
+            <p className="mt-5 max-w-2xl text-base leading-[2]" style={{ color: muted }}>
+              صممت هذا الكورس للمعلم الذي يريد أن يخفف العمل المتكرر دون أن يتنازل عن خبرته أو قراره. الهدف ليس استعراض الأدوات، بل تحويلها إلى طريقة عمل واضحة ومخرجات تعليمية مفيدة.
+            </p>
+            <Link href="/about" className="mt-6 inline-flex items-center gap-2 font-bold underline decoration-2 underline-offset-8" style={{ color: red }}>
+              اعرف المزيد عن المدرب <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center"><div className="flex justify-center"><Image src="/images/trainer-nawaf.webp" alt="المدرب نواف البوسطة" width={280} height={280} className="h-64 w-64 rounded-full object-cover ring-8 ring-[#F0F0EE]" /></div><div><p className="mb-4 text-sm font-bold" style={{ color: red }}>من يقودك؟</p><h2 className="text-3xl font-black md:text-5xl">نواف البوسطة</h2><p className="mt-3 font-bold" style={{ color: red }}>مدرب في الذكاء الاصطناعي وزيادة الإنتاجية</p><p className="mt-5 max-w-2xl text-base leading-[2]" style={{ color: muted }}>صممت هذا الكورس للمعلم الذي يريد أن يخفف العمل المتكرر دون أن يتنازل عن خبرته أو قراره. الهدف ليس استعراض الأدوات، بل تحويلها إلى طريقة عمل واضحة ومخرجات تعليمية مفيدة.</p><Link href="/about" className="mt-6 inline-flex items-center gap-2 font-bold underline decoration-2 underline-offset-8" style={{ color: red }}>اعرف المزيد عن المدرب <ArrowLeft className="h-4 w-4" /></Link></div></div></section>
+      {/* 7. هدايا التسجيل */}
+      <section className="px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1180px]">
+          <p className="mb-4 text-sm font-bold" style={{ color: red }}>مع التسجيل</p>
+          <h2 className="max-w-3xl text-3xl font-black md:text-5xl">هدايا وملفات تساعدك تطبق من أول يوم</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {gifts.map((gift) => (
+              <article key={gift.title} className="rounded-2xl bg-white border p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
+                <gift.icon className="h-7 w-7" style={{ color: red }} />
+                <p className="mt-5 text-xs font-black uppercase" style={{ color: red }}>{gift.value}</p>
+                <h3 className="mt-2 text-xl font-black">{gift.title}</h3>
+                <p className="mt-3 text-sm leading-[1.9]" style={{ color: muted }}>{gift.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>لمن يناسب الكورس؟</p><h2 className="max-w-3xl text-3xl font-black md:text-5xl">هذا الكورس لك إذا كنت تريد تحضيرًا أسرع ومحتوى أوضح.</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{['تبدأ كل درس من الصفر وتريد طريقة ثابتة.', 'لا تملك لابتوب وتريد التطبيق بالكامل من هاتفك المحمول.', 'تريد إعداد اختبار أو عرض أو PDF خلال وقت أقل.', 'تريد صناعة محتوى تعليمي يعرّف الطلاب بخبرتك.', 'تحتاج مراجعة وتنظيمًا قبل مشاركة أي مخرج.', 'لا تملك خبرة تقنية كبيرة وتريد شرحًا خطوة بخطوة.'].map((text) => <div key={text} className="rounded-2xl bg-white p-5 font-bold leading-[1.9] shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><CheckCircle2 className="mb-3 h-5 w-5" style={{ color: red }} />{text}</div>)}</div></div></section>
+      {/* 8. لمن يناسب الكورس */}
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
+        <div className="mx-auto max-w-[1180px]">
+          <p className="mb-4 text-sm font-bold" style={{ color: red }}>لمن يناسب الكورس؟</p>
+          <h2 className="max-w-3xl text-3xl font-black md:text-5xl">هذا الكورس لك إذا كنت تريد تحضيرًا أسرع ومحتوى أوضح.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              'تبدأ كل درس من الصفر وتريد طريقة ثابتة.',
+              'لا تملك لابتوب وتريد التطبيق بالكامل من هاتفك المحمول.',
+              'تريد إعداد اختبار أو عرض أو PDF خلال وقت أقل.',
+              'تريد صناعة محتوى تعليمي يعرّف الطلاب بخبرتك.',
+              'تحتاج مراجعة وتنظيمًا قبل مشاركة أي مخرج.',
+              'لا تملك خبرة تقنية كبيرة وتريد شرحًا خطوة بخطوة.'
+            ].map((text) => (
+              <div key={text} className="rounded-2xl bg-white p-5 font-bold leading-[1.9] shadow-[0_8px_25px_rgba(0,0,0,0.04)]">
+                <CheckCircle2 className="mb-3 h-5 w-5" style={{ color: red }} />{text}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-[1000px]"><p className="mb-4 text-sm font-bold" style={{ color: red }}>مقارنة واضحة</p><h2 className="text-3xl font-black md:text-5xl">ما الذي يجعله مختلفًا؟</h2><div className="mt-10 overflow-hidden rounded-2xl border bg-white" style={{ borderColor: line }}><div className="grid grid-cols-3 bg-[#242424] p-4 text-sm font-black text-white"><span>المعيار</span><span>التحضير المعتاد</span><span style={{ color: red }}>هذا الكورس</span></div>{[['البداية','صفحة فارغة كل مرة','تبدأ من مصدرك'],['المخرج','ملف واحد أو شرح واحد','شرح واختبار وPDF وعرض ومحتوى'],['المراجعة','متأخرة ومجهدة','مراجعة بشرية قبل الاستخدام'],['الدعم','تجربة فردية','ملخصات PDF و4 جلسات أسئلة']].map(([a,b,c]) => <div key={a} className="grid grid-cols-3 gap-3 border-t p-4 text-sm leading-[1.8]" style={{ borderColor: line }}><span className="font-black">{a}</span><span style={{ color: muted }}>{b}</span><span className="font-bold" style={{ color: red }}>{c}</span></div>)}</div></div></section>
+      {/* 9. المقارنة */}
+      <section className="px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1000px]">
+          <p className="mb-4 text-sm font-bold" style={{ color: red }}>مقارنة واضحة</p>
+          <h2 className="text-3xl font-black md:text-5xl">ما الذي يجعله مختلفًا؟</h2>
+          <div className="mt-10 overflow-hidden rounded-2xl border bg-white" style={{ borderColor: line }}>
+            <div className="grid grid-cols-3 bg-[#242424] p-4 text-sm font-black text-white">
+              <span>المعيار</span>
+              <span>التحضير المعتاد</span>
+              <span style={{ color: red }}>هذا الكورس</span>
+            </div>
+            {[
+              ['البداية','صفحة فارغة كل مرة','تبدأ من مصدرك'],
+              ['المخرج','ملف واحد أو شرح واحد','شرح واختبار وPDF وعرض ومحتوى'],
+              ['المراجعة','متأخرة ومجهدة','مراجعة بشرية قبل الاستخدام'],
+              ['الدعم','تجربة فردية','ملخصات PDF و4 جلسات أسئلة']
+            ].map(([a,b,c]) => (
+              <div key={a} className="grid grid-cols-3 gap-3 border-t p-4 text-sm leading-[1.8]" style={{ borderColor: line }}>
+                <span className="font-black">{a}</span>
+                <span style={{ color: muted }}>{b}</span>
+                <span className="font-bold" style={{ color: red }}>{c}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[1180px]"><p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>التسجيل والدفع</p><h2 className="text-center text-3xl font-black md:text-5xl">طرق دفع مريحة داخل سوريا وخارجها</h2><p className="mx-auto mt-5 max-w-2xl text-center leading-[2]" style={{ color: muted }}>ما بدنا طريقة الدفع تكون عائق أمام أي معلم أو مدرب. تواصل معنا، وخد الطريقة الأنسب إلك مع تفعيل سريع ومباشر.</p><div className="mx-auto mt-10 grid max-w-[1000px] gap-5 md:grid-cols-2"><article className="rounded-2xl bg-white p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p><h3 className="mt-3 text-2xl font-black">دفع محلي وتفعيل فوري</h3><p className="mt-4 leading-[2]" style={{ color: muted }}>عبر سيريتل كاش، شام كاش، شبكات الهرم، الفؤاد، بنك بيمو، وغيرها من الوسائل المتاحة، مع توضيح الخطوات كاملة عبر WhatsApp.</p></article><article className="rounded-2xl bg-white p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]"><p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p><h3 className="mt-3 text-2xl font-black">تحويل آمن من أي دولة</h3><p className="mt-4 leading-[2]" style={{ color: muted }}>نستقبل التسجيل والتحويل من جميع دول العالم عبر وسائل مريحة وآمنة مثل Western Union وPayPal وبطاقات الدفع العالمية، حسب المتاح.</p></article></div><div className="mt-8 text-center"><a href={createWhatsAppLink('مرحباً، أريد معرفة طريقة الدفع المناسبة لي وتفعيل الكورس فوراً.')} onClick={() => trackWhatsAppClick('payment_options')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-bold text-white transition hover:opacity-90" style={{ backgroundColor: red }}>اعرف طريقة الدفع وفعّل اشتراكك <MessageCircle className="h-5 w-5" /></a></div></div></section>      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}>
+      {/* 10. آراء معلمين ومدربين من المنطقة */}
+      <section className="border-y px-5 py-14 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}>
+        <div className="mx-auto max-w-[1180px]">
+          <p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>آراء معلمين ومدربين من المنطقة</p>
+          <h2 className="text-center text-3xl font-black md:text-5xl">شوف كيف تغيّر وقت التحضير والمخرجات</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {[
+              ['أ. ماهر العلي', 'مدرس رياضيات للبكالوريا — حلب', 'يا جماعة، نحنا كمدرسين بكالوريا منعرف قديش تحضير درس الرياضيات وتأليف الأسئلة بياخد وقت ويهدّ الحيل. مسكت درس صعب ومن كتاب المنهج نفسه، وبوقت قصير طلعت دليل دراسة بصري وورقة امتحان مرتبة للطباعة. صار عندي بنك أسئلة وتصدير لملفات Word بدون تشتّت.'],
+              ['أ. نورة الحربي', 'معلمة صفوف أولية ومصممة أنشطة — جدة', 'كمعلمة صفوف أولية كان أكبر همي شد انتباه الصغار. صرت أعمل إنفوجرافيك ملون وبطاقات مراجعة تفاعلية، وصار الشرح يناسب عمر الطلاب بدل ما يكون جاف. الأهم أني وفّرت وقت وجهد كبير بالتحضير.'],
+              ['أ. عمر الحديثي', 'مدرس لغة إنكليزية — بغداد', 'كنت أعاني كيف أعمل محتوى استماع ممتع للطلاب. هلق بحوّل الدرس لبودكاست بصوتين يتناقشوا بالإنكليزي، وبجهّز الفيديوهات التوضيحية بدقائق. الكورس عملي وجاء بوقته.'],
+              ['د. رغد العبد الله', 'مدربة ومستشارة تطوير تربوي — دمشق', 'صياغة الحقائب التدريبية وتصميم الورش كان يستهلك أسابيع. تعلمت أبني خطة الورشة والتمارين وأنشطة كسر الجمود بجودة أكاديمية وبوقت أقصر. هذا ليس مجرد تعليم أدوات، بل طريقة عمل تختصر الجهد التقليدي.']
+            ].map(([name, role, quote]) => (
+              <article key={name} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]">
+                <p className="text-base font-bold leading-[2]">“{quote}”</p>
+                <p className="mt-5 font-black" style={{ color: red }}>{name}</p>
+                <p className="mt-1 text-sm" style={{ color: muted }}>{role}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 11. طرق الدفع */}
+      <section className="px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1180px]">
+          <p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>التسجيل والدفع</p>
+          <h2 className="text-center text-3xl font-black md:text-5xl">طرق دفع مريحة داخل سوريا وخارجها</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-center leading-[2]" style={{ color: muted }}>
+            ما بدنا طريقة الدفع تكون عائق أمام أي معلم أو مدرب. تواصل معنا، وخد الطريقة الأنسب إلك مع تفعيل سريع ومباشر.
+          </p>
+          <div className="mx-auto mt-10 grid max-w-[1000px] gap-5 md:grid-cols-2">
+            <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
+              <p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p>
+              <h3 className="mt-3 text-2xl font-black">دفع محلي وتفعيل فوري</h3>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>عبر سيريتل كاش، شام كاش، شبكات الهرم، الفؤاد، بنك بيمو، وغيرها من الوسائل المتاحة، مع توضيح الخطوات كاملة عبر WhatsApp.</p>
+            </article>
+            <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
+              <p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p>
+              <h3 className="mt-3 text-2xl font-black">تحويل آمن من أي دولة</h3>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>نستقبل التسجيل والتحويل من جميع دول العالم عبر وسائل مريحة وآمنة مثل Western Union وPayPal وبطاقات الدفع العالمية، حسب المتاح.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. الأسئلة الشائعة */}
+      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
+        <div className="mx-auto max-w-[900px]">
+          <div className="text-center">
+            <p className="mb-4 text-sm font-bold" style={{ color: red }}>الأسئلة الشائعة</p>
+            <h2 className="text-3xl font-black md:text-5xl">أسئلة طبيعية قبل اتخاذ القرار</h2>
+          </div>
+          <div className="mt-10 grid gap-3">
+            {faqs.map(([q,a], i) => (
+              <article key={q} className="rounded-2xl bg-white px-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]">
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="flex w-full items-center justify-between gap-5 py-5 text-right font-black">
+                  <span>{q}</span>
+                  <ChevronDown className={`h-5 w-5 shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} style={{ color: red }} />
+                </button>
+                {openFaq === i && <p className="pb-5 text-sm leading-[2]" style={{ color: muted }}>{a}</p>}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 13. بطاقة العرض الختامي الشامل */}
+      <section className="px-5 py-16 text-white md:px-8 md:py-24" style={{ backgroundColor: ink }}>
         <div className="mx-auto max-w-[900px] text-center">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold text-amber-300">
             <Zap className="h-3.5 w-3.5" />
@@ -432,8 +641,6 @@ export default function LandingClient() {
           </div>
         </div>
       </section>
-
-      <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}><div className="mx-auto max-w-[900px]"><div className="text-center"><p className="mb-4 text-sm font-bold" style={{ color: red }}>الأسئلة الشائعة</p><h2 className="text-3xl font-black md:text-5xl">أسئلة طبيعية قبل اتخاذ القرار</h2></div><div className="mt-10 grid gap-3">{faqs.map(([q,a], i) => <article key={q} className="rounded-2xl bg-white px-5 shadow-[0_8px_25px_rgba(0,0,0,0.04)]"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="flex w-full items-center justify-between gap-5 py-5 text-right font-black"><span>{q}</span><ChevronDown className={`h-5 w-5 shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} style={{ color: red }} /></button>{openFaq === i && <p className="pb-5 text-sm leading-[2]" style={{ color: muted }}>{a}</p>}</article>)}</div></div></section>
 
       <footer className="px-5 py-8 text-center text-sm text-white" style={{ backgroundColor: ink }}>© {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين <span className="mx-2 text-white/40">·</span> <Link href={resultsHref} className="underline">نماذج المخرجات</Link></footer>
       <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('reference_style_mobile_sticky')} target="_blank" rel="noopener noreferrer" className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-lg md:hidden" style={{ backgroundColor: red }}>احجز مكانك الآن <MessageCircle className="h-5 w-5" /></a>
