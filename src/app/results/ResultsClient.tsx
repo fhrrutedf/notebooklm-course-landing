@@ -17,8 +17,11 @@ import {
   MessageCircle,
   Play,
   Presentation,
+  Send,
   ShieldCheck,
+  Smartphone,
   Sparkles,
+  Users,
   Video,
   Zap,
 } from 'lucide-react'
@@ -366,15 +369,20 @@ export default function ResultsClient() {
       {/* زر الحجز الأوسط (Mid-Page Conversion CTA) */}
       <section className="px-5 py-8">
         <div className="mx-auto max-w-[1000px] rounded-3xl border-2 border-[#E3342F]/30 bg-[#F7EDEC] p-6 text-center shadow-[0_14px_40px_rgba(227,52,47,0.08)] md:p-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1 text-xs font-black text-[#B92723] shadow-sm">
-            <Zap className="h-3.5 w-3.5 text-[#E3342F]" />
-            تطبيق عملي من أول يوم
-          </span>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1 text-xs font-black text-[#B92723] shadow-sm">
+              <Zap className="h-3.5 w-3.5 text-[#E3342F]" />
+              تطبيق عملي من أول يوم
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 border border-red-300 px-3 py-1 text-xs font-black text-[#B92723]">
+              🔥 متبقي 6 مقاعد فقط بسعر الإطلاق
+            </span>
+          </div>
           <h3 className="mt-3 text-2xl font-black leading-[1.4] text-[#242424] md:text-3xl">
             أعجبتك هذه النتائج وتريد تطبيقها على كتبك ودروسك؟
           </h3>
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-[2] text-[#555555] md:text-base">
-            في الكورس بتتعلم الطريقة كاملة خطوة بخطوة: من فتح صفحة الكتاب، إلى استخراج الأفكار وبناء الشرح، وحتى إخراج ورقة امتحان أو عرض جاهز دون أي تشتت.
+            في الكورس بتتعلم الطريقة كاملة خطوة بخطوة: من فتح صفحة الكتاب، إلى استخراج الأفكار وبناء الشرح، وحتى إخراج ورقة امتحان أو عرض جاهز دون أي تشتت، مع متابعة شخصية من المدرب.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
             <a
@@ -391,8 +399,11 @@ export default function ResultsClient() {
               <MessageCircle className="h-5 w-5" />
             </a>
           </div>
+          <p className="mt-2 text-xs text-[#666666]">
+            💡 <strong className="text-[#242424]">ماذا يحدث بعد الضغط؟</strong> يفتح شات واتساب مباشرة مع المدرب للإجابة على استفساراتك، اختيار طريقة الدفع الأسهل لك، واستلام رابط الكورس فوراً.
+          </p>
           <p className="mt-3 text-xs font-bold text-[#666666]">
-            سعر الإطلاق 35$ فقط (أو قسطان 17.5$) · وصول دائم · ضمان استرجاع كامل 7 أيام
+            سعر الإطلاق 35$ فقط (أو قسطان 17.5$) · وصول دائم عبر Telegram · ضمان استرجاع كامل 7 أيام
           </p>
         </div>
       </section>
@@ -556,9 +567,14 @@ export default function ResultsClient() {
 
           <div className="mx-auto mt-10 max-w-2xl rounded-3xl border border-[#E2E2DF] bg-white p-7 shadow-[0_18px_45px_rgba(0,0,0,0.08)] md:p-9">
             <div className="text-center">
-              <span className="rounded-full bg-[#F7EDEC] px-3 py-1 text-xs font-bold text-[#B92723]">
-                عرض التسجيل الحالي
-              </span>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <span className="rounded-full bg-[#F7EDEC] px-3 py-1 text-xs font-bold text-[#B92723]">
+                  عرض التسجيل الحالي
+                </span>
+                <span className="rounded-full bg-red-100 border border-red-300 px-3 py-1 text-xs font-bold text-[#B92723]">
+                  🔥 متبقي 6 مقاعد فقط بسعر الإطلاق
+                </span>
+              </div>
               <div className="mt-4 flex items-center justify-center gap-3">
                 <span className="text-xl font-bold text-[#888888] line-through decoration-2">79$</span>
                 <span className="text-5xl font-black text-[#E3342F]">35$</span>
@@ -568,7 +584,25 @@ export default function ResultsClient() {
               </p>
             </div>
 
-            <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {/* صندوق أين وكيف تستلم الكورس */}
+            <div className="mt-6 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-500 text-white shadow-sm">
+                  <Send className="h-5 w-5" />
+                </div>
+                <div className="text-right text-xs leading-[1.8] text-slate-700">
+                  <p className="font-black text-sky-950 text-sm">أين وكيف تستلم الكورس؟</p>
+                  <p className="mt-1">
+                    • <strong>وصول فوري ودائم عبر تطبيق Telegram:</strong> تستلم فور الدفع رابط قناة ومجموعة الكورس الخاصة لتشاهد الدروس في أي وقت وتحتفظ بها للأبد.
+                  </p>
+                  <p className="mt-1">
+                    • <strong>متابعة من الهاتف مباشرة خطوة بخطوة مع المدرب:</strong> لا تحتاج كمبيوتر، وإذا وقفت بأي خطوة أو تطبيق، المدرب معك شخصياً للإجابة والتوجيه عبر تيليجرام وواتساب.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl bg-[#F7EDEC] p-5">
                 <p className="font-bold text-[#E3342F]">داخل سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
@@ -583,10 +617,6 @@ export default function ResultsClient() {
               </div>
             </div>
 
-            <p className="mt-6 text-center text-sm font-bold leading-[1.9] text-[#242424]">
-              الاشتراك والتفعيل الفوري متاح وبأسهل الطرق. اضغط على WhatsApp ليساعدك فريق الدعم باختيار الطريقة الأنسب.
-            </p>
-
             <a
               href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد حجز مقعدي وتفعيل الكورس فوراً.')}
               onClick={() => {
@@ -600,6 +630,18 @@ export default function ResultsClient() {
               <span>احجز مقعدك وابدأ تفعيل الكورس عبر الواتساب</span>
               <MessageCircle className="h-5 w-5" />
             </a>
+
+            {/* ماذا يحدث بعد الضغط على زر واتساب؟ */}
+            <div className="mt-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4 text-right">
+              <p className="text-xs font-black text-amber-900 mb-2">
+                💬 ماذا سيحدث بعد الضغط على زر واتساب؟
+              </p>
+              <div className="grid gap-2 text-xs text-amber-950/80">
+                <p>1️⃣ <strong>تواصل مباشر مع المدرب:</strong> يفتح شات فوري تسأل فيه أي سؤال وتتأكد إذا الكورس مناسب لمادتك وهاتفك.</p>
+                <p>2️⃣ <strong>اختيار طريقة الدفع المريحة لك:</strong> شام كاش، سيريتل كاش، هرم، أو غيرها بدون أي تعقيد.</p>
+                <p>3️⃣ <strong>استلام رابط الوصول فوراً:</strong> يتم إضافتك لمجموعة وتطبيق Telegram فور تأكيد الإيصال وتبدأ فوراً مع ضمان استرجاع 7 أيام.</p>
+              </div>
+            </div>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-[#666666]">
               <span className="flex items-center gap-1 text-emerald-700">
