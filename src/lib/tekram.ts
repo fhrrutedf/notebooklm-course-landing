@@ -12,6 +12,7 @@ declare global {
         desc: string
         merchant_order_id?: string
         webhook_url?: string
+        return_url?: string
         onSuccess?: (order: any) => void
         onCancel?: () => void
       }) => void
@@ -33,6 +34,7 @@ export function buildTekramDirectUrl(options: {
   desc: string
   merchantOrderId: string
   webhookUrl: string
+  returnUrl?: string
 }): string {
   const params = new URLSearchParams({
     amount: String(options.amount),
@@ -41,6 +43,9 @@ export function buildTekramDirectUrl(options: {
     merchant_order_id: options.merchantOrderId,
     webhook_url: options.webhookUrl,
   })
+  if (options.returnUrl) {
+    params.set('return_url', options.returnUrl)
+  }
   return `https://tekrams.com/checkout?${params.toString()}`
 }
 
@@ -53,6 +58,9 @@ export function openTekramCheckout({
 }: TekramCheckoutOptions = {}) {
   const orderId = `ORD-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`
   const webhookUrl = `${APP_BASE_URL}/api/webhooks/tekram`
+  const returnUrl = `${APP_BASE_URL}/thank-you?order_id=${encodeURIComponent(orderId)}${
+    affiliateRef ? `&ref=${encodeURIComponent(affiliateRef)}` : ''
+  }`
 
   const handleSuccess = (order: any) => {
     if (onSuccess) {
@@ -79,6 +87,7 @@ export function openTekramCheckout({
         desc,
         merchant_order_id: orderId,
         webhook_url: webhookUrl,
+        return_url: returnUrl,
         onSuccess: handleSuccess,
         onCancel: handleCancel,
       })
@@ -95,6 +104,7 @@ export function openTekramCheckout({
     desc,
     merchantOrderId: orderId,
     webhookUrl,
+    returnUrl,
   })
   window.location.href = directUrl
 }
