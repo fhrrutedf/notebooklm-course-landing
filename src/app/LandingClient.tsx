@@ -25,7 +25,57 @@ import {
   Users,
   X,
   Zap,
+  ZoomIn,
 } from 'lucide-react'
+
+type TestimonialScreenshot = {
+  id: number
+  src: string
+  width: number
+  height: number
+  tag: string
+  highlight: string
+  detail: string
+}
+
+const testimonialScreenshots: TestimonialScreenshot[] = [
+  {
+    id: 1,
+    src: '/images/testimonials/testimonial-1.jpg',
+    width: 1005,
+    height: 591,
+    tag: '📊 الإنفوجرافيك والملخصات البصرية',
+    highlight: '«قسم الإنفوجرافيك فتحلي عيوني إنو التصميم مو بس ألوان.. صار عندي قدرة أعمل ملخص بصري للعلوم أو الكيمياء أو أي درس فيه خطوات ومفاهيم معقدة»',
+    detail: 'تعلّم صياغة العناوين الجاذبة وترتيب المعلومات بصرياً ليلتقط الطالب فكرة الدرس بلمحة سريعة.',
+  },
+  {
+    id: 2,
+    src: '/images/testimonials/testimonial-2.jpg',
+    width: 968,
+    height: 657,
+    tag: '🖥️ العروض التقديمية والسلايدات',
+    highlight: '«السلايدات كانت وجع رأس.. هلق صار عندي عرض بقدر راجعه وعدل عليه بثواني بدل ما صمم كل شيء من الصفر»',
+    detail: 'تحويل محتوى الدرس لشرائح مرتبة، كل شريحة لها هدف تعليمي وصورة داعمة دون تضييع ساعات بالتصميم.',
+  },
+  {
+    id: 3,
+    src: '/images/testimonials/testimonial-3.jpg',
+    width: 1024,
+    height: 511,
+    tag: '🎬 الفيديوهات والسيناريو التعليمي',
+    highlight: '«تعلمت كيف أكتب سيناريو مرتب، وقسم الشرح لمشاهد، وحدد شو يطلع ع الشاشة وشو ينحكى بصوت.. جهزت مادة للطلاب يدرسوها برات الحصة»',
+    detail: 'نقلة نوعية تتجاوز الـ PDF إلى إنتاج دروس فيديو تعليمية بسيناريو احترافي يشاهده الطلاب في أي وقت.',
+  },
+  {
+    id: 4,
+    src: '/images/testimonials/testimonial-4.jpg',
+    width: 952,
+    height: 484,
+    tag: '🧠 الخرائط الذهنية وهيكلة الدرس',
+    highlight: '«الخريطة الذهنية ساعدتني أفهم هيكل الدرس.. مفروزة بصرياً من الفكرة الأساسية للتفاصيل، ومفيدة جداً وقت مراجعة الفحوصات»',
+    detail: 'تفكيك الدروس المعقدة وتوزيع الأفكار شجرياً وبصرياً لتسهيل الشرح على المعلم والمراجعة على الطالب.',
+  },
+]
 
 const subscribeAffiliate = () => () => {}
 
@@ -53,6 +103,7 @@ export default function LandingClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [offerTimeLeft, setOfferTimeLeft] = useState<CountdownTime | null>(null)
   const [showExitPopup, setShowExitPopup] = useState(false)
+  const [selectedScreenshot, setSelectedScreenshot] = useState<TestimonialScreenshot | null>(null)
   const exitPopupShownRef = useRef(false)
   const affiliateRef = useSyncExternalStore(
     subscribeAffiliate,
@@ -64,6 +115,22 @@ export default function LandingClient() {
     const directRef = resolveAffiliateRef(window.location.search)
     if (directRef) window.localStorage.setItem('course_affiliate_ref', directRef)
   }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedScreenshot(null)
+    }
+    if (selectedScreenshot) {
+      window.addEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [selectedScreenshot])
 
   useEffect(() => {
     const STORAGE_KEY = 'course_offer_deadline'
@@ -666,25 +733,91 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 10. آراء معلمين ومدربين من المنطقة */}
-      <section className="border-y px-5 py-14 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}>
+      {/* 10. آراء وتجارب موثقة من المشتركين عبر واتساب */}
+      <section className="border-y px-4 py-14 sm:px-6 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}>
         <div className="mx-auto max-w-[1180px]">
-          <p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>آراء معلمين ومدربين من المنطقة</p>
-          <h2 className="text-center text-3xl font-black md:text-5xl">شوف كيف تغيّر وقت التحضير والمخرجات</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {[
-              ['أ. ماهر العلي', 'مدرس رياضيات للبكالوريا — حلب', 'يا جماعة، نحنا كمدرسين بكالوريا منعرف قديش تحضير درس الرياضيات وتأليف الأسئلة بياخد وقت ويهدّ الحيل. مسكت درس صعب ومن كتاب المنهج نفسه، وبوقت قصير طلعت دليل دراسة بصري وورقة امتحان مرتبة للطباعة. صار عندي بنك أسئلة وتصدير لملفات Word بدون تشتّت.'],
-              ['أ. نورة الحربي', 'معلمة صفوف أولية ومصممة أنشطة — جدة', 'كمعلمة صفوف أولية كان أكبر همي شد انتباه الصغار. صرت أعمل إنفوجرافيك ملون وبطاقات مراجعة تفاعلية، وصار الشرح يناسب عمر الطلاب بدل ما يكون جاف. الأهم أني وفّرت وقت وجهد كبير بالتحضير.'],
-              ['أ. عمر الحديثي', 'مدرس لغة إنكليزية — بغداد', 'كنت أعاني كيف أعمل محتوى استماع ممتع للطلاب. هلق بحوّل الدرس لبودكاست بصوتين يتناقشوا بالإنكليزي، وبجهّز الفيديوهات التوضيحية بدقائق. الكورس عملي وجاء بوقته.'],
-              ['د. رغد العبد الله', 'مدربة ومستشارة تطوير تربوي — دمشق', 'صياغة الحقائب التدريبية وتصميم الورش كان يستهلك أسابيع. تعلمت أبني خطة الورشة والتمارين وأنشطة كسر الجمود بجودة أكاديمية وبوقت أقصر. هذا ليس مجرد تعليم أدوات، بل طريقة عمل تختصر الجهد التقليدي.']
-            ].map(([name, role, quote]) => (
-              <article key={name} className="rounded-2xl bg-white p-6 shadow-[0_12px_35px_rgba(0,0,0,0.05)]">
-                <p className="text-base font-bold leading-[2]">“{quote}”</p>
-                <p className="mt-5 font-black" style={{ color: red }}>{name}</p>
-                <p className="mt-1 text-sm" style={{ color: muted }}>{role}</p>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black text-emerald-700 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>محادثات وتقييمات حقيقية عبر WhatsApp 💬</span>
+            </div>
+            <h2 className="mt-4 text-3xl font-black md:text-5xl text-[#242424]">
+              تجارب حقيقية ورسائل المشتركين
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-[1.9]" style={{ color: muted }}>
+              لقطات شاشة أصلية بدقة عالية من محادثات المعلمين والمدربين بعد تطبيق محاور الكورس في تحضير الدروس، وتصميم السلايدات والإنفوجرافيك، وإنتاج الفيديو والخرائط الذهنية.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+            {testimonialScreenshots.map((item) => (
+              <article
+                key={item.id}
+                className="group flex flex-col overflow-hidden rounded-2xl md:rounded-3xl border bg-white shadow-[0_12px_35px_rgba(0,0,0,0.05)] transition-all duration-300 hover:border-neutral-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.09)]"
+                style={{ borderColor: line }}
+              >
+                {/* رأس البطاقة */}
+                <div className="flex items-center justify-between gap-3 border-b px-4 py-3.5 sm:px-5 sm:py-4 bg-neutral-50/80" style={{ borderColor: line }}>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-red-100 bg-red-50 px-2.5 py-1 text-xs font-bold" style={{ color: redDark }}>
+                    {item.tag}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">
+                    ✓ محادثة موثقة
+                  </span>
+                </div>
+
+                {/* صورة السكرين شوت عالية الدقة */}
+                <div
+                  onClick={() => setSelectedScreenshot(item)}
+                  className="relative cursor-pointer overflow-hidden bg-[#FAF8F5] p-3 sm:p-4 flex items-center justify-center transition"
+                  title="انقر لتكبير المحادثة بدقة عالية"
+                >
+                  <div className="w-full overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm transition-transform duration-300 group-hover:scale-[1.015]">
+                    <img
+                      src={item.src}
+                      alt={`${item.tag} - ${item.highlight}`}
+                      width={item.width}
+                      height={item.height}
+                      className="block h-auto w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* شارة التكبير العائمة */}
+                  <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1 text-xs font-bold text-white shadow-lg backdrop-blur-sm transition-all duration-200 group-hover:bg-black/90 group-hover:scale-105">
+                    <ZoomIn className="h-3.5 w-3.5 text-white" />
+                    <span>انقر للتكبير</span>
+                  </div>
+                </div>
+
+                {/* نص التقييم والنتيجة */}
+                <div className="flex flex-1 flex-col justify-between p-4 sm:p-6 bg-white">
+                  <div>
+                    <p className="text-sm sm:text-base font-bold leading-[1.8] text-[#242424]">
+                      {item.highlight}
+                    </p>
+                    <div className="mt-3 flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2">
+                      <span className="text-base leading-none">💡</span>
+                      <span><strong>النتيجة:</strong> {item.detail}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedScreenshot(item)}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#E2E2DF] bg-neutral-50 px-4 py-2.5 text-xs sm:text-sm font-bold text-[#444444] transition hover:border-[#E3342F]/40 hover:bg-[#F7EDEC] hover:text-[#B92723]"
+                  >
+                    <ZoomIn className="h-4 w-4" />
+                    <span>عرض المحادثة بحجمها الكامل بدقة عالية</span>
+                  </button>
+                </div>
               </article>
             ))}
           </div>
+
+          <p className="mt-8 text-center text-xs sm:text-sm text-[#777777]">
+            🔒 تم نشر لقطات المحادثات بموافقة أصحابها لعرض أثر المهارات العملية مباشرة في الميدان التعليمي.
+          </p>
         </div>
       </section>
 
@@ -868,6 +1001,54 @@ export default function LandingClient() {
             >
               لا شكرًا، سأتابع التصفح
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* نافذة تكبير لقطات الشاشة (Lightbox Modal) */}
+      {selectedScreenshot && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-3 sm:p-6 backdrop-blur-sm"
+          onClick={() => setSelectedScreenshot(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative flex max-h-[95vh] w-full max-w-3xl flex-col items-center rounded-2xl bg-neutral-900/95 p-3 sm:p-5 border border-white/10 shadow-2xl text-right"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* شريط الإغلاق والعنوان */}
+            <div className="flex w-full items-center justify-between border-b border-white/10 pb-3 text-white">
+              <span className="text-xs sm:text-sm font-bold text-amber-300">
+                {selectedScreenshot.tag}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedScreenshot(null)}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 hover:text-white"
+                aria-label="إغلاق"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* الصورة بحجمها الكامل عالي الدقة */}
+            <div className="mt-3 flex w-full items-center justify-center overflow-auto max-h-[72vh] p-1">
+              <img
+                src={selectedScreenshot.src}
+                alt={selectedScreenshot.highlight}
+                width={selectedScreenshot.width}
+                height={selectedScreenshot.height}
+                className="h-auto max-h-[70vh] w-auto max-w-full rounded-xl object-contain shadow-2xl bg-white border border-black/10"
+              />
+            </div>
+
+            {/* نص المحادثة التوضيحي */}
+            <div className="mt-3 w-full border-t border-white/10 pt-3 text-center">
+              <p className="text-xs sm:text-sm text-neutral-200 font-medium leading-relaxed max-w-2xl mx-auto">
+                {selectedScreenshot.highlight}
+              </p>
+            </div>
           </div>
         </div>
       )}
