@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { track } from '@vercel/analytics'
 import { trackWhatsApp } from '@/lib/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
+import { TekramPayButton } from '@/components/TekramPayButton'
+import { openTekramCheckout } from '@/lib/tekram'
 import {
   ArrowRight,
   BookOpen,
@@ -584,40 +586,50 @@ export default function ResultsClient() {
               <div className="rounded-2xl bg-[#F7EDEC] p-5">
                 <p className="font-bold text-[#E3342F]">داخل سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  سيريتل كاش، شام كاش، الهرم، الفؤاد، بنك بيمو، وغيرها بتفعيل فوري ومباشر.
+                  دفع إلكتروني مباشر عبر تكرام باي (شام كاش فوري)، أو سيريتل كاش وشبكات الهرم، الفؤاد، بنك بيمو بالتنسيق عبر WhatsApp.
                 </p>
               </div>
               <div className="rounded-2xl bg-[#F0F0EE] p-5">
                 <p className="font-bold text-[#E3342F]">خارج سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  PayPal، Western Union، والبطاقات البنكية الدولية حسب المتاح.
+                  دفع مباشر فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، و PayPal عبر تكرام باي، أو عبر Western Union.
                 </p>
               </div>
             </div>
 
-            <a
-              href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد حجز مقعدي وتفعيل الكورس فوراً.')}
-              onClick={() => {
-                track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })
-                trackWhatsApp('results_final_cta', { affiliate_ref: affiliateRef || 'direct' })
-              }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#E3342F] px-8 py-4 text-base font-bold text-white shadow-md transition hover:bg-[#B92723] hover:scale-[1.01]"
-            >
-              <span>احجز مقعدك وابدأ تفعيل الكورس عبر الواتساب</span>
-              <MessageCircle className="h-5 w-5" />
-            </a>
+            <div className="mt-6 space-y-3">
+              <TekramPayButton
+                amount={22}
+                title="كورس الذكاء الاصطناعي للمعلمين"
+                affiliateRef={affiliateRef}
+                source="results_final_cta_tekram"
+                label="ادفع أونلاين الآن (22$) عبر تكرام باي"
+              />
 
-            {/* ماذا يحدث بعد الضغط على زر واتساب؟ */}
+              <a
+                href={createWhatsAppLink('مرحباً، شاهدت نماذج المخرجات وأريد حجز مقعدي وتفعيل الكورس فوراً.')}
+                onClick={() => {
+                  track('whatsapp_click', { source: 'results_final_cta', affiliate_ref: affiliateRef || 'direct' })
+                  trackWhatsApp('results_final_cta', { affiliate_ref: affiliateRef || 'direct' })
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#E2E2DF] bg-white px-6 py-3.5 text-sm font-bold text-[#444444] transition hover:bg-[#F0F0EE] shadow-sm"
+              >
+                <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+              </a>
+            </div>
+
+            {/* ماذا يحدث بعد الدفع أو التواصل؟ */}
             <div className="mt-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4 text-right">
               <p className="text-xs font-black text-amber-900 mb-2">
-                💬 ماذا سيحدث بعد الضغط على زر واتساب؟
+                ⚡ خيارات الدفع والتفعيل الفوري:
               </p>
               <div className="grid gap-2 text-xs text-amber-950/80">
-                <p>1️⃣ <strong>تواصل مباشر مع المدرب:</strong> يفتح شات فوري تسأل فيه أي سؤال وتتأكد إذا الكورس مناسب لمادتك وهاتفك.</p>
-                <p>2️⃣ <strong>اختيار طريقة الدفع المريحة لك:</strong> شام كاش، سيريتل كاش، هرم، أو غيرها بدون أي تعقيد.</p>
-                <p>3️⃣ <strong>استلام رابط الوصول فوراً:</strong> يتم إضافتك لمجموعة وتطبيق Telegram فور تأكيد الإيصال وتبدأ فوراً مع ضمان استرجاع 7 أيام.</p>
+                <p>1️⃣ <strong>دفع إلكتروني فوري (تكرام باي):</strong> تدفع بضغطة زر وتنتقل فوراً لصفحة استلام بيانات الوصول ومجموعة Telegram.</p>
+                <p>2️⃣ <strong>دفع يدوي واستفسارات (WhatsApp):</strong> تواصل مباشر لاختيار وسيلة الدفع المحلية وتأكيد الإيصال.</p>
+                <p>3️⃣ <strong>ضمان استرجاع كامل 7 أيام:</strong> حقك محفوظ بالكامل دون أي تعقيد.</p>
               </div>
             </div>
 
@@ -632,8 +644,21 @@ export default function ResultsClient() {
         </div>
       </section>
 
-      {/* زر الموبايل العائم أسفل الشاشة (Sticky Mobile CTA) */}
-      <div className="fixed inset-x-4 bottom-4 z-50 md:hidden">
+      {/* شريط الموبايل العائم أسفل الشاشة (Sticky Mobile CTA) */}
+      <div className="fixed inset-x-3 bottom-3 z-50 flex items-center gap-2 md:hidden">
+        <button
+          type="button"
+          onClick={() => {
+            openTekramCheckout({
+              amount: 22,
+              desc: 'كورس الذكاء الاصطناعي للمعلمين',
+              affiliateRef,
+            })
+          }}
+          className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E3342F] px-4 py-3 text-xs font-bold text-white shadow-[0_10px_25px_rgba(227,52,47,0.4)] active:scale-95"
+        >
+          <span>ادفع أونلاين 22$ (تكرام باي)</span>
+        </button>
         <a
           href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد حجز مقعدي في الكورس.')}
           onClick={() => {
@@ -642,10 +667,10 @@ export default function ResultsClient() {
           }}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-[#E3342F] px-5 py-3.5 text-sm font-bold text-white shadow-[0_10px_25px_rgba(227,52,47,0.5)] active:scale-95"
+          className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3.5 py-3 text-xs font-bold text-slate-800 border border-slate-200 shadow-lg active:scale-95"
         >
-          <span>احجز مكانك في الكورس الآن</span>
-          <MessageCircle className="h-5 w-5" />
+          <MessageCircle className="h-4 w-4 text-[#25D366]" />
+          <span>واتساب</span>
         </a>
       </div>
 

@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { track } from '@vercel/analytics'
 import { trackWhatsApp } from '@/lib/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
+import { TekramPayButton } from '@/components/TekramPayButton'
+import { openTekramCheckout } from '@/lib/tekram'
 import {
   ArrowDown,
   ArrowLeft,
@@ -222,7 +224,7 @@ export default function LandingClient() {
     ['هل المخرجات والامتحانات تلائم المناهج السورية الرسمية؟', 'نبدأ من كتاب المنهج أو المصدر الذي ترفقه أنت، ثم نراجع الناتج بشريًا قبل استخدامه. طبّقنا أمثلة على مواد واختبارات للمعلمين، لكن يبقى قرار الدقة والملاءمة بيد المعلم.'],
     ['هل الأدوات تحتاج اشتراكات شهرية مدفوعة؟', 'المسار يعتمد على حلول مجانية قدر الإمكان، ولا توجد تكاليف خفية ضمن رسوم الكورس. وإذا تغيّرت سياسات أي خدمة، نوضح ذلك قبل استخدامها.'],
     ['كيف أحصل على دعم إذا واجهت مشكلة؟', 'عندك 4 جلسات متابعة مباشرة للأسئلة والأجوبة، وتقدر تجيب سؤالك أو مادتك ونطبق عليها معًا.'],
-    ['كيف يتم الدفع والاستلام من داخل سوريا وخارجها؟', 'داخل سوريا نوفر وسائل محلية سريعة مثل سيريتل كاش، شام كاش، شبكة الهرم، الفؤاد، بنك بيمو وغيرها حسب المتاح، ونوضح لك الطريقة المناسبة عبر WhatsApp. وبعد التفعيل تحصل على وصول دائم عبر Telegram.'],
+    ['كيف يتم الدفع والاستلام من داخل سوريا وخارجها؟', 'يمكنك الدفع المباشر الفوري أونلاين عبر بوابة تكرام باي (تدعم شام كاش، مدى، فيزا/ماستركارد، بايبال) مع تفعيل تلقائي، أو عبر وسائل محلية مثل سيريتل كاش وشبكات الهرم، الفؤاد، بنك بيمو بالتنسيق عبر WhatsApp. وفور تأكيد الدفع تحصل على وصول دائم ومباشر عبر Telegram.'],
     ['هل الشهادة إلزامية؟', 'لا. شهادة وزارة التنمية السورية اختيارية برسوم منفصلة، ويمكن طلبها بعد اختبار أو مشروع نهاية الكورس.'],
     ['هل أحصل على ملفات PDF مع كل درس؟', 'نعم. كل درس معه ملخص PDF أو قالب عملي يساعدك تراجع الخطوات وتطبقها دون إعادة مشاهدة المحتوى كاملًا.'],
     ['هل الدورة مناسبة لمعلم المدرسة أو المدرّس الخصوصي؟', 'نعم. الأمثلة قابلة للتخصيص حسب المادة والمرحلة، من الابتدائي وحتى البكالوريا، مع بقاء المعلم صاحب القرار في المراجعة والاستخدام.'],
@@ -271,17 +273,34 @@ export default function LandingClient() {
     </p>
   </div>
 
-  <a href={createWhatsAppLink('مرحباً، أريد الاشتراك الآن والحصول على تفعيل فوري في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('hero_price_card')} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 font-bold text-white transition hover:opacity-90 shadow-md" style={{ backgroundColor: red }}>
-    اشترك الآن واحصل على تفعيل فوري <MessageCircle className="h-5 w-5" />
-  </a>
+  <div className="mt-5 space-y-3">
+    <TekramPayButton
+      amount={22}
+      title="كورس الذكاء الاصطناعي للمعلمين"
+      affiliateRef={affiliateRef}
+      source="hero_price_card_tekram"
+      label="ادفع أونلاين الآن (22$) — تفعيل فوري"
+    />
+
+    <a
+      href={createWhatsAppLink('مرحباً، أريد الاستفسار أو الدفع اليدوي للاشتراك في كورس الذكاء الاصطناعي للمعلمين.')}
+      onClick={() => trackWhatsAppClick('hero_price_card_whatsapp')}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-bold border border-[#E2E2DF] bg-[#F8F8F6] hover:bg-[#F0F0EE] text-[#444444] transition shadow-sm"
+    >
+      <MessageCircle className="h-4 w-4 text-[#25D366]" />
+      <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+    </a>
+  </div>
 
   <div className="mt-3 rounded-xl bg-amber-50/90 p-2.5 text-right text-xs leading-[1.8] text-amber-950 border border-amber-200/70">
     <p className="font-bold flex items-center gap-1.5 text-amber-900">
-      <span>💬</span>
-      <span>ماذا سيحدث بعد الضغط على الزر؟</span>
+      <span>⚡</span>
+      <span>خيارات الدفع المتاحة:</span>
     </p>
     <p className="mt-0.5 text-amber-900/90">
-      ستتحدث مباشرة مع فريق الدعم عبر WhatsApp لاختيار وسيلة الدفع الأنسب لك، ونرسل لك رابط تفعيل الكورس فوراً خلال 5 دقائق دون أي تعقيد.
+      <strong>دفع إلكتروني فوري:</strong> عبر تكرام باي (شام كاش، فيزا/ماستركارد، مدى، بايبال) مع تفعيل فوري، أو <strong>دفع يدوي:</strong> عبر سيريتل كاش وشبكات الهرم بالتنسيق عبر WhatsApp.
     </p>
   </div>
 
@@ -681,12 +700,12 @@ export default function LandingClient() {
             <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
               <p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p>
               <h3 className="mt-3 text-2xl font-black">دفع محلي وتفعيل فوري</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>عبر سيريتل كاش، شام كاش، شبكات الهرم، الفؤاد، بنك بيمو، وغيرها من الوسائل المتاحة، مع توضيح الخطوات كاملة عبر WhatsApp.</p>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع إلكتروني مباشر عبر بوابة <strong>تكرام باي</strong> (شام كاش فوري)، أو عبر سيريتل كاش وشبكات الهرم والفؤاد وبنك بيمو مع مساعدة فورية عبر WhatsApp.</p>
             </article>
             <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
               <p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p>
-              <h3 className="mt-3 text-2xl font-black">تحويل آمن من أي دولة</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>نستقبل التسجيل والتحويل من جميع دول العالم عبر وسائل مريحة وآمنة مثل Western Union وPayPal وبطاقات الدفع العالمية، حسب المتاح.</p>
+              <h3 className="mt-3 text-2xl font-black">تحويل ودفع إلكتروني آمن</h3>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، أو PayPal مباشرة عبر <strong>تكرام باي</strong>، أو التحويل عبر Western Union بالتنسيق المباشر.</p>
             </article>
           </div>
         </div>
@@ -739,16 +758,34 @@ export default function LandingClient() {
               <span className="text-sm text-white/50 line-through decoration-2">39$</span>
               <span className="mr-3 text-4xl font-black" style={{ color: red }}>22$</span>
             </div>
-            <a href={createWhatsAppLink('مرحباً، أريد الاشتراك في كورس الذكاء الاصطناعي للمعلمين بسعر العرض.')} onClick={() => trackWhatsAppClick('reference_style_final')} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-3 rounded-full px-7 py-4 font-bold text-white transition hover:opacity-90 shadow-lg" style={{ backgroundColor: red }}>
-              اشترك الآن في عرض التسجيل <MessageCircle className="h-5 w-5" />
-            </a>
+            <div className="space-y-3">
+              <TekramPayButton
+                amount={22}
+                title="كورس الذكاء الاصطناعي للمعلمين"
+                affiliateRef={affiliateRef}
+                source="reference_style_final_tekram"
+                label="ادفع أونلاين الآن (22$) — تفعيل فوري"
+              />
+
+              <a
+                href={createWhatsAppLink('مرحباً، أريد الاشتراك في كورس الذكاء الاصطناعي للمعلمين بسعر العرض.')}
+                onClick={() => trackWhatsAppClick('reference_style_final_whatsapp')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-xs md:text-sm font-bold text-white/90 hover:text-white bg-white/10 hover:bg-white/15 border border-white/15 transition shadow"
+              >
+                <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+              </a>
+            </div>
+
             <div className="mt-3 rounded-xl bg-white/5 p-2.5 text-right text-xs leading-[1.8] text-white/80 border border-white/10">
               <p className="font-bold text-amber-300 flex items-center gap-1.5">
-                <span>💬</span>
-                <span>ماذا سيحدث بعد الضغط على الزر؟</span>
+                <span>⚡</span>
+                <span>خيارات الدفع المتاحة:</span>
               </p>
               <p className="mt-0.5 text-white/70">
-                ستتحدث مباشرة مع فريق الدعم عبر WhatsApp لمساعدتك باختيار وسيلة الدفع الأنسب لك وتفعيل حسابك خلال دقائق دون أي تعقيد.
+                دفع فوري عبر تكرام باي (شام كاش، البطاقات البنكية، مدى، بايبال)، أو تحويل يدوي عبر سيريتل كاش والهرم بمساعدة فريق الدعم عبر WhatsApp.
               </p>
             </div>
             <p className="mt-4 text-center text-xs text-white/60">وصول فوري للمحتوى · <span className="font-bold" style={{ color: red }}>ضمان استرجاع كامل لمدة 7 أيام</span></p>
@@ -757,7 +794,34 @@ export default function LandingClient() {
       </section>
 
       <footer className="px-5 py-8 text-center text-sm text-white" style={{ backgroundColor: ink }}>© {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين <span className="mx-2 text-white/40">·</span> <Link href={resultsHref} className="underline">نماذج المخرجات</Link></footer>
-      <a href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')} onClick={() => trackWhatsAppClick('reference_style_mobile_sticky')} target="_blank" rel="noopener noreferrer" className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-lg md:hidden" style={{ backgroundColor: red }}>احجز مكانك الآن <MessageCircle className="h-5 w-5" /></a>
+      
+      {/* الشريط العائم للموبايل */}
+      <div className="fixed inset-x-3 bottom-3 z-50 flex items-center gap-2 md:hidden">
+        <button
+          type="button"
+          onClick={() => {
+            openTekramCheckout({
+              amount: 22,
+              desc: 'كورس الذكاء الاصطناعي للمعلمين',
+              affiliateRef,
+            })
+          }}
+          className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-white shadow-xl active:scale-95"
+          style={{ backgroundColor: red }}
+        >
+          <span>ادفع أونلاين 22$ (تكرام باي)</span>
+        </button>
+        <a
+          href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')}
+          onClick={() => trackWhatsAppClick('reference_style_mobile_sticky')}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-3 text-xs font-bold text-slate-800 bg-white border border-slate-200 shadow-xl active:scale-95"
+        >
+          <MessageCircle className="h-4 w-4 text-[#25D366]" />
+          <span>واتساب</span>
+        </a>
+      </div>
 
       {/* Exit-intent / idle popup */}
       {showExitPopup && (

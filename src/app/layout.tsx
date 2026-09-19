@@ -82,6 +82,11 @@ export default function RootLayout({
           />
         </noscript>
         {/* End Meta Pixel Code */}
+        {/* Tekram Pay SDK */}
+        <Script
+          src="https://tekrams.com/tekram-pay.js"
+          strategy="afterInteractive"
+        />
         <Toaster />
         <Analytics />
       </body>
