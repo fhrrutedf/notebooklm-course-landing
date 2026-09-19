@@ -94,12 +94,12 @@ export function TekramPayButton({
         {isLoading ? (
           <span className="flex items-center gap-2">
             <span className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span>جاري فتح بوابة تكرام باي...</span>
+            <span>جاري تجهيز الدفع...</span>
           </span>
         ) : (
           <>
             <Lock className="h-4 w-4 opacity-90" />
-            <span>{label || `ادفع الآن أونلاين (${amount}$) عبر تكرام باي`}</span>
+            <span>{label || `ادفع الآن أونلاين (${amount}$)`}</span>
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
           </>
         )}
@@ -115,6 +115,7 @@ export function TekramPayButton({
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">مدى</span>
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">فيزا / ماستركارد</span>
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">بايبال</span>
+          <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">تكرام باي</span>
         </div>
       )}
     </div>

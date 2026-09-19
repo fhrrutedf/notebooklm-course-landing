@@ -586,13 +586,13 @@ export default function ResultsClient() {
               <div className="rounded-2xl bg-[#F7EDEC] p-5">
                 <p className="font-bold text-[#E3342F]">داخل سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  دفع إلكتروني مباشر عبر تكرام باي (شام كاش فوري)، أو سيريتل كاش وشبكات الهرم، الفؤاد، بنك بيمو بالتنسيق عبر WhatsApp.
+                  دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.
                 </p>
               </div>
               <div className="rounded-2xl bg-[#F0F0EE] p-5">
                 <p className="font-bold text-[#E3342F]">خارج سوريا</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  دفع مباشر فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، و PayPal عبر تكرام باي، أو عبر Western Union.
+                  دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.
                 </p>
               </div>
             </div>
@@ -603,7 +603,7 @@ export default function ResultsClient() {
                 title="كورس الذكاء الاصطناعي للمعلمين"
                 affiliateRef={affiliateRef}
                 source="results_final_cta_tekram"
-                label="ادفع أونلاين الآن (22$) عبر تكرام باي"
+                label="ادفع أونلاين الآن (22$) — تفعيل فوري"
               />
 
               <a
@@ -617,7 +617,7 @@ export default function ResultsClient() {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#E2E2DF] bg-white px-6 py-3.5 text-sm font-bold text-[#444444] transition hover:bg-[#F0F0EE] shadow-sm"
               >
                 <MessageCircle className="h-4 w-4 text-[#25D366]" />
-                <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+                <span>أو تواصل عبر WhatsApp للاستفسار والمساعدة</span>
               </a>
             </div>
 
@@ -627,8 +627,8 @@ export default function ResultsClient() {
                 ⚡ خيارات الدفع والتفعيل الفوري:
               </p>
               <div className="grid gap-2 text-xs text-amber-950/80">
-                <p>1️⃣ <strong>دفع إلكتروني فوري (تكرام باي):</strong> تدفع بضغطة زر وتنتقل فوراً لصفحة استلام بيانات الوصول ومجموعة Telegram.</p>
-                <p>2️⃣ <strong>دفع يدوي واستفسارات (WhatsApp):</strong> تواصل مباشر لاختيار وسيلة الدفع المحلية وتأكيد الإيصال.</p>
+                <p>1️⃣ <strong>دفع إلكتروني فوري:</strong> تدفع بضغطة زر وتنتقل فوراً لصفحة استلام بيانات الوصول ومجموعة Telegram.</p>
+                <p>2️⃣ <strong>تواصل مباشر ومساعدة (WhatsApp):</strong> للمساعدة في خيارات الدفع الفوري وتأكيد التسجيل.</p>
                 <p>3️⃣ <strong>ضمان استرجاع كامل 7 أيام:</strong> حقك محفوظ بالكامل دون أي تعقيد.</p>
               </div>
             </div>
@@ -657,7 +657,7 @@ export default function ResultsClient() {
           }}
           className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E3342F] px-4 py-3 text-xs font-bold text-white shadow-[0_10px_25px_rgba(227,52,47,0.4)] active:scale-95"
         >
-          <span>ادفع أونلاين 22$ (تكرام باي)</span>
+          <span>ادفع أونلاين 22$ (تفعيل فوري)</span>
         </button>
         <a
           href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد حجز مقعدي في الكورس.')}

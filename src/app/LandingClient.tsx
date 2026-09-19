@@ -288,10 +288,10 @@ export default function LandingClient() {
   const faqs = [
     ['هل الكورس مناسب لمن لا يملك خبرة تقنية كبيرة؟', 'نعم. الشرح تدريجي ومبسط، ونبدأ من الصفر، ومع كل درس ملخص PDF يرجعلك وقت التطبيق حتى ما تضطر تعيد الفيديو كاملًا.'],
     ['هل أحتاج جهاز لابتوب أو كمبيوتر للبدء والتطبيق؟', 'لا، لا تحتاج لابتوب بالضرورة! الكورس مصمم بحيث يمكنك مشاهدة الدروس وتطبيق جميع الأدوات وبناء الشروحات والامتحانات والمحتوى التعليمي مباشرة من هاتفك المحمول أو جهازك اللوحي (الآيباد) بسهولة.'],
-    ['هل المخرجات والامتحانات تلائم المناهج السورية الرسمية؟', 'نبدأ من كتاب المنهج أو المصدر الذي ترفقه أنت، ثم نراجع الناتج بشريًا قبل استخدامه. طبّقنا أمثلة على مواد واختبارات للمعلمين، لكن يبقى قرار الدقة والملاءمة بيد المعلم.'],
+    ['هل المخرجات والامتحانات تلائم المناهج والكتب الدراسية التي أدرّسها؟', 'نعم، نبدأ من كتاب المنهج أو المصدر الذي ترفقه أنت لأي مادة ومرحلة، ثم نراجع الناتج بشريًا قبل استخدامه. الكورس يعطيك إطار عمل تطبقه على أي كتاب أو مقرر دراسي، ويبقى قرار الدقة والملاءمة بيدك كمعلم.'],
     ['هل الأدوات تحتاج اشتراكات شهرية مدفوعة؟', 'المسار يعتمد على حلول مجانية قدر الإمكان، ولا توجد تكاليف خفية ضمن رسوم الكورس. وإذا تغيّرت سياسات أي خدمة، نوضح ذلك قبل استخدامها.'],
     ['كيف أحصل على دعم إذا واجهت مشكلة؟', 'عندك 4 جلسات متابعة مباشرة للأسئلة والأجوبة، وتقدر تجيب سؤالك أو مادتك ونطبق عليها معًا.'],
-    ['كيف يتم الدفع والاستلام من داخل سوريا وخارجها؟', 'يمكنك الدفع المباشر الفوري أونلاين عبر بوابة تكرام باي (تدعم شام كاش، مدى، فيزا/ماستركارد، بايبال) مع تفعيل تلقائي، أو عبر وسائل محلية مثل سيريتل كاش وشبكات الهرم، الفؤاد، بنك بيمو بالتنسيق عبر WhatsApp. وفور تأكيد الدفع تحصل على وصول دائم ومباشر عبر Telegram.'],
+    ['كيف يتم الدفع والاستلام من داخل سوريا وخارجها؟', 'من داخل سوريا الدفع فوري وبسيط عبر شام كاش، ومن خارج سوريا الدفع متاح بالبطاقات البنكية (فيزا / ماستركارد)، مدى، بايبال وتكرام باي مع تفعيل مباشر. وفور الدفع تحصل على وصول دائم وفوري عبر Telegram.'],
     ['هل الشهادة إلزامية؟', 'لا. شهادة وزارة التنمية السورية اختيارية برسوم منفصلة، ويمكن طلبها بعد اختبار أو مشروع نهاية الكورس.'],
     ['هل أحصل على ملفات PDF مع كل درس؟', 'نعم. كل درس معه ملخص PDF أو قالب عملي يساعدك تراجع الخطوات وتطبقها دون إعادة مشاهدة المحتوى كاملًا.'],
     ['هل الدورة مناسبة لمعلم المدرسة أو المدرّس الخصوصي؟', 'نعم. الأمثلة قابلة للتخصيص حسب المادة والمرحلة، من الابتدائي وحتى البكالوريا، مع بقاء المعلم صاحب القرار في المراجعة والاستخدام.'],
@@ -350,14 +350,14 @@ export default function LandingClient() {
     />
 
     <a
-      href={createWhatsAppLink('مرحباً، أريد الاستفسار أو الدفع اليدوي للاشتراك في كورس الذكاء الاصطناعي للمعلمين.')}
+      href={createWhatsAppLink('مرحباً، أريد الاستفسار والتسجيل في كورس الذكاء الاصطناعي للمعلمين.')}
       onClick={() => trackWhatsAppClick('hero_price_card_whatsapp')}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-bold border border-[#E2E2DF] bg-[#F8F8F6] hover:bg-[#F0F0EE] text-[#444444] transition shadow-sm"
     >
       <MessageCircle className="h-4 w-4 text-[#25D366]" />
-      <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+      <span>أو تواصل عبر WhatsApp للاستفسار والمساعدة</span>
     </a>
   </div>
 
@@ -367,7 +367,7 @@ export default function LandingClient() {
       <span>خيارات الدفع المتاحة:</span>
     </p>
     <p className="mt-0.5 text-amber-900/90">
-      <strong>دفع إلكتروني فوري:</strong> عبر تكرام باي (شام كاش، فيزا/ماستركارد، مدى، بايبال) مع تفعيل فوري، أو <strong>دفع يدوي:</strong> عبر سيريتل كاش وشبكات الهرم بالتنسيق عبر WhatsApp.
+      <strong>داخل سوريا:</strong> شام كاش فوري. <strong>خارج سوريا:</strong> البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.
     </p>
   </div>
 
@@ -832,13 +832,13 @@ export default function LandingClient() {
           <div className="mx-auto mt-10 grid max-w-[1000px] gap-5 md:grid-cols-2">
             <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
               <p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p>
-              <h3 className="mt-3 text-2xl font-black">دفع محلي وتفعيل فوري</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع إلكتروني مباشر عبر بوابة <strong>تكرام باي</strong> (شام كاش فوري)، أو عبر سيريتل كاش وشبكات الهرم والفؤاد وبنك بيمو مع مساعدة فورية عبر WhatsApp.</p>
+              <h3 className="mt-3 text-2xl font-black">دفع فوري عبر شام كاش</h3>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.</p>
             </article>
             <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
               <p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p>
               <h3 className="mt-3 text-2xl font-black">تحويل ودفع إلكتروني آمن</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، أو PayPal مباشرة عبر <strong>تكرام باي</strong>، أو التحويل عبر Western Union بالتنسيق المباشر.</p>
+              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.</p>
             </article>
           </div>
         </div>
@@ -908,7 +908,7 @@ export default function LandingClient() {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-xs md:text-sm font-bold text-white/90 hover:text-white bg-white/10 hover:bg-white/15 border border-white/15 transition shadow"
               >
                 <MessageCircle className="h-4 w-4 text-[#25D366]" />
-                <span>أو تواصل عبر WhatsApp للدفع اليدوي والاستفسار</span>
+                <span>أو تواصل عبر WhatsApp للاستفسار والتسجيل</span>
               </a>
             </div>
 
@@ -918,7 +918,7 @@ export default function LandingClient() {
                 <span>خيارات الدفع المتاحة:</span>
               </p>
               <p className="mt-0.5 text-white/70">
-                دفع فوري عبر تكرام باي (شام كاش، البطاقات البنكية، مدى، بايبال)، أو تحويل يدوي عبر سيريتل كاش والهرم بمساعدة فريق الدعم عبر WhatsApp.
+                من داخل سوريا: شام كاش فوري. ومن خارج سوريا: البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.
               </p>
             </div>
             <p className="mt-4 text-center text-xs text-white/60">وصول فوري للمحتوى · <span className="font-bold" style={{ color: red }}>ضمان استرجاع كامل لمدة 7 أيام</span></p>
@@ -942,7 +942,7 @@ export default function LandingClient() {
           className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-white shadow-xl active:scale-95"
           style={{ backgroundColor: red }}
         >
-          <span>ادفع أونلاين 22$ (تكرام باي)</span>
+          <span>ادفع أونلاين 22$ (تفعيل فوري)</span>
         </button>
         <a
           href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')}

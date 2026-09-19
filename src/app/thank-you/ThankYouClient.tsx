@@ -56,7 +56,7 @@ export default function ThankYouClient() {
           </h1>
 
           <p className="mt-3 text-sm md:text-base text-[#666666] leading-relaxed max-w-xl mx-auto">
-            شكراً لثقتك واشتراكك. تم تأكيد عمليتك المالية بأمان عبر بوابة <strong>تكرام باي (Tekram Pay)</strong>.
+            شكراً لثقتك واشتراكك. تم تأكيد عمليتك المالية بنجاح وأمان.
           </p>
 
           {/* تفاصيل الطلب */}
@@ -108,7 +108,7 @@ export default function ThankYouClient() {
 
       {/* تذييل */}
       <footer className="py-4 text-center text-xs text-[#888888]">
-        © {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين · منصة تكرام باي المعتمدة
+        © {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين · دفع آمن وتفعيل فوري
       </footer>
     </div>
   )
