@@ -498,7 +498,95 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 5. محتوى الكورس: المسار الكامل */}
+      {/* 5. آراء وتجارب موثقة من المشتركين عبر واتساب */}
+      <section className="border-b px-4 py-14 sm:px-6 md:px-8 md:py-20 bg-white">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black text-emerald-700 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>محادثات وتقييمات حقيقية عبر WhatsApp 💬</span>
+            </div>
+            <h2 className="mt-4 text-3xl font-black md:text-5xl text-[#242424]">
+              تجارب حقيقية ورسائل المشتركين
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-[1.9]" style={{ color: muted }}>
+              لقطات شاشة أصلية بدقة عالية من محادثات المعلمين والمدربين بعد تطبيق محاور الكورس في تحضير الدروس، وتصميم السلايدات والإنفوجرافيك، وإنتاج الفيديو والخرائط الذهنية.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+            {testimonialScreenshots.map((item) => (
+              <article
+                key={item.id}
+                className="group flex flex-col overflow-hidden rounded-2xl md:rounded-3xl border bg-[#FAF8F5]/50 shadow-[0_12px_35px_rgba(0,0,0,0.05)] transition-all duration-300 hover:border-neutral-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.09)]"
+                style={{ borderColor: line }}
+              >
+                {/* رأس البطاقة */}
+                <div className="flex items-center justify-between gap-3 border-b px-4 py-3.5 sm:px-5 sm:py-4 bg-neutral-50/80" style={{ borderColor: line }}>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-red-100 bg-red-50 px-2.5 py-1 text-xs font-bold" style={{ color: redDark }}>
+                    {item.tag}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">
+                    ✓ محادثة موثقة
+                  </span>
+                </div>
+
+                {/* صورة السكرين شوت عالية الدقة */}
+                <div
+                  onClick={() => setSelectedScreenshot(item)}
+                  className="relative cursor-pointer overflow-hidden bg-white p-3 sm:p-4 flex items-center justify-center transition"
+                  title="انقر لتكبير المحادثة بدقة عالية"
+                >
+                  <div className="w-full overflow-hidden rounded-xl border border-black/5 bg-[#FAF8F5] shadow-sm transition-transform duration-300 group-hover:scale-[1.015]">
+                    <img
+                      src={item.src}
+                      alt={`${item.tag} - ${item.highlight}`}
+                      width={item.width}
+                      height={item.height}
+                      className="block h-auto w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* شارة التكبير العائمة */}
+                  <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1 text-xs font-bold text-white shadow-lg backdrop-blur-sm transition-all duration-200 group-hover:bg-black/90 group-hover:scale-105">
+                    <ZoomIn className="h-3.5 w-3.5 text-white" />
+                    <span>انقر للتكبير</span>
+                  </div>
+                </div>
+
+                {/* نص التقييم والنتيجة */}
+                <div className="flex flex-1 flex-col justify-between p-4 sm:p-6 bg-white">
+                  <div>
+                    <p className="text-sm sm:text-base font-bold leading-[1.8] text-[#242424]">
+                      {item.highlight}
+                    </p>
+                    <div className="mt-3 flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2">
+                      <span className="text-base leading-none">💡</span>
+                      <span><strong>النتيجة:</strong> {item.detail}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedScreenshot(item)}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#E2E2DF] bg-neutral-50 px-4 py-2.5 text-xs sm:text-sm font-bold text-[#444444] transition hover:border-[#E3342F]/40 hover:bg-[#F7EDEC] hover:text-[#B92723]"
+                  >
+                    <ZoomIn className="h-4 w-4" />
+                    <span>عرض المحادثة بحجمها الكامل بدقة عالية</span>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-xs sm:text-sm text-[#777777]">
+            🔒 تم نشر لقطات المحادثات بموافقة أصحابها لعرض أثر المهارات العملية مباشرة في الميدان التعليمي.
+          </p>
+        </div>
+      </section>
+
+      {/* 6. محتوى الكورس: المسار الكامل */}
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center md:text-right">
@@ -610,7 +698,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 6. المدرب */}
+      {/* 7. المدرب */}
       <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
         <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[0.7fr_1.3fr] md:items-center">
           <div className="flex justify-center">
@@ -630,7 +718,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 7. هدايا التسجيل */}
+      {/* 8. هدايا التسجيل */}
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1180px]">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -684,7 +772,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 8. لمن يناسب الكورس */}
+      {/* 9. لمن يناسب الكورس */}
       <section className="border-y px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line, backgroundColor: soft }}>
         <div className="mx-auto max-w-[1180px]">
           <p className="mb-4 text-sm font-bold" style={{ color: red }}>لمن يناسب الكورس؟</p>
@@ -706,7 +794,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 9. المقارنة */}
+      {/* 10. المقارنة */}
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1000px]">
           <p className="mb-4 text-sm font-bold" style={{ color: red }}>مقارنة واضحة</p>
@@ -730,94 +818,6 @@ export default function LandingClient() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* 10. آراء وتجارب موثقة من المشتركين عبر واتساب */}
-      <section className="border-y px-4 py-14 sm:px-6 md:px-8 md:py-20" style={{ borderColor: line, backgroundColor: soft }}>
-        <div className="mx-auto max-w-[1180px]">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black text-emerald-700 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>محادثات وتقييمات حقيقية عبر WhatsApp 💬</span>
-            </div>
-            <h2 className="mt-4 text-3xl font-black md:text-5xl text-[#242424]">
-              تجارب حقيقية ورسائل المشتركين
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-[1.9]" style={{ color: muted }}>
-              لقطات شاشة أصلية بدقة عالية من محادثات المعلمين والمدربين بعد تطبيق محاور الكورس في تحضير الدروس، وتصميم السلايدات والإنفوجرافيك، وإنتاج الفيديو والخرائط الذهنية.
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
-            {testimonialScreenshots.map((item) => (
-              <article
-                key={item.id}
-                className="group flex flex-col overflow-hidden rounded-2xl md:rounded-3xl border bg-white shadow-[0_12px_35px_rgba(0,0,0,0.05)] transition-all duration-300 hover:border-neutral-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.09)]"
-                style={{ borderColor: line }}
-              >
-                {/* رأس البطاقة */}
-                <div className="flex items-center justify-between gap-3 border-b px-4 py-3.5 sm:px-5 sm:py-4 bg-neutral-50/80" style={{ borderColor: line }}>
-                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-red-100 bg-red-50 px-2.5 py-1 text-xs font-bold" style={{ color: redDark }}>
-                    {item.tag}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">
-                    ✓ محادثة موثقة
-                  </span>
-                </div>
-
-                {/* صورة السكرين شوت عالية الدقة */}
-                <div
-                  onClick={() => setSelectedScreenshot(item)}
-                  className="relative cursor-pointer overflow-hidden bg-[#FAF8F5] p-3 sm:p-4 flex items-center justify-center transition"
-                  title="انقر لتكبير المحادثة بدقة عالية"
-                >
-                  <div className="w-full overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm transition-transform duration-300 group-hover:scale-[1.015]">
-                    <img
-                      src={item.src}
-                      alt={`${item.tag} - ${item.highlight}`}
-                      width={item.width}
-                      height={item.height}
-                      className="block h-auto w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  {/* شارة التكبير العائمة */}
-                  <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1 text-xs font-bold text-white shadow-lg backdrop-blur-sm transition-all duration-200 group-hover:bg-black/90 group-hover:scale-105">
-                    <ZoomIn className="h-3.5 w-3.5 text-white" />
-                    <span>انقر للتكبير</span>
-                  </div>
-                </div>
-
-                {/* نص التقييم والنتيجة */}
-                <div className="flex flex-1 flex-col justify-between p-4 sm:p-6 bg-white">
-                  <div>
-                    <p className="text-sm sm:text-base font-bold leading-[1.8] text-[#242424]">
-                      {item.highlight}
-                    </p>
-                    <div className="mt-3 flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2">
-                      <span className="text-base leading-none">💡</span>
-                      <span><strong>النتيجة:</strong> {item.detail}</span>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedScreenshot(item)}
-                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#E2E2DF] bg-neutral-50 px-4 py-2.5 text-xs sm:text-sm font-bold text-[#444444] transition hover:border-[#E3342F]/40 hover:bg-[#F7EDEC] hover:text-[#B92723]"
-                  >
-                    <ZoomIn className="h-4 w-4" />
-                    <span>عرض المحادثة بحجمها الكامل بدقة عالية</span>
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <p className="mt-8 text-center text-xs sm:text-sm text-[#777777]">
-            🔒 تم نشر لقطات المحادثات بموافقة أصحابها لعرض أثر المهارات العملية مباشرة في الميدان التعليمي.
-          </p>
         </div>
       </section>
 
