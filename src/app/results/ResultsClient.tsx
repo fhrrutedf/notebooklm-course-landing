@@ -7,6 +7,7 @@ import { trackWhatsApp } from '@/lib/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import { TekramPayButton } from '@/components/TekramPayButton'
 import { openTekramCheckout } from '@/lib/tekram'
+import { useGeoPricing } from '@/hooks/useGeoPricing'
 import {
   ArrowRight,
   BookOpen,
@@ -151,6 +152,7 @@ export default function ResultsClient() {
     () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
     () => '',
   )
+  const pricing = useGeoPricing()
 
   useEffect(() => {
     const directRef = resolveAffiliateRef(window.location.search)
@@ -559,9 +561,12 @@ export default function ResultsClient() {
                 </span>
               </div>
               <div className="mt-4 flex items-center justify-center gap-3">
-                <span className="text-xl font-bold text-[#888888] line-through decoration-2">39$</span>
-                <span className="text-5xl font-black text-[#E3342F]">22$</span>
+                <span className="text-xl font-bold text-[#888888] line-through decoration-2">{pricing.originalPrice}</span>
+                <span className="text-5xl font-black text-[#E3342F]">{pricing.currentPrice}</span>
               </div>
+              {pricing.approxUsdNote && (
+                <p className="mt-1 text-xs font-bold text-[#666666] text-center">{pricing.approxUsdNote}</p>
+              )}
             </div>
 
             {/* صندوق أين وكيف تستلم الكورس */}
@@ -599,11 +604,11 @@ export default function ResultsClient() {
 
             <div className="mt-6 space-y-3">
               <TekramPayButton
-                amount={22}
+                amount={pricing.checkoutAmount}
                 title="كورس الذكاء الاصطناعي للمعلمين"
                 affiliateRef={affiliateRef}
                 source="results_final_cta_tekram"
-                label="ادفع أونلاين الآن (22$) — تفعيل فوري"
+                label={pricing.buttonLabel}
               />
 
               <a
@@ -650,14 +655,14 @@ export default function ResultsClient() {
           type="button"
           onClick={() => {
             openTekramCheckout({
-              amount: 22,
+              amount: pricing.checkoutAmount,
               desc: 'كورس الذكاء الاصطناعي للمعلمين',
               affiliateRef,
             })
           }}
           className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E3342F] px-4 py-3 text-xs font-bold text-white shadow-[0_10px_25px_rgba(227,52,47,0.4)] active:scale-95"
         >
-          <span>ادفع أونلاين 22$ (تفعيل فوري)</span>
+          <span>{pricing.mobileButtonLabel}</span>
         </button>
         <a
           href={createWhatsAppLink('مرحباً، شاهدت صفحة النماذج وأريد حجز مقعدي في الكورس.')}

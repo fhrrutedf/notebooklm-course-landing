@@ -8,6 +8,7 @@ import { trackWhatsApp } from '@/lib/analytics'
 import { affiliateMessageSuffix, referralHref, resolveAffiliateRef } from '@/lib/affiliate'
 import { TekramPayButton } from '@/components/TekramPayButton'
 import { openTekramCheckout } from '@/lib/tekram'
+import { useGeoPricing } from '@/hooks/useGeoPricing'
 import {
   ArrowDown,
   ArrowLeft,
@@ -110,6 +111,7 @@ export default function LandingClient() {
     () => resolveAffiliateRef(window.location.search) || window.localStorage.getItem('course_affiliate_ref') || '',
     () => '',
   )
+  const pricing = useGeoPricing()
 
   useEffect(() => {
     const directRef = resolveAffiliateRef(window.location.search)
@@ -304,7 +306,7 @@ export default function LandingClient() {
       {offerTimeLeft && (
         <div className="bg-[#242424] px-4 py-2.5 text-center text-xs md:text-sm font-bold text-white">
           <span className="text-[#F5F5F2]">عرض إطلاق محدود: </span>
-          <span style={{ color: red }} className="font-black">22$ (متبقي 6 مقاعد فقط)</span>
+          <span style={{ color: red }} className="font-black">{pricing.topBannerPrice} (متبقي 6 مقاعد فقط)</span>
           <span className="mx-2 text-white/60">•</span>
           <span>ينتهي العرض خلال: </span>
           <span className="tabular-nums font-black text-amber-400">
@@ -326,8 +328,11 @@ export default function LandingClient() {
   <p className="mt-4 text-sm font-black" style={{ color: red }}>وفر تعب العام الدراسي بأكمله الآن!</p>
   <p className="mt-3 text-sm font-bold" style={{ color: muted }}>سعر الإطلاق الحالي</p>
   <div className="mt-1">
-    <span className="text-lg font-bold line-through decoration-2" style={{ color: muted }}>39$</span>
-    <span className="mr-3 text-5xl font-black" style={{ color: red }}>22$</span>
+    <span className="text-lg font-bold line-through decoration-2" style={{ color: muted }}>{pricing.originalPrice}</span>
+    <span className="mr-3 text-5xl font-black" style={{ color: red }}>{pricing.currentPrice}</span>
+    {pricing.approxUsdNote && (
+      <p className="mt-1 text-xs font-bold text-[#666666]">{pricing.approxUsdNote}</p>
+    )}
   </div>
 
   <div className="mt-4 rounded-xl bg-[#F8F8F6] p-3 text-xs leading-[1.8] font-bold text-[#444444] border border-[#E2E2DF] text-right">
@@ -342,11 +347,11 @@ export default function LandingClient() {
 
   <div className="mt-5 space-y-3">
     <TekramPayButton
-      amount={22}
+      amount={pricing.checkoutAmount}
       title="كورس الذكاء الاصطناعي للمعلمين"
       affiliateRef={affiliateRef}
       source="hero_price_card_tekram"
-      label="ادفع أونلاين الآن (22$) — تفعيل فوري"
+      label={pricing.buttonLabel}
     />
 
     <a
@@ -888,16 +893,19 @@ export default function LandingClient() {
               <p className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: red }} />وصول دائم وتحديثات مستقبلية مجانية</p>
             </div>
             <div className="my-6 border-t border-white/10 pt-5 text-center">
-              <span className="text-sm text-white/50 line-through decoration-2">39$</span>
-              <span className="mr-3 text-4xl font-black" style={{ color: red }}>22$</span>
+              <span className="text-sm text-white/50 line-through decoration-2">{pricing.originalPrice}</span>
+              <span className="mr-3 text-4xl font-black" style={{ color: red }}>{pricing.currentPrice}</span>
+              {pricing.approxUsdNote && (
+                <p className="mt-1 text-xs text-white/70">{pricing.approxUsdNote}</p>
+              )}
             </div>
             <div className="space-y-3">
               <TekramPayButton
-                amount={22}
+                amount={pricing.checkoutAmount}
                 title="كورس الذكاء الاصطناعي للمعلمين"
                 affiliateRef={affiliateRef}
                 source="reference_style_final_tekram"
-                label="ادفع أونلاين الآن (22$) — تفعيل فوري"
+                label={pricing.buttonLabel}
               />
 
               <a
@@ -934,7 +942,7 @@ export default function LandingClient() {
           type="button"
           onClick={() => {
             openTekramCheckout({
-              amount: 22,
+              amount: pricing.checkoutAmount,
               desc: 'كورس الذكاء الاصطناعي للمعلمين',
               affiliateRef,
             })
@@ -942,7 +950,7 @@ export default function LandingClient() {
           className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-white shadow-xl active:scale-95"
           style={{ backgroundColor: red }}
         >
-          <span>ادفع أونلاين 22$ (تفعيل فوري)</span>
+          <span>{pricing.mobileButtonLabel}</span>
         </button>
         <a
           href={createWhatsAppLink('مرحباً، أريد تفاصيل التسجيل في كورس الذكاء الاصطناعي للمعلمين.')}

@@ -1,5 +1,13 @@
 export const TEKRAM_SELLER_ID = '83d55630-5a52-4c43-92b2-120f67fa5372'
 export const DEFAULT_COURSE_PRICE = 22
+export const DEFAULT_REGULAR_PRICE = 39
+
+// تسعير المملكة العربية السعودية
+export const SAUDI_COURSE_PRICE_SAR = 199
+export const SAUDI_REGULAR_PRICE_SAR = 249
+export const SAUDI_COURSE_PRICE_USD = 53
+export const SAUDI_REGULAR_PRICE_USD = 66
+
 export const COURSE_TITLE = 'كورس الذكاء الاصطناعي للمعلمين'
 export const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://course.manasadigital.com'
 
