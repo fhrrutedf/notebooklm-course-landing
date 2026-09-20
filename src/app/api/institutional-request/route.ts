@@ -1,0 +1,176 @@
+import { NextRequest, NextResponse } from "next/server";
+
+const TARGET_EMAIL = "info@manasadigital.com";
+
+export async function POST(request: NextRequest) {
+  try {
+    const data = await request.json();
+
+    const {
+      institutionName,
+      contactPerson,
+      jobTitle,
+      countryCity,
+      whatsappNumber,
+      email,
+      teacherCount,
+      subjectsGrades,
+      trainingType,
+      additionalNotes,
+    } = data;
+
+    if (!institutionName || !contactPerson || !whatsappNumber) {
+      return NextResponse.json(
+        { success: false, error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    const submissionTime = new Date().toLocaleString("ar-SA", {
+      timeZone: "Asia/Riyadh",
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+
+    const emailSubject = `طلب عرض تدريب مؤسسي جديد: ${institutionName} — ${contactPerson}`;
+
+    const emailHtml = `
+      <div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.8; color: #242424; max-width: 600px; margin: 0 auto; border: 1px solid #E2E2DF; border-radius: 12px; padding: 24px; background-color: #FAFAF8;">
+        <div style="text-align: center; border-bottom: 2px solid #E3342F; padding-bottom: 16px; margin-bottom: 20px;">
+          <h2 style="color: #E3342F; margin: 0;">طلب تدريب مؤسسي جديد للمدارس والمعاهد</h2>
+          <p style="color: #666666; margin: 4px 0 0 0; font-size: 14px;">كورس الذكاء الاصطناعي للمعلمين</p>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; width: 35%; color: #555;">المؤسسة التعليمية:</td>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #111;">${institutionName}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">اسم المسؤول:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${contactPerson}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">المسمى الوظيفي:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${jobTitle || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">الدولة والمدينة:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${countryCity}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">عدد المعلمين:</td>
+            <td style="padding: 10px; font-weight: bold; color: #E3342F; border-bottom: 1px solid #E2E2DF;">${teacherCount || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">نوع التدريب المطلوب:</td>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF;">${trainingType || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">المواد أو المراحل:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${subjectsGrades || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">رقم واتساب:</td>
+            <td style="padding: 10px; direction: ltr; text-align: right; border-bottom: 1px solid #E2E2DF;">
+              <a href="https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}" style="color: #25D366; font-weight: bold; text-decoration: none;">${whatsappNumber}</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">البريد الإلكتروني:</td>
+            <td style="padding: 10px; direction: ltr; text-align: right; border-bottom: 1px solid #E2E2DF;">
+              ${email ? `<a href="mailto:${email}" style="color: #0066CC;">${email}</a>` : 'لم يُذكر'}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; color: #555; vertical-align: top;">الملاحظات:</td>
+            <td style="padding: 10px; white-space: pre-wrap;">${additionalNotes || 'لا توجد ملاحظات إضافية'}</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 20px; padding: 12px; background-color: #F0F0EE; border-radius: 8px; font-size: 12px; color: #666; text-align: center;">
+          تم استلام هذا الطلب عبر نموذج المؤسسات في: ${submissionTime}
+        </div>
+      </div>
+    `;
+
+    // تسجيل الطلب دائماً في سجلات الخادم
+    console.log(
+      `[INSTITUTIONAL OFFER REQUEST -> ${TARGET_EMAIL}]:`,
+      JSON.stringify({
+        institutionName,
+        contactPerson,
+        whatsappNumber,
+        countryCity,
+        teacherCount,
+        trainingType,
+        email,
+      }, null, 2)
+    );
+
+    // 1. محاولة الإرسال عبر خدمة Resend إن توفر مفتاح الـ API
+    if (process.env.RESEND_API_KEY) {
+      try {
+        const resendRes = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: process.env.EMAIL_FROM || "منصة ديجيتال <onboarding@resend.dev>",
+            to: [TARGET_EMAIL],
+            subject: emailSubject,
+            html: emailHtml,
+          }),
+        });
+
+        if (!resendRes.ok) {
+          const errText = await resendRes.text();
+          console.warn("[Resend API Error]:", errText);
+        } else {
+          console.log("[Resend API Success]: Email dispatched to", TARGET_EMAIL);
+        }
+      } catch (err) {
+        console.warn("[Resend Dispatch Error]:", err);
+      }
+    }
+
+    // 2. محاولة الإرسال عبر Webhook (مثل Zapier / Make / Slack) إن وجد
+    if (process.env.NOTIFICATION_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.NOTIFICATION_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            targetEmail: TARGET_EMAIL,
+            institutionName,
+            contactPerson,
+            whatsappNumber,
+            countryCity,
+            teacherCount,
+            trainingType,
+            subjectsGrades,
+            email,
+            additionalNotes,
+            submittedAt: submissionTime,
+          }),
+        });
+      } catch (err) {
+        console.warn("[Webhook Dispatch Error]:", err);
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `تم استلام الطلب وتسجيله وإرسال الإشعار إلى ${TARGET_EMAIL}`,
+      targetEmail: TARGET_EMAIL,
+    });
+  } catch (error) {
+    console.error("[Institutional Request API Error]:", error);
+    return NextResponse.json(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

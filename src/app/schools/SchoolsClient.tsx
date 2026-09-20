@@ -21,6 +21,7 @@ import {
   Layers,
   LayoutGrid,
   Lock,
+  Mail,
   MessageCircle,
   PenTool,
   Presentation,
@@ -407,6 +408,15 @@ export default function SchoolsClient() {
       formData.email ? `✉️ البريد الإلكتروني: ${formData.email}` : '',
       formData.additionalNotes ? `📝 ملاحظات: ${formData.additionalNotes}` : '',
     ].filter(Boolean)
+
+    // 1. إرسال البيانات آلياً إلى الخادم لتحويلها إلى البريد الإلكتروني info@manasadigital.com
+    fetch('/api/institutional-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    }).catch((err) => {
+      console.warn('Failed to send institutional request to API:', err)
+    })
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageLines.join('\n'))}`
 
@@ -1082,6 +1092,11 @@ export default function SchoolsClient() {
                 <p className="text-base md:text-lg text-emerald-900 font-semibold max-w-lg mx-auto leading-relaxed">
                   وصلنا طلبك. رح نراجع عدد المعلمين واحتياج المؤسسة ونبعتلك العرض الأنسب وطريقة الدفع المناسبة.
                 </p>
+                <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-100/90 px-4 py-1.5 text-xs font-bold text-emerald-900 border border-emerald-300">
+                  <Mail className="h-3.5 w-3.5 text-emerald-700" />
+                  <span>تم توجيه نسخة من الطلب آلياً إلى بريد الإدارة:</span>
+                  <span dir="ltr" className="font-mono font-black text-[#E3342F]">info@manasadigital.com</span>
+                </div>
                 <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a
                     href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -1091,6 +1106,13 @@ export default function SchoolsClient() {
                   >
                     <MessageCircle className="h-4 w-4" />
                     <span>متابعة الطلب عبر WhatsApp مباشرة</span>
+                  </a>
+                  <a
+                    href={`mailto:info@manasadigital.com?subject=${encodeURIComponent(`طلب تدريب مؤسسي: ${formData.institutionName}`)}&body=${encodeURIComponent(`المؤسسة: ${formData.institutionName}\nالمسؤول: ${formData.contactPerson}\nواتساب: ${formData.whatsappNumber}\nالدولة والمدينة: ${formData.countryCity}\nعدد المعلمين: ${formData.teacherCount}\nنوع التدريب: ${formData.trainingType}\nالملاحظات: ${formData.additionalNotes}`)}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-800 border border-slate-300 shadow-sm hover:bg-slate-50"
+                  >
+                    <Mail className="h-4 w-4 text-[#E3342F]" />
+                    <span>إرسال بريد إلكتروني مباشر</span>
                   </a>
                   <button
                     type="button"
