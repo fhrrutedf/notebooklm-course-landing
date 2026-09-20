@@ -381,7 +381,7 @@ export default function SchoolsClient() {
     }
   }
 
-  const handleFormSubmit = (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -392,41 +392,23 @@ export default function SchoolsClient() {
       teacher_count: formData.teacherCount,
     })
 
-    // تجهيز رسالة WhatsApp
-    const messageLines = [
-      'السلام عليكم ورحمة الله،',
-      'أرغب بطلب عرض مؤسسي لبرنامج تدريب فريق المعلمين بالذكاء الاصطناعي:',
-      '',
-      `🏫 اسم المؤسسة: ${formData.institutionName}`,
-      `👤 اسم المسؤول: ${formData.contactPerson}`,
-      formData.jobTitle ? `💼 المسمى الوظيفي: ${formData.jobTitle}` : '',
-      `📍 الدولة والمدينة: ${formData.countryCity}`,
-      `👥 عدد المعلمين: ${formData.teacherCount}`,
-      formData.subjectsGrades ? `📚 المواد أو المراحل: ${formData.subjectsGrades}` : '',
-      `🎯 نوع التدريب: ${formData.trainingType}`,
-      `📱 رقم واتساب: ${formData.whatsappNumber}`,
-      formData.email ? `✉️ البريد الإلكتروني: ${formData.email}` : '',
-      formData.additionalNotes ? `📝 ملاحظات: ${formData.additionalNotes}` : '',
-    ].filter(Boolean)
-
-    // 1. إرسال البيانات آلياً إلى الخادم لتحويلها إلى البريد الإلكتروني info@manasadigital.com
-    fetch('/api/institutional-request', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    }).catch((err) => {
+    // إرسال البيانات آلياً إلى الخادم لإيصالها إلى البريد الإلكتروني info@manasadigital.com
+    try {
+      const res = await fetch('/api/institutional-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) {
+        console.warn('Server returned non-ok status for institutional request')
+      }
+    } catch (err) {
       console.warn('Failed to send institutional request to API:', err)
-    })
+    }
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageLines.join('\n'))}`
-
-    // إظهار حالة النجاح
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      // توجيه تلقائي لواتساب كخيار مكمل
-      window.open(whatsappUrl, '_blank')
-    }, 600)
+    // إظهار حالة النجاح مباشرة داخل الصفحة دون أي تحويل تلقائي إطلاقاً
+    setIsSubmitting(false)
+    setIsSubmitted(true)
   }
 
   return (

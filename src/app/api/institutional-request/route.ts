@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 const TARGET_EMAIL = "info@manasadigital.com";
 
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
       timeStyle: "short",
     });
 
-    const emailSubject = `طلب عرض تدريب مؤسسي جديد: ${institutionName} — ${contactPerson}`;
+    const emailSubject = `طلب تدريب مؤسسي جديد: ${institutionName} — ${contactPerson}`;
 
     const emailHtml = `
       <div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.8; color: #242424; max-width: 600px; margin: 0 auto; border: 1px solid #E2E2DF; border-radius: 12px; padding: 24px; background-color: #FAFAF8;">
@@ -94,22 +95,60 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    // تسجيل الطلب دائماً في سجلات الخادم
-    console.log(
-      `[INSTITUTIONAL OFFER REQUEST -> ${TARGET_EMAIL}]:`,
-      JSON.stringify({
-        institutionName,
-        contactPerson,
-        whatsappNumber,
-        countryCity,
-        teacherCount,
-        trainingType,
-        email,
-      }, null, 2)
-    );
+    const plainText = `
+طلب تدريب مؤسسي جديد للمدارس والمعاهد
+--------------------------------------
+المؤسسة: ${institutionName}
+المسؤول: ${contactPerson}
+المسمى الوظيفي: ${jobTitle || 'غير محدد'}
+الدولة والمدينة: ${countryCity}
+عدد المعلمين: ${teacherCount || 'غير محدد'}
+نوع التدريب: ${trainingType || 'غير محدد'}
+المواد أو المراحل: ${subjectsGrades || 'غير محدد'}
+واتساب: ${whatsappNumber}
+البريد: ${email || 'لم يُذكر'}
+الملاحظات: ${additionalNotes || 'لا توجد'}
+وقت الإرسال: ${submissionTime}
+    `.trim();
 
-    // 1. محاولة الإرسال عبر خدمة Resend إن توفر مفتاح الـ API
-    if (process.env.RESEND_API_KEY) {
+    // 1. تسجيل الطلب محلياً وفي السجلات
+    console.log(`[INSTITUTIONAL REQUEST -> ${TARGET_EMAIL}] received from ${institutionName} (${contactPerson})`);
+
+    let emailDelivered = false;
+
+    // 2. محاولة الإرسال عبر SMTP (Nodemailer) - الأنسب لحساب Zoho Mail أو أي مزود بريد
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      try {
+        const port = Number(process.env.SMTP_PORT) || 465;
+        const secure = port === 465;
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port,
+          secure,
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+
+        await transporter.sendMail({
+          from: process.env.SMTP_FROM || `"منصة ديجيتال" <${process.env.SMTP_USER}>`,
+          to: TARGET_EMAIL,
+          replyTo: email || undefined,
+          subject: emailSubject,
+          text: plainText,
+          html: emailHtml,
+        });
+
+        console.log(`[SMTP Success]: Email dispatched to ${TARGET_EMAIL}`);
+        emailDelivered = true;
+      } catch (smtpErr) {
+        console.warn("[SMTP Error]:", smtpErr);
+      }
+    }
+
+    // 3. محاولة الإرسال عبر Resend API
+    if (!emailDelivered && process.env.RESEND_API_KEY) {
       try {
         const resendRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -120,23 +159,62 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             from: process.env.EMAIL_FROM || "منصة ديجيتال <onboarding@resend.dev>",
             to: [TARGET_EMAIL],
+            reply_to: email || undefined,
             subject: emailSubject,
             html: emailHtml,
           }),
         });
 
-        if (!resendRes.ok) {
-          const errText = await resendRes.text();
-          console.warn("[Resend API Error]:", errText);
+        if (resendRes.ok) {
+          console.log(`[Resend Success]: Email dispatched to ${TARGET_EMAIL}`);
+          emailDelivered = true;
         } else {
-          console.log("[Resend API Success]: Email dispatched to", TARGET_EMAIL);
+          const errText = await resendRes.text();
+          console.warn("[Resend Error]:", errText);
         }
-      } catch (err) {
-        console.warn("[Resend Dispatch Error]:", err);
+      } catch (resendErr) {
+        console.warn("[Resend Error]:", resendErr);
       }
     }
 
-    // 2. محاولة الإرسال عبر Webhook (مثل Zapier / Make / Slack) إن وجد
+    // 4. إرسال فوري ومباشر كبديل تلقائي عبر FormSubmit بدون الحاجة لإعداد مسبق
+    if (!emailDelivered) {
+      try {
+        const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: emailSubject,
+            _template: "table",
+            "اسم المؤسسة": institutionName,
+            "اسم المسؤول": contactPerson,
+            "المسمى الوظيفي": jobTitle || "غير محدد",
+            "الدولة والمدينة": countryCity,
+            "عدد المعلمين": teacherCount || "غير محدد",
+            "نوع التدريب": trainingType || "غير محدد",
+            "المواد أو المراحل": subjectsGrades || "غير محدد",
+            "رقم واتساب": whatsappNumber,
+            "البريد الإلكتروني": email || "لم يُذكر",
+            "ملاحظات إضافية": additionalNotes || "لا توجد",
+            "تاريخ ووقت الطلب": submissionTime,
+          }),
+        });
+
+        if (formSubmitRes.ok) {
+          console.log(`[FormSubmit Success]: Request forwarded to ${TARGET_EMAIL}`);
+          emailDelivered = true;
+        } else {
+          console.warn("[FormSubmit Warning]: Status", formSubmitRes.status);
+        }
+      } catch (fsErr) {
+        console.warn("[FormSubmit Error]:", fsErr);
+      }
+    }
+
+    // 5. إشعار الويب هوك الإضافي إن وُجد (مثل Slack / Discord / Zapier)
     if (process.env.NOTIFICATION_WEBHOOK_URL) {
       try {
         await fetch(process.env.NOTIFICATION_WEBHOOK_URL, {
@@ -156,14 +234,15 @@ export async function POST(request: NextRequest) {
             submittedAt: submissionTime,
           }),
         });
-      } catch (err) {
-        console.warn("[Webhook Dispatch Error]:", err);
+      } catch (hookErr) {
+        console.warn("[Webhook Dispatch Error]:", hookErr);
       }
     }
 
     return NextResponse.json({
       success: true,
-      message: `تم استلام الطلب وتسجيله وإرسال الإشعار إلى ${TARGET_EMAIL}`,
+      delivered: emailDelivered,
+      message: `تم استلام الطلب وتوجيهه إلى البريد ${TARGET_EMAIL}`,
       targetEmail: TARGET_EMAIL,
     });
   } catch (error) {
