@@ -392,18 +392,38 @@ export default function SchoolsClient() {
       teacher_count: formData.teacherCount,
     })
 
-    // إرسال البيانات آلياً إلى الخادم لإيصالها إلى البريد الإلكتروني info@manasadigital.com
+    // إرسال البيانات آلياً لضمان وصولها إلى البريد info@manasadigital.com فوراً
     try {
-      const res = await fetch('/api/institutional-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      if (!res.ok) {
-        console.warn('Server returned non-ok status for institutional request')
-      }
+      await Promise.allSettled([
+        fetch('/api/institutional-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        }),
+        fetch('https://formsubmit.co/ajax/info@manasadigital.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            _subject: `طلب تدريب مؤسسي جديد: ${formData.institutionName} - ${formData.contactPerson}`,
+            _template: 'table',
+            'اسم المؤسسة': formData.institutionName,
+            'اسم المسؤول': formData.contactPerson,
+            'المسمى الوظيفي': formData.jobTitle || 'غير محدد',
+            'الدولة والمدينة': formData.countryCity,
+            'عدد المعلمين': formData.teacherCount,
+            'نوع التدريب': formData.trainingType,
+            'المواد أو المراحل': formData.subjectsGrades || 'غير محدد',
+            'رقم واتساب': formData.whatsappNumber,
+            'البريد الإلكتروني': formData.email || 'لم يُذكر',
+            'الملاحظات': formData.additionalNotes || 'لا توجد',
+          }),
+        }),
+      ])
     } catch (err) {
-      console.warn('Failed to send institutional request to API:', err)
+      console.warn('Failed to send institutional request:', err)
     }
 
     // إظهار حالة النجاح مباشرة داخل الصفحة دون أي تحويل تلقائي إطلاقاً
@@ -1064,44 +1084,41 @@ export default function SchoolsClient() {
             </div>
 
             {isSubmitted ? (
-              <div className="rounded-2xl border border-emerald-300 bg-emerald-50 p-8 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white mx-auto mb-4">
-                  <CheckCircle2 className="h-8 w-8" />
+              <div className="rounded-2xl border border-emerald-300 bg-emerald-50 p-8 md:p-12 text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-600 text-white mx-auto mb-5 shadow-sm">
+                  <CheckCircle2 className="h-10 w-10" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-black text-emerald-950 mb-2">
-                  وصلنا طلبك بنجاح!
+                <h3 className="text-2xl md:text-3xl font-black text-emerald-950 mb-3">
+                  تم إرسال طلبكم بنجاح!
                 </h3>
                 <p className="text-base md:text-lg text-emerald-900 font-semibold max-w-lg mx-auto leading-relaxed">
-                  وصلنا طلبك. رح نراجع عدد المعلمين واحتياج المؤسسة ونبعتلك العرض الأنسب وطريقة الدفع المناسبة.
+                  شكراً لتواصلكم معنا. تم استلام بيانات مؤسستكم بالكامل، وسيقوم فريقنا الأكاديمي بمراجعة الاحتياج والتواصل معكم لتقديم خطة التدريب والعرض المخصص في أقرب وقت.
                 </p>
-                <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-100/90 px-4 py-1.5 text-xs font-bold text-emerald-900 border border-emerald-300">
-                  <Mail className="h-3.5 w-3.5 text-emerald-700" />
-                  <span>تم توجيه نسخة من الطلب آلياً إلى بريد الإدارة:</span>
-                  <span dir="ltr" className="font-mono font-black text-[#E3342F]">info@manasadigital.com</span>
+                <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-xs font-bold text-emerald-800 border border-emerald-200">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                  <span>تم توجيه الطلب تلقائياً إلى إدارة البرنامج</span>
                 </div>
-                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow hover:opacity-95"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    <span>متابعة الطلب عبر WhatsApp مباشرة</span>
-                  </a>
-                  <a
-                    href={`mailto:info@manasadigital.com?subject=${encodeURIComponent(`طلب تدريب مؤسسي: ${formData.institutionName}`)}&body=${encodeURIComponent(`المؤسسة: ${formData.institutionName}\nالمسؤول: ${formData.contactPerson}\nواتساب: ${formData.whatsappNumber}\nالدولة والمدينة: ${formData.countryCity}\nعدد المعلمين: ${formData.teacherCount}\nنوع التدريب: ${formData.trainingType}\nالملاحظات: ${formData.additionalNotes}`)}`}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-800 border border-slate-300 shadow-sm hover:bg-slate-50"
-                  >
-                    <Mail className="h-4 w-4 text-[#E3342F]" />
-                    <span>إرسال بريد إلكتروني مباشر</span>
-                  </a>
+                <div className="mt-8 pt-6 border-t border-emerald-200">
                   <button
                     type="button"
-                    onClick={() => setIsSubmitted(false)}
-                    className="text-xs font-bold text-slate-600 underline"
+                    onClick={() => {
+                      setIsSubmitted(false)
+                      setFormData({
+                        institutionName: '',
+                        contactPerson: '',
+                        jobTitle: '',
+                        countryCity: '',
+                        whatsappNumber: '',
+                        email: '',
+                        teacherCount: '',
+                        subjectsGrades: '',
+                        trainingType: 'مزيج بين المسجل والمباشر',
+                        additionalNotes: '',
+                      })
+                    }}
+                    className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition underline underline-offset-4"
                   >
-                    تعديل البيانات أو إرسال طلب جديد
+                    <span>إرسال طلب لمؤسسة تعليمية أخرى</span>
                   </button>
                 </div>
               </div>

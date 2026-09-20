@@ -185,6 +185,8 @@ export async function POST(request: NextRequest) {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Referer: "https://course.manasadigital.com/schools",
+            Origin: "https://course.manasadigital.com",
           },
           body: JSON.stringify({
             _subject: emailSubject,
