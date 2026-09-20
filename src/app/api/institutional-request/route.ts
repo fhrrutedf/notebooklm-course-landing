@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
     // 4. إرسال فوري ومباشر كبديل تلقائي عبر FormSubmit بدون الحاجة لإعداد مسبق
     if (!emailDelivered) {
       try {
-        const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+        const formSubmitRes = await fetch(`https://formsubmit.co/ajax/03913a3be76582fa45b5a9f1bc2260ff`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

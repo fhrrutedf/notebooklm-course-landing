@@ -400,7 +400,7 @@ export default function SchoolsClient() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         }),
-        fetch('https://formsubmit.co/ajax/info@manasadigital.com', {
+        fetch('https://formsubmit.co/ajax/03913a3be76582fa45b5a9f1bc2260ff', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
