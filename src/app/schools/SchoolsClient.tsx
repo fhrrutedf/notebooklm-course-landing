@@ -952,11 +952,11 @@ export default function SchoolsClient() {
 
           <div className="mt-10 text-center">
             <Link
-              href="/results"
+              href="/schools/results"
               onClick={() => trackInstitutional('institutional_sample_click', { source: 'view_all_samples_btn' })}
               className="inline-flex items-center gap-2 rounded-full border-2 border-[#242424] px-8 py-3.5 text-sm md:text-base font-bold text-[#242424] hover:bg-[#242424] hover:text-white transition-all shadow-sm"
             >
-              <span>شاهد جميع النماذج والمخرجات التطبيقية</span>
+              <span>شاهد جميع النماذج والمخرجات التطبيقية للمؤسسات</span>
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </div>
@@ -1344,8 +1344,8 @@ export default function SchoolsClient() {
               صفحة التسجيل الفردي للمعلمين
             </Link>
             <span>•</span>
-            <Link href="/results" className="underline hover:text-[#242424]">
-              نماذج المخرجات
+            <Link href="/schools/results" className="underline hover:text-[#242424]">
+              نماذج مخرجات المؤسسات
             </Link>
           </div>
         </div>
