@@ -316,7 +316,22 @@ export default function LandingClient() {
       )}
 
       <nav className="border-b px-4 py-4" style={{ borderColor: line, backgroundColor: paper }}>
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4"><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full text-white" style={{ backgroundColor: red }}><BookOpen className="h-4 w-4" /></span><span className="text-sm font-bold md:text-base">كورس الذكاء الاصطناعي للمعلمين</span></div><Link href="/schools" className="hidden items-center gap-2 text-sm font-bold sm:flex" style={{ color: red }}>للمؤسسات التعليمية <Building2 className="h-4 w-4" /></Link></div>
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full text-white" style={{ backgroundColor: red }}>
+              <BookOpen className="h-4 w-4" />
+            </span>
+            <span className="text-sm font-bold md:text-base">كورس الذكاء الاصطناعي للمعلمين</span>
+          </div>
+          <Link
+            href="/schools"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-bold transition hover:opacity-85"
+            style={{ color: red }}
+          >
+            <Building2 className="h-4 w-4 shrink-0" />
+            <span>هل تمثل مدرسة أو معهدًا؟ تعرّف على برامج التدريب المؤسسي</span>
+          </Link>
+        </div>
       </nav>
 
       <section className="px-5 py-14 md:px-8 md:py-20">
@@ -933,6 +948,20 @@ export default function LandingClient() {
           </div>
         </div>
       </section>
+
+      {/* شريط التحويل لبرامج المدارس والمؤسسات */}
+      <div className="border-t py-6 px-4 text-center bg-white" style={{ borderColor: line }}>
+        <p className="text-sm md:text-base font-bold text-[#333333]">
+          هل تمثل مدرسة أو معهدًا؟{' '}
+          <Link
+            href="/schools"
+            className="font-black text-[#E3342F] hover:text-[#B92723] inline-flex items-center gap-1 underline underline-offset-4 mr-1"
+          >
+            <span>تعرّف على برامج التدريب المؤسسي لفرق المعلمين</span>
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+        </p>
+      </div>
 
       <footer className="px-5 py-8 text-center text-sm text-white" style={{ backgroundColor: ink }}>© {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين <span className="mx-2 text-white/40">·</span> <Link href={resultsHref} className="underline">نماذج المخرجات</Link></footer>
       
