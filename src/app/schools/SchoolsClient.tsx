@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Clock,
   Compass,
+  CreditCard,
   FileCheck2,
   FileSpreadsheet,
   FileText,
@@ -23,6 +24,7 @@ import {
   MessageCircle,
   PenTool,
   Presentation,
+  Receipt,
   School,
   Send,
   Share2,
@@ -189,47 +191,68 @@ const workStages = [
   },
 ]
 
-// الباقات وخيارات التدريب (بدون أسعار ثابتة)
+// الباقات المقترحة بأسعار إرشادية وتخصيص كامل
 const trainingPackages = [
   {
     id: 'small_team',
-    name: 'تجربة فريق صغيرة',
-    audience: 'مناسبة لـ 3 إلى 5 معلمين',
-    badge: 'تجربة مركزة وسريعة',
+    name: 'باقة تجربة الفريق',
+    audience: 'مناسبة لـ 5 معلمين',
+    badge: 'تجربة مركزة وسريعة لاختبار الملاءمة',
+    indicativePrice: 'يبدأ من 995 ريالاً سعودياً',
+    teacherCountOption: '1–5',
+    trainingTypeOption: 'محتوى مسجل + جلسة تطبيق',
     points: [
-      'مناسبة لاختبار ملاءمة البرنامج مع قسم أو مرحلة محددة.',
-      'تشمل جلسة تعريفية بمسار العمل وأدواته.',
-      'تطبيق عملي فوري على درس حقيقي من منهجكم.',
-      'جلسة أسئلة وأجوبة ومتابعة للمخرجات الأولى.',
+      'الوصول إلى الكورس الكامل.',
+      'ملفات PDF والقوالب.',
+      'جلسة تعريفية للفريق.',
+      'جلسة أسئلة وأجوبة.',
+      'تطبيق أولي على درس حقيقي.',
     ],
   },
   {
     id: 'department',
-    name: 'تدريب قسم أو معهد',
-    audience: 'مناسب لـ 8 إلى 15 معلمًا',
-    badge: 'الخيار الأكثر طلباً للأقسام الأكاديمية',
+    name: 'باقة القسم التعليمي',
+    audience: 'مناسبة لـ 10 معلمين',
+    badge: 'الخيار الأنسب لمعظم المعاهد والمدارس',
+    indicativePrice: 'يبدأ من 1,790 ريالاً سعودياً',
     featured: true,
+    teacherCountOption: '6–10',
+    trainingTypeOption: 'تدريب مباشر + قوالب وتطبيقات',
     points: [
-      'مناسب لقسم علمي كامل أو كادر معهد تعليمي متخصص.',
-      'تدريب جماعي يركز على تخصصات ومواد القسم.',
-      'تطبيقات عملية لبناء اختبارات وعروض وملخصات.',
-      'حزمة قوالب عمل موحدة قابلة للتعديل والاعتماد.',
-      'جلسات أسئلة وأجوبة وتدقيق لمخرجات الفريق.',
+      'كل محتوى الكورس.',
+      'تدريب جماعي للفريق.',
+      'تطبيق على أكثر من مادة.',
+      'قوالب قابلة للتعديل.',
+      'جلستان للأسئلة والتطبيق.',
+      'متابعة أولية بعد التدريب.',
     ],
   },
   {
     id: 'full_institution',
-    name: 'برنامج مؤسسي متكامل',
-    audience: 'مناسب للمدارس والمعاهد الأكبر',
+    name: 'باقة المؤسسة المتكاملة',
+    audience: 'مناسبة لـ 20 معلماً أو أكثر',
     badge: 'حل شامل متعدد المراحل والأقسام',
+    indicativePrice: 'يُحدَّد حسب عدد المعلمين ونطاق التدريب',
+    teacherCountOption: '21–50',
+    trainingTypeOption: 'تدريب مخصص لكامل المؤسسة',
     points: [
-      'تدريب عدة فرق أو أقسام دراسية عبر مسارات مخصصة.',
-      'تطبيق موسع ومباشر على مواد ومقررات المؤسسة.',
-      'متابعة مستمرة ومراجعة دورية للمخرجات المنتجة.',
-      'تقييم للمخرجات وبناء مكتبة أصول تعليمية خاصة بالمدرسة.',
-      'دعم للمنسقين الأكاديميين ورؤساء الأقسام لمتابعة الأثر.',
+      'تدريب عدة مجموعات أو أقسام.',
+      'تطبيق على مواد المؤسسة.',
+      'تنظيم طريقة عمل موحدة.',
+      'قوالب خاصة بالمؤسسة.',
+      'جلسات متابعة.',
+      'تقرير مختصر عن التطبيق والمخرجات.',
     ],
   },
+]
+
+// مسار التعاقد والدفع للمؤسسات
+const contractingSteps = [
+  { num: '1', title: 'اختيار الباقة المبدئية', desc: 'تحديد نقطة البداية المناسبة لحجم الفريق' },
+  { num: '2', title: 'تحديد عدد المعلمين', desc: 'ملء بيانات المؤسسة والمراحل الدراسية' },
+  { num: '3', title: 'معرفة المواد وطريقة التدريب', desc: 'مسجل، مباشر، أو مخصص حسب منهجكم' },
+  { num: '4', title: 'إرسال عرض نهائي مخصص', desc: 'عرض رسمي مفصل مع التكلفة النهائية والفاتورة' },
+  { num: '5', title: 'إرسال رابط دفع خاص', desc: 'رابط دفع رسمي (مدى، بطاقات، تكرام باي، تحويل بنكي)' },
 ]
 
 // النماذج الأربعة للمخرجات
@@ -314,17 +337,17 @@ export default function SchoolsClient() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const formStartedRef = useRef(false)
 
-  // بيانات النموذج
+  // بيانات النموذج بحقول دقيقة مطابقة للتوجيهات
   const [formData, setFormData] = useState({
     institutionName: '',
     contactPerson: '',
     jobTitle: '',
     countryCity: '',
-    email: '',
     whatsappNumber: '',
-    teacherCount: '8-15 معلماً',
+    email: '',
+    teacherCount: '6–10',
     subjectsGrades: '',
-    trainingType: 'تدريب قسم أو معهد (8 إلى 15 معلماً)',
+    trainingType: 'تدريب مباشر',
     additionalNotes: '',
   })
 
@@ -339,9 +362,18 @@ export default function SchoolsClient() {
     }
   }
 
-  const handlePackageSelect = (packageName: string) => {
-    setFormData((prev) => ({ ...prev, trainingType: packageName }))
-    trackInstitutional('institutional_offer_request', { package: packageName })
+  const handlePackageSelect = (pkg: typeof trainingPackages[0]) => {
+    setFormData((prev) => ({
+      ...prev,
+      teacherCount: pkg.teacherCountOption,
+      trainingType: pkg.name.includes('مؤسسة')
+        ? 'تدريب مخصص'
+        : pkg.name.includes('قسم')
+        ? 'تدريب مباشر'
+        : 'محتوى مسجل',
+      additionalNotes: `طلب استفسار عن: ${pkg.name} (${pkg.audience} — السعر الإرشادي: ${pkg.indicativePrice})`,
+    }))
+    trackInstitutional('institutional_offer_request', { package: pkg.name })
     const el = document.getElementById('request')
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
@@ -365,15 +397,15 @@ export default function SchoolsClient() {
       'أرغب بطلب عرض مؤسسي لبرنامج تدريب فريق المعلمين بالذكاء الاصطناعي:',
       '',
       `🏫 اسم المؤسسة: ${formData.institutionName}`,
-      `👤 المسؤول: ${formData.contactPerson}`,
-      `💼 المسمى الوظيفي: ${formData.jobTitle || 'غير محدد'}`,
+      `👤 اسم المسؤول: ${formData.contactPerson}`,
+      formData.jobTitle ? `💼 المسمى الوظيفي: ${formData.jobTitle}` : '',
       `📍 الدولة والمدينة: ${formData.countryCity}`,
-      `👥 عدد المعلمين التقريبي: ${formData.teacherCount}`,
-      `📚 المواد والمراحل: ${formData.subjectsGrades || 'غير محددة'}`,
-      `📦 نوع التدريب المطلوب: ${formData.trainingType}`,
-      `✉️ البريد الإلكتروني: ${formData.email || 'لم يذكر'}`,
+      `👥 عدد المعلمين: ${formData.teacherCount}`,
+      formData.subjectsGrades ? `📚 المواد أو المراحل: ${formData.subjectsGrades}` : '',
+      `🎯 نوع التدريب: ${formData.trainingType}`,
       `📱 رقم واتساب: ${formData.whatsappNumber}`,
-      formData.additionalNotes ? `📝 ملاحظات إضافية: ${formData.additionalNotes}` : '',
+      formData.email ? `✉️ البريد الإلكتروني: ${formData.email}` : '',
+      formData.additionalNotes ? `📝 ملاحظات: ${formData.additionalNotes}` : '',
     ].filter(Boolean)
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageLines.join('\n'))}`
@@ -382,7 +414,7 @@ export default function SchoolsClient() {
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
-      // توجيه تلقائي لواتساب كخيار مباشر مكمل
+      // توجيه تلقائي لواتساب كخيار مكمل
       window.open(whatsappUrl, '_blank')
     }, 600)
   }
@@ -439,6 +471,12 @@ export default function SchoolsClient() {
             >
               صفحة الأفراد
             </Link>
+            <a
+              href="#packages"
+              className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] md:inline-block transition"
+            >
+              الباقات الإرشادية
+            </a>
             <a
               href="#request"
               onClick={() => trackInstitutional('institutional_offer_request', { source: 'header_nav' })}
@@ -543,9 +581,7 @@ export default function SchoolsClient() {
                   className="rounded-2xl border bg-white p-6 md:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all hover:border-[#CBD5E1]"
                   style={{ borderColor: line }}
                 >
-                  <div
-                    className="flex h-11 w-11 items-center justify-center rounded-xl mb-4 text-[#E3342F] bg-[#F7EDEC]"
-                  >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl mb-4 text-[#E3342F] bg-[#F7EDEC]">
                     <IconComp className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg md:text-xl font-black text-[#242424] mb-2 leading-snug">
@@ -723,19 +759,22 @@ export default function SchoolsClient() {
         </div>
       </section>
 
-      {/* قسم الباقات وخيارات التدريب (بدون أسعار ثابتة) */}
-      <section className="border-t bg-white px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
+      {/* قسم الباقات المقترحة بأسعار إرشادية واضحة */}
+      <section id="packages" className="border-t bg-white px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] mb-3">
               <LayoutGrid className="h-4 w-4" />
-              <span>خيارات قابلة للتخصيص الكامل</span>
+              <span>باقات أولية واضحة</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-black text-[#242424] leading-[1.35]">
-              خيارات برامج التدريب المؤسسي
+              اختر نقطة البداية المناسبة لفريقك
             </h2>
             <p className="mt-4 text-[17px] md:text-lg leading-[1.9] text-[#555555]">
-              نصمم نطاق التدريب ليلائم حجم فريقكم وأهدافكم الأكاديمية وطبيعة المناهج المعتمدة لديكم:
+              يمكنك البدء بتجربة صغيرة مع عدد محدود من المعلمين، ثم توسيع التدريب لاحقًا حسب احتياج مؤسستك.
+            </p>
+            <p className="mt-2 text-sm md:text-base font-semibold text-[#777777]">
+              الأسعار التالية إرشادية، ويُحدَّد السعر النهائي حسب عدد المعلمين، نوع التدريب، المواد، والمراحل الدراسية.
             </p>
           </div>
 
@@ -745,27 +784,38 @@ export default function SchoolsClient() {
                 key={pkg.id}
                 className={`relative flex flex-col justify-between rounded-2xl border p-7 transition-all ${
                   pkg.featured
-                    ? 'bg-white border-[#E3342F] shadow-[0_12px_35px_rgba(227,52,47,0.1)] ring-2 ring-[#E3342F]/15'
+                    ? 'bg-white border-[#E3342F] shadow-[0_12px_35px_rgba(227,52,47,0.12)] ring-2 ring-[#E3342F]/15'
                     : 'bg-[#FAFAF8] border-[#E2E2DF] shadow-sm'
                 }`}
               >
                 <div>
                   {pkg.featured && (
                     <div className="mb-4 inline-block rounded-full bg-[#E3342F] px-3.5 py-1 text-xs font-black text-white">
-                      ★ الأكثر طلباً للمدارس والمعاهد
+                      ★ {pkg.badge}
                     </div>
                   )}
+                  {!pkg.featured && (
+                    <div className="mb-4 inline-block rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-bold border border-slate-200">
+                      {pkg.badge}
+                    </div>
+                  )}
+
                   <h3 className="text-xl md:text-2xl font-black text-[#242424]">
                     {pkg.name}
                   </h3>
                   <div className="mt-1 text-sm font-bold text-[#E3342F]">
                     {pkg.audience}
                   </div>
-                  <p className="mt-2 text-xs font-semibold text-[#777777]">
-                    {pkg.badge}
-                  </p>
 
-                  <div className="my-6 border-t border-slate-200" />
+                  {/* السعر الإرشادي */}
+                  <div className="mt-4 rounded-xl bg-white border border-[#E2E2DF] p-3 text-center">
+                    <span className="block text-xs font-bold text-[#888888] mb-0.5">السعر الإرشادي:</span>
+                    <span className="text-base md:text-lg font-black text-[#242424]">
+                      {pkg.indicativePrice}
+                    </span>
+                  </div>
+
+                  <div className="my-5 border-t border-slate-200" />
 
                   <ul className="space-y-3 text-[15px] leading-relaxed text-[#444444]">
                     {pkg.points.map((pt, idx) => (
@@ -780,22 +830,66 @@ export default function SchoolsClient() {
                 <div className="mt-8 pt-4">
                   <button
                     type="button"
-                    onClick={() => handlePackageSelect(pkg.name)}
-                    className={`w-full rounded-full py-3.5 px-5 text-sm md:text-base font-bold transition-all ${
+                    onClick={() => handlePackageSelect(pkg)}
+                    className={`w-full rounded-full py-3.5 px-5 text-sm md:text-base font-black transition-all ${
                       pkg.featured
                         ? 'bg-[#E3342F] text-white hover:bg-[#B92723] shadow-md hover:scale-[1.01]'
                         : 'bg-white text-[#242424] border border-[#E2E2DF] hover:bg-[#F0F0EE]'
                     }`}
                   >
-                    اطلب تفاصيل هذا الخيار
+                    اطلب عرضًا مناسبًا لمؤسستك
                   </button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 text-center text-sm md:text-[16px] font-bold text-[#666666]">
-            📌 <span className="underline">ملاحظة:</span> يُحدَّد العرض النهائي حسب عدد المعلمين، المواد، المراحل، وطريقة التدريب.
+          {/* الملاحظات الإرشادية تحت الباقات */}
+          <div className="mt-10 rounded-2xl bg-[#FAFAF8] border border-[#E2E2DF] p-5 text-right space-y-2 max-w-3xl mx-auto">
+            <p className="text-sm md:text-[15px] font-bold text-[#333333] leading-relaxed">
+              📌 <strong>ملاحظة هامة:</strong> الأسعار المذكورة إرشادية، ويُحدَّد العرض النهائي حسب عدد المعلمين، الدولة، المواد والمراحل الدراسية، ونوع التدريب المطلوب: مسجل، مباشر، أو مخصص للمؤسسة.
+            </p>
+            <p className="text-sm md:text-[15px] font-black text-emerald-800 flex items-center gap-1.5">
+              <span>💡</span>
+              <span>كلما زاد عدد المعلمين، انخفضت تكلفة المقعد الواحد.</span>
+            </p>
+          </div>
+
+          {/* مخطط مسار التعاقد والدفع المخصص */}
+          <div className="mt-12 pt-8 border-t border-slate-200">
+            <div className="text-center max-w-2xl mx-auto mb-8">
+              <h3 className="text-lg md:text-xl font-black text-[#242424]">
+                كيف تسير خطوات الاتفاق والدفع للمؤسسات؟
+              </h3>
+              <p className="mt-1 text-sm text-[#666666]">
+                مسار منظم وشفاف يضمن حصول مؤسستكم على عرض ملائم وفواتير رسمية معتمدة:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 max-w-4xl mx-auto text-center">
+              {contractingSteps.map((s, i) => (
+                <div key={i} className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm text-right sm:text-center">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#E3342F] text-white text-xs font-black mb-2">
+                    {s.num}
+                  </span>
+                  <h4 className="text-xs md:text-sm font-black text-[#242424] mb-1">
+                    {s.title}
+                  </h4>
+                  <p className="text-[11px] md:text-xs text-[#666666] leading-normal">
+                    {s.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-[#666666]">
+              <span className="text-[#888888]">طرق الدفع المعتمدة للمؤسسات:</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">مدى Mada</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">فيزا / ماستركارد</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">تكرام باي Tekram</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">شام كاش</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">تحويل بنكي رسمي + فاتورة</span>
+            </div>
           </div>
         </div>
       </section>
@@ -973,7 +1067,7 @@ export default function SchoolsClient() {
                 خلينا نعرف احتياج مؤسستك
               </h2>
               <p className="mt-3 text-[16px] md:text-lg text-[#666666]">
-                أدخل تفاصيل مؤسستكم وسنتواصل معكم لمناقشة الخيار الأنسب وتقديم خطة تدريب ملائمة.
+                أدخل تفاصيل مؤسستكم وسنتواصل معكم لمناقشة الخيار الأنسب وتقديم خطة تدريب وعرض سعر مخصص.
               </p>
             </div>
 
@@ -986,7 +1080,7 @@ export default function SchoolsClient() {
                   وصلنا طلبك بنجاح!
                 </h3>
                 <p className="text-base md:text-lg text-emerald-900 font-semibold max-w-lg mx-auto leading-relaxed">
-                  وصلنا طلبك، وسنتواصل معك لمناقشة احتياج المؤسسة والخيار الأنسب.
+                  وصلنا طلبك. رح نراجع عدد المعلمين واحتياج المؤسسة ونبعتلك العرض الأنسب وطريقة الدفع المناسبة.
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a
@@ -1012,12 +1106,12 @@ export default function SchoolsClient() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      اسم المؤسسة التعليمية *
+                      1. اسم المؤسسة التعليمية *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="مثال: مدارس النخبة الأهلية"
+                      placeholder="مثال: مدارس النور الأهلية"
                       value={formData.institutionName}
                       onChange={(e) => setFormData({ ...formData, institutionName: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1027,12 +1121,12 @@ export default function SchoolsClient() {
 
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      اسم الشخص المسؤول *
+                      2. اسم المسؤول *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="مثال: أ. أحمد العلي"
+                      placeholder="مثال: أ. عبد الرحمن السعدي"
                       value={formData.contactPerson}
                       onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1044,21 +1138,7 @@ export default function SchoolsClient() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      المسمى الوظيفي
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="مثال: مدير المدرسة / المشرف الأكاديمي"
-                      value={formData.jobTitle}
-                      onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
-                      style={{ borderColor: line }}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      الدولة والمدينة *
+                      3. الدولة والمدينة *
                     </label>
                     <input
                       type="text"
@@ -1070,12 +1150,76 @@ export default function SchoolsClient() {
                       style={{ borderColor: line }}
                     />
                   </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      المسمى الوظيفي (اختياري)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="مثال: مدير المعهد / مشرف التدريب"
+                      value={formData.jobTitle}
+                      onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    />
+                  </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      رقم WhatsApp للتواصل *
+                      4. عدد المعلمين المستهدفين تقريبًا *
+                    </label>
+                    <select
+                      value={formData.teacherCount}
+                      onChange={(e) => setFormData({ ...formData, teacherCount: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="1–5">1–5 معلمين</option>
+                      <option value="6–10">6–10 معلمين</option>
+                      <option value="11–20">11–20 معلماً</option>
+                      <option value="21–50">21–50 معلماً</option>
+                      <option value="أكثر من 50">أكثر من 50 معلماً</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      6. نوع التدريب المطلوب *
+                    </label>
+                    <select
+                      value={formData.trainingType}
+                      onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="محتوى مسجل">محتوى مسجل</option>
+                      <option value="تدريب مباشر">تدريب مباشر</option>
+                      <option value="تدريب مخصص">تدريب مخصص</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      5. المواد أو المراحل الدراسية
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="مثال: الرياضيات والعلوم — المرحلة المتوسطة"
+                      value={formData.subjectsGrades}
+                      onChange={(e) => setFormData({ ...formData, subjectsGrades: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      7. رقم WhatsApp للتواصل *
                     </label>
                     <input
                       type="tel"
@@ -1088,80 +1232,30 @@ export default function SchoolsClient() {
                       style={{ borderColor: line }}
                     />
                   </div>
-
-                  <div>
-                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      البريد الإلكتروني المؤسسي
-                    </label>
-                    <input
-                      type="email"
-                      dir="ltr"
-                      placeholder="info@school.edu"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] text-right focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
-                      style={{ borderColor: line }}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      عدد المعلمين المستهدفين تقريبًا
-                    </label>
-                    <select
-                      value={formData.teacherCount}
-                      onChange={(e) => setFormData({ ...formData, teacherCount: e.target.value })}
-                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
-                      style={{ borderColor: line }}
-                    >
-                      <option value="3-5 معلمين">3 إلى 5 معلمين (تجربة فريق صغيرة)</option>
-                      <option value="8-15 معلماً">8 إلى 15 معلماً (تدريب قسم أو معهد)</option>
-                      <option value="16-30 معلماً">16 إلى 30 معلماً</option>
-                      <option value="أكثر من 30 معلماً">أكثر من 30 معلماً (برنامج مدرسي متكامل)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      نوع التدريب المطلوب
-                    </label>
-                    <select
-                      value={formData.trainingType}
-                      onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}
-                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
-                      style={{ borderColor: line }}
-                    >
-                      <option value="تجربة فريق صغيرة (3 إلى 5 معلمين)">تجربة فريق صغيرة (3 إلى 5 معلمين)</option>
-                      <option value="تدريب قسم أو معهد (8 إلى 15 معلماً)">تدريب قسم أو معهد (8 إلى 15 معلماً)</option>
-                      <option value="برنامج مؤسسي متكامل للمدرسة بأكملها">برنامج مؤسسي متكامل للمدرسة بأكملها</option>
-                      <option value="استشارة لتحديد الاحتياج الأنسب">استشارة لتحديد الاحتياج الأنسب</option>
-                    </select>
-                  </div>
                 </div>
 
                 <div>
                   <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                    المواد أو المراحل الدراسية المستهدفة
+                    البريد الإلكتروني المؤسسي (اختياري)
                   </label>
                   <input
-                    type="text"
-                    placeholder="مثال: الرياضيات والعلوم للمرحلة المتوسطة والثانوية"
-                    value={formData.subjectsGrades}
-                    onChange={(e) => setFormData({ ...formData, subjectsGrades: e.target.value })}
-                    className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                    type="email"
+                    dir="ltr"
+                    placeholder="info@school.edu"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] text-right focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
                     style={{ borderColor: line }}
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                    رسالة أو ملاحظات إضافية
+                    8. الملاحظات أو التفاصيل الإضافية
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="أي تفاصيل خاصة بتوقيت التدريب، المنهج، أو التحديات الحالية..."
+                    placeholder="أي ملاحظات حول المنهج، توقيت البدء المناسب، أو استفسارات حول طريقة الدفع المعتمدة..."
                     value={formData.additionalNotes}
                     onChange={(e) => setFormData({ ...formData, additionalNotes: e.target.value })}
                     className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1187,7 +1281,7 @@ export default function SchoolsClient() {
                     ) : (
                       <span className="flex items-center justify-center gap-2">
                         <Send className="h-5 w-5" />
-                        <span>إرسال طلب العرض</span>
+                        <span>احصل على عرض مؤسستك</span>
                       </span>
                     )}
                   </button>
@@ -1221,7 +1315,7 @@ export default function SchoolsClient() {
               className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full px-8 py-4 text-base md:text-lg font-black text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
               style={{ backgroundColor: red }}
             >
-              <span>اطلب عرضًا مؤسسيًا</span>
+              <span>احصل على عرض مؤسستك</span>
               <ArrowLeft className="h-5 w-5" />
             </a>
 
