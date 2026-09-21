@@ -2,11 +2,14 @@
 
 import { useState, useEffect, useRef, type FormEvent } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { track } from '@vercel/analytics'
 import {
   ArrowLeft,
   ArrowRight,
+  Award,
   BookOpen,
+  BriefcaseBusiness,
   Building2,
   CheckCircle2,
   ChevronDown,
@@ -25,8 +28,10 @@ import {
   MessageCircle,
   PenTool,
   Presentation,
+  Quote,
   Receipt,
   School,
+  Search,
   Send,
   Share2,
   Shield,
@@ -37,6 +42,7 @@ import {
   Users,
   Video,
   Workflow,
+  Wrench,
   Zap,
 } from 'lucide-react'
 
@@ -332,6 +338,39 @@ const institutionalFaqs = [
   },
 ]
 
+const trainerTrainingSessions = [
+  {
+    title: 'إعداد معلم رقمي',
+    audience: 'المعلمون والعاملون في التعليم',
+    description: 'جلسة عملية لبناء معلم رقمي قادر على تنظيم المحتوى، إعداد الأنشطة، وتوظيف الأدوات الحديثة في التحضير والتواصل مع الطلاب.',
+    images: ['/images/training/digital-teacher-01.png', '/images/training/digital-teacher-02.png'],
+  },
+  {
+    title: 'أتمتة المهام والعمليات المتكررة',
+    audience: 'الكوادر المهنية والأكاديمية — جامعة حمص',
+    description: 'جلسة تطبيقية حول تحويل المهام المتكررة إلى سير عمل أكثر تنظيمًا باستخدام أدوات الذكاء الاصطناعي والأتمتة.',
+    images: ['/images/training/agri-automation-01.png', '/images/training/agri-automation-02.png'],
+  },
+  {
+    title: 'إعداد المحتوى بالذكاء الاصطناعي',
+    audience: 'صنّاع المحتوى والمهتمون بالتعليم والتأهيل',
+    description: 'تدريب على التخطيط للمحتوى، توليد الأفكار، كتابة النصوص، وتجهيز مواد قابلة للنشر والتدريس مع الحفاظ على هوية المؤسسة.',
+    images: ['/images/training/ai-content-01.png', '/images/training/ai-content-02.png'],
+  },
+  {
+    title: 'Vibe Coding — البرمجة بالذكاء الاصطناعي',
+    audience: 'المبرمجون وصنّاع الحلول والتطبيقات',
+    description: 'جلسة تطبيقية لتحويل الفكرة إلى نموذج أولي، وبناء الواجهات، وفهم الكود، واختبار الأخطاء بمساعدة الذكاء الاصطناعي.',
+    images: ['/images/training/vibe-coding-01.png'],
+  },
+  {
+    title: 'جلسات تفاعلية Online في الذكاء الاصطناعي',
+    audience: 'متدربون وفرق عمل تعليمية عن بُعد',
+    description: 'جلسات تفاعلية مباشرة عبر الإنترنت تضمنت مشاركة الشاشة، شرح الوصول إلى أدوات الذكاء الاصطناعي، والإجابة عن أسئلة المشاركين خطوة بخطوة.',
+    images: ['/images/training/online-ai-01.png', '/images/training/online-ai-02.png'],
+  },
+]
+
 export default function SchoolsClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -488,6 +527,12 @@ export default function SchoolsClient() {
               className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] md:inline-block transition"
             >
               الباقات الإرشادية
+            </a>
+            <a
+              href="#trainer"
+              className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] lg:inline-block transition"
+            >
+              عن المدرب
             </a>
             <a
               href="#request"
@@ -1014,6 +1059,199 @@ export default function SchoolsClient() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* قسم عن المدرب نواف البوسطة ومعرض الورش التدريبية (من صفحة عن المدرب) */}
+      <section id="trainer" className="border-t bg-white px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
+        <div className="mx-auto max-w-[1180px]">
+          {/* رأس القسم */}
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] bg-[#F7EDEC] px-3.5 py-1.5 rounded-full mb-3 border border-red-100">
+              <Award className="h-4 w-4" />
+              <span>مدرب البرنامج وخبير التطبيقات العملية</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-[#242424] leading-[1.3]">
+              من يقود تدريب كادركم الأكاديمي؟
+            </h2>
+            <p className="mt-4 text-[17px] md:text-xl leading-[1.9] text-[#555555]">
+              برنامج مصمم بخبرة تطبيقية تجمع بين فهم متطلبات التعليم وأحدث أدوات الأتمتة والذكاء الاصطناعي التوليدي.
+            </p>
+          </div>
+
+          {/* بطاقة البروفايل الأساسية */}
+          <div className="rounded-3xl border bg-[#FAFAF8] p-7 md:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] mb-12" style={{ borderColor: line }}>
+            <div className="grid md:grid-cols-[280px_1fr] gap-8 md:gap-12 items-center">
+              <div className="flex flex-col items-center text-center">
+                <div className="relative">
+                  <Image
+                    src="/images/trainer-nawaf.jpg"
+                    alt="المدرب نواف البوسطة"
+                    width={280}
+                    height={280}
+                    className="w-56 h-56 md:w-64 md:h-64 rounded-2xl object-cover border-4 shadow-lg"
+                    style={{ borderColor: 'rgba(227, 52, 47, 0.2)' }}
+                  />
+                  <span className="absolute -bottom-3 inset-x-4 mx-auto rounded-full bg-[#E3342F] px-4 py-1 text-xs font-black text-white shadow text-center">
+                    مدرب البرنامج
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#E3342F]/10 text-[#E3342F] px-3.5 py-1 text-xs font-bold mb-3">
+                  عن المدرب
+                </div>
+                <h3 className="text-2xl md:text-4xl font-black text-[#242424] leading-tight mb-2">
+                  نواف البوسطة
+                </h3>
+                <p className="text-base md:text-lg font-bold text-[#E3342F] mb-4">
+                  مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية — سوريا
+                </p>
+                <p className="text-[16px] md:text-[17px] leading-[2] text-[#555555] mb-5">
+                  مدرب وخبير متخصص في أدوات الذكاء الاصطناعي، يعمل على تحويل التقنيات الحديثة إلى حلول عملية قابلة للتطبيق للأفراد والشركات والمؤسسات التعليمية. يجمع بين التدريب، البحث، تصميم المحتوى، وتطوير حلول الأتمتة، مع تركيز على جعل الذكاء الاصطناعي مفهومًا وقابلًا للاستخدام وموجهاً لخدمة العملية التعليمية.
+                </p>
+
+                {/* اقتباس */}
+                <div className="rounded-xl border-r-4 border-[#E3342F] bg-white p-4 text-[15px] md:text-base font-bold text-[#333333] shadow-sm">
+                  «الذكاء الاصطناعي ليس مستقبلًا ننتظره، بل حاضر نصنعه... وأدواته وُجدت لتمنح المعلم وقتاً أثمن مع طلابه لا لتستبدل حكمته ورؤيته التربوية.»
+                </div>
+              </div>
+            </div>
+
+            {/* أرقام وإحصائيات المدرب */}
+            <div className="mt-10 pt-10 border-t grid grid-cols-1 sm:grid-cols-3 gap-5" style={{ borderColor: line }}>
+              <div className="bg-white border rounded-2xl p-5 text-center shadow-sm" style={{ borderColor: line }}>
+                <div className="text-3xl md:text-4xl font-black text-[#E3342F]">640+</div>
+                <p className="text-[#666666] text-sm md:text-base font-bold mt-1.5">متدرب ومعلم تلقّوا التدريب</p>
+              </div>
+              <div className="bg-white border rounded-2xl p-5 text-center shadow-sm" style={{ borderColor: line }}>
+                <div className="text-3xl md:text-4xl font-black text-[#E3342F]">50+</div>
+                <p className="text-[#666666] text-sm md:text-base font-bold mt-1.5">شركة ومؤسسة تم تدريب كوادرها</p>
+              </div>
+              <div className="bg-white border rounded-2xl p-5 text-center shadow-sm" style={{ borderColor: line }}>
+                <div className="text-3xl md:text-4xl font-black text-[#E3342F]">10+</div>
+                <p className="text-[#666666] text-sm md:text-base font-bold mt-1.5">مشاريع وأنظمة أتمتة وتطبيقات عملية</p>
+              </div>
+            </div>
+          </div>
+
+          {/* مجالات التدريب وحلول الأتمتة */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            <div className="rounded-2xl border bg-white p-7 shadow-sm" style={{ borderColor: line }}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F7EDEC] text-[#E3342F]">
+                  <BriefcaseBusiness className="h-5 w-5" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-[#242424]">مجالات التدريب</h3>
+              </div>
+              <ul className="space-y-3.5 text-[#555555] text-sm md:text-[15px] leading-relaxed">
+                {[
+                  'تدريب الكوادر والمدارس على أدوات الذكاء الاصطناعي المتقدمة',
+                  'Prompt Engineering وصياغة الأوامر العملية التربوية المتخصصة',
+                  'تصميم المحتوى والمناهج والأنشطة التدريبية لمستويات متعددة',
+                  'تطبيق الذكاء الاصطناعي في التعليم وزيادة الإنتاجية المؤسسية',
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-5 w-5 text-[#E3342F] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border bg-white p-7 shadow-sm" style={{ borderColor: line }}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F7EDEC] text-[#E3342F]">
+                  <Wrench className="h-5 w-5" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-[#242424]">الحلول والمشاريع</h3>
+              </div>
+              <ul className="space-y-3.5 text-[#555555] text-sm md:text-[15px] leading-relaxed">
+                {[
+                  'أتمتة إعداد الاختبارات وأوراق العمل والتقارير وبنوك الأسئلة',
+                  'حلول أتمتة مخصصة وسير عمل متكامل للمؤسسات التعليمية',
+                  'تطوير أدوات باستخدام Python وAPIs وWorkflow Automation',
+                  'تحويل نتائج البحث والكتب إلى تطبيقات ومواد قابلة للاستخدام',
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-5 w-5 text-[#E3342F] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* معرض صور الورش والجلسات التدريبية الواقعية للمدرب */}
+          <div>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] mb-2">
+                <Presentation className="h-4 w-4" />
+                <span>توثيق حي ومباشر</span>
+              </div>
+              <h3 className="text-2xl md:text-4xl font-black text-[#242424]">
+                من الورش والجلسات التدريبية الواقعية
+              </h3>
+              <p className="mt-3 text-base md:text-lg text-[#666666] leading-relaxed">
+                جلسات وتدريبات عملية قدّمها المدرب نواف البوسطة لفئات مختلفة، من التعليم وصناعة المحتوى إلى الأتمتة وتطبيقات الذكاء الاصطناعي.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {trainerTrainingSessions.map((session, idx) => (
+                <article
+                  key={idx}
+                  className="rounded-2xl border bg-white overflow-hidden shadow-sm hover:shadow-md transition flex flex-col"
+                  style={{ borderColor: line }}
+                >
+                  <div className="grid grid-cols-2 gap-1 bg-slate-100 p-1">
+                    {session.images.map((imgSrc, imgIdx) => (
+                      <div
+                        key={imgIdx}
+                        className={`relative overflow-hidden bg-slate-200 ${
+                          session.images.length === 1 ? 'col-span-2 h-52' : 'h-40 md:h-44'
+                        }`}
+                      >
+                        <Image
+                          src={imgSrc}
+                          alt={session.title}
+                          fill
+                          className="object-cover hover:scale-105 transition duration-300"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="text-lg font-black text-[#242424] mb-1">
+                        {session.title}
+                      </h4>
+                      <div className="text-xs font-bold text-[#E3342F] mb-3">
+                        {session.audience}
+                      </div>
+                      <p className="text-xs md:text-sm text-[#666666] leading-relaxed">
+                        {session.description}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* رابط إضافي لصفحة عن المدرب المنفصلة */}
+            <div className="mt-10 text-center">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 font-bold text-sm md:text-base text-[#E3342F] hover:text-[#B92723] transition underline underline-offset-8"
+              >
+                <span>الاطلاع على السيرة الكاملة للمدرب ورؤيته البحثية في صفحة مستقلة</span>
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
