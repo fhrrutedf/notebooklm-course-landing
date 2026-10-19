@@ -547,7 +547,7 @@ export default function SchoolsResultsClient() {
             </div>
 
             <p className="text-center text-xs text-[#777777] mb-6">
-              💡 تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة ونطاق العمل. ويتضمن العرض فواتير رسمية ودعم الدفع عبر مدى، فيزا/ماستركارد، تكرام باي، والتحويل البنكي.
+              💡 تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة ونطاق العمل. السداد متاح عبر: شام كاش، مدى Mada، فيزا/ماستركارد، بايبال PayPal، تكرام باي Tekram Pay، والتحويل البنكي الرسمي مع فاتورة معتمدة.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

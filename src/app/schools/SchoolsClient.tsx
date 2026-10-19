@@ -1148,13 +1148,70 @@ export default function SchoolsClient() {
             </div>
           </div>
 
-          {/* مخطط مسار التعاقد والدفع المخصص */}
-          <div className="mt-12 pt-8 border-t border-slate-200">
-            <div className="text-center max-w-2xl mx-auto mb-8">
-              <h3 className="text-lg md:text-xl font-black text-[#242424]">
-                كيف تسير خطوات الاتفاق والدفع للمؤسسات؟
+          {/* قسم طرق الدفع المعتمدة للمؤسسات داخل سوريا وخارجها */}
+          <div className="mt-14 pt-10 border-t border-slate-200">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="text-xs font-black uppercase tracking-wider text-[#E3342F] mb-2 inline-block">
+                السداد والتعاقد المؤسسي
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black text-[#242424]">
+                طرق دفع مريحة ومعتمدة للمؤسسات داخل سوريا وخارجها
               </h3>
-              <p className="mt-1 text-sm text-[#666666]">
+              <p className="mt-3 text-sm md:text-base leading-relaxed text-[#555555]">
+                نوفر خيارات سداد مرنة تتناسب مع اللوائح المالية للمدارس والمعاهد والجهات التعليمية، مع إصدار فواتير رسمية وعقود تدريب موثقة.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 max-w-4xl mx-auto mb-10">
+              <article className="rounded-2xl bg-white border p-6 md:p-7 shadow-[0_8px_25px_rgba(0,0,0,0.04)]" style={{ borderColor: line }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black px-2.5 py-1 rounded-full bg-red-50 text-[#E3342F] border border-red-100">
+                    داخل سوريا
+                  </span>
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    ✓ تفعيل فوري
+                  </span>
+                </div>
+                <h4 className="text-xl font-black text-[#242424]">دفع فوري عبر شام كاش</h4>
+                <p className="mt-3 text-sm md:text-[15px] leading-[1.9] text-[#555555]">
+                  سداد مباشر وفوري عبر <strong>شام كاش</strong> للمؤسسات والمعاهد داخل سوريا، مع استلام إيصال رسمي وبدء تجهيز البرنامج التدريبي مباشرة.
+                </p>
+                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-slate-600">
+                  <span>بوابة الدفع:</span>
+                  <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-800 border border-slate-200">شام كاش Sham Cash</span>
+                </div>
+              </article>
+
+              <article className="rounded-2xl bg-white border p-6 md:p-7 shadow-[0_8px_25px_rgba(0,0,0,0.04)]" style={{ borderColor: line }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black px-2.5 py-1 rounded-full bg-red-50 text-[#E3342F] border border-red-100">
+                    خارج سوريا (السعودية والخليج)
+                  </span>
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    ✓ بوابات آمنة + فواتير
+                  </span>
+                </div>
+                <h4 className="text-xl font-black text-[#242424]">تحويل ودفع إلكتروني آمن</h4>
+                <p className="mt-3 text-sm md:text-[15px] leading-[1.9] text-[#555555]">
+                  سداد فوري وآمن بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى Mada، PayPal، وتكرام باي Tekram Pay، بالإضافة إلى خيار التحويل البنكي الرسمي للمؤسسات مع إصدار فاتورة ضريبية وعقد تدريب رسمي.
+                </p>
+                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-1.5 text-xs font-bold text-slate-600">
+                  <span>البوابات:</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-800 border border-slate-200">مدى Mada</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-800 border border-slate-200">فيزا / ماستركارد</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-800 border border-slate-200">بايبال PayPal</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-800 border border-slate-200">تكرام باي Tekram</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-800 border border-slate-200">تحويل بنكي رسمي</span>
+                </div>
+              </article>
+            </div>
+
+            {/* خطوات مسار الاتفاق */}
+            <div className="text-center max-w-2xl mx-auto mb-6">
+              <h4 className="text-base md:text-lg font-black text-[#242424]">
+                كيف تسير خطوات الاتفاق والدفع للمؤسسات؟
+              </h4>
+              <p className="mt-1 text-xs md:text-sm text-[#666666]">
                 مسار منظم وشفاف يضمن حصول مؤسستكم على عرض ملائم وفواتير رسمية معتمدة:
               </p>
             </div>
@@ -1165,9 +1222,9 @@ export default function SchoolsClient() {
                   <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#E3342F] text-white text-xs font-black mb-2">
                     {s.num}
                   </span>
-                  <h4 className="text-xs md:text-sm font-black text-[#242424] mb-1">
+                  <h5 className="text-xs md:text-sm font-black text-[#242424] mb-1">
                     {s.title}
-                  </h4>
+                  </h5>
                   <p className="text-[11px] md:text-xs text-[#666666] leading-normal">
                     {s.desc}
                   </p>
@@ -1175,12 +1232,13 @@ export default function SchoolsClient() {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-[#666666]">
-              <span className="text-[#888888]">طرق الدفع المعتمدة للمؤسسات:</span>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 text-xs font-bold text-[#666666]">
+              <span className="text-[#888888]">جميع بوابات الدفع المدعومة:</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">شام كاش Sham Cash</span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">مدى Mada</span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">فيزا / ماستركارد</span>
-              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">تكرام باي Tekram</span>
-              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">شام كاش</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">بايبال PayPal</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">تكرام باي Tekram Pay</span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 border border-slate-200">تحويل بنكي رسمي + فاتورة</span>
             </div>
           </div>
