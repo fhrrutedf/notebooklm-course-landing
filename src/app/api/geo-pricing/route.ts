@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const GULF_COUNTRIES = new Set(['SA', 'AE', 'QA', 'KW', 'BH', 'OM', 'KSA', 'UAE']);
+
 export async function GET(request: NextRequest) {
   try {
-    // 0. Check query parameter override (e.g. ?country=SA)
+    // 0. Check query parameter override (e.g. ?country=SA, ?country=AE, ?geo=gulf)
     const urlCountry = request.nextUrl.searchParams.get('country') || request.nextUrl.searchParams.get('geo');
     if (urlCountry) {
       const code = urlCountry.trim().toUpperCase();
+      const isGulf = GULF_COUNTRIES.has(code) || code === 'GULF' || code === 'GCC';
       return NextResponse.json({
+        isGulf,
         isSaudi: code === 'SA' || code === 'KSA',
         isSyria: code === 'SY',
         country: code,
@@ -18,6 +22,7 @@ export async function GET(request: NextRequest) {
     if (cfCountry) {
       const code = cfCountry.trim().toUpperCase();
       return NextResponse.json({
+        isGulf: GULF_COUNTRIES.has(code),
         isSaudi: code === 'SA',
         isSyria: code === 'SY',
         country: code,
@@ -29,6 +34,7 @@ export async function GET(request: NextRequest) {
     if (vercelCountry) {
       const code = vercelCountry.trim().toUpperCase();
       return NextResponse.json({
+        isGulf: GULF_COUNTRIES.has(code),
         isSaudi: code === 'SA',
         isSyria: code === 'SY',
         country: code,
@@ -50,6 +56,7 @@ export async function GET(request: NextRequest) {
           const country = (geoData?.country || '').trim().toUpperCase();
           if (country) {
             return NextResponse.json({
+              isGulf: GULF_COUNTRIES.has(country),
               isSaudi: country === 'SA',
               isSyria: country === 'SY',
               country,
@@ -65,6 +72,7 @@ export async function GET(request: NextRequest) {
           if (fallbackRes.ok) {
             const country = (await fallbackRes.text()).trim().toUpperCase();
             return NextResponse.json({
+              isGulf: GULF_COUNTRIES.has(country),
               isSaudi: country === 'SA',
               isSyria: country === 'SY',
               country,
@@ -78,12 +86,14 @@ export async function GET(request: NextRequest) {
 
     // Default:
     return NextResponse.json({
+      isGulf: false,
       isSaudi: false,
       isSyria: false,
       country: 'DEFAULT',
     });
   } catch {
     return NextResponse.json({
+      isGulf: false,
       isSaudi: false,
       isSyria: false,
       country: 'ERROR',

@@ -293,7 +293,10 @@ export default function LandingClient() {
     ['هل المخرجات والامتحانات تلائم المناهج والكتب الدراسية التي أدرّسها؟', 'نعم، نبدأ من كتاب المنهج أو المصدر الذي ترفقه أنت لأي مادة ومرحلة، ثم نراجع الناتج بشريًا قبل استخدامه. الكورس يعطيك إطار عمل تطبقه على أي كتاب أو مقرر دراسي، ويبقى قرار الدقة والملاءمة بيدك كمعلم.'],
     ['هل الأدوات تحتاج اشتراكات شهرية مدفوعة؟', 'المسار يعتمد على حلول مجانية قدر الإمكان، ولا توجد تكاليف خفية ضمن رسوم الكورس. وإذا تغيّرت سياسات أي خدمة، نوضح ذلك قبل استخدامها.'],
     ['كيف أحصل على دعم إذا واجهت مشكلة؟', 'عندك 4 جلسات متابعة مباشرة للأسئلة والأجوبة، وتقدر تجيب سؤالك أو مادتك ونطبق عليها معًا.'],
-    ['كيف يتم الدفع والاستلام من داخل سوريا وخارجها؟', 'من داخل سوريا الدفع فوري وبسيط عبر شام كاش، ومن خارج سوريا الدفع متاح بالبطاقات البنكية (فيزا / ماستركارد)، مدى، بايبال وتكرام باي مع تفعيل مباشر. وفور الدفع تحصل على وصول دائم وفوري عبر Telegram.'],
+    ['كيف يتم الدفع والاستلام؟', pricing.hideShamCash
+      ? 'الدفع متاح ومباشر بالبطاقات البنكية (فيزا / ماستركارد)، مدى، بايبال وتكرام باي مع تفعيل مباشر وفوري. وفور الدفع تحصل على وصول دائم وفوري عبر Telegram.'
+      : 'من داخل سوريا الدفع فوري وبسيط عبر شام كاش، ومن خارج سوريا الدفع متاح بالبطاقات البنكية (فيزا / ماستركارد)، مدى، بايبال وتكرام باي مع تفعيل مباشر. وفور الدفع تحصل على وصول دائم وفوري عبر Telegram.'
+    ],
     ['هل الشهادة إلزامية؟', 'لا. شهادة وزارة التنمية السورية اختيارية برسوم منفصلة، ويمكن طلبها بعد اختبار أو مشروع نهاية الكورس.'],
     ['هل أحصل على ملفات PDF مع كل درس؟', 'نعم. كل درس معه ملخص PDF أو قالب عملي يساعدك تراجع الخطوات وتطبقها دون إعادة مشاهدة المحتوى كاملًا.'],
     ['هل الدورة مناسبة لمعلم المدرسة أو المدرّس الخصوصي؟', 'نعم. الأمثلة قابلة للتخصيص حسب المادة والمرحلة، من الابتدائي وحتى البكالوريا، مع بقاء المعلم صاحب القرار في المراجعة والاستخدام.'],
@@ -367,6 +370,7 @@ export default function LandingClient() {
       affiliateRef={affiliateRef}
       source="hero_price_card_tekram"
       label={pricing.buttonLabel}
+      hideShamCash={pricing.hideShamCash}
     />
 
     <a
@@ -387,12 +391,18 @@ export default function LandingClient() {
       <span>خيارات الدفع المتاحة:</span>
     </p>
     <p className="mt-0.5 text-amber-900/90">
-      <strong>داخل سوريا:</strong> شام كاش فوري. <strong>خارج سوريا:</strong> البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.
+      {pricing.hideShamCash ? (
+        <span>دفع إلكتروني فوري وآمن عبر: <strong>مدى Mada</strong>، <strong>البطاقات البنكية (فيزا / ماستركارد)</strong>، <strong>PayPal</strong>، وتكرام باي مع تفعيل فوري.</span>
+      ) : (
+        <span><strong>داخل سوريا:</strong> شام كاش فوري. <strong>خارج سوريا:</strong> البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.</span>
+      )}
     </p>
   </div>
 
   <p className="mt-3 text-xs leading-[1.8]" style={{ color: muted }}>
-    متاح التسجيل الفوري والدفع الآمن لجميع المعلمين والمدربين من داخل وخارج سوريا.
+    {pricing.hideShamCash
+      ? 'متاح التسجيل الفوري والدفع الآمن لجميع المعلمين والمدربين.'
+      : 'متاح التسجيل الفوري والدفع الآمن لجميع المعلمين والمدربين من داخل وخارج سوريا.'}
   </p>
 </aside>
 </div>
@@ -845,22 +855,43 @@ export default function LandingClient() {
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1180px]">
           <p className="mb-4 text-center text-sm font-bold" style={{ color: red }}>التسجيل والدفع</p>
-          <h2 className="text-center text-3xl font-black md:text-5xl">طرق دفع مريحة داخل سوريا وخارجها</h2>
+          <h2 className="text-center text-3xl font-black md:text-5xl">
+            {pricing.hideShamCash ? 'طرق دفع إلكترونية سريعة وآمنة' : 'طرق دفع مريحة داخل سوريا وخارجها'}
+          </h2>
           <p className="mx-auto mt-5 max-w-2xl text-center leading-[2]" style={{ color: muted }}>
             ما بدنا طريقة الدفع تكون عائق أمام أي معلم أو مدرب. تواصل معنا، وخد الطريقة الأنسب إلك مع تفعيل سريع ومباشر.
           </p>
-          <div className="mx-auto mt-10 grid max-w-[1000px] gap-5 md:grid-cols-2">
-            <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
-              <p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p>
-              <h3 className="mt-3 text-2xl font-black">دفع فوري عبر شام كاش</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.</p>
-            </article>
-            <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
-              <p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p>
-              <h3 className="mt-3 text-2xl font-black">تحويل ودفع إلكتروني آمن</h3>
-              <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.</p>
-            </article>
-          </div>
+          {pricing.hideShamCash ? (
+            <div className="mx-auto mt-10 max-w-[850px]">
+              <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)] text-center md:text-right" style={{ borderColor: line }}>
+                <p className="text-sm font-black" style={{ color: red }}>سداد إلكتروني فوري ومباشر</p>
+                <h3 className="mt-3 text-2xl font-black">خيارات دفع مرنة وآمنة 100%</h3>
+                <p className="mt-4 leading-[2]" style={{ color: muted }}>
+                  سداد مباشر وفوري عبر بطاقات <strong>مدى Mada</strong>، <strong>البطاقات البنكية الدولية (فيزا / ماستركارد)</strong>، <strong>بايبال PayPal</strong>، وتكرام باي. فور إتمام الدفع، يتم تفعيل حسابك مباشرة واستلام محتوى الكورس وملفات الـ PDF مع رابط قناة وتيليجرام المتابعة الخاصة.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800 border border-emerald-200">✓ تفعيل فوري وآمن</span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-800 border border-slate-200">بطاقات مدى Mada</span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-800 border border-slate-200">فيزا / ماستركارد</span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-800 border border-slate-200">PayPal بايبال</span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-800 border border-slate-200">تكرام باي</span>
+                </div>
+              </article>
+            </div>
+          ) : (
+            <div className="mx-auto mt-10 grid max-w-[1000px] gap-5 md:grid-cols-2">
+              <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
+                <p className="text-sm font-black" style={{ color: red }}>داخل سوريا</p>
+                <h3 className="mt-3 text-2xl font-black">دفع فوري عبر شام كاش</h3>
+                <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.</p>
+              </article>
+              <article className="rounded-2xl bg-white border p-7 shadow-[0_12px_35px_rgba(0,0,0,0.05)]" style={{ borderColor: line }}>
+                <p className="text-sm font-black" style={{ color: red }}>خارج سوريا</p>
+                <h3 className="mt-3 text-2xl font-black">تحويل ودفع إلكتروني آمن</h3>
+                <p className="mt-4 leading-[2]" style={{ color: muted }}>دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.</p>
+              </article>
+            </div>
+          )}
         </div>
       </section>
 
@@ -921,6 +952,7 @@ export default function LandingClient() {
                 affiliateRef={affiliateRef}
                 source="reference_style_final_tekram"
                 label={pricing.buttonLabel}
+                hideShamCash={pricing.hideShamCash}
               />
 
               <a
@@ -941,7 +973,11 @@ export default function LandingClient() {
                 <span>خيارات الدفع المتاحة:</span>
               </p>
               <p className="mt-0.5 text-white/70">
-                من داخل سوريا: شام كاش فوري. ومن خارج سوريا: البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.
+                {pricing.hideShamCash ? (
+                  <span>دفع إلكتروني فوري وآمن عبر: <strong className="text-white">مدى Mada</strong>، <strong className="text-white">البطاقات البنكية (Visa / MasterCard)</strong>، <strong className="text-white">PayPal</strong>، وتكرام باي مع تفعيل مباشر.</span>
+                ) : (
+                  <span>من داخل سوريا: شام كاش فوري. ومن خارج سوريا: البطاقات البنكية، مدى، بايبال، وتكرام باي مع تفعيل فوري.</span>
+                )}
               </p>
             </div>
             <p className="mt-4 text-center text-xs text-white/60">وصول فوري للمحتوى · <span className="font-bold" style={{ color: red }}>ضمان استرجاع كامل لمدة 7 أيام</span></p>

@@ -13,6 +13,7 @@ interface TekramPayButtonProps {
   className?: string
   showBadges?: boolean
   label?: string
+  hideShamCash?: boolean
 }
 
 export function TekramPayButton({
@@ -23,6 +24,7 @@ export function TekramPayButton({
   className = '',
   showBadges = true,
   label,
+  hideShamCash = false,
 }: TekramPayButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -111,7 +113,9 @@ export function TekramPayButton({
             ✓ دفع آمن وفوري
           </span>
           <span className="text-[#888888]">يدعم:</span>
-          <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">شام كاش</span>
+          {!hideShamCash && (
+            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">شام كاش</span>
+          )}
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">مدى</span>
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">فيزا / ماستركارد</span>
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 font-semibold border border-slate-200">بايبال</span>

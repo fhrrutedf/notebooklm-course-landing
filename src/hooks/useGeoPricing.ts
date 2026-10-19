@@ -12,6 +12,7 @@ import {
 export interface GeoPricingInfo {
   country: string
   isSaudi: boolean
+  isGulf: boolean
   isSyria: boolean
   isLoading: boolean
   // النصوص المعروضة
@@ -24,11 +25,15 @@ export interface GeoPricingInfo {
   buttonLabel: string
   mobileButtonLabel: string
   currencySymbol: string
+  hideShamCash: boolean
 }
 
-const DEFAULT_PRICING: GeoPricingInfo = {
+const GULF_CODES = new Set(['SA', 'AE', 'QA', 'KW', 'BH', 'OM', 'KSA', 'UAE', 'GULF', 'GCC'])
+
+export const DEFAULT_PRICING: GeoPricingInfo = {
   country: 'DEFAULT',
   isSaudi: false,
+  isGulf: false,
   isSyria: false,
   isLoading: true,
   currentPrice: `${DEFAULT_COURSE_PRICE}$`,
@@ -39,11 +44,13 @@ const DEFAULT_PRICING: GeoPricingInfo = {
   buttonLabel: `ادفع أونلاين الآن (${DEFAULT_COURSE_PRICE}$) — تفعيل فوري`,
   mobileButtonLabel: `ادفع أونلاين ${DEFAULT_COURSE_PRICE}$ (تفعيل فوري)`,
   currencySymbol: '$',
+  hideShamCash: false,
 }
 
-const SAUDI_PRICING: GeoPricingInfo = {
-  country: 'SA',
+export const GULF_PRICING: GeoPricingInfo = {
+  country: 'GCC',
   isSaudi: true,
+  isGulf: true,
   isSyria: false,
   isLoading: false,
   currentPrice: `${SAUDI_COURSE_PRICE_SAR} ر.س`,
@@ -51,88 +58,107 @@ const SAUDI_PRICING: GeoPricingInfo = {
   approxUsdNote: `(ما يعادل تقريباً ${SAUDI_COURSE_PRICE_USD}$)`,
   topBannerPrice: `${SAUDI_COURSE_PRICE_SAR} ر.س`,
   checkoutAmount: SAUDI_COURSE_PRICE_USD,
-  buttonLabel: `ادفع أونلاين الآن (${SAUDI_COURSE_PRICE_SAR} ر.س / ${SAUDI_COURSE_PRICE_USD}$) — تفعيل فوري`,
+  buttonLabel: `ادفع أونلاين الآن (${SAUDI_COURSE_PRICE_SAR} ر.س) — تفعيل فوري`,
   mobileButtonLabel: `ادفع أونلاين ${SAUDI_COURSE_PRICE_SAR} ر.س (تفعيل فوري)`,
   currencySymbol: 'ر.س',
+  hideShamCash: true,
 }
 
 export function useGeoPricing(): GeoPricingInfo {
   const [pricing, setPricing] = useState<GeoPricingInfo>(DEFAULT_PRICING)
 
   useEffect(() => {
-    // 1. التحقق من وجود المعامل في الرابط للاختبار (مثال: ?country=SA أو ?geo=SA)
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search)
-      const forcedCountry = (params.get('country') || params.get('geo'))?.toUpperCase()
+    if (typeof window === 'undefined') return
 
-      if (forcedCountry === 'SA' || forcedCountry === 'KSA' || forcedCountry === 'SAUDI') {
-        setPricing(SAUDI_PRICING)
+    // 1. التحقق من وجود المعامل في الرابط للاختبار (مثال: ?country=SA أو ?country=AE أو ?geo=gulf)
+    const params = new URLSearchParams(window.location.search)
+    const forcedCountry = (params.get('country') || params.get('geo'))?.toUpperCase()
+
+    if (forcedCountry && GULF_CODES.has(forcedCountry)) {
+      setPricing({
+        ...GULF_PRICING,
+        country: forcedCountry,
+      })
+      return
+    }
+
+    if (forcedCountry && forcedCountry !== 'DEFAULT') {
+      setPricing({
+        ...DEFAULT_PRICING,
+        country: forcedCountry,
+        isLoading: false,
+      })
+      return
+    }
+
+    // 2. التحقق من الكاش في sessionStorage لتسريع العرض وتجنب الوميض
+    const cached = sessionStorage.getItem('geo_pricing_country')?.toUpperCase()
+    if (cached) {
+      if (GULF_CODES.has(cached)) {
+        setPricing({
+          ...GULF_PRICING,
+          country: cached,
+        })
         return
-      }
-
-      if (forcedCountry && forcedCountry !== 'DEFAULT') {
+      } else {
         setPricing({
           ...DEFAULT_PRICING,
-          country: forcedCountry,
+          country: cached,
           isLoading: false,
         })
         return
       }
-
-      // 2. التحقق من الكاش في sessionStorage لتسريع العرض وتجنب الوميض
-      const cached = sessionStorage.getItem('geo_pricing_country')
-      if (cached) {
-        if (cached === 'SA') {
-          setPricing(SAUDI_PRICING)
-          return
-        } else {
-          setPricing({
-            ...DEFAULT_PRICING,
-            country: cached,
-            isLoading: false,
-          })
-          return
-        }
-      }
-
-      // 3. جلب الدولة من مسار geo-pricing
-      fetch('/api/geo-pricing')
-        .then((res) => res.json())
-        .then((data) => {
-          const detectedCountry = data?.country?.toUpperCase() || ''
-          const isSaudi = data?.isSaudi === true || detectedCountry === 'SA'
-
-          if (isSaudi) {
-            sessionStorage.setItem('geo_pricing_country', 'SA')
-            setPricing(SAUDI_PRICING)
-          } else {
-            sessionStorage.setItem('geo_pricing_country', detectedCountry || 'OTHER')
-            setPricing({
-              ...DEFAULT_PRICING,
-              country: detectedCountry || 'OTHER',
-              isSyria: data?.isSyria === true || detectedCountry === 'SY',
-              isLoading: false,
-            })
-          }
-        })
-        .catch(() => {
-          // في حال فشل الاتصال، فحص المنطقة الزمنية كحل احتياطي ذكي
-          try {
-            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-            if (timeZone && (timeZone.includes('Riyadh') || timeZone.includes('Saudi'))) {
-              sessionStorage.setItem('geo_pricing_country', 'SA')
-              setPricing(SAUDI_PRICING)
-              return
-            }
-          } catch {
-            // Ignore
-          }
-          setPricing({
-            ...DEFAULT_PRICING,
-            isLoading: false,
-          })
-        })
     }
+
+    // 3. جلب الدولة من مسار geo-pricing
+    fetch('/api/geo-pricing')
+      .then((res) => res.json())
+      .then((data) => {
+        const detectedCountry = (data?.country || '').toUpperCase()
+        const isGulf = data?.isGulf === true || data?.isSaudi === true || GULF_CODES.has(detectedCountry)
+
+        if (isGulf) {
+          sessionStorage.setItem('geo_pricing_country', detectedCountry || 'GCC')
+          setPricing({
+            ...GULF_PRICING,
+            country: detectedCountry || 'GCC',
+            isSaudi: detectedCountry === 'SA' || detectedCountry === 'KSA',
+          })
+        } else {
+          sessionStorage.setItem('geo_pricing_country', detectedCountry || 'OTHER')
+          setPricing({
+            ...DEFAULT_PRICING,
+            country: detectedCountry || 'OTHER',
+            isSyria: data?.isSyria === true || detectedCountry === 'SY',
+            isLoading: false,
+          })
+        }
+      })
+      .catch(() => {
+        // في حال فشل الاتصال، فحص المنطقة الزمنية كحل احتياطي ذكي
+        try {
+          const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+          if (
+            timeZone.includes('Riyadh') ||
+            timeZone.includes('Saudi') ||
+            timeZone.includes('Dubai') ||
+            timeZone.includes('Qatar') ||
+            timeZone.includes('Kuwait') ||
+            timeZone.includes('Bahrain') ||
+            timeZone.includes('Muscat')
+          ) {
+            sessionStorage.setItem('geo_pricing_country', 'GCC')
+            setPricing(GULF_PRICING)
+            return
+          }
+        } catch {
+          // Ignore
+        }
+        setPricing({
+          ...DEFAULT_PRICING,
+          isLoading: false,
+        })
+      })
   }, [])
 
   return pricing

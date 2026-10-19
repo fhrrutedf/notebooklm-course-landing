@@ -587,20 +587,29 @@ export default function ResultsClient() {
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl bg-[#F7EDEC] p-5">
-                <p className="font-bold text-[#E3342F]">داخل سوريا</p>
+            {pricing.hideShamCash ? (
+              <div className="mt-6 rounded-2xl bg-[#F0F0EE] p-5">
+                <p className="font-bold text-[#E3342F]">دفع إلكتروني آمن وفوري</p>
                 <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.
+                  دفع مباشر عبر بطاقات مدى Mada، البطاقات البنكية الدولية (فيزا / ماستركارد)، PayPal، وتكرام باي مع تفعيل فوري ومباشر.
                 </p>
               </div>
-              <div className="rounded-2xl bg-[#F0F0EE] p-5">
-                <p className="font-bold text-[#E3342F]">خارج سوريا</p>
-                <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
-                  دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.
-                </p>
+            ) : (
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl bg-[#F7EDEC] p-5">
+                  <p className="font-bold text-[#E3342F]">داخل سوريا</p>
+                  <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
+                    دفع مباشر وفوري عبر <strong>شام كاش</strong>، مع تفعيل حسابك واستلام محتوى الكورس فوراً.
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-[#F0F0EE] p-5">
+                  <p className="font-bold text-[#E3342F]">خارج سوريا</p>
+                  <p className="mt-1.5 text-xs leading-[1.9] text-[#666666]">
+                    دفع فوري بالبطاقات البنكية الدولية (فيزا / ماستركارد)، مدى، PayPal، وتكرام باي مع تفعيل فوري ومباشر.
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="mt-6 space-y-3">
               <TekramPayButton
@@ -609,6 +618,7 @@ export default function ResultsClient() {
                 affiliateRef={affiliateRef}
                 source="results_final_cta_tekram"
                 label={pricing.buttonLabel}
+                hideShamCash={pricing.hideShamCash}
               />
 
               <a

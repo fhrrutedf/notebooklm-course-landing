@@ -1,6 +1,6 @@
 export const TEKRAM_SELLER_ID = '83d55630-5a52-4c43-92b2-120f67fa5372'
 export const DEFAULT_COURSE_PRICE = 22
-export const DEFAULT_REGULAR_PRICE = 39
+export const DEFAULT_REGULAR_PRICE = 35
 
 // تسعير المملكة العربية السعودية
 export const SAUDI_COURSE_PRICE_SAR = 199
