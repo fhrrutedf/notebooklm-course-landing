@@ -588,17 +588,9 @@ export default function SchoolsClient() {
         fontFamily: 'var(--font-ibm-plex-sans-arabic), sans-serif',
       }}
     >
-      {/* شريط الإعلان والتنقل العلوي للعودة إلى صفحة الأفراد */}
+      {/* شريط الإعلان والتنقل العلوي للمؤسسات */}
       <div className="bg-[#242424] px-4 py-2 text-center text-xs md:text-sm font-semibold text-white/90">
-        <span>صفحة مخصصة لإدارات المدارس، المعاهد، والمؤسسات التعليمية</span>
-        <span className="mx-2 text-white/40">•</span>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1 font-bold text-amber-300 hover:text-white transition underline underline-offset-2"
-        >
-          <span>للتسجيل الفردي للمعلمين والمدربين اضغط هنا</span>
-          <ArrowLeft className="h-3.5 w-3.5" />
-        </Link>
+        <span>بوابة التدريب المؤسسي المخصصة لإدارات المدارس، المعاهد، والجهات التعليمية في السعودية ودول الخليج العربي</span>
       </div>
 
       {/* شريط التنقل الرئيسي */}
@@ -625,12 +617,6 @@ export default function SchoolsClient() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] sm:inline-block transition"
-            >
-              صفحة الأفراد
-            </Link>
             <a
               href="#training-types"
               className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] md:inline-block transition"
@@ -1360,7 +1346,7 @@ export default function SchoolsClient() {
                   مدرب في أدوات الذكاء الاصطناعي وزيادة الإنتاجية — سوريا
                 </p>
                 <p className="text-[16px] md:text-[17px] leading-[2] text-[#555555] mb-5">
-                  مدرب وخبير متخصص في أدوات الذكاء الاصطناعي، يعمل على تحويل التقنيات الحديثة إلى حلول عملية قابلة للتطبيق للأفراد والشركات والمؤسسات التعليمية. يجمع بين التدريب، البحث، تصميم المحتوى، وتطوير حلول الأتمتة، مع تركيز على جعل الذكاء الاصطناعي مفهومًا وقابلًا للاستخدام وموجهاً لخدمة العملية التعليمية.
+                  مدرب وخبير متخصص في أدوات الذكاء الاصطناعي، يعمل على تحويل التقنيات الحديثة إلى حلول عملية قابلة للتطبيق للمعلمين والمؤسسات التعليمية والجهات الأكاديمية. يجمع بين التدريب، البحث، تصميم المحتوى، وتطوير حلول الأتمتة، مع تركيز على جعل الذكاء الاصطناعي مفهومًا وقابلًا للاستخدام وموجهاً لخدمة العملية التعليمية.
                 </p>
 
                 {/* اقتباس */}
@@ -1941,10 +1927,6 @@ export default function SchoolsClient() {
             © {new Date().getFullYear()} — كورس الذكاء الاصطناعي للمعلمين · برامج التدريب المؤسسي
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/" className="underline hover:text-[#242424]">
-              صفحة التسجيل الفردي للمعلمين
-            </Link>
-            <span>•</span>
             <Link href="/schools/results" className="underline hover:text-[#242424]">
               نماذج مخرجات المؤسسات
             </Link>

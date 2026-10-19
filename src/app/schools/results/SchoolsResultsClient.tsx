@@ -631,10 +631,6 @@ export default function SchoolsResultsClient() {
         <Link href="/schools" className="underline hover:text-[#E3342F]">
           صفحة المؤسسات الرئيسية
         </Link>
-        <span className="mx-2 text-white/40">·</span>
-        <Link href="/" className="underline hover:text-[#E3342F]">
-          صفحة التسجيل الفردي
-        </Link>
       </footer>
     </main>
   )
