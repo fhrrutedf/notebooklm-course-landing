@@ -517,31 +517,37 @@ export default function SchoolsResultsClient() {
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3 mb-6">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
               <div className="rounded-2xl bg-white border border-[#E2E2DF] p-4 text-center">
-                <span className="block text-xs font-bold text-[#888888] mb-1">تجربة فريق صغيرة</span>
-                <span className="block text-sm font-bold text-[#E3342F] mb-2">5 معلمين</span>
-                <span className="block text-base font-black text-[#242424]">تبدأ من 995 ر.س</span>
+                <span className="block text-xs font-bold text-[#888888] mb-1">باقة التأسيس المؤسسي</span>
+                <span className="block text-sm font-bold text-[#E3342F] mb-2">5–10 معلمين</span>
+                <span className="block text-base font-black text-[#242424]">تبدأ من 4,900 ر.س</span>
               </div>
 
               <div className="rounded-2xl bg-white border-2 border-[#E3342F] p-4 text-center shadow-sm relative">
                 <span className="absolute -top-2.5 right-1/2 translate-x-1/2 bg-[#E3342F] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full">
-                  الأنسب للمعاهد والمدارس
+                  الخيار الأكثر طلباً
                 </span>
-                <span className="block text-xs font-bold text-[#888888] mb-1">تدريب قسم أو معهد</span>
-                <span className="block text-sm font-bold text-[#E3342F] mb-2">10 معلمين</span>
-                <span className="block text-base font-black text-[#242424]">تبدأ من 1,790 ر.س</span>
+                <span className="block text-xs font-bold text-[#888888] mb-1">باقة تطوير الفريق الأكاديمي</span>
+                <span className="block text-sm font-bold text-[#E3342F] mb-2">10–20 معلماً</span>
+                <span className="block text-base font-black text-[#242424]">تبدأ من 9,500 ر.س</span>
               </div>
 
               <div className="rounded-2xl bg-white border border-[#E2E2DF] p-4 text-center">
-                <span className="block text-xs font-bold text-[#888888] mb-1">برنامج مؤسسي متكامل</span>
-                <span className="block text-sm font-bold text-[#E3342F] mb-2">20 معلمًا أو أكثر</span>
-                <span className="block text-sm font-black text-[#242424]">يُحدّد حسب النطاق</span>
+                <span className="block text-xs font-bold text-[#888888] mb-1">باقة التحول التعليمي</span>
+                <span className="block text-sm font-bold text-[#E3342F] mb-2">20–50 معلماً</span>
+                <span className="block text-base font-black text-[#242424]">تبدأ من 18,000 ر.س</span>
+              </div>
+
+              <div className="rounded-2xl bg-white border border-[#E2E2DF] p-4 text-center">
+                <span className="block text-xs font-bold text-[#888888] mb-1">برنامج مخصص بالكامل</span>
+                <span className="block text-sm font-bold text-[#E3342F] mb-2">للمؤسسات والشبكات</span>
+                <span className="block text-sm font-black text-[#242424]">يُحدّد بعد دراسة الاحتياج</span>
               </div>
             </div>
 
             <p className="text-center text-xs text-[#777777] mb-6">
-              💡 كلما زاد عدد المعلمين، انخفضت تكلفة المقعد الواحد. ويتضمن العرض فواتير رسمية ودعم الدفع عبر مدى، فيزا/ماستركارد، تكرام باي، والتحويل البنكي.
+              💡 تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة ونطاق العمل. ويتضمن العرض فواتير رسمية ودعم الدفع عبر مدى، فيزا/ماستركارد، تكرام باي، والتحويل البنكي.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

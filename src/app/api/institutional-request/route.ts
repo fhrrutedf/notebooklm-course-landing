@@ -15,8 +15,13 @@ export async function POST(request: NextRequest) {
       whatsappNumber,
       email,
       teacherCount,
+      branchesCount,
       subjectsGrades,
       trainingType,
+      expectedHours,
+      customizationLevel,
+      outputsCount,
+      followUpMethod,
       additionalNotes,
     } = data;
 
@@ -60,16 +65,36 @@ export async function POST(request: NextRequest) {
             <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${countryCity}</td>
           </tr>
           <tr>
-            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">عدد المعلمين:</td>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">عدد المشاركين:</td>
             <td style="padding: 10px; font-weight: bold; color: #E3342F; border-bottom: 1px solid #E2E2DF;">${teacherCount || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">عدد الأقسام أو الفروع:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${branchesCount || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">المواد والمراحل:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${subjectsGrades || 'غير محدد'}</td>
           </tr>
           <tr>
             <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">نوع التدريب المطلوب:</td>
             <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF;">${trainingType || 'غير محدد'}</td>
           </tr>
           <tr>
-            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">المواد أو المراحل:</td>
-            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${subjectsGrades || 'غير محدد'}</td>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">عدد الساعات المتوقع:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${expectedHours || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">مستوى التخصيص:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${customizationLevel || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">المشاريع أو المخرجات:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${outputsCount || 'غير محدد'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">طريقة المتابعة:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #E2E2DF;">${followUpMethod || 'غير محدد'}</td>
           </tr>
           <tr>
             <td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #E2E2DF; color: #555;">رقم واتساب:</td>
@@ -102,9 +127,14 @@ export async function POST(request: NextRequest) {
 المسؤول: ${contactPerson}
 المسمى الوظيفي: ${jobTitle || 'غير محدد'}
 الدولة والمدينة: ${countryCity}
-عدد المعلمين: ${teacherCount || 'غير محدد'}
+عدد المشاركين: ${teacherCount || 'غير محدد'}
+عدد الأقسام أو الفروع: ${branchesCount || 'غير محدد'}
+المواد والمراحل: ${subjectsGrades || 'غير محدد'}
 نوع التدريب: ${trainingType || 'غير محدد'}
-المواد أو المراحل: ${subjectsGrades || 'غير محدد'}
+عدد الساعات المتوقع: ${expectedHours || 'غير محدد'}
+مستوى التخصيص: ${customizationLevel || 'غير محدد'}
+المشاريع أو المخرجات: ${outputsCount || 'غير محدد'}
+طريقة المتابعة: ${followUpMethod || 'غير محدد'}
 واتساب: ${whatsappNumber}
 البريد: ${email || 'لم يُذكر'}
 الملاحظات: ${additionalNotes || 'لا توجد'}

@@ -80,11 +80,11 @@ function trackInstitutional(eventName: string, props?: TrackProps) {
 
 // عناصر شريط الثقة
 const trustItems = [
-  'تدريب عملي للمعلمين',
-  'تطبيق على مواد المؤسسة',
-  'قوالب قابلة للتعديل',
-  'متابعة وأسئلة وأجوبة',
-  'مراجعة بشرية قبل اعتماد المخرجات',
+  'تدريب عملي للفرق والمعلمين',
+  'تطبيق على مناهج ومواد المؤسسة',
+  'قوالب ونماذج قابلة للتعديل',
+  'مشاريع عملية ومتابعة بعد التدريب',
+  'مراجعة بشرية واعتماد تربوي للمخرجات',
 ]
 
 // نقاط المشكلة
@@ -142,35 +142,39 @@ const learningSkills = [
   { id: '10', title: 'بناء قوالب عمل موحدة للمؤسسة', desc: 'إنشاء نماذج برومبت وملفات عمل قابلة للاستخدام المتكرر بين أقسام المدرسة.' },
 ]
 
-// فوائد المؤسسة (7 فوائد)
+// فوائد المؤسسة والأثر المؤسسي (8 محاور رئيسية)
 const institutionalBenefits = [
   {
-    title: 'تقليل الوقت المصروف على التحضير المتكرر',
-    desc: 'تمكين المعلم من اختصار ساعات الصياغة الروتينية واستثمارها في متابعة الطلاب والتدريس الفعال.',
+    title: 'تقليل وقت إعداد الدروس والاختبارات',
+    desc: 'تمكين المعلم من اختصار ساعات الصياغة الروتينية واستثمارها في متابعة الطلاب والتدريس الصفي الفعّال.',
   },
   {
-    title: 'تحسين تنظيم وجودة المواد التعليمية',
-    desc: 'مخرجات مطبوعة ورقمية عالية التنسيق تعكس المكانة الأكاديمية الرفيعة لمؤسستكم أمام أولياء الأمور.',
+    title: 'توحيد طريقة إعداد المواد بين المعلمين',
+    desc: 'اعتماد معايير ونماذج موحدة بين شُعب المادة الواحدة بدلاً من التباين الفردي العشوائي بين الفصول.',
   },
   {
-    title: 'توحيد منهجية إعداد الدروس والاختبارات',
-    desc: 'اعتماد معايير مشتركة بين شُعب المادة الواحدة بدلاً من التباين الفردي الكبير بين الفصول.',
+    title: 'بناء مكتبة قوالب قابلة للاستخدام المتكرر',
+    desc: 'تأسيس أصول رقمية وأوامر مخصصة (Prompts) وقوالب جاهزة تبقى رصيداً مستداماً للمؤسسة.',
   },
   {
-    title: 'مساعدة المعلمين الجدد على البدء بسرعة',
-    desc: 'توفير مسار عمل وقوالب جاهزة تدمج الكادر التدريسي الجديد في ثقافة المؤسسة التعليمية بسلاسة.',
+    title: 'تحسين جودة المخرجات التعليمية',
+    desc: 'إنتاج أوراق عمل واختبارات وعروض ومذكرات بمستوى أكاديمي وتنظيمي رفيع يعكس المكانة المميزة للمؤسسة.',
   },
   {
-    title: 'إنتاج محتوى يناسب مواد المؤسسة ومراحلها',
-    desc: 'التطبيق يتم على مناهج وكتب وخطط المؤسسة الفعلية وليس على أمثلة عامة بعيدة عن واقعكم.',
+    title: 'تدريب الفريق على الاستخدام الآمن والمسؤول',
+    desc: 'ترسيخ معايير الأمان والخصوصية والنزاهة الأكاديمية مع حظر مشاركة أي بيانات حساسة أو خاصة بالطلاب.',
   },
   {
-    title: 'رفع قدرة الفريق على إعداد مواد قابلة للمراجعة',
-    desc: 'كل مخرج يمر بخطوة التحقق والتعديل، مما يمنع تمرير أخطاء غير مقصودة في الواجبات والامتحانات.',
+    title: 'إنتاج محتوى تعليمي قابل للمراجعة والتطوير',
+    desc: 'كل مخرج يمر بخطوة الفحص والتدقيق التربوي قبل طباعته أو اعتماده لضمان الموثوقية والدقة العلمية.',
   },
   {
-    title: 'تخفيف الاعتماد على العمل العشوائي المنفصل',
-    desc: 'بناء جسور تعاون أكاديمي بين معلمي القسم الواحد لتبادل الأفكار والأنشطة والقوالب الفعالة.',
+    title: 'رفع كفاءة الأقسام الأكاديمية',
+    desc: 'تنسيق متقن بين رؤساء الأقسام والمعلمين وتسريع إنجاز بنوك الأسئلة وخطط العمل المشتركة.',
+  },
+  {
+    title: 'بناء طريقة عمل مستدامة داخل المؤسسة',
+    desc: 'تحويل الذكاء الاصطناعي من تجارب فردية متفرقة إلى سير عمل منهجي مستمر يخدم المؤسسة على المدى البعيد.',
   },
 ]
 
@@ -198,68 +202,167 @@ const workStages = [
   },
 ]
 
-// الباقات المقترحة بأسعار إرشادية وتخصيص كامل
+// أنواع التدريب المؤسسي الثلاثة
+const trainingTypesList = [
+  {
+    id: 'recorded',
+    num: '01',
+    title: 'محتوى إلكتروني مسجل',
+    subtitle: 'مسار رقمي منظم ومرن',
+    desc: 'محتوى منظم يمكن للمشاركين مشاهدته والعودة إليه في أي وقت، مع إمكانية إضافة جلسات أسئلة وتطبيق حسب الاتفاق.',
+    points: [
+      'محتوى تدريبي مقسم بدقة إلى خطوات عملية.',
+      'مرونة كاملة في أوقات المتابعة لكل معلم.',
+      'إمكانية إضافة جلسات نقاش وتطبيق حسب رغبة المؤسسة.',
+    ],
+    icon: Video,
+  },
+  {
+    id: 'live',
+    num: '02',
+    title: 'تدريب مباشر عن بُعد',
+    subtitle: 'جلسات تفاعلية حية وتطبيق فوري',
+    desc: 'جلسات مباشرة تشمل شرحاً وتطبيقاً وأسئلة وأجوبة ومهام عملية مع المدرب خطوة بخطوة.',
+    points: [
+      'شرح حي ومباشر مع مشاركة الشاشة والأدوات.',
+      'تطبيق عملي وتفاعل وتلقي أسئلة الفريق فورياً.',
+      'مهام وتطبيقات صفية مصغرة وتقييم مباشر.',
+    ],
+    icon: Presentation,
+  },
+  {
+    id: 'custom',
+    num: '03',
+    title: 'تدريب مؤسسي مخصص',
+    subtitle: 'برنامج مصمم بالكامل لمنهجكم وفروعكم',
+    desc: 'برنامج يُبنى حسب مواد المؤسسة ومراحلها وأقسامها، ويشمل تطبيقات وقوالب ومشاريع ومتابعة حسب نطاق الاتفاق.',
+    points: [
+      'تطبيق مباشر على كتب ومناهج المؤسسة المعتمدة.',
+      'إعداد مكتبة قوالب وأوامر خاصة بهوية المؤسسة.',
+      'مشاريع عملية للفريق وجلسات متابعة بعد التدريب.',
+    ],
+    icon: School,
+  },
+]
+
+// الباقات والأسعار المؤسسية الجديدة
 const trainingPackages = [
   {
-    id: 'small_team',
-    name: 'باقة تجربة الفريق',
-    audience: 'مناسبة لـ 5 معلمين',
-    badge: 'تجربة مركزة وسريعة لاختبار الملاءمة',
-    indicativePrice: 'يبدأ من 995 ريالاً سعودياً',
-    teacherCountOption: '1–5',
-    trainingTypeOption: 'محتوى مسجل + جلسة تطبيق',
+    id: 'foundations',
+    name: 'باقة التأسيس المؤسسي',
+    audience: 'مناسبة لـ 5 إلى 10 معلمين',
+    badge: 'تأسيس وتطبيق أولي',
+    indicativePrice: 'يبدأ من 4,900 ريال سعودي',
+    priceNote: 'قد يرتفع السعر حسب مستوى التخصيص وعدد المواد والمخرجات المطلوبة.',
+    teacherCountOption: '5–10 معلمين',
+    trainingTypeOption: 'محتوى إلكتروني مسجل',
     points: [
-      'الوصول إلى الكورس الكامل.',
-      'ملفات PDF والقوالب.',
+      'جلسة تشخيص أولية لاحتياج المؤسسة.',
+      'محتوى تدريبي إلكتروني منظم.',
       'جلسة تعريفية للفريق.',
-      'جلسة أسئلة وأجوبة.',
-      'تطبيق أولي على درس حقيقي.',
+      'تطبيق أولي على درس أو مادة من مواد المؤسسة.',
+      'قوالب تعليمية قابلة للتعديل.',
+      'جلسة أسئلة وتطبيق.',
+      'توجيه أولي للمشاركين.',
+      'ملخص بالمخرجات والتوصيات.',
     ],
   },
   {
-    id: 'department',
-    name: 'باقة القسم التعليمي',
-    audience: 'مناسبة لـ 10 معلمين',
-    badge: 'الخيار الأنسب لمعظم المعاهد والمدارس',
-    indicativePrice: 'يبدأ من 1,790 ريالاً سعودياً',
+    id: 'academic_team',
+    name: 'باقة تطوير الفريق الأكاديمي',
+    audience: 'مناسبة لـ 10 إلى 20 معلماً أو موظفاً',
+    badge: 'الخيار الأكثر طلباً للمدارس والمعاهد',
+    indicativePrice: 'يبدأ من 9,500 ريال سعودي',
+    priceNote: 'يُرفع السعر أو يُخفض بحسب عدد الساعات، وعدد المواد، ومستوى التخصيص، وعدد المشاريع والمتابعة المطلوبة.',
     featured: true,
-    teacherCountOption: '6–10',
-    trainingTypeOption: 'تدريب مباشر + قوالب وتطبيقات',
+    teacherCountOption: '10–20 معلماً',
+    trainingTypeOption: 'تدريب مباشر عن بُعد',
     points: [
-      'كل محتوى الكورس.',
-      'تدريب جماعي للفريق.',
-      'تطبيق على أكثر من مادة.',
-      'قوالب قابلة للتعديل.',
-      'جلستان للأسئلة والتطبيق.',
-      'متابعة أولية بعد التدريب.',
+      'تحليل احتياج المؤسسة.',
+      'تدريب مباشر أو مسار إلكتروني منظم حسب الاتفاق.',
+      'تطبيق على أكثر من مادة أو مرحلة دراسية.',
+      'تدريب على إعداد الدروس والمحاضرات.',
+      'إنشاء الأسئلة والاختبارات وبنوك الأسئلة.',
+      'إعداد العروض والملخصات وملفات PDF.',
+      'إنشاء الفيديوهات التعليمية والصوت والـPodcast.',
+      'إنشاء القصص التعليمية.',
+      'إعداد خطط العمل والمشاريع التعليمية.',
+      'قوالب قابلة لإعادة الاستخدام.',
+      'مشروع تطبيقي للفريق.',
+      'جلستان أو أكثر للأسئلة والتطبيق.',
+      'مراجعة أولية للمخرجات.',
+      'متابعة بعد التدريب.',
     ],
   },
   {
-    id: 'full_institution',
-    name: 'باقة المؤسسة المتكاملة',
-    audience: 'مناسبة لـ 20 معلماً أو أكثر',
-    badge: 'حل شامل متعدد المراحل والأقسام',
-    indicativePrice: 'يُحدَّد حسب عدد المعلمين ونطاق التدريب',
-    teacherCountOption: '21–50',
-    trainingTypeOption: 'تدريب مخصص لكامل المؤسسة',
+    id: 'transformation',
+    name: 'باقة التحول التعليمي للمؤسسة',
+    audience: 'مناسبة لـ 20 إلى 50 معلماً أو أكثر',
+    badge: 'حل شامل متعدد الأقسام والمراحل',
+    indicativePrice: 'يبدأ من 18,000 ريال سعودي',
+    priceNote: 'السعر النهائي يحدد بعد معرفة عدد الأقسام، وعدد المشاركين، وعدد المواد، ونطاق التخصيص، والمدة الزمنية المطلوبة.',
+    teacherCountOption: '20–50 معلماً',
+    trainingTypeOption: 'تدريب مؤسسي مخصص',
     points: [
+      'دراسة احتياج المؤسسة وأقسامها.',
       'تدريب عدة مجموعات أو أقسام.',
-      'تطبيق على مواد المؤسسة.',
-      'تنظيم طريقة عمل موحدة.',
-      'قوالب خاصة بالمؤسسة.',
+      'تطبيق على مواد ومناهج المؤسسة.',
+      'بناء منهجية موحدة لإعداد الدروس والاختبارات.',
+      'إنشاء مكتبة قوالب وأوامر خاصة بالمؤسسة.',
+      'إعداد نماذج عمل قابلة للتطبيق بين الأقسام.',
+      'مشاريع عملية للمعلمين.',
+      'مراجعة المخرجات.',
       'جلسات متابعة.',
       'تقرير مختصر عن التطبيق والمخرجات.',
+      'خطة مقترحة لاستدامة استخدام الذكاء الاصطناعي داخل المؤسسة.',
+    ],
+  },
+  {
+    id: 'custom_full',
+    name: 'برنامج مخصص بالكامل',
+    audience: 'للمدارس والشبكات والمجمعات الكبرى',
+    badge: 'نظام عمل متكامل واستشارات',
+    indicativePrice: 'يحدد بعد دراسة الاحتياج',
+    priceNote: 'يتم بناء خطة العمل والتكلفة بالكامل بعد جلسة استشارية لدراسة الاحتياج مع إدارة المؤسسة.',
+    description: 'برنامج مخصص للمؤسسات التي ترغب في بناء نظام عمل متكامل للذكاء الاصطناعي في التعليم، مع محتوى خاص، وقوالب مؤسسية، وتطبيقات على المناهج، ومشاريع، ومتابعة، وتقارير مخرجات.',
+    teacherCountOption: 'أكثر من 50 معلماً',
+    trainingTypeOption: 'تدريب مؤسسي مخصص',
+    points: [
+      'استشارات مخصصة وتصميم حقيبة تدريبية حصرية.',
+      'تدريب ممتد لجميع الأفرع والأقسام التعليمية.',
+      'بناء وتطوير مسارات عمل مؤتمتة خاصة بالمؤسسة.',
+      'إعداد وتخصيص مكتبة أوامر وقوالب مؤسسية.',
+      'تطبيقات عملية ومشاريع مخصصة لكل قسم ومرحلة.',
+      'مراجعة وتقييم دوري شامل لجميع المخرجات التربوية.',
+      'جلسات متابعة وتقارير مخرجات تفصيلية للإدارة.',
+      'خطة استدامة طويلة المدى ودعم فني واستشاري متواصل.',
     ],
   },
 ]
 
+// العوامل الـ 12 المحددة للنطاق السعري المرن
+const pricingFactorsList = [
+  'عدد المعلمين والموظفين',
+  'عدد الساعات التدريبية',
+  'عدد الجلسات',
+  'نوع التدريب: مسجل، مباشر، أو مخصص',
+  'عدد المواد والمراحل الدراسية',
+  'مستوى تخصيص المحتوى',
+  'عدد المشاريع العملية',
+  'مستوى المتابعة بعد التدريب',
+  'إعداد القوالب الخاصة بالمؤسسة',
+  'عدد الأقسام أو الفروع',
+  'الحاجة إلى تقارير ومراجعة مخرجات',
+  'التدريب لمجموعة واحدة أو عدة مجموعات',
+]
+
 // مسار التعاقد والدفع للمؤسسات
 const contractingSteps = [
-  { num: '1', title: 'اختيار الباقة المبدئية', desc: 'تحديد نقطة البداية المناسبة لحجم الفريق' },
-  { num: '2', title: 'تحديد عدد المعلمين', desc: 'ملء بيانات المؤسسة والمراحل الدراسية' },
-  { num: '3', title: 'معرفة المواد وطريقة التدريب', desc: 'مسجل، مباشر، أو مخصص حسب منهجكم' },
-  { num: '4', title: 'إرسال عرض نهائي مخصص', desc: 'عرض رسمي مفصل مع التكلفة النهائية والفاتورة' },
-  { num: '5', title: 'إرسال رابط دفع خاص', desc: 'رابط دفع رسمي (مدى، بطاقات، تكرام باي، تحويل بنكي)' },
+  { num: '1', title: 'طلب العرض الأولي', desc: 'تحديد عدد المعلمين ونوع التدريب والمواد' },
+  { num: '2', title: 'دراسة الاحتياج الأكاديمي', desc: 'جلسة تشخيص سريعة لتحديد نطاق التخصيص' },
+  { num: '3', title: 'عرض فني ومالي مخصص', desc: 'عرض رسمي مفصل يحدد المخرجات والتكلفة بدقة' },
+  { num: '4', title: 'اعتماد العرض وإصدار الفاتورة', desc: 'فواتير ضريبية رسمية معتمدة للمؤسسات' },
+  { num: '5', title: 'بدء التدريب والمتابعة', desc: 'مسار عمل تطبيقي منظم مع تقارير مخرجات' },
 ]
 
 // النماذج الأربعة للمخرجات
@@ -294,8 +397,28 @@ const samplesData = [
   },
 ]
 
-// الأسئلة الشائعة (10 أسئلة)
+// الأسئلة الشائعة لإدارات المدارس والمعاهد (تتضمن الأسئلة المؤسسية الخمسة أولاً)
 const institutionalFaqs = [
+  {
+    q: 'هل الأسعار ثابتة لجميع المؤسسات؟',
+    a: 'لا. الأسعار إرشادية وتبدأ من قيمة محددة، بينما يحدد السعر النهائي حسب عدد المشاركين، نوع التدريب، عدد الساعات، المواد والمراحل، مستوى التخصيص، المشاريع، والمتابعة المطلوبة.',
+  },
+  {
+    q: 'ما سبب ارتفاع سعر البرامج المؤسسية؟',
+    a: 'البرنامج المؤسسي لا يقتصر على الوصول إلى محتوى عام، بل قد يتضمن تحليل احتياج المؤسسة، تطبيقاً على موادها ومناهجها، تدريب فريق كامل، قوالب خاصة، مشاريع عملية، مراجعة مخرجات، ومتابعة بعد التدريب.',
+  },
+  {
+    q: 'هل يمكن تخفيض السعر؟',
+    a: 'نعم، يمكن تعديل نطاق البرنامج والسعر حسب عدد المشاركين، ونوع التدريب، وعدد الساعات، ومستوى التخصيص، والمخرجات المطلوبة.',
+  },
+  {
+    q: 'هل يمكن أن يرتفع السعر عن السعر الإرشادي؟',
+    a: 'نعم. قد يرتفع السعر عند طلب تخصيص كامل، أو تدريب عدة أقسام، أو تطبيق على مواد متعددة، أو إعداد قوالب ومشاريع خاصة، أو إضافة جلسات متابعة وتقارير مخرجات.',
+  },
+  {
+    q: 'هل السعر يشمل جميع موظفي المؤسسة؟',
+    a: 'السعر يحدد حسب العدد ونطاق التنفيذ. ويذكر العرض الفني والمالي النهائي عدد المشاركين والخدمات والمخرجات المشمولة بوضوح.',
+  },
   {
     q: 'هل البرنامج مناسب للمعلمين غير المتخصصين بالتقنية؟',
     a: 'نعم تماماً. صُمم البرنامج ليكون عملياً ومبسطاً للغاية، ولا يتطلب أي خلفية برمجية أو تقنية معقدة. الشرح يركز على الخطوات المنطقية الواضحة التي يمكن لأي معلم تطبيقها بسهولة ومن أول جلسة.',
@@ -309,31 +432,11 @@ const institutionalFaqs = [
     a: 'نعم، المنهجية مرنة وتغطي المواد العلمية (كالرياضيات والعلوم والفيزياء) والأدبية (كالّلغات والتاريخ والتربية)، وتخدم المراحل من التعليم الأساسي وحتى المرحلة الثانوية، مع مراعاة خصائص كل فئة عمرية.',
   },
   {
-    q: 'هل التدريب مباشر أم مسجل؟',
-    a: 'نوفر مزيجاً مرناً: محتوى تدريبي أساسي ومسجل بجودة عالية يتيح للمعلم المتابعة في الوقت المناسب له، مع إمكانية تنظيم جلسات تفاعلية مباشرة (عن بُعد) للتطبيق العملي والنقاش والإجابة على استفسارات الفريق.',
-  },
-  {
-    q: 'كم عدد المعلمين في كل مجموعة تدريبية؟',
-    a: 'نوصي بمجموعات تتراوح بين 5 إلى 15 معلماً في الورش التطبيقية المباشرة لضمان المتابعة الفردية الدقيقة وجودة مراجعة التطبيقات، مع إمكانية تدريب فرق متعددة متوازية للمدارس الكبيرة.',
-  },
-  {
-    q: 'هل يحتاج المعلمون إلى أجهزة لابتوب خاصة؟',
-    a: 'الأفضل توفر حاسوب محمول لتسهيل نسخ وتنسيق المستندات والملفات المدرسية، لكن كافة الأدوات والمسارات تعمل بكفاءة أيضاً من الأجهزة اللوحية (Tablets) والهواتف الذكية.',
-  },
-  {
-    q: 'هل يحصل المعلمون على قوالب وملفات تطبيقية؟',
-    a: 'نعم، يتسلم الفريق مكتبة متكاملة من قوالب الأوامر التعليمية (Prompts)، وملفات تنسيق الاختبارات، ونماذج العروض التقديمية والملخصات لتعديلها واستخدامها في مهامهم اليومية مباشرة.',
-  },
-  {
-    q: 'كيف تتم متابعة الفريق بعد التدريب؟',
-    a: 'نوفر فترة متابعة للإجابة على الأسئلة الطارئة وتقديم التغذية الراجعة على المخرجات التي ينتجها المعلمون، والتأكد من تحول التدريب إلى ممارسة يومية مستدامة داخل المؤسسة.',
-  },
-  {
     q: 'كيف يتم التعامل مع خصوصية ملفات المؤسسة وبيانات الطلاب؟',
     a: 'نلتزم بسياسات أمان صارمة؛ حيث نعلّم الفريق حظر رفع أي بيانات تعريفية شخصية للطلاب، والاعتماد حصراً على نصوص الكتب والمناهج العامة مع احترام الملكية الفكرية للمؤسسة التعليمية.',
   },
   {
-    q: 'كيف نطلب عرضًا مناسبًا لمؤسستنا؟',
+    q: 'كيف نطلب عرضاً مناسباً لمؤسستنا؟',
     a: 'يمكنكم تعبئة نموذج طلب العرض أدناه أو التواصل المباشر عبر واتساب. سنراجع احتياج مؤسستكم وعدد الكادر التدريسي ونرسل لكم مقترحاً متكاملاً يحدد النطاق والخطوات بدقة.',
   },
 ]
@@ -377,7 +480,7 @@ export default function SchoolsClient() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const formStartedRef = useRef(false)
 
-  // بيانات النموذج بحقول دقيقة مطابقة للتوجيهات
+  // بيانات النموذج بحقول دقيقة وشاملة للمؤسسات
   const [formData, setFormData] = useState({
     institutionName: '',
     contactPerson: '',
@@ -385,9 +488,14 @@ export default function SchoolsClient() {
     countryCity: '',
     whatsappNumber: '',
     email: '',
-    teacherCount: '6–10',
+    teacherCount: '10–20 معلماً',
+    branchesCount: 'فرع واحد',
     subjectsGrades: '',
-    trainingType: 'تدريب مباشر',
+    trainingType: 'تدريب مباشر عن بُعد',
+    expectedHours: '8–12 ساعة تدريبية',
+    customizationLevel: 'تخصيص متوسط مع قوالب للمؤسسة',
+    outputsCount: 'مشروعان تطبيقيان ومخرجات صفية',
+    followUpMethod: 'جلسات متابعة مباشرة بعد التدريب',
     additionalNotes: '',
   })
 
@@ -406,11 +514,7 @@ export default function SchoolsClient() {
     setFormData((prev) => ({
       ...prev,
       teacherCount: pkg.teacherCountOption,
-      trainingType: pkg.name.includes('مؤسسة')
-        ? 'تدريب مخصص'
-        : pkg.name.includes('قسم')
-        ? 'تدريب مباشر'
-        : 'محتوى مسجل',
+      trainingType: pkg.trainingTypeOption,
       additionalNotes: `طلب استفسار عن: ${pkg.name} (${pkg.audience} — السعر الإرشادي: ${pkg.indicativePrice})`,
     }))
     trackInstitutional('institutional_offer_request', { package: pkg.name })
@@ -452,12 +556,17 @@ export default function SchoolsClient() {
             'اسم المسؤول': formData.contactPerson,
             'المسمى الوظيفي': formData.jobTitle || 'غير محدد',
             'الدولة والمدينة': formData.countryCity,
-            'عدد المعلمين': formData.teacherCount,
-            'نوع التدريب': formData.trainingType,
-            'المواد أو المراحل': formData.subjectsGrades || 'غير محدد',
+            'عدد المشاركين': formData.teacherCount,
+            'عدد الأقسام أو الفروع': formData.branchesCount,
+            'المواد والمراحل': formData.subjectsGrades || 'غير محدد',
+            'نوع التدريب المطلوب': formData.trainingType,
+            'عدد الساعات المتوقع': formData.expectedHours,
+            'مستوى التخصيص': formData.customizationLevel,
+            'المشاريع أو المخرجات': formData.outputsCount,
+            'طريقة المتابعة': formData.followUpMethod,
             'رقم واتساب': formData.whatsappNumber,
             'البريد الإلكتروني': formData.email || 'لم يُذكر',
-            'الملاحظات': formData.additionalNotes || 'لا توجد',
+            'الملاحظات والاحتياج الخاص': formData.additionalNotes || 'لا توجد',
           }),
         }),
       ])
@@ -523,10 +632,16 @@ export default function SchoolsClient() {
               صفحة الأفراد
             </Link>
             <a
+              href="#training-types"
+              className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] md:inline-block transition"
+            >
+              أنواع التدريب
+            </a>
+            <a
               href="#packages"
               className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] md:inline-block transition"
             >
-              الباقات الإرشادية
+              الباقات والأسعار
             </a>
             <a
               href="#trainer"
@@ -535,12 +650,18 @@ export default function SchoolsClient() {
               عن المدرب
             </a>
             <a
+              href="#faq"
+              className="hidden text-sm font-bold text-[#555555] hover:text-[#242424] lg:inline-block transition"
+            >
+              الأسئلة الشائعة
+            </a>
+            <a
               href="#request"
               onClick={() => trackInstitutional('institutional_offer_request', { source: 'header_nav' })}
               className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs md:text-sm font-bold text-white shadow transition-all hover:scale-[1.02] active:scale-95"
               style={{ backgroundColor: red }}
             >
-              <span>اطلب عرضاً لمؤسستك</span>
+              <span>احصل على عرض مؤسستك</span>
               <ArrowLeft className="h-4 w-4" />
             </a>
           </div>
@@ -553,16 +674,20 @@ export default function SchoolsClient() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#F7EDEC] px-4 py-1.5 text-xs md:text-sm font-black text-[#B92723] mb-6 border border-red-100">
               <Building2 className="h-4 w-4 text-[#E3342F]" />
-              <span>للمدارس الخاصة، المعاهد، مراكز التدريب، والأكاديميات التعليمية</span>
+              <span>للمدارس الخاصة، المعاهد، ومؤسسات التعليم في السعودية والخليج</span>
             </div>
 
             <h1 className="text-3xl font-black leading-[1.3] tracking-tight md:text-5xl lg:text-[3.25rem] text-[#242424]">
-              درّب فريقك على استخدام الذكاء الاصطناعي لصناعة محتوى تعليمي أفضل
+              درّب فريقك الأكاديمي على الذكاء الاصطناعي وصناعة محتوى تعليمي احترافي
             </h1>
 
             <p className="mt-6 text-[17px] md:text-xl leading-[2] text-[#555555] max-w-3xl mx-auto">
-              برنامج عملي يساعد المدارس والمعاهد على تحويل الكتب والدروس إلى شروحات، اختبارات، أوراق عمل، عروض ومحتوى تعليمي منظم، مع بقاء المراجعة والقرار بيد المعلم.
+              برامج مؤسسية تبدأ من 4,900 ريال سعودي، وتُحدد قيمتها النهائية حسب نطاق التدريب والتخصيص. للمؤسسات التي تحتاج إلى تدريب جماعي وتطبيق عملي على موادها ومناهجها، مع بقاء المراجعة والقرار التربوي بيد المعلم.
             </p>
+
+            <div className="mt-4 text-xs md:text-sm font-bold text-[#E3342F]">
+              كل عرض يُبنى حسب عدد المعلمين، عدد الساعات، نوع التدريب، وعدد المخرجات المطلوبة.
+            </div>
 
             {/* الأزرار الرئيسية ورسالة الطمأنة */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -575,7 +700,7 @@ export default function SchoolsClient() {
                   backgroundImage: 'linear-gradient(135deg, #E3342F 0%, #B92723 100%)',
                 }}
               >
-                <span>اطلب عرضًا مؤسسيًا</span>
+                <span>احصل على عرض فني ومالي لمؤسستك</span>
                 <ArrowLeft className="h-5 w-5" />
               </a>
 
@@ -589,9 +714,9 @@ export default function SchoolsClient() {
               </a>
             </div>
 
-            <p className="mt-5 text-[15px] md:text-[17px] font-semibold text-[#666666] flex items-center justify-center gap-2">
+            <p className="mt-5 text-[14px] md:text-[16px] font-bold text-[#444444] flex items-center justify-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-              <span>نبدأ بتطبيق عملي على مادة أو درس من منهج مؤسستك.</span>
+              <span>تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة.</span>
             </p>
           </div>
         </div>
@@ -756,11 +881,11 @@ export default function SchoolsClient() {
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {institutionalBenefits.map((benefit, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl border p-6 text-right transition-all hover:shadow-sm"
+                className="rounded-2xl border p-5 text-right transition-all hover:shadow-sm"
                 style={{ borderColor: line, backgroundColor: soft }}
               >
                 <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#E3342F]/10 text-[#E3342F]">
@@ -769,17 +894,89 @@ export default function SchoolsClient() {
                 <h3 className="text-base md:text-lg font-black text-[#242424] mb-2 leading-snug">
                   {benefit.title}
                 </h3>
-                <p className="text-[15px] md:text-[16px] leading-[1.8] text-[#555555]">
+                <p className="text-[14px] md:text-[15px] leading-[1.8] text-[#555555]">
                   {benefit.desc}
                 </p>
               </div>
             ))}
           </div>
+
+          {/* مقولة قياس الأثر المؤسسي */}
+          <div className="mt-8 rounded-2xl border border-red-200 bg-[#F7EDEC] p-5 text-center max-w-3xl mx-auto shadow-sm">
+            <p className="text-sm md:text-base font-black text-[#B92723] leading-relaxed">
+              «قيمة البرنامج تُقاس بما يبنيه الفريق من مهارات وقوالب وسير عمل قابل للاستخدام بعد انتهاء التدريب، وليس بعدد ساعات الشرح فقط.»
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* قسم أنواع التدريب المؤسسي الثلاثة */}
+      <section id="training-types" className="border-t bg-[#FAFAF8] px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
+        <div className="mx-auto max-w-[1180px]">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] bg-white px-3.5 py-1 rounded-full border border-red-100 mb-3 shadow-xs">
+              <Presentation className="h-4 w-4" />
+              <span>أنماط التنفيذ والتدريب</span>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-black text-[#242424] leading-[1.35]">
+              أنواع التدريب المؤسسي المتاحة
+            </h2>
+            <p className="mt-4 text-[17px] md:text-lg leading-[1.9] text-[#555555]">
+              نقدّم ثلاثة أنماط تدريبية رئيسية تناسب احتياج المؤسسة وجداول كادرها التعليمي ومستوى المتابعة والتخصيص المطلوب:
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {trainingTypesList.map((type) => {
+              const IconComp = type.icon
+              return (
+                <div
+                  key={type.id}
+                  className="rounded-3xl border bg-white p-6 md:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-right flex flex-col justify-between hover:border-[#E3342F]/40 transition-all"
+                  style={{ borderColor: line }}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F7EDEC] text-[#E3342F]">
+                        <IconComp className="h-5 w-5" />
+                      </span>
+                      <span className="text-xs font-black text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                        {type.num}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-black text-[#242424] mb-1">
+                      {type.title}
+                    </h3>
+                    <p className="text-xs font-bold text-[#E3342F] mb-3">
+                      {type.subtitle}
+                    </p>
+                    <p className="text-[15px] leading-[1.8] text-[#555555] mb-5">
+                      {type.desc}
+                    </p>
+
+                    <div className="border-t pt-4 space-y-2.5 text-xs md:text-sm text-[#444444]" style={{ borderColor: line }}>
+                      {type.points.map((pt, pIdx) => (
+                        <div key={pIdx} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{pt}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50/70 p-4 md:p-5 text-center max-w-2xl mx-auto text-sm md:text-[16px] font-bold text-amber-950">
+            📌 يختلف السعر بحسب نوع التدريب ومستوى التخصيص والمخرجات المطلوبة.
+          </div>
         </div>
       </section>
 
       {/* قسم طريقة العمل مع المؤسسة (4 خطوات) */}
-      <section className="px-5 py-16 md:px-8 md:py-24">
+      <section className="border-t px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] mb-3">
@@ -818,98 +1015,151 @@ export default function SchoolsClient() {
 
       {/* قسم الباقات المقترحة بأسعار إرشادية واضحة */}
       <section id="packages" className="border-t bg-white px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
-        <div className="mx-auto max-w-[1180px]">
+        <div className="mx-auto max-w-[1240px]">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] mb-3">
               <LayoutGrid className="h-4 w-4" />
-              <span>باقات أولية واضحة</span>
+              <span>باقات التدريب المؤسسي</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-black text-[#242424] leading-[1.35]">
-              اختر نقطة البداية المناسبة لفريقك
+              باقات التدريب المؤسسي والاستثمار الإرشادي
             </h2>
             <p className="mt-4 text-[17px] md:text-lg leading-[1.9] text-[#555555]">
-              يمكنك البدء بتجربة صغيرة مع عدد محدود من المعلمين، ثم توسيع التدريب لاحقًا حسب احتياج مؤسستك.
+              كل عرض يُبنى حسب عدد المعلمين، عدد الساعات، نوع التدريب، وعدد المخرجات المطلوبة.
             </p>
-            <p className="mt-2 text-sm md:text-base font-semibold text-[#777777]">
-              الأسعار التالية إرشادية، ويُحدَّد السعر النهائي حسب عدد المعلمين، نوع التدريب، المواد، والمراحل الدراسية.
+            <p className="mt-2 text-sm md:text-base font-bold text-[#E3342F]">
+              تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة.
             </p>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3 items-stretch">
+          {/* شبكة الباقات الأربع */}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch">
             {trainingPackages.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`relative flex flex-col justify-between rounded-2xl border p-7 transition-all ${
+                className={`relative flex flex-col justify-between rounded-3xl border p-6 md:p-7 transition-all ${
                   pkg.featured
-                    ? 'bg-white border-[#E3342F] shadow-[0_12px_35px_rgba(227,52,47,0.12)] ring-2 ring-[#E3342F]/15'
-                    : 'bg-[#FAFAF8] border-[#E2E2DF] shadow-sm'
+                    ? 'bg-white border-[#E3342F] shadow-[0_12px_35px_rgba(227,52,47,0.12)] ring-2 ring-[#E3342F]/20'
+                    : 'bg-[#FAFAF8] border-[#E2E2DF] shadow-sm hover:shadow-md'
                 }`}
               >
                 <div>
-                  {pkg.featured && (
-                    <div className="mb-4 inline-block rounded-full bg-[#E3342F] px-3.5 py-1 text-xs font-black text-white">
+                  {pkg.featured ? (
+                    <div className="mb-4 inline-block rounded-full bg-[#E3342F] px-3 py-1 text-xs font-black text-white shadow-xs">
                       ★ {pkg.badge}
                     </div>
-                  )}
-                  {!pkg.featured && (
+                  ) : (
                     <div className="mb-4 inline-block rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-bold border border-slate-200">
                       {pkg.badge}
                     </div>
                   )}
 
-                  <h3 className="text-xl md:text-2xl font-black text-[#242424]">
+                  <h3 className="text-xl md:text-2xl font-black text-[#242424] leading-snug">
                     {pkg.name}
                   </h3>
                   <div className="mt-1 text-sm font-bold text-[#E3342F]">
                     {pkg.audience}
                   </div>
 
-                  {/* السعر الإرشادي */}
-                  <div className="mt-4 rounded-xl bg-white border border-[#E2E2DF] p-3 text-center">
+                  {/* السعر الإرشادي في مربع بارز */}
+                  <div className="mt-4 rounded-2xl bg-white border border-[#E2E2DF] p-3.5 text-center shadow-xs">
                     <span className="block text-xs font-bold text-[#888888] mb-0.5">السعر الإرشادي:</span>
                     <span className="text-base md:text-lg font-black text-[#242424]">
                       {pkg.indicativePrice}
                     </span>
                   </div>
 
+                  {/* ملاحظة السعر للباقة */}
+                  <div className="mt-3 rounded-xl bg-slate-50 border border-slate-200/80 p-2.5 text-xs font-medium text-[#666666] leading-relaxed">
+                    ℹ️ {pkg.priceNote}
+                  </div>
+
+                  {/* وصف إضافي للباقة المخصصة إن وجد */}
+                  {(pkg as any).description && (
+                    <p className="mt-3 text-xs leading-relaxed text-[#555555]">
+                      {(pkg as any).description}
+                    </p>
+                  )}
+
                   <div className="my-5 border-t border-slate-200" />
 
-                  <ul className="space-y-3 text-[15px] leading-relaxed text-[#444444]">
+                  <ul className="space-y-3 text-xs md:text-sm leading-relaxed text-[#444444]">
                     {pkg.points.map((pt, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-1" />
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-8 pt-4">
+                <div className="mt-8 pt-4 border-t border-slate-200/60">
                   <button
                     type="button"
                     onClick={() => handlePackageSelect(pkg)}
-                    className={`w-full rounded-full py-3.5 px-5 text-sm md:text-base font-black transition-all ${
+                    className={`w-full rounded-full py-3.5 px-4 text-xs md:text-sm font-black transition-all ${
                       pkg.featured
                         ? 'bg-[#E3342F] text-white hover:bg-[#B92723] shadow-md hover:scale-[1.01]'
                         : 'bg-white text-[#242424] border border-[#E2E2DF] hover:bg-[#F0F0EE]'
                     }`}
                   >
-                    اطلب عرضًا مناسبًا لمؤسستك
+                    اطلب عرضاً مناسباً لمؤسستك
                   </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* الملاحظات الإرشادية تحت الباقات */}
-          <div className="mt-10 rounded-2xl bg-[#FAFAF8] border border-[#E2E2DF] p-5 text-right space-y-2 max-w-3xl mx-auto">
-            <p className="text-sm md:text-[15px] font-bold text-[#333333] leading-relaxed">
-              📌 <strong>ملاحظة هامة:</strong> الأسعار المذكورة إرشادية، ويُحدَّد العرض النهائي حسب عدد المعلمين، الدولة، المواد والمراحل الدراسية، ونوع التدريب المطلوب: مسجل، مباشر، أو مخصص للمؤسسة.
+          {/* المربع البارز: النطاق السعري المرن */}
+          <div className="mt-12 rounded-3xl border-2 border-[#E3342F]/30 bg-[#FAFAF8] p-6 md:p-9 shadow-[0_10px_30px_rgba(0,0,0,0.03)] max-w-4xl mx-auto text-right">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5 border-b pb-4 border-slate-200">
+              <div>
+                <span className="inline-block text-xs font-black uppercase text-[#E3342F] bg-[#F7EDEC] px-3 py-1 rounded-full mb-1">
+                  شفافية استثمارية
+                </span>
+                <h3 className="text-xl md:text-2xl font-black text-[#242424]">
+                  الاستثمار التدريبي يختلف حسب نطاق البرنامج
+                </h3>
+              </div>
+              <div className="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-full shrink-0">
+                عروض مرنة ومخصصة
+              </div>
+            </div>
+
+            <p className="text-[15px] md:text-base leading-[2] text-[#444444] font-medium mb-3">
+              الأسعار الظاهرة في الصفحة أسعار إرشادية أولية وليست عروضاً نهائية. قد ينخفض السعر عند اختيار محتوى مسجل محدود أو عدد مشاركين أكبر، وقد يرتفع عند طلب تدريب مباشر موسع، أو تخصيص المحتوى، أو التطبيق على عدة مواد ومراحل، أو إعداد قوالب ومشاريع خاصة بالمؤسسة.
             </p>
-            <p className="text-sm md:text-[15px] font-black text-emerald-800 flex items-center gap-1.5">
-              <span>💡</span>
-              <span>كلما زاد عدد المعلمين، انخفضت تكلفة المقعد الواحد.</span>
+
+            <p className="text-[15px] md:text-base leading-[2] text-[#444444] font-medium mb-6">
+              بعد معرفة عدد المشاركين والمواد ونوع التدريب والمخرجات المطلوبة، يتم إعداد عرض فني ومالي خاص بالمؤسسة.
             </p>
+
+            <div className="rounded-2xl bg-white border border-[#E2E2DF] p-5 mb-5">
+              <span className="block text-xs font-bold text-[#888888] mb-3">
+                العوامل التي تؤثر في تحديد العرض وزيادة أو تخفيض السعر الإرشادي:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs md:text-sm font-semibold text-[#333333]">
+                {pricingFactorsList.map((factor, fIdx) => (
+                  <div key={fIdx} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#E3342F] shrink-0" />
+                    <span>{factor}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-slate-200">
+              <p className="text-xs md:text-sm font-black text-[#B92723]">
+                «تبدأ الأسعار من، ويُحدد العرض النهائي بعد دراسة احتياج المؤسسة.»
+              </p>
+              <a
+                href="#request"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-xs md:text-sm font-bold text-white bg-[#E3342F] hover:bg-[#B92723] transition shadow shrink-0"
+              >
+                <span>احصل على عرض فني ومالي لمؤسستك</span>
+                <ArrowLeft className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
           {/* مخطط مسار التعاقد والدفع المخصص */}
@@ -1257,7 +1507,7 @@ export default function SchoolsClient() {
       </section>
 
       {/* قسم الأسئلة الشائعة (10 أسئلة) */}
-      <section className="px-5 py-16 md:px-8 md:py-24">
+      <section id="faq" className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-[900px]">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] mb-3">
@@ -1306,7 +1556,7 @@ export default function SchoolsClient() {
 
       {/* نموذج طلب العرض المؤسسي */}
       <section id="request" className="border-t bg-white px-5 py-16 md:px-8 md:py-24" style={{ borderColor: line }}>
-        <div className="mx-auto max-w-[800px]">
+        <div className="mx-auto max-w-[850px]">
           <div className="rounded-3xl border bg-[#FAFAF8] p-6 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.04)]" style={{ borderColor: line }}>
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#E3342F] bg-[#F7EDEC] px-3.5 py-1 rounded-full mb-3">
@@ -1314,10 +1564,10 @@ export default function SchoolsClient() {
                 <span>طلب عرض رسمي مخصص</span>
               </div>
               <h2 className="text-2xl md:text-4xl font-black text-[#242424]">
-                خلينا نعرف احتياج مؤسستك
+                احصل على عرض فني ومالي لمؤسستك
               </h2>
-              <p className="mt-3 text-[16px] md:text-lg text-[#666666]">
-                أدخل تفاصيل مؤسستكم وسنتواصل معكم لمناقشة الخيار الأنسب وتقديم خطة تدريب وعرض سعر مخصص.
+              <p className="mt-3 text-[15px] md:text-lg text-[#666666] max-w-xl mx-auto leading-relaxed">
+                أدخل تفاصيل كادركم واحتياجكم وسيقوم فريقنا الأكاديمي بإعداد مقترح متكامل وعرض مالي وفني مخصص لمؤسستكم.
               </p>
             </div>
 
@@ -1330,7 +1580,7 @@ export default function SchoolsClient() {
                   تم إرسال طلبكم بنجاح!
                 </h3>
                 <p className="text-base md:text-lg text-emerald-900 font-semibold max-w-lg mx-auto leading-relaxed">
-                  شكراً لتواصلكم معنا. تم استلام بيانات مؤسستكم بالكامل، وسيقوم فريقنا الأكاديمي بمراجعة الاحتياج والتواصل معكم لتقديم خطة التدريب والعرض المخصص في أقرب وقت.
+                  شكراً لتواصلكم معنا. تم استلام تفاصيل مؤسستكم بالكامل، وسيقوم فريقنا بمراجعة الاحتياج والتواصل معكم لتقديم العرض الفني والمالي في أقرب وقت.
                 </p>
                 <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-xs font-bold text-emerald-800 border border-emerald-200">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
@@ -1348,9 +1598,14 @@ export default function SchoolsClient() {
                         countryCity: '',
                         whatsappNumber: '',
                         email: '',
-                        teacherCount: '',
+                        teacherCount: '10–20 معلماً',
+                        branchesCount: 'فرع واحد',
                         subjectsGrades: '',
-                        trainingType: 'مزيج بين المسجل والمباشر',
+                        trainingType: 'تدريب مباشر عن بُعد',
+                        expectedHours: '8–12 ساعة تدريبية',
+                        customizationLevel: 'تخصيص متوسط مع قوالب للمؤسسة',
+                        outputsCount: 'مشروعان تطبيقيان ومخرجات صفية',
+                        followUpMethod: 'جلسات متابعة مباشرة بعد التدريب',
                         additionalNotes: '',
                       })
                     }}
@@ -1370,7 +1625,7 @@ export default function SchoolsClient() {
                     <input
                       type="text"
                       required
-                      placeholder="مثال: مدارس النور الأهلية"
+                      placeholder="مثال: مدارس الرياض الأهلية / معهد التفوق"
                       value={formData.institutionName}
                       onChange={(e) => setFormData({ ...formData, institutionName: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1380,7 +1635,7 @@ export default function SchoolsClient() {
 
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      2. اسم المسؤول *
+                      2. اسم مسؤول التواصل *
                     </label>
                     <input
                       type="text"
@@ -1402,7 +1657,7 @@ export default function SchoolsClient() {
                     <input
                       type="text"
                       required
-                      placeholder="مثال: السعودية — الرياض"
+                      placeholder="مثال: السعودية — الرياض / الإمارات — دبي"
                       value={formData.countryCity}
                       onChange={(e) => setFormData({ ...formData, countryCity: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1412,11 +1667,11 @@ export default function SchoolsClient() {
 
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      المسمى الوظيفي (اختياري)
+                      4. المسمى الوظيفي
                     </label>
                     <input
                       type="text"
-                      placeholder="مثال: مدير المعهد / مشرف التدريب"
+                      placeholder="مثال: مدير المدارس / المشرف الأكاديمي / رئيس القسم"
                       value={formData.jobTitle}
                       onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1428,7 +1683,7 @@ export default function SchoolsClient() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      4. عدد المعلمين المستهدفين تقريبًا *
+                      5. عدد المشاركين (معلمين وموظفين) *
                     </label>
                     <select
                       value={formData.teacherCount}
@@ -1436,27 +1691,27 @@ export default function SchoolsClient() {
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
                       style={{ borderColor: line }}
                     >
-                      <option value="1–5">1–5 معلمين</option>
-                      <option value="6–10">6–10 معلمين</option>
-                      <option value="11–20">11–20 معلماً</option>
-                      <option value="21–50">21–50 معلماً</option>
-                      <option value="أكثر من 50">أكثر من 50 معلماً</option>
+                      <option value="5–10 معلمين">5–10 معلمين (باقة التأسيس)</option>
+                      <option value="10–20 معلماً">10–20 معلماً (تطوير الفريق الأكاديمي)</option>
+                      <option value="20–50 معلماً">20–50 معلماً (التحول التعليمي)</option>
+                      <option value="أكثر من 50 معلماً">أكثر من 50 معلماً (برنامج مخصص)</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      6. نوع التدريب المطلوب *
+                      6. عدد الأقسام أو الفروع
                     </label>
                     <select
-                      value={formData.trainingType}
-                      onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}
+                      value={formData.branchesCount}
+                      onChange={(e) => setFormData({ ...formData, branchesCount: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
                       style={{ borderColor: line }}
                     >
-                      <option value="محتوى مسجل">محتوى مسجل</option>
-                      <option value="تدريب مباشر">تدريب مباشر</option>
-                      <option value="تدريب مخصص">تدريب مخصص</option>
+                      <option value="فرع واحد">فرع واحد</option>
+                      <option value="فرعان إلى 3 فروع">فرعان إلى 3 فروع</option>
+                      <option value="4 إلى 6 فروع">4 إلى 6 فروع</option>
+                      <option value="شبكة تعليمية ممتدة (أكثر من 6 فروع)">شبكة تعليمية ممتدة (أكثر من 6 فروع)</option>
                     </select>
                   </div>
                 </div>
@@ -1464,21 +1719,108 @@ export default function SchoolsClient() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      5. المواد أو المراحل الدراسية
+                      7. نوع التدريب المطلوب *
+                    </label>
+                    <select
+                      value={formData.trainingType}
+                      onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="محتوى إلكتروني مسجل">محتوى إلكتروني مسجل</option>
+                      <option value="تدريب مباشر عن بُعد">تدريب مباشر عن بُعد</option>
+                      <option value="تدريب مؤسسي مخصص">تدريب مؤسسي مخصص</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      8. عدد الساعات التدريبية المتوقع
+                    </label>
+                    <select
+                      value={formData.expectedHours}
+                      onChange={(e) => setFormData({ ...formData, expectedHours: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="4–6 ساعات تدريبية">4–6 ساعات تدريبية</option>
+                      <option value="8–12 ساعة تدريبية">8–12 ساعة تدريبية</option>
+                      <option value="15–20 ساعة تدريبية">15–20 ساعة تدريبية</option>
+                      <option value="يحدد حسب دراسة الاحتياج الأكاديمي">يحدد حسب دراسة الاحتياج الأكاديمي</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      9. مستوى التخصيص المطلوب
+                    </label>
+                    <select
+                      value={formData.customizationLevel}
+                      onChange={(e) => setFormData({ ...formData, customizationLevel: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="تطبيق قياسي على درس من المنهج">تطبيق قياسي على درس من المنهج</option>
+                      <option value="تخصيص متوسط مع قوالب للمؤسسة">تخصيص متوسط مع قوالب للمؤسسة</option>
+                      <option value="تخصيص كامل لكافة المواد والمناهج والفروع">تخصيص كامل لكافة المواد والمناهج والفروع</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      10. عدد المشاريع أو المخرجات المطلوبة
+                    </label>
+                    <select
+                      value={formData.outputsCount}
+                      onChange={(e) => setFormData({ ...formData, outputsCount: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="مشروع تطبيقي واحد للفريق">مشروع تطبيقي واحد للفريق</option>
+                      <option value="مشروعان إلى 3 مشاريع صفية">مشروعان إلى 3 مشاريع صفية</option>
+                      <option value="بنوك أسئلة ومكتبة قوالب شاملة للمؤسسة">بنوك أسئلة ومكتبة قوالب شاملة للمؤسسة</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      11. طريقة المتابعة المناسبة
+                    </label>
+                    <select
+                      value={formData.followUpMethod}
+                      onChange={(e) => setFormData({ ...formData, followUpMethod: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    >
+                      <option value="جلسات متابعة مباشرة بعد التدريب">جلسات متابعة مباشرة بعد التدريب</option>
+                      <option value="متابعة وإشراف عبر قناة تواصل خاصة">متابعة وإشراف عبر قناة تواصل خاصة</option>
+                      <option value="مراجعة مخرجات وتقارير دورية للإدارة">مراجعة مخرجات وتقارير دورية للإدارة</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      12. المواد والمراحل الدراسية
                     </label>
                     <input
                       type="text"
-                      placeholder="مثال: الرياضيات والعلوم — المرحلة المتوسطة"
+                      placeholder="مثال: الرياضيات والعلوم واللغات — المرحلة المتوسطة والثانوية"
                       value={formData.subjectsGrades}
                       onChange={(e) => setFormData({ ...formData, subjectsGrades: e.target.value })}
                       className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
                       style={{ borderColor: line }}
                     />
                   </div>
+                </div>
 
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                      7. رقم WhatsApp للتواصل *
+                      13. رقم WhatsApp للتواصل *
                     </label>
                     <input
                       type="tel"
@@ -1491,30 +1833,30 @@ export default function SchoolsClient() {
                       style={{ borderColor: line }}
                     />
                   </div>
+
+                  <div>
+                    <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
+                      14. البريد الإلكتروني المؤسسي (اختياري)
+                    </label>
+                    <input
+                      type="email"
+                      dir="ltr"
+                      placeholder="info@school.edu.sa"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] text-right focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
+                      style={{ borderColor: line }}
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                    البريد الإلكتروني المؤسسي (اختياري)
-                  </label>
-                  <input
-                    type="email"
-                    dir="ltr"
-                    placeholder="info@school.edu"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] text-right focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
-                    style={{ borderColor: line }}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs md:text-sm font-bold text-[#242424] mb-1.5">
-                    8. الملاحظات أو التفاصيل الإضافية
+                    15. الملاحظات والاحتياج الخاص
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="أي ملاحظات حول المنهج، توقيت البدء المناسب، أو استفسارات حول طريقة الدفع المعتمدة..."
+                    placeholder="أي ملاحظات حول المناهج المعتمدة، المواعيد المفضلة للبدء، أو رغبة في استشارة أولية..."
                     value={formData.additionalNotes}
                     onChange={(e) => setFormData({ ...formData, additionalNotes: e.target.value })}
                     className="w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#242424] focus:border-[#E3342F] focus:outline-none focus:ring-1 focus:ring-[#E3342F]"
@@ -1540,7 +1882,7 @@ export default function SchoolsClient() {
                     ) : (
                       <span className="flex items-center justify-center gap-2">
                         <Send className="h-5 w-5" />
-                        <span>احصل على عرض مؤسستك</span>
+                        <span>احصل على عرض فني ومالي لمؤسستك</span>
                       </span>
                     )}
                   </button>
@@ -1556,15 +1898,15 @@ export default function SchoolsClient() {
         <div className="mx-auto max-w-[850px] text-white">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs md:text-sm font-bold text-amber-300 mb-6">
             <Sparkles className="h-4 w-4" />
-            <span>خطوة عملية تبدأ من منهجكم</span>
+            <span>عرض مخصص لاحتياج مؤسستكم</span>
           </div>
 
           <h2 className="text-2xl md:text-4xl font-black leading-tight">
-            ابدأ بخطوة تطبيقية صغيرة قبل اعتماد البرنامج
+            احصل على عرض فني ومالي مصمم حسب احتياج مؤسستك
           </h2>
 
           <p className="mt-4 text-[17px] md:text-lg leading-[1.9] text-white/80 max-w-2xl mx-auto">
-            أرسل لنا معلومات مؤسستك، وسنقترح لك طريقة مناسبة لبدء التدريب حسب عدد المعلمين والمواد والمراحل.
+            كل عرض يُبنى حسب عدد المعلمين، عدد الساعات، نوع التدريب، وعدد المخرجات المطلوبة. تواصل معنا لنبدأ بدراسة احتياج مؤسستكم وتقديم المقترح الملائم.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1574,12 +1916,12 @@ export default function SchoolsClient() {
               className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full px-8 py-4 text-base md:text-lg font-black text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
               style={{ backgroundColor: red }}
             >
-              <span>احصل على عرض مؤسستك</span>
+              <span>احصل على عرض فني ومالي لمؤسستك</span>
               <ArrowLeft className="h-5 w-5" />
             </a>
 
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، أود الاستفسار عن برامج التدريب المؤسسي للمدارس والمعاهد.')}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، أود الاستفسار عن برامج التدريب المؤسسي للمدارس والمعاهد والحصول على عرض فني ومالي.')}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackInstitutional('institutional_whatsapp_click', { source: 'final_cta_whatsapp' })}
