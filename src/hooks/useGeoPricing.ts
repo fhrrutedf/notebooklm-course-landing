@@ -41,8 +41,8 @@ export const DEFAULT_PRICING: GeoPricingInfo = {
   approxUsdNote: '',
   topBannerPrice: `${DEFAULT_COURSE_PRICE}$`,
   checkoutAmount: DEFAULT_COURSE_PRICE,
-  buttonLabel: `ادفع أونلاين الآن (${DEFAULT_COURSE_PRICE}$) — تفعيل فوري`,
-  mobileButtonLabel: `ادفع أونلاين ${DEFAULT_COURSE_PRICE}$ (تفعيل فوري)`,
+  buttonLabel: `ابدأ التسجيل (${DEFAULT_COURSE_PRICE}$)`,
+  mobileButtonLabel: `ابدأ التسجيل (${DEFAULT_COURSE_PRICE}$)`,
   currencySymbol: '$',
   hideShamCash: false,
 }
@@ -58,8 +58,8 @@ export const GULF_PRICING: GeoPricingInfo = {
   approxUsdNote: `(ما يعادل تقريباً ${SAUDI_COURSE_PRICE_USD}$)`,
   topBannerPrice: `${SAUDI_COURSE_PRICE_SAR} ر.س`,
   checkoutAmount: SAUDI_COURSE_PRICE_USD,
-  buttonLabel: `ادفع أونلاين الآن (${SAUDI_COURSE_PRICE_SAR} ر.س) — تفعيل فوري`,
-  mobileButtonLabel: `ادفع أونلاين ${SAUDI_COURSE_PRICE_SAR} ر.س (تفعيل فوري)`,
+  buttonLabel: `ابدأ التسجيل (${SAUDI_COURSE_PRICE_SAR} ر.س)`,
+  mobileButtonLabel: `ابدأ التسجيل (${SAUDI_COURSE_PRICE_SAR} ر.س)`,
   currencySymbol: 'ر.س',
   hideShamCash: true,
 }

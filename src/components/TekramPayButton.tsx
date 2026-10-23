@@ -14,6 +14,7 @@ interface TekramPayButtonProps {
   showBadges?: boolean
   label?: string
   hideShamCash?: boolean
+  onPreCheckout?: () => void
 }
 
 export function TekramPayButton({
@@ -25,10 +26,18 @@ export function TekramPayButton({
   showBadges = true,
   label,
   hideShamCash = false,
+  onPreCheckout,
 }: TekramPayButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleCheckout = () => {
+    if (isLoading) return
+
+    if (onPreCheckout) {
+      onPreCheckout()
+      return
+    }
+
     setIsLoading(true)
 
     // Track analytics event
@@ -89,8 +98,8 @@ export function TekramPayButton({
         disabled={isLoading}
         className={`group relative inline-flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-4 font-bold text-white shadow-lg transition-all transform hover:scale-[1.01] active:scale-98 disabled:opacity-75 disabled:pointer-events-none ${className}`}
         style={{
-          backgroundColor: '#E3342F',
-          backgroundImage: 'linear-gradient(135deg, #E3342F 0%, #B92723 100%)',
+          backgroundColor: '#E31E24',
+          backgroundImage: 'linear-gradient(135deg, #E31E24 0%, #B92723 100%)',
         }}
       >
         {isLoading ? (
@@ -101,7 +110,7 @@ export function TekramPayButton({
         ) : (
           <>
             <Lock className="h-4 w-4 opacity-90" />
-            <span>{label || `ادفع الآن أونلاين (${amount}$)`}</span>
+            <span>{label || `ابدأ التسجيل الآن (${amount}$)`}</span>
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
           </>
         )}
@@ -110,7 +119,7 @@ export function TekramPayButton({
       {showBadges && (
         <div className="mt-2.5 flex items-center justify-center gap-2 text-[11px] font-bold text-[#666666] flex-wrap">
           <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-            ✓ دفع آمن وفوري
+            ✓ تفعيل فوري ومباشر
           </span>
           <span className="text-[#888888]">يدعم:</span>
           {!hideShamCash && (
