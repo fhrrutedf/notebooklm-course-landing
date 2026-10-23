@@ -1968,7 +1968,16 @@ export default function SchoolsClient() {
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('مرحباً، أود الاستفسار عن برامج التدريب المؤسسي للمدارس والمعاهد والحصول على عرض فني ومالي.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackInstitutional('institutional_whatsapp_click', { source: 'final_cta_whatsapp' })}
+              onClick={() => {
+                track('institutional_whatsapp_click', { source: 'final_cta_whatsapp' })
+                if (typeof (window as any).fbq === 'function') {
+                  ;(window as any).fbq('track', 'Contact', {
+                    content_name: 'AI Course for Teachers - WhatsApp Inquiry',
+                    content_category: 'Course Registration',
+                    cta_source: 'schools_final_cta_whatsapp',
+                  })
+                }
+              }}
               className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 px-7 py-4 text-base font-bold text-white transition-all shadow"
             >
               <MessageCircle className="h-5 w-5 text-[#25D366]" />

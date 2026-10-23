@@ -567,6 +567,15 @@ export default function SchoolsResultsClient() {
                 href={createWhatsAppLink('مرحباً، شاهدت صفحة نماذج مخرجات المؤسسات وأرغب بمناقشة تدريب كادر مدرستنا.')}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof (window as any).fbq === 'function') {
+                    ;(window as any).fbq('track', 'Contact', {
+                      content_name: 'AI Course for Teachers - WhatsApp Inquiry',
+                      content_category: 'Course Registration',
+                      cta_source: 'schools_results_packages_whatsapp',
+                    })
+                  }
+                }}
                 className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-[#E2E2DF] bg-white px-7 py-4 text-sm font-bold text-[#242424] hover:bg-[#F0F0EE] shadow-sm transition"
               >
                 <MessageCircle className="h-4 w-4 text-[#25D366]" />
@@ -591,6 +600,15 @@ export default function SchoolsResultsClient() {
           href={createWhatsAppLink('مرحباً، أود الاستفسار عن تدريب فريق المعلمين بالذكاء الاصطناعي لمؤسستنا.')}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            if (typeof (window as any).fbq === 'function') {
+              ;(window as any).fbq('track', 'Contact', {
+                content_name: 'AI Course for Teachers - WhatsApp Inquiry',
+                content_category: 'Course Registration',
+                cta_source: 'schools_results_mobile_sticky',
+              })
+            }
+          }}
           className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3.5 py-3 text-xs font-bold text-slate-800 border border-slate-200 shadow-xl active:scale-95"
         >
           <MessageCircle className="h-4 w-4 text-[#25D366]" />
