@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
+  ArrowLeft,
   BookOpen,
   CheckCircle2,
   ChevronDown,
@@ -78,73 +79,73 @@ const testimonialScreenshots: TestimonialScreenshot[] = [
   },
 ]
 
-// 11 مادة مع روابط Google Drive وصور المعاينة
+// 11 مادة مع روابط Google Drive وصور المعاينة الفعلية المطابقة لمحتوى المجلدات
 const subjectCards = [
   {
     name: 'رياضيات',
     driveUrl: 'https://drive.google.com/drive/folders/1tgdM54omePUYnnI8X8iHyBLHICfWbWKl',
-    image: '/samples/user/math-baccalaureate-exam.webp',
-    tag: 'ورقة امتحان بكالوريا ودليل دراسة',
+    image: '/samples/subjects/math-exam.webp',
+    tag: 'ورقة امتحان بكالوريا مع الترويسة وسلالم التصحيح',
   },
   {
     name: 'فيزياء',
     driveUrl: 'https://drive.google.com/drive/folders/1RqFCNkZs6Dp3GPIi69dW-X4UZsbKnjSz',
-    image: '/samples/previews/chemistry-blueprint.webp',
-    tag: 'مخطط تجارب وأسئلة تفكير نقدي',
+    image: '/samples/subjects/physics-forces-vectors.png',
+    tag: 'مخطط القوى الفيزيائية والمتجهات الميكانيكية',
   },
   {
     name: 'كيمياء',
     driveUrl: 'https://drive.google.com/drive/folders/1fS0XY3EZSmRQXIlDrd29vmyKuNkfL-g2',
-    image: '/samples/previews/chemistry-infographic.webp',
-    tag: 'إنفوجرافيك وتلخيص مفاهيم وتفاعلات',
+    image: '/samples/subjects/chemistry-reaction-rate.png',
+    tag: 'مخطط سرعة التفاعل وحركية التوازن الكيميائي',
   },
   {
     name: 'علوم',
     driveUrl: 'https://drive.google.com/drive/folders/1bjoEZunlbPleI0hgym6-BVLoTxopXI7F',
-    image: '/samples/user/mindmap-brain-detailed.png',
-    tag: 'خرائط ذهنية مفصلة لأجهزة الجسم',
+    image: '/samples/subjects/science-living-cell.png',
+    tag: 'إنفوجرافيك الخلية الحية والمصنع البيولوجي',
   },
   {
     name: 'عربي',
     driveUrl: 'https://drive.google.com/drive/folders/1Cjcpur7e6Fa6ygi93DMDFEuiAUAxNSMk',
-    image: '/samples/user/handwriting-to-ai-summary.png',
-    tag: 'من خط اليد إلى قواعد وتدريبات رقمية',
+    image: '/samples/subjects/arabic-poetry-guide.png',
+    tag: 'دليل دراسي وتحليلي لقصيدة مروءة وسخاء',
   },
   {
     name: 'إنكليزي',
     driveUrl: 'https://drive.google.com/drive/folders/1o3wsfIPGiEyv2h-zn8oJ01SIgtv1frBm',
-    image: '/samples/previews/english-presentation.webp',
-    tag: 'عروض تقديمية وبطاقات محادثة',
+    image: '/samples/subjects/english-trial-exam.png',
+    tag: 'الصفحة الأولى من امتحان إنكليزي تجريبي رسمي',
   },
   {
     name: 'فرنسي',
     driveUrl: 'https://drive.google.com/drive/folders/17BoRMuGiZz3Eot-UBQLBK4oTlOTOdXle',
-    image: '/samples/user/story-oral-exercise.png',
-    tag: 'أنشطة قصة وتطبيق شفهي تفاعلي',
+    image: '/samples/subjects/french-grammar-tenses.png',
+    tag: 'دليل شامل لقواعد اللغة وتصريف الأزمنة',
   },
   {
     name: 'تاريخ',
     driveUrl: 'https://drive.google.com/drive/folders/1Qc8MRelcmZ2er8ovbKnbA50an4Ejk4vw',
-    image: '/example-lesson-plan.png',
-    tag: 'جداول أحداث وخطط دروس موثقة',
+    image: '/samples/subjects/history-geopolitical-map.png',
+    tag: 'الخارطة الجيوسياسية والأطماع الاستعمارية',
   },
   {
     name: 'جغرافيا',
     driveUrl: 'https://drive.google.com/drive/folders/1OsOZD7uIdJ1IfW-mkIlbISbyLBGYv4Iw',
-    image: '/samples/user/lesson-explanation.png',
-    tag: 'خريطة شرح ومفاهيم بيئية وجغرافية',
+    image: '/samples/subjects/geography-water-cycle.png',
+    tag: 'مخطط الدورة المائية والنظام المناخي البيئي',
   },
   {
     name: 'فلسفة',
     driveUrl: 'https://drive.google.com/drive/folders/1dWAo-BtIVxM2RaZ4sHCpNyskBpUC4C-R',
-    image: '/samples/user/mindmap-brain.png',
-    tag: 'خريطة تفكير نقدي ونقاشات فلسفية',
+    image: '/samples/subjects/philosophy-logic-thinking.png',
+    tag: 'أسس التفكير الفلسفي وبنية الاستدلال المنطقي',
   },
   {
     name: 'إسلامية',
     driveUrl: 'https://drive.google.com/drive/folders/11Y178TMSwKE_tVmzxgkfJ8ZMb4E69bgf',
-    image: '/example-pdf.png',
-    tag: 'مذكرة أحكام وأسئلة استنتاجية مرتبة',
+    image: '/samples/subjects/islamic-tajweed-mindmap.png',
+    tag: 'خريطة ذهنية مفصلة لأحكام النون والتنوين',
   },
 ]
 
@@ -382,7 +383,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 4. نماذج حسب المادة (شبكة 11 بطاقة) */}
+      {/* 4. نماذج حسب المادة (شبكة 11 بطاقة مع صور المعاينة الحقيقية) */}
       <section className="border-t border-[#E7E7E4] bg-white px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
@@ -393,7 +394,7 @@ export default function LandingClient() {
               نماذج حسب المادة
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#666]">
-              اطّلع على نماذج حقيقية مطبقة من كتب المناهج في 11 مادة دراسية:
+              نماذج حقيقية مطبقة من داخل مجلدات المناهج الدراسية، انقر على أي مادة للاطلاع على مجلدها بالكامل:
             </p>
           </div>
 
@@ -403,13 +404,13 @@ export default function LandingClient() {
                 key={subject.name}
                 className="flex flex-col overflow-hidden rounded-2xl border border-[#E7E7E4] bg-[#FBFBFA] shadow-sm transition hover:shadow-md"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 border-b border-[#E7E7E4]">
                   <Image
                     src={subject.image}
                     alt={`نماذج مادة ${subject.name}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    className="object-cover object-top transition-transform duration-300 hover:scale-105"
                   />
                   <span className="absolute top-2.5 right-2.5 rounded-full bg-[#141414]/90 px-3 py-1 text-xs font-black text-white backdrop-blur-sm">
                     {subject.name}
@@ -419,7 +420,7 @@ export default function LandingClient() {
                 <div className="flex flex-1 flex-col justify-between p-4">
                   <div>
                     <h3 className="text-base font-black text-[#141414]">{subject.name}</h3>
-                    <p className="mt-1 text-xs text-[#666] leading-relaxed">{subject.tag}</p>
+                    <p className="mt-1 text-xs text-[#555] leading-relaxed">{subject.tag}</p>
                   </div>
 
                   <a
@@ -470,7 +471,7 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 6. آراء وتجارب المتدربين الأربعة كصور + سطرين عن المدرب */}
+      {/* 6. آراء وتجارب المتدربين الأربعة كصور + سطرين عن المدرب مع رابط عرض المزيد */}
       <section className="border-t border-[#E7E7E4] bg-white px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
@@ -550,7 +551,7 @@ export default function LandingClient() {
             ))}
           </div>
 
-          {/* سطرين عن المدرب نواف البوسطة */}
+          {/* سطرين عن المدرب نواف البوسطة + رابط عرض المزيد عن المدرب */}
           <div className="mt-10 rounded-3xl border border-[#E7E7E4] bg-[#FBFBFA] p-6 sm:p-7">
             <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-right">
               <Image
@@ -560,12 +561,21 @@ export default function LandingClient() {
                 height={96}
                 className="h-20 w-20 rounded-full object-cover ring-4 ring-white shadow-md shrink-0"
               />
-              <div>
+              <div className="flex-1">
                 <h3 className="text-lg font-black text-[#141414]">نواف البوسطة</h3>
                 <p className="text-xs font-bold text-[#E31E24]">مدرب في توظيف الذكاء الاصطناعي وزيادة الإنتاجية</p>
                 <p className="mt-2 text-xs sm:text-sm leading-[1.8] text-[#555]">
                   يساعد المعلمين والمدربين على اختصار ساعات التحضير وبناء مخرجات تعليمية متكاملة لطلابهم، مع بقاء المراجعة والقرار التربوي بيدك كمعلم.
                 </p>
+                <div className="mt-3">
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#E31E24] hover:text-[#B92723] underline underline-offset-4 transition"
+                  >
+                    <span>تعرّف على مسيرة وخبرة المدرب (عرض المزيد)</span>
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
