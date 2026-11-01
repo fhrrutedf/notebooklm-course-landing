@@ -11,7 +11,6 @@ import {
   ExternalLink,
   Lock,
   MessageCircle,
-  Play,
   ShieldCheck,
   Smartphone,
   Sparkles,
@@ -357,34 +356,8 @@ export default function LandingClient() {
         </div>
       </section>
 
-      {/* 3. فيديو تطبيقي مجاني */}
-      <section className="px-4 py-12 sm:px-6 md:py-16 bg-[#FBFBFA]">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF0F2] px-3.5 py-1 text-xs font-bold text-[#B92723]">
-            <Play className="h-3.5 w-3.5 fill-current" />
-            فيديو تطبيقي مجاني
-          </span>
-          <h2 className="mt-3 text-2xl font-black text-[#141414] sm:text-3xl md:text-4xl">
-            شاهد كيف تُصنع ورقة امتحان جاهزة من كتاب المنهج
-          </h2>
-          <p className="mt-2 text-xs sm:text-sm text-[#666]">
-            تطبيق عملي خطوة بخطوة يوضح تحويل المنهج ونماذج الأسئلة إلى ورقة امتحان رسمية جاهزة للطباعة.
-          </p>
-
-          <div className="mt-6 aspect-video overflow-hidden rounded-2xl bg-black shadow-xl border border-[#E7E7E4]">
-            <iframe
-              className="h-full w-full"
-              src="https://www.youtube-nocookie.com/embed/nuXcfg0Bhbw?rel=0"
-              title="شاهد كيف تُصنع ورقة امتحان جاهزة من كتاب المنهج"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 4. نماذج حسب المادة (شبكة 11 بطاقة مع صور المعاينة الحقيقية) */}
-      <section className="border-t border-[#E7E7E4] bg-white px-4 py-12 sm:px-6 md:py-16">
+      {/* 3. نماذج حسب المادة (شبكة 11 بطاقة مع صور المعاينة الحقيقية) */}
+      <section className="bg-white px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF0F2] px-3.5 py-1 text-xs font-bold text-[#E31E24]">
