@@ -82,6 +82,16 @@ export default function RootLayout({
           />
         </noscript>
         {/* End Meta Pixel Code */}
+        <Script id="meta-pixel-initiate-checkout" strategy="afterInteractive">
+          {`
+            document.addEventListener('click', function(event) {
+              var link = event.target.closest ? event.target.closest('a[href*="wa.me"]') : null;
+              if (link && window.fbq) {
+                fbq('track', 'InitiateCheckout');
+              }
+            });
+          `}
+        </Script>
         {/* Tekram Pay SDK */}
         <Script
           src="https://tekrams.com/tekram-pay.js"
